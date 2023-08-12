@@ -1,0 +1,265 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/SofiaProBlack-Italic.eot",
+      "sha1": "bef8bec526775ef4d8e368db6d5fa7cf073401cf"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack-Italic.ttf",
+      "sha1": "754020ac3e8c940b126bb9abe8ab29915f748a88"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack-Italic.woff",
+      "sha1": "ee89573a08aa1aa7e45f95166b37cc8707d42b25"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack-Italic.woff2",
+      "sha1": "e0309ee670fd4ec72a3fca6eee85015ea74a59be"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack.eot",
+      "sha1": "7f50933002f71e0d57087bf90634f059d2186071"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack.ttf",
+      "sha1": "655de5d67f8d0e97bacf62dc070e91ce0966281e"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack.woff",
+      "sha1": "16d4d9eabf1dc35d2cd0d0a682003652f411722e"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBlack.woff2",
+      "sha1": "737518ce1955cfa42c89edc69e56bd091c7b3eba"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold-Italic.eot",
+      "sha1": "a235fd4efefb49d5ae427d3fdaf2d1c7177c66ae"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold-Italic.ttf",
+      "sha1": "601215ada93ed09aac5acad0b07129c2dce7e42f"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold-Italic.woff",
+      "sha1": "1c6c2e07d8e5eabfba9b80ca48c983747fbf2eba"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold-Italic.woff2",
+      "sha1": "c88d61c0165e2f699c0e2e00049438138c2e3c95"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold.eot",
+      "sha1": "dd6de820734fa07ff7588840990c15cd859c8f09"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold.ttf",
+      "sha1": "f6a41518fe7f8d74fe23f0dd8d832e9d659f935d"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold.woff",
+      "sha1": "f545e635100b5f96fc007ed134d82ac811784cfe"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProBold.woff2",
+      "sha1": "b5e7197f03aaed3a5ef612fc90b93f4d3d12833c"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight-Italic.eot",
+      "sha1": "d6c7dd13f9a8b2b97e19343c633952f513b668ce"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight-Italic.ttf",
+      "sha1": "6b88531df613f9b685b15b9d90c884a60c7839ac"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight-Italic.woff",
+      "sha1": "457ec01430f61661e67c377851d1e0d0f0d41385"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight-Italic.woff2",
+      "sha1": "c5946fd357c362ce142ab08d42d3086b0197ccef"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight.eot",
+      "sha1": "066a4741797759768af7c6249428471be4407289"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight.ttf",
+      "sha1": "57c75fc071511e9e1fb634b41f26fffafb8b83d9"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight.woff",
+      "sha1": "4d59c18039b10d29636e255078fa6a3292bcb3fb"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProExtraLight.woff2",
+      "sha1": "c6baa54e76c561cd5753fededa6742d83e0ea39f"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight-Italic.eot",
+      "sha1": "2e171cce23526174673290fad2226a3da898bf69"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight-Italic.ttf",
+      "sha1": "73e714dd2503bf737eafe8fbd16218f1ecee843c"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight-Italic.woff",
+      "sha1": "63aaadb11d284b5d3e8a66592ba2c2e8fe034985"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight-Italic.woff2",
+      "sha1": "70ec9f734729a7158d52fb385086ab186d0da5e7"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight.eot",
+      "sha1": "8acf221ffa90ecdd1460d83133687da9f4b153f2"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight.ttf",
+      "sha1": "0a69be503c60aa844b0364d2fa7d31c4ea44adfc"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight.woff",
+      "sha1": "9f90fd3c3a510fecf791d8c97f27cf49ba98c78b"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProLight.woff2",
+      "sha1": "55c6091a5104f40e8dc8492eff41d464239d2f49"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium-Italic.eot",
+      "sha1": "a7ef8a11520772e62bdfd36225e1ebf86ae3a0a9"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium-Italic.ttf",
+      "sha1": "70b8e3038e770e86ed0e2e5ac97d7ba9b4d1ebca"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium-Italic.woff",
+      "sha1": "ebd2f39e2531a40929dcbed781ef85a0c482ae1f"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium-Italic.woff2",
+      "sha1": "0f87cd5e6716424935c387de099c559e08864950"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium.eot",
+      "sha1": "d6a243b3f785a25f244c53d589a75d04ead202c2"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium.ttf",
+      "sha1": "0eefbc3d8cf460fd5e69cf7ddbb9042dd956f3f2"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium.woff",
+      "sha1": "6dbf6019199a14a8d794376e7d016e6ad1162f93"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProMedium.woff2",
+      "sha1": "c07191f0a53466930355f140826575d77f92a001"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular-Italic.eot",
+      "sha1": "73bb09b3b3899ffe382e415b0e01f16f9dc64264"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular-Italic.ttf",
+      "sha1": "6477fbc43faf4183c67dbf231f9eca50abe99311"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular-Italic.woff",
+      "sha1": "402f53e066fb5d9577e1f39d24d3de9e8ef12b3b"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular-Italic.woff2",
+      "sha1": "dc10b05680b97ce317d7054d109fe1f9501d73c1"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular.eot",
+      "sha1": "f5b5dbdfc18cb901efd9b66efae412cdbbb2fe0e"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular.ttf",
+      "sha1": "3725c662e94be986b5025e978975643d5b097b15"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular.woff",
+      "sha1": "2a8412f340bf0094b67142ebb3b472ab4621e926"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProRegular.woff2",
+      "sha1": "ecfc5e38eda4ffe59bd483bda62870f021418f4c"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold-Italic.eot",
+      "sha1": "18244fe5c3e24edeaa478d4a3554f1c02a49fd81"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold-Italic.ttf",
+      "sha1": "55a0608217af9bc04e49c9054c9ff0ae4b82abef"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold-Italic.woff",
+      "sha1": "fce4689b7d46979b361f26ed74ae91b9a06198b4"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold-Italic.woff2",
+      "sha1": "350c10c470a7f19963f4d21fed6e3ae6dd413a90"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold.eot",
+      "sha1": "4d130a5be0c8349014887f04ade1eb74b2154597"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold.ttf",
+      "sha1": "55eaccc2855cd3dc0bf95416526cbb1864a2ea1c"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold.woff",
+      "sha1": "bbcdef553e8e9814989df85d9362cd966d3fa9a6"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProSemiBold.woff2",
+      "sha1": "fb2410df8c24e95980ade22263aab0067aea1697"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight-Italic.eot",
+      "sha1": "1e3e72a8b3208bb5e7d96085d391fefee4f28d4d"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight-Italic.ttf",
+      "sha1": "df11935f18e97561e1d17a9117042125875afab6"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight-Italic.woff",
+      "sha1": "f7e14ef1c7d470dfee2740db0fb7e1fe44a534cb"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight-Italic.woff2",
+      "sha1": "1048d615007d663c65299aec0cef6c4c9c1a4cd9"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight.eot",
+      "sha1": "efe33a3832679d465aedef5d03510617162160fd"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight.ttf",
+      "sha1": "662c8fd86b64bf4c4bdcaa4a64e9611eec5d5524"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight.woff",
+      "sha1": "6cbd846137d427afe7ccd30cb471aa047f08b227"
+    },
+    {
+      "path": "src/assets/fonts/SofiaProUltraLight.woff2",
+      "sha1": "d4499220d73ccf0417dd7286f98a4e3a5145a569"
+    },
+    {
+      "path": "src/assets/fonts/stylesheet.css",
+      "sha1": "5f92f72882c6a835ed1b46ee9276054fd5bd43f4"
+    }
+  ]
+}
