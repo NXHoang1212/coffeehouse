@@ -1,13 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import AppNavigate from './src/navigation/app/AppNavigate'
 
-function App(): JSX.Element {
+const App = () => {
   return (
-    <>
-      <View>
-        <Text>Hello World</Text>
-      </View>
-    </>
+    <AppNavigate />
   )
 }
 

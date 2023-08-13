@@ -1,5 +1,5 @@
 //chữ mặc định
-export const FONT = {
+export const FONTSTYLE = {
     BLACK_ITALIC: 'SofiaProBlack-Italic',
     BLACK: 'SofiaProBlack',
     BOLD_ITALIC: 'SofiaProBold-Italic',

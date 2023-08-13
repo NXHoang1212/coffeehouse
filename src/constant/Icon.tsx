@@ -13,8 +13,8 @@ export const Logo = {
     GOOGLE: require('../assets/images/google.png'),
     TEXTLOGO: require('../assets/images/Logo.png'),
     SLASHLOGO: require('../assets/images/SlashCoffee.png'),
-    HANDSTOCK: require('../assets/images/IconHandStock.png'),
-    LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.png'),
+    HANDSTOCK: require('../assets/images/IconHandStock.jpg'),
+    LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.jpg'),
 }
 
 /*DÙNG CHUNG */
@@ -30,6 +30,7 @@ export const Icon = {
     RIGHT: require('../assets/images/IconRight.png'),
     SCAN: require('../assets/images/IconScan.png'),
     SEARCH: require('../assets/images/iconsearch.png'),
+    POINTS: require('../assets/images/IconPoints.png'),
 }
 
 /* THÔNG TIN */
@@ -46,6 +47,7 @@ export const infores = {
     DATEPICKER: require('../assets/images/iconPicker.png'),
     EDIT: require('../assets/images/IconEdit.png'),
     LOGOUT: require('../assets/images/IconLogout.png'),
+    CAMERA: require('../assets/images/IconCamera.png'),
 }
 
 /* LIÊN HỆ */
