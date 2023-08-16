@@ -1,58 +1,70 @@
-import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView } from 'react-native'
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, RefreshControl } from 'react-native'
+import React, { useState, useRef } from 'react'
 import StyleHomePage from '../../styles/home/StyleHomePage'
 import { Logo, category, Icon } from '../../constant/Icon'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient';
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import ActivityIndicator from '../../components/activity/ActivityIndicator'
+import BottomSheetHome from './BottomSheetHome'
+import { LoadingScroll } from '../../hooks/Loading'
 
 const HomePage = () => {
+  const loadingData = LoadingScroll();
+  const [showRefresh, setShowRefresh] = useState(false);
+  const onRefresh = () => {
+    setShowRefresh(true);
+    setTimeout(() => {
+      setShowRefresh(false);
+      loadingData.setIsLoading(true);
+      setTimeout(() => {
+        loadingData.setIsLoading(false);
+      }, 1000);
+    }, 1000);
+  }
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
-        <View style={StyleHomePage.container}>
-          <StatusBar backgroundColor='#FFF7E6' barStyle='dark-content' />
-          <View style={StyleHomePage.viewheader}>
-            <View style={StyleHomePage.headerText}>
-              <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
-              <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
-            </View>
-            <View style={StyleHomePage.headerIcon}>
-              <View style={StyleHomePage.viewpromo}>
-                <TouchableOpacity>
-                  <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
-                </TouchableOpacity>
-              </View>
-              <View style={StyleHomePage.viewbell}>
-                <TouchableOpacity>
-                  <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
-                </TouchableOpacity>
-              </View>
-            </View>
+    <View style={StyleHomePage.container}>
+      <StatusBar backgroundColor='#FFF7E6' barStyle='dark-content' />
+      <View style={StyleHomePage.viewheader}>
+        <View style={StyleHomePage.headerText}>
+          <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
+          <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
+        </View>
+        <View style={StyleHomePage.headerIcon}>
+          <View style={StyleHomePage.viewpromo}>
+            <TouchableOpacity>
+              <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
+            </TouchableOpacity>
           </View>
-          <View style={StyleHomePage.viewbanner}>
-            <Image
-              style={StyleHomePage.banner}
-              source={Logo.DATINGCOFFEE}
-              resizeMode={FastImage.resizeMode.contain}
-            />
-            <LinearGradient colors={['#FA8C16', '#ff4f0a']} style={StyleHomePage.thecard}>
-              <View style={StyleHomePage.viewthecard}>
-                <Text style={StyleHomePage.textcardLoginSet}>Đăng Nhập</Text>
-                <Text style={StyleHomePage.textcard}>
-                  Sử dụng app tích điểm và đổi những ưu đãi chỉ dành riêng cho thành viên bạn nhé !
-                </Text>
-                <TouchableOpacity style={StyleHomePage.cardLogin}>
-                  <Text style={StyleHomePage.textcardLoginSet}>Đăng Nhập</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={StyleHomePage.card} source={Icon.POINTS} />
-            </LinearGradient>
+          <View style={StyleHomePage.viewbell}>
+            <TouchableOpacity>
+              <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
+            </TouchableOpacity>
           </View>
         </View>
-      </BottomSheetModalProvider>
-    </GestureHandlerRootView>
+      </View>
+      {loadingData.isLoading && <ActivityIndicator />}
+      <ScrollView showsVerticalScrollIndicator={false}
+        refreshControl={<RefreshControl refreshing={showRefresh} onRefresh={onRefresh} />}>
+        <View style={StyleHomePage.viewbody}>
+          <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
+            <View style={StyleHomePage.viewtextcard}>
+              <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
+              <Text style={StyleHomePage.textcard}>Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho thành viên bạn nhé!</Text>
+              <TouchableOpacity>
+                <View style={StyleHomePage.viewlogincard}>
+                  <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </LinearGradient>
+          <View style={StyleHomePage.viewimagecard}>
+            <Image style={StyleHomePage.imagecard} source={Logo.DATINGCOFFEE} />
+          </View>
+          <BottomSheetHome />
+        </View>
+      </ScrollView>
+    </View >
   )
 }
 

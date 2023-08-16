@@ -4,6 +4,7 @@ export const Banner = {
     DISCOUNT50: require('../assets/images/banner2.jpg'),
     DISCOUNT40: require('../assets/images/banner3.jpg'),
     CLICKHERE: require('../assets/images/banner4.jpg'),
+    TRADEBEAN: require('../assets/images/banner5.png'),
 }
 
 /* ĐĂNG NHẬP */

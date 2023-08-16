@@ -9,9 +9,10 @@ const StyleHomePage = StyleSheet.create({
         backgroundColor: COLOR.SKIN,
     },
     viewheader: {
-        top: HEIGHT(0.5),
         marginLeft: WIDTH(3),
         flexDirection: 'row',
+        alignItems: 'center',
+        height: HEIGHT(6),
     },
     headerText: {
         flexDirection: 'row',
@@ -61,66 +62,79 @@ const StyleHomePage = StyleSheet.create({
         width: WIDTH(3.5),
         height: HEIGHT(2.3),
     },
-    viewbanner: {
-
+    viewbody: {
+        // marginTop: HEIGHT(2),
+        height: HEIGHT(120),
     },
-    banner: {
-        width: WIDTH(120),
-        height: HEIGHT(50),
-        alignSelf: 'center',
-        top: HEIGHT(15),
-    },
-    thecard: {
-        width: WIDTH(93),
-        height: HEIGHT(21),
+    viewbodycard: {
+        width: WIDTH(92),
+        height: HEIGHT(22),
         backgroundColor: COLOR.ORANGE,
+        alignSelf: 'center',
         borderRadius: WIDTH(5),
-        alignSelf: 'center',
-        bottom: HEIGHT(45),
+        top: HEIGHT(2),
+        // bottom: HEIGHT(55),
     },
-    card: {
-        width: WIDTH(48),
-        height: HEIGHT(20),
-        marginLeft: 'auto',
-        right: WIDTH(0.5),
-        bottom: HEIGHT(11.8),
-    },
-    viewthecard: {
+    viewtextcard: {
         flexDirection: 'column',
+        justifyContent: 'center',
         alignItems: 'center',
-        top: HEIGHT(1),
-        alignSelf: 'center',
+        marginTop: HEIGHT(3.5),
         gap: HEIGHT(0.5),
     },
-    textcardLoginSet: {
-        fontSize: FONTSIZE(1.9),
-        fontFamily: FONTSTYLE.MEDIUM,
-        color: COLOR.WHITE,
+    texttitlecard: {
+        fontSize: FONTSIZE(2.3),
+        fontFamily: FONTSTYLE.SEMIBOLD,
+        color: COLOR.BLACK,
     },
     textcard: {
-        fontSize: FONTSIZE(1.9),
-        fontFamily: FONTSTYLE.MEDIUM,
-        color: COLOR.WHITE,
-        width: WIDTH(80),
+        fontSize: FONTSIZE(1.8),
+        fontFamily: FONTSTYLE.REGULAR,
+        color: COLOR.BLACK,
         textAlign: 'center',
     },
-    cardLogin: {
-        width: WIDTH(39),
-        height: HEIGHT(4),
-        backgroundColor: COLOR.ORANGEBOLD,
+    viewlogincard: {
+        width: WIDTH(50),
+        height: HEIGHT(4.5),
+        backgroundColor: COLOR.ORANGE,
+        alignSelf: 'center',
         borderRadius: WIDTH(2),
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: HEIGHT(2),
+    },
+    textlogincard: {
+        fontSize: FONTSIZE(1.8),
+        fontFamily: FONTSTYLE.BOLD,
+        color: COLOR.WHITE,
+    },
+    viewimagecard: {
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 3,
-        top: HEIGHT(1),
+        marginTop: HEIGHT(13),
     },
-    BottomsheetContainer: {
+    imagecard: {
+        width: WIDTH(95),
+        height: HEIGHT(45),
+        resizeMode: 'cover',
+    },
+    viewbottom: {
         backgroundColor: COLOR.WHITE,
-        borderTopLeftRadius: WIDTH(5),
-        borderTopRightRadius: WIDTH(5),
+        // width: WIDTH(100),
         height: HEIGHT(100),
-
+        bottom: HEIGHT(55),
+        elevation: 10,
+        borderTopLeftRadius: WIDTH(3),
+        borderTopRightRadius: WIDTH(3),
     },
+    line: {
+        width: WIDTH(10),
+        height: HEIGHT(0.7),
+        backgroundColor: COLOR.GRAY,
+        alignSelf: 'center',
+        borderRadius: WIDTH(5),
+        marginTop: HEIGHT(0.8),
+    }
 });
 
 export default StyleHomePage;

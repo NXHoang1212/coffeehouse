@@ -1,42 +1,37 @@
-import { View, Text, Dimensions } from 'react-native'
-import React, { useEffect } from 'react'
-import StyleBottomSheetHome from '../../styles/home/StyleBottomSheetHome'
-import { GestureDetector, Gesture } from 'react-native-gesture-handler'
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated'
+import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import StyleBottomSheetHome from '../../styles/home/StyleBottomSheetHome';
+import { order, Banner } from '../../constant/Icon';
+import FastImage from 'react-native-fast-image';
+import BannerSlider from '../../components/banner/Advertisement';
 
 const BottomSheetHome = () => {
-    const { height: SRCEEN_HEIGTH } = Dimensions.get('window');
-    const translateY = useSharedValue(0);
-    const context = useSharedValue({ y: 0 });
-    const gesture = Gesture.Pan()
-        .onStart(() => {
-            context.value = { y: translateY.value }
-        }).onUpdate((event) => {
-            translateY.value = event.translationY + context.value.y;
-            translateY.value = Math.max(translateY.value, -SRCEEN_HEIGTH);
-        }).onEnd(() => {
-            if (translateY.value < -SRCEEN_HEIGTH / 2) {
-                translateY.value = withTiming(-SRCEEN_HEIGTH)
-            } else if (translateY.value > -SRCEEN_HEIGTH / 2) {
-                translateY.value = withTiming(-SRCEEN_HEIGTH / 1.9)
-            }
-        })
-
-    const RBottomSheetStyle = useAnimatedStyle(() => {
-        return {
-            transform: [{ translateY: translateY.value }]
-        }
-    })
-    useEffect(() => {
-        translateY.value = withTiming(-SRCEEN_HEIGTH / 1.9)
-    }, [])
     return (
-        <GestureDetector gesture={gesture}>
-            <Animated.View style={[StyleBottomSheetHome.container, RBottomSheetStyle]}>
-                <View style={StyleBottomSheetHome.line} />
-            </Animated.View>
-        </GestureDetector>
-    )
-}
+        <View style={StyleBottomSheetHome.container}>
+            <View style={StyleBottomSheetHome.line} />
+            <View style={StyleBottomSheetHome.vieworder}>
+                <TouchableOpacity>
+                    <View style={StyleBottomSheetHome.viewshipper}>
+                        <FastImage source={order.SHIPPER} style={StyleBottomSheetHome.imgshipper} />
+                        <Text style={StyleBottomSheetHome.textshipper}>Giao Hàng</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={StyleBottomSheetHome.lineship} />
+                <TouchableOpacity>
+                    <View style={StyleBottomSheetHome.viewbringship}>
+                        <View style={StyleBottomSheetHome.viewimgbringship}>
+                            <Image source={order.CARRIEDAWAY} style={StyleBottomSheetHome.imgbringship} />
+                        </View>
+                        <Text style={StyleBottomSheetHome.textbringship}>Mang đi</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+            <View style={StyleBottomSheetHome.viewbanner}>
+                <BannerSlider />
+            </View>
+        </View>
+    );
+};
 
-export default BottomSheetHome
+export default BottomSheetHome;
+
