@@ -63,8 +63,7 @@ const StyleHomePage = StyleSheet.create({
         height: HEIGHT(2.3),
     },
     viewbody: {
-        // marginTop: HEIGHT(2),
-        height: HEIGHT(120),
+        height: HEIGHT(25),
     },
     viewbodycard: {
         width: WIDTH(92),
@@ -73,14 +72,14 @@ const StyleHomePage = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: WIDTH(5),
         top: HEIGHT(2),
-        // bottom: HEIGHT(55),
+        zIndex: 1,
     },
     viewtextcard: {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: HEIGHT(3.5),
-        gap: HEIGHT(0.5),
+        marginTop: HEIGHT(2.5),
+        gap: HEIGHT(0.9),
     },
     texttitlecard: {
         fontSize: FONTSIZE(2.3),
@@ -102,16 +101,23 @@ const StyleHomePage = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         top: HEIGHT(2),
+        zIndex: 1,
     },
     textlogincard: {
         fontSize: FONTSIZE(1.8),
         fontFamily: FONTSTYLE.BOLD,
         color: COLOR.WHITE,
     },
+    iconpoints: {
+        position: 'absolute',
+        width: WIDTH(53),
+        height: HEIGHT(28),
+        left: WIDTH(38.8),
+    },
     viewimagecard: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: HEIGHT(13),
+        marginTop: HEIGHT(5),
     },
     imagecard: {
         width: WIDTH(95),

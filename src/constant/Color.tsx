@@ -1,6 +1,7 @@
 export const COLOR = {
     WHITE: '#FFFFFF',
     SKIN: '#FFF7E6',
+    SKINBLAND: '#FFF2D8',
     BLACK: '#000',
     ORANGE: '#ff4f0a',
     ORANGEBOLD: '#FA8C16',

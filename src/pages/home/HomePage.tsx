@@ -44,25 +44,24 @@ const HomePage = () => {
         </View>
       </View>
       {loadingData.isLoading && <ActivityIndicator />}
-      <ScrollView showsVerticalScrollIndicator={false}
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={showRefresh} onRefresh={onRefresh} />}>
         <View style={StyleHomePage.viewbody}>
           <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
             <View style={StyleHomePage.viewtextcard}>
               <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
               <Text style={StyleHomePage.textcard}>Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho thành viên bạn nhé!</Text>
-              <TouchableOpacity>
-                <View style={StyleHomePage.viewlogincard}>
-                  <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
-                </View>
+              <TouchableOpacity style={StyleHomePage.viewlogincard}>
+                <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
               </TouchableOpacity>
+              <Image style={StyleHomePage.iconpoints} source={Icon.POINTS} />
             </View>
           </LinearGradient>
           <View style={StyleHomePage.viewimagecard}>
             <Image style={StyleHomePage.imagecard} source={Logo.DATINGCOFFEE} />
           </View>
-          <BottomSheetHome />
         </View>
+        <BottomSheetHome />
       </ScrollView>
     </View >
   )

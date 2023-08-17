@@ -7,8 +7,8 @@ const StyleBottomSheetHome = StyleSheet.create({
     container: {
         backgroundColor: COLOR.WHITE,
         // width: WIDTH(100),
-        height: HEIGHT(100),
-        bottom: HEIGHT(55),
+        flex: 1,
+        // bottom: HEIGHT(85),
         elevation: 10,
         borderTopLeftRadius: WIDTH(3),
         borderTopRightRadius: WIDTH(3),
@@ -84,6 +84,147 @@ const StyleBottomSheetHome = StyleSheet.create({
         height: HEIGHT(28),
         alignSelf: 'center',
     },
+    viewbean: {
+        bottom: HEIGHT(4),
+        left: WIDTH(5),
+    },
+    viewimgbean: {
+        width: WIDTH(90),
+        height: WIDTH(25),
+        borderWidth: WIDTH(0.3),
+        borderColor: COLOR.GRAYBLAND,
+        borderRadius: WIDTH(2),
+        top: HEIGHT(2),
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: WIDTH(7),
+    },
+    imgbean: {
+        width: WIDTH(20),
+        height: WIDTH(20),
+        resizeMode: 'cover',
+        borderRadius: WIDTH(2),
+        left: WIDTH(3),
+    },
+    textbean: {
+        fontSize: FONTSIZE(2.3),
+        color: COLOR.BLACK,
+        fontFamily: FONTSTYLE.SEMIBOLD,
+    },
+    viewtext: {
+        flexDirection: 'column',
+        gap: HEIGHT(0.5),
+    },
+    texttitlebean: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.BLACK,
+        width: WIDTH(47),
+        fontFamily: FONTSTYLE.SEMIBOLD,
+    },
+    textbeanproduct: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.GRAY,
+        fontWeight: '500',
+    },
+    viewpricebean: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: WIDTH(0.7),
+    },
+    textbeanprice: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.GREEN,
+    },
+    viewchangebean: {
+        width: WIDTH(13),
+        height: HEIGHT(3.5),
+        backgroundColor: COLOR.SKINBLAND,
+        borderRadius: WIDTH(4),
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: WIDTH(8),
+    },
+    textchangebean: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.ORANGE,
+        fontFamily: FONTSTYLE.REGULAR,
+        fontWeight: '800',
+    },
+    viewsuggest: {
+        left: WIDTH(5),
+        height: HEIGHT(25),
+    },
+    textsuggest: {
+        fontSize: FONTSIZE(2.1),
+        color: COLOR.BLACK,
+        fontFamily: FONTSTYLE.SEMIBOLD,
+    },
+    viewdiscover: {
+
+    },
+    viewimgdiscover: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        left: WIDTH(5),
+        gap: WIDTH(1),
+    },
+    textdiscover: {
+        fontSize: FONTSIZE(2.1),
+        color: COLOR.BLACK,
+        fontFamily: FONTSTYLE.SEMIBOLD,
+    },
+    imgdiscover: {
+        width: WIDTH(6),
+        height: WIDTH(6),
+    },
+    viewtabdiscover: {
+        flexDirection: 'row',
+        marginTop: HEIGHT(1),
+        gap: WIDTH(5),
+        marginLeft: WIDTH(6.8),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tabcontainer: {
+
+    },
+    activeTab: {
+        width: WIDTH(34),
+        height: HEIGHT(4),
+        backgroundColor: COLOR.SKINBLAND,
+        borderRadius: WIDTH(5),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    texttab: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.BLACK,
+        fontFamily: FONTSTYLE.REGULAR,
+        fontWeight: '700',
+    },
+    activeText: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.ORANGE,
+        fontFamily: FONTSTYLE.REGULAR,
+        fontWeight: '700',
+    },
+    viewspace: {
+        width: WIDTH(15),
+    },
+    viewtabspecial: {
+        // flexDirection: 'row',
+        height: HEIGHT(115),
+        top: HEIGHT(1),
+    },
+    viewtabfreshhome: {
+        // flexDirection: 'row',
+        height: HEIGHT(63),
+        top: HEIGHT(1),
+    },
+    viewtabcoffelover: {
+        height: HEIGHT(63),
+        top: HEIGHT(1)
+    }
 });
 
 

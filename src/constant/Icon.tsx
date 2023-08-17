@@ -32,6 +32,7 @@ export const Icon = {
     SCAN: require('../assets/images/IconScan.png'),
     SEARCH: require('../assets/images/iconsearch.png'),
     POINTS: require('../assets/images/IconPoints.png'),
+    TIME: require('../assets/images/iconcalendar.png'),
 }
 
 /* THÔNG TIN */
@@ -63,6 +64,7 @@ export const contact = {
 export const order = {
     SHIPPER: require('../assets/images/IconDelivery.png'),
     CARRIEDAWAY: require('../assets/images/IconAway.png'),
+    STAR: require('../assets/images/iconstarcustom.png'),
 }
 
 /* TAB MENU CHÍNH */
@@ -104,3 +106,22 @@ export const Evaluate = {
     STAR: require('../assets/images/IconStar.png'),
     ORDERFEEDBACK: require('../assets/images/IconcupcoffeeFeedback.png'),
 }
+
+/* KHÁM PHÁ THÊM */
+export const Explore = {
+    DISCOUNT10: require('../assets/images/discount10.jpg'),
+    DISCOUNT40: require('../assets/images/discount40.jpg'),
+    DISCOUNT50: require('../assets/images/discount50.jpg'),
+    DISCOUNTCHILL: require('../assets/images/discountchill.jpg'),
+    FREESHIPWATER: require('../assets/images/freeshipwater.jpg'),
+    UPGRADEAPP: require('../assets/images/upgradeapp.jpg'),
+    SALE39K: require('../assets/images/banner1.jpg'),
+    MINIGAME: require('../assets/images/minigame.jpg'),
+    TRAXANH: require('../assets/images/traxanhtaybac.jpg'),
+    CHOTDONNHA: require('../assets/images/doiquachuan.jpg'),
+    FREESHIP: require('../assets/images/freeship.jpg'),
+    V60: require('../assets/images/nghethuaphache.jpg'),
+    KALITAWAVE: require('../assets/images/katlivewave.jpg'),
+    COLDBREW: require('../assets/images/coldbrew.jpg'),
+    ESPRESSO: require('../assets/images/espresso.jpg'),
+}   
