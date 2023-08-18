@@ -1,10 +1,21 @@
-import TabHomeNavigateComponent from '../../../navigation/home/TabHomeNavigate';
+import { ImageSourcePropType } from 'react-native';
+
 export enum StackHomeNavigateNameEnum {
-    HomePage = 'TabHomeNavigateComponent',
+    TabHomePage = 'TabHomeNavigate',
+    StackHomeUrl = 'StackHomeNavigate',
 }
 
 
 export type StackHomeNavigateTypeParam = {
-    TabHomeNavigateComponent: undefined;    
+    TabHomeNavigate: undefined;
+    StackHomeNavigate: undefined;
 }
+
+
+export type StackHomeNavigateType = {
+    component: React.FC;
+    name: keyof StackHomeNavigateTypeParam;
+    icon: ImageSourcePropType;
+};
+
 

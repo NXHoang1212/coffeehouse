@@ -10,7 +10,8 @@ import { LoadingScroll } from '../../hooks/Loading'
 
 const HomePage = () => {
   const loadingData = LoadingScroll();
-  const [showRefresh, setShowRefresh] = useState(false);
+  const [showRefresh, setShowRefresh] = useState<boolean>(false);
+  const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
   const onRefresh = () => {
     setShowRefresh(true);
     setTimeout(() => {
@@ -21,10 +22,18 @@ const HomePage = () => {
       }, 1000);
     }, 1000);
   }
+  const onScroll = (event: any) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    if (offsetY > 100) {
+      setBackgroundColor('#fff');
+    } else {
+      setBackgroundColor('#FFF7E6');
+    }
+  };
 
   return (
-    <View style={StyleHomePage.container}>
-      <StatusBar backgroundColor='#FFF7E6' barStyle='dark-content' />
+    <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
+      <StatusBar backgroundColor={backgroundColor} barStyle="dark-content" />
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
@@ -44,7 +53,7 @@ const HomePage = () => {
         </View>
       </View>
       {loadingData.isLoading && <ActivityIndicator />}
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}
+      <ScrollView showsVerticalScrollIndicator={false} onScroll={onScroll} contentContainerStyle={{ flexGrow: 1 }}
         refreshControl={<RefreshControl refreshing={showRefresh} onRefresh={onRefresh} />}>
         <View style={StyleHomePage.viewbody}>
           <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>

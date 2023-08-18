@@ -3,18 +3,37 @@ import { View, Text, Image, TouchableOpacity, ImageSourcePropType } from "react-
 import StyleItemWebView from "../../styles/item/StyleItemWebView";
 import { Icon } from "../../constant/Icon";
 import { TrunacteString } from "../../utils/TrunacteString";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { EnumStackNaviagte, ParamsStack } from "../../navigation/home/StackHomeNavigate";
+import { StackHomeNavigateNameEnum } from "../../data/types/navigation/TypeStack";
+
 interface ItemWebViewProps {
   item: {
     id: string;
     name: string;
     image: ImageSourcePropType;
     time: string;
+    url: string;
   }
 }
 
-const ItemWebView: React.FC<ItemWebViewProps> = ({ item }) => {
+const ItemWebView = ({ item }: ItemWebViewProps) => {
+  const navigation = useNavigation<NativeStackNavigationProp<ParamsStack>>();
+
+  const openWebView = () => {
+    // @ts-ignore
+    navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl, {
+      screen: EnumStackNaviagte.WebView,
+      params: {
+        name: item.name,
+        url: item.url
+      }
+    })
+  }
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={openWebView}>
       <View style={StyleItemWebView.container}>
         <View style={StyleItemWebView.viewimg}>
           <Image source={item.image} style={StyleItemWebView.img} />
@@ -30,5 +49,6 @@ const ItemWebView: React.FC<ItemWebViewProps> = ({ item }) => {
     </TouchableOpacity>
   );
 };
+
 
 export default ItemWebView;

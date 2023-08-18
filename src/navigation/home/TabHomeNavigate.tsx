@@ -13,7 +13,7 @@ import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
-const TabHomeNavigate: TabHomeNavigateType[] = [
+const TabNavigate: TabHomeNavigateType[] = [
     {
         component: HomePage,
         name: TabHomeNavigateEnum.HomePage,
@@ -41,7 +41,7 @@ const TabHomeNavigate: TabHomeNavigateType[] = [
     }
 ]
 
-const TabHomeNavigateComponent = () => {
+const TabHomeNavigate = () => {
     return (
         <BottomTabNavigate.Navigator
             screenOptions=
@@ -56,7 +56,7 @@ const TabHomeNavigateComponent = () => {
                 },
             }}
         >
-            {TabHomeNavigate.map((item) => (
+            {TabNavigate.map((item) => (
                 <BottomTabNavigate.Screen
                     key={item.name}
                     name={item.name}
@@ -79,7 +79,7 @@ const TabHomeNavigateComponent = () => {
     )
 }
 
-export default TabHomeNavigateComponent;
+export default TabHomeNavigate;
 
 
 const styles = StyleSheet.create({

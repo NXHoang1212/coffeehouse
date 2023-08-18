@@ -33,6 +33,7 @@ export const Icon = {
     SEARCH: require('../assets/images/iconsearch.png'),
     POINTS: require('../assets/images/IconPoints.png'),
     TIME: require('../assets/images/iconcalendar.png'),
+    SHARE: require('../assets/images/iconshare.png'),
 }
 
 /* THÔNG TIN */

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Image, FlatList, StatusBar } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import StyleBottomSheetHome from '../../styles/home/StyleBottomSheetHome';
 import { order, Banner } from '../../constant/Icon';
@@ -13,6 +13,9 @@ import { DataCoffeLover } from '../../data/listitem/DataCoffeeLover';
 
 const BottomSheetHome = () => {
     const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
+    //sử dụng memo để tối ưu hóa performance
+    const MemoziedItemWebView = React.memo(ItemWebView);
+
     return (
         <View style={StyleBottomSheetHome.container}>
             <View style={StyleBottomSheetHome.line} />
@@ -86,7 +89,7 @@ const BottomSheetHome = () => {
                     <FlashList
                         numColumns={2}
                         data={DataSpecial}
-                        renderItem={({ item }) => <ItemWebView item={item} />}
+                        renderItem={({ item }) => <MemoziedItemWebView item={item} />}
                         keyExtractor={item => item.id}
                         estimatedItemSize={200}
                     />
@@ -96,7 +99,7 @@ const BottomSheetHome = () => {
                     <FlashList
                         numColumns={2}
                         data={DataRefreshHome}
-                        renderItem={({ item }) => <ItemWebView item={item} />}
+                        renderItem={({ item }) => <MemoziedItemWebView item={item} />}
                         keyExtractor={item => item.id}
                         estimatedItemSize={200}
                     />
@@ -106,7 +109,7 @@ const BottomSheetHome = () => {
                     <FlashList
                         numColumns={2}
                         data={DataCoffeLover}
-                        renderItem={({ item }) => <ItemWebView item={item} />}
+                        renderItem={({ item }) => <MemoziedItemWebView item={item} />}
                         keyExtractor={item => item.id}
                         estimatedItemSize={200}
                     />
