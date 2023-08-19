@@ -3,13 +3,13 @@ import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../.
 import HomePage from "../../pages/home/HomePage";
 import { TabCoffee, Icon } from '../../constant/Icon';
 import PromoDiscount from "../../pages/code/PromoDiscount";
-import Favourites from "../../pages/infatuated/Favourites";
 import Other from "../../pages/another/Other";
 import { COLOR } from "../../constant/Color";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
+import Heart from "../../pages/infatuated/Heart";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
@@ -25,8 +25,8 @@ const TabNavigate: TabHomeNavigateType[] = [
         icon: TabCoffee.ORDER,
     },
     {
-        component: Favourites,
-        name: TabHomeNavigateEnum.Favourites,
+        component: Heart,
+        name: TabHomeNavigateEnum.Heart,
         icon: TabCoffee.HEART,
     },
     {

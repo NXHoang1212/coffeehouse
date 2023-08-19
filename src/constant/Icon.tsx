@@ -23,7 +23,8 @@ export const Icon = {
     BACK: require('../assets/images/IconBack.png'),
     DELETE: require('../assets/images/IconDelete.png'),
     CHECK: require('../assets/images/Icondoublecheck.png'),
-    DOWN: require('../assets/images/IconDown.png'),
+    DOWNDOUBLE: require('../assets/images/IconDown.png'),
+    DOWN: require('../assets/images/icondownmenu.png'),
     MINUS: require('../assets/images/iconminus.png'),
     PLUS: require('../assets/images/iconPlus.png'),
     NOTIFY: require('../assets/images/IconNotify.png'),
@@ -34,6 +35,7 @@ export const Icon = {
     POINTS: require('../assets/images/IconPoints.png'),
     TIME: require('../assets/images/iconcalendar.png'),
     SHARE: require('../assets/images/iconshare.png'),
+    CANCEL: require('../assets/images/iconcancel.png'),
 }
 
 /* THÔNG TIN */
@@ -87,6 +89,7 @@ export const Bean = {
 
 /* DANH MỤC  */
 export const category = {
+    SALE39K: require('../assets/images/sale39k.jpg'),
     CLOUDFEE: require('../assets/images/IconCloudFee.png'),
     CLOUDTEA: require('../assets/images/IconCloudTea.png'),
     TEAPEACH: require('../assets/images/IconCoffee.png'),

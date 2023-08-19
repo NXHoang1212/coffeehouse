@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import BottomSheetHome from './BottomSheetHome'
 import { LoadingScroll } from '../../hooks/Loading'
+import { ThemLightStatusBar } from '../../constant/ThemLight'
 
 const HomePage = () => {
   const loadingData = LoadingScroll();
@@ -30,10 +31,9 @@ const HomePage = () => {
       setBackgroundColor('#FFF7E6');
     }
   };
-
+  ThemLightStatusBar('dark-content', backgroundColor);
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
-      <StatusBar backgroundColor={backgroundColor} barStyle="dark-content" />
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />

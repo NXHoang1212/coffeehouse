@@ -3,7 +3,7 @@ import { ImageSourcePropType } from "react-native";
 //type là một từ khóa trong TypeScript dùng để khai báo kiểu dữ liệu cho biến, hàm, lớp, interface, ...
 export type TabHomeParamList = {
     [TabHomeNavigateEnum.HomePage]: undefined;
-    [TabHomeNavigateEnum.Favourites]: undefined;
+    [TabHomeNavigateEnum.Heart]: undefined;
     [TabHomeNavigateEnum.CartOrder]: undefined;
     [TabHomeNavigateEnum.PromoDiscount]: undefined;
     [TabHomeNavigateEnum.Other]: undefined;
@@ -14,7 +14,7 @@ export type TabHomeParamList = {
 export enum TabHomeNavigateEnum {
     HomePage = 'Trang chủ',
     PromoDiscount = 'Ưu đãi',
-    Favourites = 'Yêu thích',
+    Heart = 'Yêu thích',
     CartOrder = 'Đặt hàng',
     Other = 'Khác',
 }
