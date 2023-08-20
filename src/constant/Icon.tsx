@@ -20,6 +20,7 @@ export const Logo = {
 
 /*DÙNG CHUNG */
 export const Icon = {
+    ADDRESS: require('../assets/images/iconaddresshome.png'),
     BACK: require('../assets/images/IconBack.png'),
     DELETE: require('../assets/images/IconDelete.png'),
     CHECK: require('../assets/images/Icondoublecheck.png'),
@@ -36,6 +37,11 @@ export const Icon = {
     TIME: require('../assets/images/iconcalendar.png'),
     SHARE: require('../assets/images/iconshare.png'),
     CANCEL: require('../assets/images/iconcancel.png'),
+    FEEDBACK: require('../assets/images/iconfeddbackorder.png'),
+    AVATAR: require('../assets/images/avatar.png'),
+    ABOUT: require('../assets/images/iconabouut.png'),
+    LINK: require('../assets/images/iconlink.png'),
+    HARAVAN: require('../assets/images/iconharavan.png'),
 }
 
 /* THÔNG TIN */
@@ -128,4 +134,15 @@ export const Explore = {
     KALITAWAVE: require('../assets/images/katlivewave.jpg'),
     COLDBREW: require('../assets/images/coldbrew.jpg'),
     ESPRESSO: require('../assets/images/espresso.jpg'),
-}   
+}
+
+
+export const IconRank = {
+    BIRTHDAY: require('../assets/images/iconbrass.png'),
+    BEAN: require('../assets/images/iconbean.png'),
+    PROMO: require('../assets/images/iconcode.png'),
+    COFFEE: require('../assets/images/iconcoffeebean.png'),
+    SNACK: require('../assets/images/iconsnackbean.png'),
+    STAR: require('../assets/images/iconstarmember.png'),
+    VALI: require('../assets/images/iconvali.png'),
+}

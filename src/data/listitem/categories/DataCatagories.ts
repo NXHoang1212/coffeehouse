@@ -1,5 +1,5 @@
 
-import { category } from '../../constant/Icon'
+import { category } from "../../../constant/Icon"
 
 export const DataCategories = [
     {

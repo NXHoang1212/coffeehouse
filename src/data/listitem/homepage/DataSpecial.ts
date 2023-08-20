@@ -1,4 +1,4 @@
-import { Explore } from '../../constant/Icon';
+import { Explore } from '../../../constant/Icon';
 
 export const DataSpecial = [
     {

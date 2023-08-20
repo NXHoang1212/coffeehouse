@@ -111,7 +111,7 @@ const StylePromoDiscount = StyleSheet.create({
         left: WIDTH(4),
     },
     textservice: {
-        fontSize: FONTSIZE(2.1),
+        fontSize: FONTSIZE(1.8),
         color: COLOR.BLACK,
         fontWeight: '500',
         left: WIDTH(4),
@@ -142,8 +142,8 @@ const StylePromoDiscount = StyleSheet.create({
         letterSpacing: WIDTH(0.1),
     },
     viewseeall: {
-        width: WIDTH(22),
-        height: HEIGHT(3.5),
+        width: WIDTH(24),
+        height: HEIGHT(3.9),
         backgroundColor: COLOR.SKIN,
         borderRadius: WIDTH(3),
         justifyContent: 'center',

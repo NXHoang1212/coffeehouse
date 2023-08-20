@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../../data/types/navigation/TypesTab";
 import HomePage from "../../pages/home/HomePage";
-import { TabCoffee, Icon } from '../../constant/Icon';
+import { TabCoffee } from '../../constant/Icon';
 import PromoDiscount from "../../pages/code/PromoDiscount";
 import Other from "../../pages/another/Other";
 import { COLOR } from "../../constant/Color";
@@ -10,6 +10,7 @@ import { Image, StyleSheet } from "react-native";
 import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 import Heart from "../../pages/infatuated/Heart";
+import OtherNavigator from "../other/TabOtherNavigate";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
@@ -35,7 +36,7 @@ const TabNavigate: TabHomeNavigateType[] = [
         icon: TabCoffee.DISCOUNT,
     },
     {
-        component: Other,
+        component: OtherNavigator,
         name: TabHomeNavigateEnum.Other,
         icon: TabCoffee.OTHER,
     }
@@ -46,6 +47,7 @@ const TabHomeNavigate = () => {
         <BottomTabNavigate.Navigator
             screenOptions=
             {{
+                tabBarHideOnKeyboard: true,
                 tabBarActiveTintColor: COLOR.ORANGE,
                 tabBarInactiveTintColor: COLOR.GRAY,
                 tabBarStyle: styles.bottomBar,
@@ -86,5 +88,6 @@ const styles = StyleSheet.create({
     bottomBar: {
         borderTopWidth: 1,
         borderTopColor: COLOR.GRAY,
+        height: HEIGHT(6.3),
     },
 });
