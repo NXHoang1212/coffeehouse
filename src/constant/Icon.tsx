@@ -16,6 +16,7 @@ export const Logo = {
     SLASHLOGO: require('../assets/images/SlashCoffee.png'),
     HANDSTOCK: require('../assets/images/IconHandStock.jpg'),
     LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.jpg'),
+    VIETNAM: require('../assets/images/iconvietnam.png'),
 }
 
 /*DÙNG CHUNG */
@@ -36,12 +37,13 @@ export const Icon = {
     POINTS: require('../assets/images/IconPoints.png'),
     TIME: require('../assets/images/iconcalendar.png'),
     SHARE: require('../assets/images/iconshare.png'),
-    CANCEL: require('../assets/images/iconcancel.png'),
+    CANCEL: require('../assets/images/iconx.png'),
     FEEDBACK: require('../assets/images/iconfeddbackorder.png'),
     AVATAR: require('../assets/images/avatar.png'),
     ABOUT: require('../assets/images/iconabouut.png'),
     LINK: require('../assets/images/iconlink.png'),
     HARAVAN: require('../assets/images/iconharavan.png'),
+    BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
 }
 
 /* THÔNG TIN */

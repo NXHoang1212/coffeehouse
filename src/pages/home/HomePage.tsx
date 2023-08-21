@@ -8,8 +8,12 @@ import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import BottomSheetHome from './BottomSheetHome'
 import { LoadingScroll } from '../../hooks/Loading'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
 
 const HomePage = () => {
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const loadingData = LoadingScroll();
   const [showRefresh, setShowRefresh] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
@@ -31,6 +35,15 @@ const HomePage = () => {
       setBackgroundColor('#FFF7E6');
     }
   };
+  const handeleGeneral = (destination: string) => {
+    if (destination === 'DiscountUser') {
+      //@ts-ignore
+      navigation.navigate('StackHomeNavigate', { screen: 'DiscountUser', })
+    } else if (destination === 'Notifee') {
+      //@ts-ignore
+      navigation.navigate('StackHomeNavigate', { screen: 'Notifee', })
+    }
+  }
   ThemLightStatusBar('dark-content', backgroundColor);
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
@@ -40,16 +53,12 @@ const HomePage = () => {
           <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
         </View>
         <View style={StyleHomePage.headerIcon}>
-          <View style={StyleHomePage.viewpromo}>
-            <TouchableOpacity>
-              <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
-            </TouchableOpacity>
-          </View>
-          <View style={StyleHomePage.viewbell}>
-            <TouchableOpacity>
-              <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
+            <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
+          </TouchableOpacity>
+          <TouchableOpacity style={StyleHomePage.viewbell} onPress={() => handeleGeneral('Notifee')}>
+            <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
+          </TouchableOpacity>
         </View>
       </View>
       {loadingData.isLoading && <ActivityIndicator />}

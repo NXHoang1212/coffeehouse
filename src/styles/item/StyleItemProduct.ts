@@ -12,8 +12,8 @@ const StyleItemProduct = StyleSheet.create({
         left: WIDTH(4),
     },
     textnamecategories: {
-        fontSize: FONTSIZE(2),
-        fontWeight: '600',
+        fontSize: FONTSIZE(1.7),
+        fontWeight: '500',
         color: COLOR.BLACK,
         letterSpacing: WIDTH(0.2),
     },

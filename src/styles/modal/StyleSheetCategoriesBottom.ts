@@ -12,6 +12,12 @@ const StyleSheetCategoriesBottom = StyleSheet.create({
         top: HEIGHT(1),
     },
     viebottomheader: {},
+    viewcate: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        left: WIDTH(4),
+    },
     line: {
         width: WIDTH(100),
         height: HEIGHT(0.08),
@@ -24,6 +30,12 @@ const StyleSheetCategoriesBottom = StyleSheet.create({
         color: COLOR.BLACK,
         fontWeight: 'bold',
         textAlign: 'center',
+    },
+    iconx: {
+        width: WIDTH(4),
+        height: WIDTH(4),
+        resizeMode: 'contain',
+        left: WIDTH(28),
     },
     viewcategoryitem: {
         flexDirection: 'column',

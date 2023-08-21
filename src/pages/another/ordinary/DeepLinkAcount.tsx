@@ -27,13 +27,15 @@ const DeepLinkAcount = () => {
         </TouchableOpacity>
         <Text style={StyleDeepLinkAccount.textHeader}>Liên kết tài khoản</Text>
       </View>
-      <TouchableOpacity onPress={showFlashMessage}>
-        <View style={StyleDeepLinkAccount.viewitem}>
-          <Image source={Icon.HARAVAN} style={StyleDeepLinkAccount.iconharavan} />
-          <Text style={StyleDeepLinkAccount.textitem}>Liên kết với Harawoks</Text>
-          <Image source={Icon.RIGHT} style={StyleDeepLinkAccount.iconright} />
-        </View>
-      </TouchableOpacity>
+      <View style={StyleDeepLinkAccount.body}>
+        <TouchableOpacity onPress={showFlashMessage}>
+          <View style={StyleDeepLinkAccount.viewitem}>
+            <Image source={Icon.HARAVAN} style={StyleDeepLinkAccount.iconharavan} />
+            <Text style={StyleDeepLinkAccount.textitem}>Liên kết với Harawoks</Text>
+            <Image source={Icon.RIGHT} style={StyleDeepLinkAccount.iconright} />
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

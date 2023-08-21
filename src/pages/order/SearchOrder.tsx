@@ -22,9 +22,12 @@ const SearchOrder = () => {
             value={search}
             autoFocus={true}
           />
-          <TouchableOpacity onPress={() => { setSearch('') }}>
-            <Image source={Icon.CANCEL} style={StyleSearchOrder.iconcancel} />
-          </TouchableOpacity>
+          {/* khi gõ icon tìm kiếm sẽ hiện icon để xóa từ gõ */}
+          {search.length > 0 && (
+            <TouchableOpacity onPress={() => { setSearch('') }}>
+              <Image source={Icon.CANCEL} style={StyleSearchOrder.iconcancel} />
+            </TouchableOpacity>
+          )}
         </View>
         <TouchableOpacity onPress={goBack}>
           <Text style={StyleSearchOrder.textcancel}>Hủy</Text>

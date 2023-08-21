@@ -59,12 +59,13 @@ const StyleCategoryItem = StyleSheet.create({
         top: HEIGHT(0.5),
     },
     viewseemore: {
-        width: WIDTH(16),
-        height: WIDTH(16),
+        width: WIDTH(14.9),
+        height: WIDTH(14.9),
         borderRadius: WIDTH(12),
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: WIDTH(0.3),
+        marginTop: HEIGHT(0.5),
         borderColor: COLOR.GRAYBLAND,
     },
     iconseemore: {

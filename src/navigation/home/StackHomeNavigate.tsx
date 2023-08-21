@@ -15,6 +15,7 @@ import Address from "../../pages/another/addresses/SaveAddress";
 import AddAddress from "../../pages/another/addresses/AddAddress";
 import EditAddress from "../../pages/another/addresses/EditAddress";
 import AboutCoffee from "../../pages/another/ordinary/AboutCoffee";
+import Notifee from "../../pages/general/Notifee";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ export enum EnumStackNaviagte {
     Add = 'AddAddress',
     Edit = 'EditAddress',
     About = 'AboutCoffee',
+    Notication = 'Notifee',
 }
 
 
@@ -64,6 +66,7 @@ const StackHomeNavigate = (): React.JSX.Element => {
             <Stack.Screen name={EnumStackNaviagte.Add} component={AddAddress} />
             <Stack.Screen name={EnumStackNaviagte.Edit} component={EditAddress} />
             <Stack.Screen name={EnumStackNaviagte.About} component={AboutCoffee} />
+            <Stack.Screen name={EnumStackNaviagte.Notication} component={Notifee} />
         </Stack.Navigator>
     )
 };

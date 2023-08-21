@@ -39,7 +39,7 @@ const StyleOrder = StyleSheet.create({
         gap: WIDTH(3),
     },
     texttitle: {
-        fontSize: FONTSIZE(2.3),
+        fontSize: FONTSIZE(2),
         color: COLOR.BLACK,
         fontWeight: 'bold',
         fontFamily: FONTSTYLE.REGULAR,
@@ -57,12 +57,12 @@ const StyleOrder = StyleSheet.create({
         gap: WIDTH(3),
     },
     iconsearch: {
-        width: WIDTH(5),
-        height: WIDTH(5),
+        width: WIDTH(4),
+        height: WIDTH(4),
     },
     iconheart: {
-        width: WIDTH(5),
-        height: WIDTH(5),
+        width: WIDTH(4),
+        height: WIDTH(4),
     },
     line: {
         width: WIDTH(100),

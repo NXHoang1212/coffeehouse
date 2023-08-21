@@ -6,7 +6,6 @@ import CategoryItem from '../../components/item/CategoryItem'
 import { DataNameCategory } from '../../data/listitem/categories/DataNameCategory'
 import { FlashList } from '@huunguyen312/flash-list'
 import ItemProduct from '../../components/item/ItemProduct'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
@@ -14,24 +13,18 @@ import SheetCatagoriesBottom from '../../components/modal/SheetCatagoriesBottom'
 import { BottomSheetModal, BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import * as Animatable from 'react-native-animatable';
 import { ThemLightStatusBar } from '../../constant/ThemLight'
+import BottomSheetMenu from '../../components/modal/BottomSheetMenu'
+import { Provider } from 'react-native-paper'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
 
 const CartOrder = () => {
+  const [show, setShow] = useState<boolean>(false);
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const handleFavourites = () => {
     //@ts-ignore
     navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Favourites', })
   }
-  const bottomsheetRef = useRef<BottomSheetModal>(null)
-  const snapPoints = useMemo(() => ['60%', '100%'], [])
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, [])
-  const handlePresentModalPress = useCallback(() => {
-    bottomsheetRef.current?.present();
-  }, [])
-  const handlecancel = useCallback(() => {
-    bottomsheetRef.current?.close();
-  }, [])
   const handleSearch = () => {
     // @ts-ignore
     animateAndNavigate();
@@ -49,12 +42,12 @@ const CartOrder = () => {
   const animationRef = useRef<any>(null);
   ThemLightStatusBar('dark-content', '#fff');
   return (
-    <TouchableWithoutFeedback onPress={handlecancel}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheetModalProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider>
+        <TouchableWithoutFeedback>
           <View style={StyleOrder.container}>
             <Animatable.View style={StyleOrder.viewheader} animation="fadeInDownBig" duration={1000}>
-              <TouchableOpacity style={StyleOrder.viewhandlemenu} onPress={handlePresentModalPress}>
+              <TouchableOpacity style={StyleOrder.viewhandlemenu} onPress={() => setShow(true)}>
                 <View style={StyleOrder.viewmenu}>
                   <Image source={category.MENU} style={StyleOrder.iconmenu} />
                 </View>
@@ -83,24 +76,18 @@ const CartOrder = () => {
                   estimatedItemSize={200}
                 />
               </View>
-              <BottomSheetModal
-                ref={bottomsheetRef}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-                index={0} snapPoints={snapPoints} onChange={handleSheetChanges}>
-                <SheetCatagoriesBottom />
-              </BottomSheetModal>
+              <BottomSheetMenu
+                show={show} enableBackDropDismiss
+                onDismiss={() => { setShow(false) }}></BottomSheetMenu>
             </View>
             <View >
             </View>
           </View>
-        </BottomSheetModalProvider>
-      </GestureHandlerRootView>
-    </TouchableWithoutFeedback>
+
+        </TouchableWithoutFeedback>
+      </Provider>
+    </GestureHandlerRootView>
   )
 }
-
-CartOrder.navigationOptions = {
-  statusBarStyle: 'dark-content', // hoặc 'light-content' tùy theo thiết kế của màn hình
-};
 
 export default CartOrder

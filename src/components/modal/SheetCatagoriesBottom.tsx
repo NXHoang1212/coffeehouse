@@ -1,13 +1,18 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { category } from '../../constant/Icon'
+import React, { useRef, useCallback } from 'react'
+import { category, Icon } from '../../constant/Icon'
 import StyleSheetCategoriesBottom from '../../styles/modal/StyleSheetCategoriesBottom'
 
 const SheetCatagoriesBottom = () => {
     return (
         <View style={{ flexDirection: 'column', gap: 15 }}>
             <View style={StyleSheetCategoriesBottom.viebottomheader}>
-                <Text style={StyleSheetCategoriesBottom.textcategorytitle}>Danh Mục</Text>
+                <View style={StyleSheetCategoriesBottom.viewcate}>
+                    <Text style={StyleSheetCategoriesBottom.textcategorytitle}>Danh Mục</Text>
+                    <TouchableOpacity>
+                        <Image source={Icon.CANCEL} style={StyleSheetCategoriesBottom.iconx} />
+                    </TouchableOpacity>
+                </View>
                 <View style={StyleSheetCategoriesBottom.line} />
             </View>
             <View style={StyleSheetCategoriesBottom.viewcategory}>

@@ -1,8 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import styleFavourite from '../../styles/infatuated/StyleFavourite'
 import { Icon } from '../../constant/Icon'
-import { useGoBack } from '../../utils/GoBack'
 import styleHeart from '../../styles/infatuated/StyleHeart'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 
@@ -11,7 +9,13 @@ const Heart = () => {
   return (
     <View style={styleHeart.container}>
       <View style={styleHeart.viewheader}>
-        <Text style={styleHeart.textheader}>Sản phẩm Yêu Thích</Text>
+        <Text style={styleHeart.textheader}> Yêu Thích</Text>
+        <TouchableOpacity style={styleHeart.viewpromo}>
+          <Image source={Icon.PROMO} style={styleHeart.iconpromo} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styleHeart.viewnotify}>
+          <Image source={Icon.NOTIFY} style={styleHeart.iconnotify} />
+        </TouchableOpacity>
       </View>
     </View>
   )

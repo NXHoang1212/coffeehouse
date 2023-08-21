@@ -49,7 +49,7 @@ const StylePromoDiscount = StyleSheet.create({
         left: WIDTH(49.8),
     },
     viewvoucher: {
-        width: WIDTH(50),
+        width: WIDTH(43),
         height: HEIGHT(3.8),
         backgroundColor: COLOR.WHITE,
         borderRadius: 15,
@@ -70,7 +70,7 @@ const StylePromoDiscount = StyleSheet.create({
         tintColor: COLOR.ORANGE,
     },
     textvoucher: {
-        fontSize: FONTSIZE(2.1),
+        fontSize: FONTSIZE(1.9),
         color: COLOR.ORANGE,
         fontWeight: 'bold',
     },

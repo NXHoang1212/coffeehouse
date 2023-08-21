@@ -12,10 +12,11 @@ import { useNavigation } from '@react-navigation/native';
 const Address = () => {
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const handeleGeneral = () => {
+  const handeleGeneral = (name: string) => {
     //@ts-ignore
-    navigation.navigate('AddAddress')
+    navigation.navigate('AddAddress', { name });
   }
+
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -27,17 +28,17 @@ const Address = () => {
           <Text style={StyleSaveAddress.textHeader}>Địa chỉ đã lưu</Text>
         </View>
         <View style={StyleSaveAddress.viewbody}>
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={handeleGeneral}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('Nhà')}>
             <Image source={TabCoffee.HOME} style={StyleSaveAddress.iconAddress} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ nhà</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={handeleGeneral}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('Công ty')}>
             <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={handeleGeneral}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('')}>
             <Image source={Icon.PLUS} style={StyleSaveAddress.iconplus} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>

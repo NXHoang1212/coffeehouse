@@ -1,18 +1,18 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../constant/Color";
-import { FONTSIZE, HEIGHT, WIDTH } from "../../../constant/Responsive";
+import { COLOR } from "../../constant/Color";
+import { WIDTH, HEIGHT, FONTSIZE } from "../../constant/Responsive";
+import { FONTSTYLE } from "../../constant/Fonts";
 
-
-const StyleAboutCoffee = StyleSheet.create({
+const StyleDiscountUser = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.GRAYBLAND1
+        backgroundColor: COLOR.WHITE
     },
     viewheader: {
         flexDirection: 'row',
         alignItems: 'center',
         width: WIDTH(100),
-        height: HEIGHT(6),
+        height: HEIGHT(5.8),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 0.5,
     },
@@ -25,9 +25,9 @@ const StyleAboutCoffee = StyleSheet.create({
         fontSize: FONTSIZE(2.4),
         color: COLOR.BLACK,
         fontWeight: 'bold',
-        marginLeft: WIDTH(28)
+        marginLeft: WIDTH(20)
     },
 });
 
 
-export default StyleAboutCoffee;
+export default StyleDiscountUser;

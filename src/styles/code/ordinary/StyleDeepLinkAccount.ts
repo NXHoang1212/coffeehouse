@@ -12,12 +12,12 @@ const StyleDeepLinkAccount = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: WIDTH(100),
-        height: HEIGHT(6),
+        height: HEIGHT(6.3),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 0.5,
     },
     iconBack: {
-        marginLeft: WIDTH(3),
+        left: WIDTH(3),
         width: WIDTH(5),
         height: HEIGHT(3),
     },
@@ -25,18 +25,21 @@ const StyleDeepLinkAccount = StyleSheet.create({
         fontSize: FONTSIZE(2.4),
         color: COLOR.BLACK,
         fontWeight: 'bold',
-        marginLeft: WIDTH(24)
+        marginLeft: WIDTH(27)
+    },
+    body: {
+        top: HEIGHT(2),
     },
     viewitem: {
-        top: HEIGHT(2),
         flexDirection: 'row',
         alignItems: 'center',
         width: WIDTH(95),
         height: HEIGHT(7),
         backgroundColor: COLOR.WHITE,
-        elevation: 5,
         alignSelf: 'center',
         borderRadius: 13,
+        borderWidth: 0.3,
+        borderColor: COLOR.GRAY,
     },
     iconharavan: {
         width: WIDTH(10),

@@ -28,7 +28,16 @@ const Other = () => {
       navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'SaveAddress', })
     } else if (destination === 'Rules') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Rules', params: { url: link } })
+      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Rules', params: { link } })
+    } else if (destination === 'Setting') {
+      //@ts-ignore
+      navigationDad.navigate('Setting')
+    } else if (destination === 'Notifee') {
+      //@ts-ignore
+      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Notifee', })
+    } else if (destination === 'DiscountUser') {
+      //@ts-ignore
+      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'DiscountUser', })
     }
   }
 
@@ -36,10 +45,10 @@ const Other = () => {
     <View style={styleOther.container}>
       <View style={styleOther.viewheader}>
         <Text style={styleOther.textheader}>Khác</Text>
-        <TouchableOpacity style={styleOther.viewpromo}>
+        <TouchableOpacity style={styleOther.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
           <Image style={styleOther.iconpromo} source={Icon.PROMO} />
         </TouchableOpacity>
-        <TouchableOpacity style={styleOther.viewnotify}>
+        <TouchableOpacity style={styleOther.viewnotify} onPress={() => handeleGeneral('Notifee')}>
           <Image style={styleOther.iconnotify} source={Icon.NOTIFY} />
         </TouchableOpacity>
       </View>
