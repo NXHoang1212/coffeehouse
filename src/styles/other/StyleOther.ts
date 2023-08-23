@@ -127,7 +127,7 @@ const styleOther = StyleSheet.create({
     },
     viewsupport: {
         width: WIDTH(94),
-        height: HEIGHT(11.5),
+        height: HEIGHT(12.3),
         backgroundColor: COLOR.WHITE,
         elevation: 5,
         borderRadius: WIDTH(3),
@@ -178,7 +178,7 @@ const styleOther = StyleSheet.create({
     },
     viewaccount: {
         width: WIDTH(94),
-        height: HEIGHT(26),
+        height: HEIGHT(27),
         backgroundColor: COLOR.WHITE,
         elevation: 5,
         borderRadius: WIDTH(3),

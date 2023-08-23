@@ -1,48 +1,100 @@
-import { View, Text, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
+import { ThemLightStatusBar } from '../../constant/ThemLight'
 import StyleLoginUser from '../../styles/auth/StyleLoginUser'
 import { Icon, Logo } from '../../constant/Icon'
+import { useGoBack } from '../../utils/GoBack'
+import { FocusLogin } from '../../hooks/Focus'
+import { loginFacebook } from '../../service/methods/LoginFacebook'
+import { loginGoogle } from '../../service/methods/LoginGoogle'
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
 
 const LoginUser = () => {
+    ThemLightStatusBar('dark-content', 'transparent');
+    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+    const goBack = useGoBack();
+    const focusLoginProps = FocusLogin();
     const [phone, setPhone] = useState<string>('')
+    const isPhoneValid = phone.length === 10;
+    const handlePhoneChange = (text: string) => {
+        setPhone(text);
+        focusLoginProps.onFocusLogin();
+    };
+    const handleLogin = () => {
+        focusLoginProps.onBlurLogin();
+    };
+    const handleNavigate = () => {
+        //@ts-ignore
+        navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser, { screen: 'CreateInformation', })
+    }
     return (
-        <View style={StyleLoginUser.container}>
-            <View style={StyleLoginUser.viewbackground}>
-                <Image source={Logo.LOGINCOFFEE} style={StyleLoginUser.background} />
-                <TouchableOpacity>
-                    <Image source={Icon.BORDERCANCEL} style={StyleLoginUser.iconcancel} />
-                </TouchableOpacity>
-            </View>
-            <View style={StyleLoginUser.viewhandle}>
-                <View style={StyleLoginUser.viewwellcome}>
-                    <Text style={StyleLoginUser.textwellcome}>Chào mừng bạn đến với</Text>
-                    <Image source={Logo.TEXTLOGO} style={StyleLoginUser.logo} />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={StyleLoginUser.container}>
+                <StatusBar backgroundColor="transparent" translucent />
+                <View style={StyleLoginUser.viewbackground}>
+                    <Image source={Logo.LOGINCOFFEE} style={StyleLoginUser.background} />
+                    <TouchableOpacity onPress={goBack}>
+                        <Image source={Icon.BORDERCANCEL} style={StyleLoginUser.iconcancel} />
+                    </TouchableOpacity>
                 </View>
-                <View style={StyleLoginUser.viewinput}>
-                    <Image source={Logo.VIETNAM} style={StyleLoginUser.iconvietnam} />
-                    <Text style={StyleLoginUser.textinput}>+84</Text>
-                    <View style={StyleLoginUser.viewline} />
-                    <TextInput
-                        style={StyleLoginUser.input}
-                        placeholder="Nhập số điện thoại"
-                        placeholderTextColor="gray"
-                        keyboardType="numeric"
-                        value={phone}
-                        onChangeText={(text) => setPhone(text)}
-                    />
-                </View>
-                <TouchableOpacity>
-                    <View style={StyleLoginUser.viewlogin}>
-                        <Text style={StyleLoginUser.textlogin}>Đăng nhập</Text>
+                <View style={StyleLoginUser.viewhandle}>
+                    <View style={StyleLoginUser.viewwellcome}>
+                        <Text style={StyleLoginUser.textwellcome}>Chào mừng bạn đến với</Text>
+                        <Image source={Logo.TEXTLOGO} style={StyleLoginUser.logo} />
                     </View>
-                </TouchableOpacity>
-                <View style={StyleLoginUser.continue}>
-                    <View style={StyleLoginUser.lineor} />
-                    <Text style={StyleLoginUser.textor}>Hoặc</Text>
-                    <View style={StyleLoginUser.lineor} />
+                    <View style={[StyleLoginUser.viewinput, focusLoginProps.focusLogin && StyleLoginUser.viewfocusinput]}>
+                        <Image source={Logo.VIETNAM} style={StyleLoginUser.iconvietnam} />
+                        <Text style={StyleLoginUser.textinput}>+84</Text>
+                        <View style={StyleLoginUser.viewline} />
+                        <TextInput
+                            style={StyleLoginUser.input}
+                            placeholder="Nhập số điện thoại"
+                            placeholderTextColor="gray"
+                            keyboardType="numeric"
+                            maxLength={10}
+                            value={phone}
+                            onChangeText={handlePhoneChange}
+                            onFocus={focusLoginProps.onFocusLogin}
+                            onBlur={focusLoginProps.onBlurLogin}
+                        />
+                    </View>
+                    <TouchableOpacity onPress={handleLogin} disabled={!isPhoneValid}>
+                        <View
+                            style={[StyleLoginUser.viewlogin, { backgroundColor: isPhoneValid ? 'orange' : 'gray' },]}   >
+                            <Text style={StyleLoginUser.textlogin}>Đăng nhập</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={StyleLoginUser.continue}>
+                        <View style={StyleLoginUser.lineor} />
+                        <Text style={StyleLoginUser.textor}>HOẶC</Text>
+                        <View style={StyleLoginUser.lineor} />
+                    </View>
+                    <View style={StyleLoginUser.viewloginOther}>
+                        <TouchableOpacity onPress={handleNavigate}>
+                            <View style={StyleLoginUser.viewapple}>
+                                <Image source={Logo.APPLE} style={StyleLoginUser.iconfb} />
+                                <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Apple</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={loginFacebook}>
+                            <View style={StyleLoginUser.viewloginfb}>
+                                <Image source={Logo.FACEBOOK} style={StyleLoginUser.iconfb} />
+                                <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Facebook</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={loginGoogle}>
+                            <View style={StyleLoginUser.viewgg}>
+                                <Image source={Logo.GOOGLE} style={StyleLoginUser.iconfb} />
+                                <Text style={StyleLoginUser.textgoogle}>Đăng nhập bằng Google</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <Text style={StyleLoginUser.textvn}>Tiếng Việt</Text>
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 

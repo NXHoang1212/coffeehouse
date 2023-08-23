@@ -6,7 +6,7 @@ export const COLOR = {
     ORANGE: '#ff4f0a',
     ORANGEBOLD: '#FA8C16',
     ORANGE1: '#fd7e14',
-    BLUE: '#0a84ff',
+    BLUE: '#1178F2',
     GRAY: '#858080',    
     GRAYBLAND: '#c4c4c4',
     GRAYBLAND1: '#F5F5F5',

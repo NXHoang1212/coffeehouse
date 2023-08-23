@@ -12,6 +12,7 @@ export const Logo = {
     DATINGCOFFEE: require('../assets/images/datingcoffee.png'),
     FACEBOOK: require('../assets/images/facebook.png'),
     GOOGLE: require('../assets/images/google.png'),
+    APPLE: require('../assets/images/lgoapple.jpg'),
     TEXTLOGO: require('../assets/images/Logo.png'),
     SLASHLOGO: require('../assets/images/SlashCoffee.png'),
     HANDSTOCK: require('../assets/images/IconHandStock.jpg'),
@@ -60,6 +61,7 @@ export const infores = {
     DATEPICKER: require('../assets/images/iconPicker.png'),
     EDIT: require('../assets/images/IconEdit.png'),
     LOGOUT: require('../assets/images/IconLogout.png'),
+    LOGIN: require('../assets/images/iconlogin.png'),
     CAMERA: require('../assets/images/IconCamera.png'),
 }
 

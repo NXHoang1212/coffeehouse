@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Keyboard } from 'react-native';
 import React, { useState } from 'react'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 import StyleInformation from '../../styles/code/StyleInformation'
@@ -76,7 +76,7 @@ const Information = () => {
               style={StyleInformation.textinput}
               value={FormatDate(date)}
               placeholder="Chọn ngày sinh"
-              onTouchStart={() => setOpen(true)}
+              onTouchStart={() => [Keyboard.dismiss, setOpen(true)]}
             />
             <Image source={infores.DATEPICKER} style={StyleInformation.iconcalendar} />
             <DatePicker modal mode="date" open={open} date={date} locale='vi'

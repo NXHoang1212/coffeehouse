@@ -48,3 +48,16 @@ export const FocusUpdate = () => {
     }
     return { focusUpdate, onFocusUpdate, onBlurUpdate };
 };
+
+
+export const FocusLogin = () => {
+    const [focusLogin, setFocusLogin] = useState<boolean>(false);
+
+    const onFocusLogin = () => {
+        setFocusLogin(true);
+    }
+    const onBlurLogin = () => {
+        setFocusLogin(false);
+    }
+    return { focusLogin, onFocusLogin, onBlurLogin };
+}

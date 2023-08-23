@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import styleOther from '../../styles/other/StyleOther'
 import { Icon, infores } from '../../constant/Icon'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
@@ -7,8 +7,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackParamsOther } from '../../data/types/other/StackOrther'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import SignOut from '../../components/profile/SignOut'
 
 const Other = () => {
+  const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung'
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
@@ -40,7 +42,13 @@ const Other = () => {
       navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'DiscountUser', })
     }
   }
-
+  const onCancelPress = () => {
+    setVisible(false);
+  };
+  const onOKPress = () => {
+    setVisible(false);
+  };
+  const handleLogout = () => { }
   return (
     <View style={styleOther.container}>
       <View style={styleOther.viewheader}>
@@ -104,12 +112,34 @@ const Other = () => {
             <Image style={styleOther.iconright} source={Icon.RIGHT} />
           </TouchableOpacity>
           <View style={styleOther.lineinfor} />
-          <TouchableOpacity style={styleOther.account}>
-            <Image style={styleOther.iconlogout} source={infores.LOGOUT} />
-            <Text style={styleOther.textlogout}>Đăng xuất</Text>
-            <Image style={styleOther.iconright} source={Icon.RIGHT} />
-          </TouchableOpacity>
+          {visible ? (
+            <TouchableOpacity style={styleOther.account} onPress={handleLogout} >
+              <Image style={styleOther.iconlogout} source={infores.LOGIN} />
+              <Text style={styleOther.textlogout}>Đăng xuất</Text>
+              <Image style={styleOther.iconright} source={Icon.RIGHT} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styleOther.account}
+              onPress={() => {
+                //@ts-ignore
+                navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser, { screen: 'Login' })
+              }}>
+              <Image style={styleOther.iconlogout} source={infores.LOGIN} />
+              <Text style={styleOther.textlogout}>Đăng nhập</Text>
+              <Image style={styleOther.iconright} source={Icon.RIGHT} />
+            </TouchableOpacity>
+          )}
+
         </View>
+        <SignOut
+          visible={visible}
+          title='Xác nhận'
+          message='Bạn có muốn đăng xuất không ?'
+          onCancelPress={onCancelPress}
+          onOKPress={onOKPress}
+        />
+
       </View>
     </View>
   )

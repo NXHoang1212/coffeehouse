@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TheCoffeeHouse</string>
+    <string name="facebook_app_id">2603514996482717</string>
+    <string name="fb_login_protocol_scheme">fb2603514996482717</string>
+    <string name="facebook_client_token">05e7d44114f8b4102f78c9f1efb9176e</string>
+
 </resources>
