@@ -6,17 +6,16 @@ import { useGoBack } from '../../utils/GoBack';
 import { Icon } from '../../constant/Icon';
 import StyleRules from '../../styles/other/StyleRules';
 import { ThemLightStatusBar } from '../../constant/ThemLight';
-import * as Progress from 'react-native-progress';
 
 //định nghĩa dữ liệu url
 interface RouteParams {
-  url: string;
+  link: string;
 }
 
 const Rules = () => {
   ThemLightStatusBar('dark-content', '#fff');
-  const { url } = useRoute().params as RouteParams;
-  console.log("🚀 ~ file: Rules.tsx:16 ~ Rules ~ url:", url)
+  const { link } = useRoute().params as RouteParams;
+  console.log("🚀 ~ file: Rules.tsx:16 ~ Rules ~ url:", link)
   const goback = useGoBack();
   return (
     <View style={StyleRules.container}>
@@ -26,7 +25,7 @@ const Rules = () => {
         </TouchableOpacity>
         <Text style={StyleRules.textHeader}>Điều khoản</Text>
       </View>
-      <WebView source={{ uri: url }} />
+      <WebView source={{ uri: link }} />
     </View>
   )
 }
