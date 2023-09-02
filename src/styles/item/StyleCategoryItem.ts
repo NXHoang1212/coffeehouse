@@ -9,6 +9,9 @@ const StyleCategoryItem = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
     },
+    selectedCategory: {
+        
+    },
     textcategorytitle: {
         fontSize: FONTSIZE(2),
         letterSpacing: WIDTH(0.4),

@@ -1,9 +1,9 @@
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
 import CartOrder from '../../pages/order/CartOrder';
 import DetailOrder from '../../pages/order/DetailOrder';
-import { ProductCart } from '../../data/types/product/CartProduct';
-import { CartStackNames } from '../../data/types/product/CartProduct';
-import { CartStackParamList } from '../../data/types/product/CartProduct';
+import { ProductCart } from '../../data/types/product/CartOrder.entity';
+import { CartStackNames } from '../../data/types/product/CartOrder.entity';
+import { CartStackParamList } from '../../data/types/product/CartOrder.entity';
 
 const CartStack = createNativeStackNavigator();
 const CartNavigator = (): React.JSX.Element => {

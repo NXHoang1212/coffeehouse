@@ -79,7 +79,8 @@ const StyleOrder = StyleSheet.create({
         height: HEIGHT(100),
     },
     viewbottom: {
-        height: HEIGHT(100),
+        // height: HEIGHT(100),
+        marginHorizontal: WIDTH(5),
         zIndex: -1,
     },
 });

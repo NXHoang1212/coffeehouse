@@ -25,7 +25,6 @@ const AddAddress = () => {
         <View style={StyleAddAddress.viewbody1}>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Tên địa chỉ</Text>
-            {/* //làm một cái nếu có name thì hiện đoạn view còn nếu không có thì ẩn đi hiện textinput */}
             {name ?
               <View style={StyleAddAddress.viewtexthome}>
                 <Text style={StyleAddAddress.texthome}>{name}</Text>
