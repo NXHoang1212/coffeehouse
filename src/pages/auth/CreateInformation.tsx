@@ -4,25 +4,59 @@ import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { Icon, infores } from '../../constant/Icon';
 import { useGoBack } from '../../utils/GoBack';
 import DatePicker from 'react-native-date-picker'
-import { formatDate } from '../../utils/FormatDate';
+import { FormatDate } from '../../utils/FormatDate';
 import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
 import StyleCreateInformation from '../../styles/auth/StyleCreateInformation';
 import { Picker } from '@react-native-picker/picker';
 import { CheckBox } from 'react-native-elements'
+import { useDispatch, useSelector } from 'react-redux';
+import { ApiUpdateUser } from '../../service/api/IndexUser';
+import { useNavigation } from '@react-navigation/native';
+import { setUser } from '../../redux/slices/AuthSlice';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState<boolean>(false)
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
-  const [Firstname, setFirstName] = useState<string>('');
-  const [Lastname, setLastName] = useState<string>('');
-  const [Email, setEmail] = useState<string>('')
-  const [date, setDate] = useState<string>('')
   const [open, setOpen] = useState<boolean>(false)
-  const [selectedGender, setSelectedGender] = useState<string>('');
+  const user = useSelector((state: any) => state.user)
+  const id = user._id
+  console.log("🚀 ~ file: CreateInformation.tsx:31 ~ CreateInformation ~ _id:", id)
+  const [name, setName] = useState<string>(user.name)
+  const [holder, setHolder] = useState<string>(user.holder)
+  const [email, setEmail] = useState<string>(user.email)
+  const [gender, setGender] = useState<string>(user.gender)
+  const [birthday, setBirthday] = useState<string>(user.birthday)
+
+  const handle = async () => {
+    try {
+      const data: any = {
+        name: name,
+        email: email,
+        holder: holder,
+        gender: gender,
+        birthday: birthday
+      }
+      const response = await ApiUpdateUser(id, data)
+      console.log("🚀 ~ file: CreateInformation.tsx:42 ~ handle ~ response", response)
+      //nếu cập nhật thành công thì lưu vào redux và chuyển sang trang chủ
+      if (response) {
+        const user = response.data
+        dispatch(setUser(user))
+        //@ts-ignore
+        navigation.navigate('TabHomeNavigate', { screen: 'Trang chủ' })
+      }
+    } catch (error: any) {
+      console.log("🚀 ~ file: CreateInformation.tsx:44 ~ handle ~ error", error)
+    }
+  }
+
+
   return (
     <View style={StyleCreateInformation.container}>
       <View style={StyleCreateInformation.viewheader}>
@@ -37,8 +71,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Nhập tên của bạn *"
-              value={Firstname}
-              onChangeText={(name) => setFirstName(name)}
+              value={name}
+              onChangeText={(text) => setName(text)}
               onFocus={focusNameProps.onFocusName}
               onBlur={focusNameProps.onBlurName}
             />
@@ -47,8 +81,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Nhập họ của bạn"
-              value={Lastname}
-              onChangeText={(name) => setLastName(name)}
+              value={holder}
+              onChangeText={(text) => setHolder(text)}
               onFocus={focusHoProps.onFocusHo}
               onBlur={focusHoProps.onBlurHo}
             />
@@ -57,8 +91,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Email của bạn"
-              value={Email}
-              onChangeText={(name) => setEmail(name)}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
               onFocus={focusEmailProps.onFocusEmail}
               onBlur={focusEmailProps.onBlurEmail}
             />
@@ -66,33 +100,38 @@ const CreateInformation = () => {
           <View style={StyleCreateInformation.inputdate}>
             <TextInput
               style={StyleCreateInformation.textinput}
-              value={date ? formatDate(new Date(date)) : ''}
+              value={birthday ? FormatDate(new Date(birthday)) : ''}
               placeholder="Chọn ngày sinh"
               onTouchStart={() => [Keyboard.dismiss(), setOpen(true)]}
             />
             <Image source={infores.DATEPICKER} style={StyleCreateInformation.iconcalendar} />
-            <DatePicker modal mode="date" open={open} date={date ? new Date(date) : new Date()} locale='vi'
-              onConfirm={(date) => { setOpen(false), setDate(date.toISOString()) }}
+            <DatePicker
+              modal
+              mode="date"
+              open={open}
+              date={birthday ? new Date(birthday) : new Date()}
+              locale='vi'
+              onConfirm={(date) => { setOpen(false), setBirthday(date.toISOString()) }}
               onCancel={() => { setOpen(false) }} />
           </View>
           <View>
             <View style={StyleCreateInformation.dropdown}>
               <Picker
                 style={StyleCreateInformation.viewdropdown}
-                selectedValue={selectedGender}
-                onValueChange={(itemValue, itemIndex) => setSelectedGender(itemValue)}>
+                selectedValue={gender}
+                onValueChange={(itemValue, itemIndex) => setGender(itemValue)}>
                 <Picker.Item label="Chưa chọn giới tính" value="java" style={StyleCreateInformation.texdropdown} />
-                <Picker.Item label="Nam" value="java" style={StyleCreateInformation.texdropdown} />
-                <Picker.Item label="Nữ" value="js" style={StyleCreateInformation.texdropdown} />
+                <Picker.Item label="Nam" value="Nam" style={StyleCreateInformation.texdropdown} />
+                <Picker.Item label="Nữ" value="Nữ" style={StyleCreateInformation.texdropdown} />
               </Picker>
             </View>
           </View>
           <TouchableOpacity
             style={[StyleCreateInformation.update, !checked && StyleCreateInformation.disabledUpdate]}
-            disabled={!checked}>
+            disabled={!checked}
+            onPress={handle}>
             <Text style={StyleCreateInformation.textupdate}>Tạo tài khoản</Text>
           </TouchableOpacity>
-
         </View>
         <View style={StyleCreateInformation.viewcheckbox}>
           <CheckBox

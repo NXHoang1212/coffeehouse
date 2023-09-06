@@ -2,12 +2,14 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import StyleConfirmOtp from '../../styles/auth/StyleConfirmOtp'
 import VeriftyInput from '../../components/otp/VeriftyOtp'
+import { useNavigation } from '@react-navigation/native';
 
 const ConfirmOtpCode = () => {
+  const navigation = useNavigation()
   const [code, setCode] = useState<string>('')
   //đếm ngược thời gian gửi lại mã otp 120s
   const [time, setTime] = useState<number>(120)
-  //đếm ngược thời gian gửi lại mã otp 120s hết 120s sẽ ngưng đếm
+  //đếm ngược thời gian gửi lại mã otp 120s hết 120s sẽ ngưng đếm và chuyển về trang nhập số điện thoại
   useEffect(() => {
     let timer = setInterval(() => {
       setTime(time - 1)
@@ -36,7 +38,7 @@ const ConfirmOtpCode = () => {
       </View>
       <View style={StyleConfirmOtp.viewfail}>
         <Text style={StyleConfirmOtp.textfail}>Bạn không nhận được mã?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CreateInformation')}>
           <Text style={StyleConfirmOtp.textsendagain}>Gửi lại {time}s</Text>
         </TouchableOpacity>
       </View>

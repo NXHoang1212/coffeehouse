@@ -8,21 +8,27 @@ import DatePicker from 'react-native-date-picker'
 import ModalOptionGender from '../../components/modal/OptionGender';
 import { FormatDate } from '../../utils/FormatDate';
 import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
+import { useSelector } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit';
+
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
-  const [Firstname, setFirstName] = useState<string>('');
-  const [Lastname, setLastName] = useState<string>('');
-  const [Email, setEmail] = useState<string>('');
-  const [date, setDate] = useState<Date>(new Date())
+  const user = useSelector((state: any) => state.user)
+  const id = user._id
+  console.log("🚀 ~ file: CreateInformation.tsx:31 ~ CreateInformation ~ _id:", id)
+  const [name, setName] = useState<string>(user.name)
+  const [holder, setHolder] = useState<string>(user.holder)
+  const [email, setEmail] = useState<string>(user.email)
+  const [gender, setGender] = useState<string>(user.gender)
+  const [birthday, setBirthday] = useState<string>(user.birthday)
   const [open, setOpen] = useState<boolean>(false)
   const [genderModalVisible, setGenderModalVisible] = useState<boolean>(false);
-  const [selectedGender, setSelectedGender] = useState<string>('');
   const handleGenderSelection = (selectedGender: string) => {
-    setSelectedGender(selectedGender); // Cập nhật giới tính được chọn
+    setGender(selectedGender);
     setGenderModalVisible(false); // Đóng Modal sau khi chọn
   };
   return (
@@ -45,8 +51,8 @@ const Information = () => {
             <TextInput
               style={StyleInformation.textinput}
               placeholder="Nhập tên của bạn *"
-              value={Firstname}
-              onChangeText={(name) => setFirstName(name)}
+              value={name}
+              onChangeText={(name) => setName(name)}
               onFocus={focusNameProps.onFocusName}
               onBlur={focusNameProps.onBlurName}
             />
@@ -55,8 +61,8 @@ const Information = () => {
             <TextInput
               style={StyleInformation.textinput}
               placeholder="Nhập họ của bạn"
-              value={Lastname}
-              onChangeText={(name) => setLastName(name)}
+              value={holder}
+              onChangeText={(name) => setHolder(name)}
               onFocus={focusHoProps.onFocusHo}
               onBlur={focusHoProps.onBlurHo}
             />
@@ -65,7 +71,7 @@ const Information = () => {
             <TextInput
               style={StyleInformation.textinput}
               placeholder="Email của bạn"
-              value={Email}
+              value={email}
               onChangeText={(name) => setEmail(name)}
               onFocus={focusEmailProps.onFocusEmail}
               onBlur={focusEmailProps.onBlurEmail}
@@ -74,25 +80,29 @@ const Information = () => {
           <View style={StyleInformation.inputdate}>
             <TextInput
               style={StyleInformation.textinput}
-              value={FormatDate(date)}
+              value={birthday ? FormatDate(new Date(birthday)) : ''}
               placeholder="Chọn ngày sinh"
               onTouchStart={() => [Keyboard.dismiss, setOpen(true)]}
             />
             <Image source={infores.DATEPICKER} style={StyleInformation.iconcalendar} />
-            <DatePicker modal mode="date" open={open} date={date} locale='vi'
-              onConfirm={(date) => { setOpen(false), setDate(date) }}
+            <DatePicker
+              modal
+              mode="date"
+              open={open} date={birthday ? new Date(birthday) : new Date()}
+              locale='vi'
+              onConfirm={(date) => { setOpen(false), setBirthday(date.toISOString()) }}
               onCancel={() => { setOpen(false) }} />
           </View>
           <View>
             <TouchableOpacity onPress={() => setGenderModalVisible(true)} style={StyleInformation.inputdate}>
               <Text style={StyleInformation.textinput}>
-                {selectedGender || 'Chọn giới tính'}
+                {gender || 'Chọn giới tính'}
               </Text>
               <Image source={Icon.DOWN} style={StyleInformation.icondown} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={[StyleInformation.update, (!Firstname && !Lastname && !Email && !selectedGender) && StyleInformation.disabledUpdate]}
-            disabled={!Firstname && !Lastname && !Email && !selectedGender}>
+          <TouchableOpacity style={[StyleInformation.update, (!name && !holder && !email && !gender) && StyleInformation.disabledUpdate]}
+            disabled={!name && !holder && !email && !gender}>
             <Text style={StyleInformation.textupdate}>Cập nhật tài khoản</Text>
           </TouchableOpacity>
           <TouchableOpacity style={StyleInformation.viewdelete}>

@@ -1,12 +1,20 @@
-import { View, Text, Animated, Image, TouchableOpacity, Pressable } from 'react-native'
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { Portal } from 'react-native-paper'
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
 import { Icon, category } from '../../constant/Icon'
 import { PanGestureHandler, GestureHandlerRootView } from 'react-native-gesture-handler'
 
-const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
+interface Props {
+    show: boolean;
+    onDismiss: () => void;
+    enableBackDropDismiss?: boolean;
+    setSelectedCategory: (categoryName: String) => void;
+}
+
+const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss = true, setSelectedCategory }: Props) => {
     const [open, setopen] = useState<boolean>(show);
+    const scrollViewRef = useRef<ScrollView | null>(null);
     const bottom = useRef(new Animated.Value(-1000)).current;
     useEffect(() => {
         if (show) {
@@ -43,6 +51,7 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
             }
         }
     }
+
     return (
         <Portal>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
@@ -57,39 +66,39 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
                     <View style={StyleBottomSheetMenu.line} />
                     <View style={StyleBottomSheetMenu.viewmenu}>
                         <View style={StyleBottomSheetMenu.viewcategory}>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('39K FREESHIP')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.SALE39K} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
-                                <Text style={StyleBottomSheetMenu.textitem}>Cà phê</Text>
+                                <Text style={StyleBottomSheetMenu.textitem}>FREESHIP</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Trà Trái Cây - Trà Sữa')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.TEAMILK} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>Trà Sữa</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('CloudFee')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.CLOUDFEE} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
-                                <Text style={StyleBottomSheetMenu.textitem}>CloudFeed</Text>
+                                <Text style={StyleBottomSheetMenu.textitem}>CloudFee</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={StyleBottomSheetMenu.viewcategory}>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Cà phê')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.COFFEE} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>Cà phê</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Trà Xanh Tây Bắc')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.TEAGREEN} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>Trà Xanh</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Bánh - Snack')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.SNACK} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
@@ -97,19 +106,19 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
                             </TouchableOpacity>
                         </View>
                         <View style={StyleBottomSheetMenu.viewcategory}>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('CloudTea')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.CLOUDTEA} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>CloudTea</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Đá Xay Frosty')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.FORSTY} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>Forsty</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Thưởng thức tại nhà')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.ENJOYHOME} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
@@ -117,7 +126,7 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
                             </TouchableOpacity>
                         </View>
                         <View style={StyleBottomSheetMenu.viewcategory}>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Hi-Tea Healthy')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.TEAPEACH} style={StyleBottomSheetMenu.iconitem} />
                                 </View>
@@ -129,7 +138,7 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss }: any) => {
                                 </View>
                                 <Text style={StyleBottomSheetMenu.textitem}>Gần đây</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
+                            <TouchableOpacity style={StyleBottomSheetMenu.handleSale} onPress={() => setSelectedCategory('Thức uống khác')}>
                                 <View style={StyleBottomSheetMenu.viewitem}>
                                     <Image source={category.OTHER} style={StyleBottomSheetMenu.iconitem} />
                                 </View>

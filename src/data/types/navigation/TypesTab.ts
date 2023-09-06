@@ -4,7 +4,7 @@ import { ImageSourcePropType } from "react-native";
 export type TabHomeParamList = {
     [TabHomeNavigateEnum.HomePage]: undefined;
     [TabHomeNavigateEnum.Heart]: undefined;
-    [TabHomeNavigateEnum.CartOrder]: undefined;
+    [TabHomeNavigateEnum.Order]: undefined;
     [TabHomeNavigateEnum.PromoDiscount]: undefined;
     [TabHomeNavigateEnum.Other]: undefined;
 
@@ -15,7 +15,7 @@ export enum TabHomeNavigateEnum {
     HomePage = 'Trang chủ',
     PromoDiscount = 'Ưu đãi',
     Heart = 'Yêu thích',
-    CartOrder = 'Đặt hàng',
+    Order = 'Đặt hàng',
     Other = 'Khác',
 }
 

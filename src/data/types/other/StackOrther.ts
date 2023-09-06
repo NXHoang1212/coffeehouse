@@ -1,4 +1,5 @@
 export enum StackEnumOther {
+    Login = 'Login',
     Another = 'Other',
     History = 'HistoryOrder',
     User = 'Information',

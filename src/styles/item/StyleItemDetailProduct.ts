@@ -3,7 +3,7 @@ import { COLOR } from '../../constant/Color';
 import { FONTSTYLE } from '../../constant/Fonts';
 import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 
-const StyleItemProduct = StyleSheet.create({
+const StyleItemDetailProduct = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE,
@@ -65,4 +65,4 @@ const StyleItemProduct = StyleSheet.create({
 });
 
 
-export default StyleItemProduct;
+export default StyleItemDetailProduct;

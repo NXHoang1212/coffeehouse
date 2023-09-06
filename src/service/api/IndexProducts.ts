@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { HOST } from '../../utils/Host';
+import { HOST } from '../../constant/Host';
 import { Products } from '../../data/types/product/Product.entity';
 
 
@@ -11,7 +11,11 @@ export const ApiProducts = createApi({
         getProducts: build.query<{ data: Products[] }, void>({
             query: () => '/api/users/product',
         }),
+
+        getProductsById: build.query<{ data: Products }, string>({
+            query: (id) => `/api/users/product/detail/${id}`,
+        }),
     }),
 });
 
-export const { useGetProductsQuery } = ApiProducts
+export const { useGetProductsQuery, useGetProductsByIdQuery } = ApiProducts

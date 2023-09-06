@@ -10,7 +10,9 @@ export interface ProductCart {
 }
 
 export enum CartStackNames {
+  Login = 'Login',
   Cart = 'CartOrder',
+  Search = 'SearchOrder',
   DetailOrder = 'DetailOrder',
 }
 

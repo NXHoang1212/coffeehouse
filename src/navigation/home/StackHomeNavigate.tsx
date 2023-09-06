@@ -1,7 +1,7 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import WebViewUrl from "../../components/redirectUrl/WebView";
 import Favourites from "../../pages/infatuated/Favourites";
-import SearchOrder from "../../pages/order/SearchOrder";
+import AuthStackNavigate from "../auth/AuthUserNavigate";
 import RankMember from "../../pages/code/RankMember";
 import HistoryBean from "../../pages/code/HistoryBean";
 import ChangeBean from "../../pages/code/ChangeBean";
@@ -16,6 +16,8 @@ import AddAddress from "../../pages/another/addresses/AddAddress";
 import EditAddress from "../../pages/another/addresses/EditAddress";
 import AboutCoffee from "../../pages/another/ordinary/AboutCoffee";
 import Notifee from "../../pages/general/Notifee";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/Store";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,9 +29,9 @@ export type ParamsStack = {
 };
 
 export enum EnumStackNaviagte {
+    auth = 'authstack',
     WebView = 'WebViewUrl',
     Favourite = 'Favourites',
-    Search = 'SearchOrder',
     Rank = 'RankMember',
     History = 'HistoryBean',
     Change = 'ChangeBean',
@@ -47,28 +49,29 @@ export enum EnumStackNaviagte {
 }
 
 
+
 const StackHomeNavigate = (): React.JSX.Element => {
+    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name={EnumStackNaviagte.WebView} component={WebViewUrl} />
-            <Stack.Screen name={EnumStackNaviagte.Favourite} component={Favourites} />
-            <Stack.Screen name={EnumStackNaviagte.Search} component={SearchOrder} />
-            <Stack.Screen name={EnumStackNaviagte.Rank} component={RankMember} />
-            <Stack.Screen name={EnumStackNaviagte.History} component={HistoryBean} />
-            <Stack.Screen name={EnumStackNaviagte.Change} component={ChangeBean} />
-            <Stack.Screen name={EnumStackNaviagte.Permission} component={PermissionProfit} />
-            <Stack.Screen name={EnumStackNaviagte.Discount} component={DiscountUser} />
+            <Stack.Screen name={EnumStackNaviagte.Favourite} component={isLoggedIn ? Favourites : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Rank} component={isLoggedIn ? RankMember : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.History} component={isLoggedIn ? HistoryBean : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Change} component={isLoggedIn ? ChangeBean : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Permission} component={isLoggedIn ? PermissionProfit : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Discount} component={isLoggedIn ? DiscountUser : AuthStackNavigate} />
             <Stack.Screen name={EnumStackNaviagte.Ru} component={Rules} />
             <Stack.Screen name={EnumStackNaviagte.Music} component={PlayMusic} />
-            <Stack.Screen name={EnumStackNaviagte.FeedBack} component={FeedBackOrder} />
+            <Stack.Screen name={EnumStackNaviagte.FeedBack} component={isLoggedIn ? FeedBackOrder : AuthStackNavigate} />
             <Stack.Screen name={EnumStackNaviagte.Contact} component={ContactFeedBack} />
-            <Stack.Screen name={EnumStackNaviagte.Save} component={Address} />
-            <Stack.Screen name={EnumStackNaviagte.Add} component={AddAddress} />
-            <Stack.Screen name={EnumStackNaviagte.Edit} component={EditAddress} />
+            <Stack.Screen name={EnumStackNaviagte.Save} component={isLoggedIn ? Address : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Add} component={isLoggedIn ? AddAddress : AuthStackNavigate} />
+            <Stack.Screen name={EnumStackNaviagte.Edit} component={isLoggedIn ? EditAddress : AuthStackNavigate} />
             <Stack.Screen name={EnumStackNaviagte.About} component={AboutCoffee} />
-            <Stack.Screen name={EnumStackNaviagte.Notication} component={Notifee} />
+            <Stack.Screen name={EnumStackNaviagte.Notication} component={isLoggedIn ? Notifee : AuthStackNavigate} />
         </Stack.Navigator>
-    )
+    );
 };
 
 export type ParamsUrl = NativeStackScreenProps<ParamsStack, 'WebView'>;

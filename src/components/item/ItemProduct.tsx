@@ -5,14 +5,25 @@ import StyleItemProduct from '../../styles/item/StyleItemProduct'
 import { Products } from '../../data/types/product/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack';
+
 
 interface PropsItemProduct {
   item: Products;
-  showCategory: boolean; // Thêm prop này để xác định liệu bạn có nên hiển thị danh mục hay không
+  showCategory: boolean;
   isFirstItem: boolean;
 }
 
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+
+  const handleProductDetail = () => {
+    //@ts-ignore
+    navigation.navigate('DetailOrder', { id: item._id })
+  }
+
   return (
     <View style={StyleItemProduct.container}>
       <View style={StyleItemProduct.viewbody}>
@@ -21,24 +32,26 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
           </View>
         )}
-        <View style={StyleItemProduct.viewProduct}>
-          <View>
-            <FastImage
-              style={StyleItemProduct.imageproduct}
-              source={{
-                uri: item.image,
-                priority: FastImage.priority.high,
-              }}
-            />
+        <TouchableOpacity onPress={handleProductDetail}>
+          <View style={StyleItemProduct.viewProduct}>
+            <View>
+              <FastImage
+                style={StyleItemProduct.imageproduct}
+                source={{
+                  uri: item.image,
+                  priority: FastImage.priority.high,
+                }}
+              />
+            </View>
+            <View style={StyleItemProduct.viewitemtextproduct}>
+              <Text style={StyleItemProduct.textname}>{item.name}</Text>
+              <Text style={StyleItemProduct.textprice}>{FormatPrice(item.price)}</Text>
+            </View>
+            <TouchableOpacity style={StyleItemProduct.viewiconplus}>
+              <Image source={Icon.PLUS} style={StyleItemProduct.iconplus} />
+            </TouchableOpacity>
           </View>
-          <View style={StyleItemProduct.viewitemtextproduct}>
-            <Text style={StyleItemProduct.textname}>{item.name}</Text>
-            <Text style={StyleItemProduct.textprice}>{FormatPrice(item.price)}</Text>
-          </View>
-          <TouchableOpacity style={StyleItemProduct.viewiconplus}>
-            <Image source={Icon.PLUS} style={StyleItemProduct.iconplus} />
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   )

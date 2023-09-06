@@ -6,13 +6,15 @@ import { Icon, Logo } from '../../constant/Icon'
 import { useGoBack } from '../../utils/GoBack'
 import { FocusLogin } from '../../hooks/Focus'
 import { loginFacebook } from '../../service/methods/LoginFacebook'
-import { loginGoogle } from '../../service/methods/LoginGoogle'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { loginGoogle } from '../../service/methods/LoginGoogle'
+import { useDispatch } from 'react-redux'
 
 const LoginUser = () => {
     ThemLightStatusBar('dark-content', 'transparent');
+    const dispatch = useDispatch();
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const goBack = useGoBack();
     const focusLoginProps = FocusLogin();
@@ -84,7 +86,7 @@ const LoginUser = () => {
                                 <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Facebook</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={loginGoogle}>
+                        <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation)}>
                             <View style={StyleLoginUser.viewgg}>
                                 <Image source={Logo.GOOGLE} style={StyleLoginUser.iconfb} />
                                 <Text style={StyleLoginUser.textgoogle}>Đăng nhập bằng Google</Text>

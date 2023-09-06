@@ -11,6 +11,7 @@ import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 import Heart from "../../pages/infatuated/Heart";
 import OtherNavigator from "../other/TabOtherNavigate";
+import { useState } from "react";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
@@ -22,7 +23,7 @@ const TabNavigate: TabHomeNavigateType[] = [
     },
     {
         component: CartNavigator,
-        name: TabHomeNavigateEnum.CartOrder,
+        name: TabHomeNavigateEnum.Order,
         icon: TabCoffee.ORDER,
     },
     {

@@ -16,30 +16,30 @@ const Other = () => {
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   ThemLightStatusBar('dark-content', '#fff');
   const handeleGeneral = (destination: string) => {
-    if (destination === 'PlayMusic') {
+    if (destination === 'Notifee') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'PlayMusic', })
+      navigationDad.navigate('StackHomeNavigate', { screen: 'Notifee' })
+    } else if (destination === 'DiscountUser') {
+      //@ts-ignore
+      navigationDad.navigate('StackHomeNavigate', { screen: 'DiscountUser' })
+    } else if (destination === 'PlayMusic') {
+      //@ts-ignore
+      navigationDad.navigate('StackHomeNavigate', { screen: 'PlayMusic', })
     } else if (destination === 'FeedBackOrder') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'FeedBackOrder', })
+      navigationDad.navigate('StackHomeNavigate', { screen: 'FeedBackOrder', })
     } else if (destination === 'ContactFeedBack') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'ContactFeedBack', })
+      navigationDad.navigate('StackHomeNavigate', { screen: 'ContactFeedBack', })
     } else if (destination === 'Location') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'SaveAddress', })
+      navigationDad.navigate('StackHomeNavigate', { screen: 'SaveAddress', })
     } else if (destination === 'Rules') {
       //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Rules', params: { link } })
+      navigationDad.navigate('StackHomeNavigate', { screen: 'Rules', params: { link } })
     } else if (destination === 'Setting') {
       //@ts-ignore
       navigationDad.navigate('Setting')
-    } else if (destination === 'Notifee') {
-      //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Notifee', })
-    } else if (destination === 'DiscountUser') {
-      //@ts-ignore
-      navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'DiscountUser', })
     }
   }
   const onCancelPress = () => {

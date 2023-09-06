@@ -17,7 +17,7 @@ const StyleSearchOrder = StyleSheet.create({
     },
     viewsearch: {
         width: WIDTH(83),
-        height: HEIGHT(5),
+        height: HEIGHT(4.5),
         borderRadius: 10,
         backgroundColor: COLOR.GRAYBLAND1,
         flexDirection: 'row',
@@ -36,6 +36,8 @@ const StyleSearchOrder = StyleSheet.create({
         fontSize: FONTSIZE(2),
         color: COLOR.BLACK,
         width: WIDTH(63),
+        height: HEIGHT(4.5),
+        top: HEIGHT(0.2),
     },
     line: {
         width: WIDTH(100),
@@ -53,6 +55,11 @@ const StyleSearchOrder = StyleSheet.create({
     iconcancel: {
         width: WIDTH(3),
         height: HEIGHT(1.8),
+    },
+    viewitem: {
+        top: HEIGHT(2),
+        marginHorizontal: WIDTH(5),
+        height: HEIGHT(100),
     },
 });
 
