@@ -11,9 +11,7 @@ export interface UserMethods {
     phone: string;
 }
 
-export interface User extends UserData {
-    isLoggedIn: boolean;
-}
+export interface User extends UserData { }
 
 export interface UserData {
     _id: string;

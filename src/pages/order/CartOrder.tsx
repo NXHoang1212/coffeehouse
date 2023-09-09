@@ -4,6 +4,7 @@ import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
 import CategoryItem from '../../components/item/CategoryItem'
 import ItemProduct from '../../components/item/ItemProduct'
+import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
@@ -15,9 +16,11 @@ import { useGetProductsQuery } from '../../service/api/IndexProducts'
 import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../../redux/slices/ProductSlices'
+import { useAuth } from '../../hooks/UseAuth'
 
 const CartOrder = () => {
   ThemLightStatusBar('dark-content', '#fff');
+  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const [show, setShow] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<String>('');
@@ -29,11 +32,11 @@ const CartOrder = () => {
   const handleSearch = () => {
     dispatch(setProducts(showProducts));
     //@ts-ignore
-    navigation.navigate('SearchOrder')
+    navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser');
   }
   const handleFavourites = () => {
     //@ts-ignore
-    navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'Favourites', })
+    navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser', { screen: 'Favourites', });
   }
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
@@ -41,6 +44,7 @@ const CartOrder = () => {
     scrollToCategory(categoryName);
   };
   const scrollViewRef = useRef<ScrollView | null>(null);
+  useScrollToTop(scrollViewRef);
   const itemHeight = 150;
   const scrollToCategory = (categoryName: String) => {
     if (scrollViewRef.current) {
@@ -84,8 +88,8 @@ const CartOrder = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={StyleOrder.line} />
-            <ScrollView ref={scrollViewRef}
+            <View style={StyleOrder.line} /> 
+            <ScrollView ref={scrollViewRef}  
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{ flexGrow: 1 }}
               refreshControl={

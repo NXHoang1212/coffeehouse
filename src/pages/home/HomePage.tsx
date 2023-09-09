@@ -8,15 +8,21 @@ import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import BottomSheetHome from './BottomSheetHome'
 import { LoadingScroll } from '../../hooks/Loading'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
+import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { useAuth } from '../../hooks/UseAuth'
 
 const HomePage = () => {
+  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const loadingData = LoadingScroll();
+  const scroll = useRef(null);
+  useScrollToTop(scroll);
   const [showRefresh, setShowRefresh] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
+  ThemLightStatusBar('dark-content', backgroundColor);
   const onRefresh = () => {
     setShowRefresh(true);
     setTimeout(() => {
@@ -38,19 +44,21 @@ const HomePage = () => {
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'DiscountUser', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
     } else if (destination === 'Notifee') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'Notifee', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
-  ThemLightStatusBar('dark-content', backgroundColor);
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
-          <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
+          {
+            isLoggedIn ? <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text> :
+              <Text style={StyleHomePage.textheader}>CloudTea nhé!</Text>
+          }
         </View>
         <View style={StyleHomePage.headerIcon}>
           <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
@@ -62,8 +70,8 @@ const HomePage = () => {
         </View>
       </View>
       {loadingData.isLoading && <ActivityIndicator />}
-      <ScrollView showsVerticalScrollIndicator={false} onScroll={onScroll} contentContainerStyle={{ flexGrow: 1 }}
-        refreshControl={<RefreshControl refreshing={showRefresh} onRefresh={onRefresh} />}>
+      <ScrollView showsVerticalScrollIndicator={false} ref={scroll} onScroll={onScroll}
+        refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}>
         <View style={StyleHomePage.viewbody}>
           <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
             <View style={StyleHomePage.viewtextcard}>

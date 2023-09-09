@@ -6,17 +6,19 @@ import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useAuth } from '../../hooks/UseAuth'
 
 const Heart = () => {
   ThemLightStatusBar('dark-content', '#fff');
+  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'DiscountUser', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
     } else if (destination === 'Notifee') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'Notifee', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
   return (

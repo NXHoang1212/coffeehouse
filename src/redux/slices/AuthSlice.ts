@@ -4,8 +4,7 @@ import { User, UserData } from "../../data/types/auth/User.entity";
 
 
 const initialState: User = {
-    isLoggedIn: false,
-    _id:  '',
+    _id: '',
     role: '',
     googleId: '',
     facebookId: '',
@@ -24,7 +23,6 @@ const UserSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<User>) {
-            state.isLoggedIn = true;
             state._id = action.payload._id;
             state.role = action.payload.role;
             state.googleId = action.payload.googleId;
@@ -38,7 +36,6 @@ const UserSlice = createSlice({
             state.birthday = action.payload.birthday;
         },
         clearUser(state) {
-            state.isLoggedIn = false;
             state._id = '';
             state.role = '';
             state.googleId = '';

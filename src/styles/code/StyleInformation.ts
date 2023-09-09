@@ -52,10 +52,10 @@ const StyleInformation = StyleSheet.create({
     input: {
         width: WIDTH(90),
         height: HEIGHT(6),
-        borderWidth: 0.9,
+        borderWidth: 1,
         borderRadius: WIDTH(2),
         alignSelf: 'center',
-        borderColor: COLOR.GRAY,
+        borderColor: COLOR.GRAYBLAND,
     },
     focusedInput: {
         width: WIDTH(90),
@@ -81,6 +81,13 @@ const StyleInformation = StyleSheet.create({
         left: WIDTH(2),
         fontWeight: '500',
         width: WIDTH(81),
+    },
+    disabledInput: {
+        width: WIDTH(90),
+        height: HEIGHT(6),
+        borderRadius: WIDTH(2),
+        alignSelf: 'center',
+        backgroundColor: COLOR.GRAYBLAND,
     },
     iconcalendar: {
         width: WIDTH(5),

@@ -13,10 +13,8 @@ export enum CartStackNames {
   Login = 'Login',
   Cart = 'CartOrder',
   Search = 'SearchOrder',
-  DetailOrder = 'DetailOrder',
 }
 
 export type CartStackParamList = {
   CartOrder: undefined;
-  CartProduct: ProductCart;
 };

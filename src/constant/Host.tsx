@@ -1,3 +1,3 @@
 export const HOST = {
-    API: 'http://192.168.1.20:3000',
+    API: 'http://192.168.1.19:3000',
 }

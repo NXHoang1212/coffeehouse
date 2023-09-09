@@ -7,10 +7,10 @@ import AuthStackNavigate from '../auth/AuthUserNavigate';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import LoginUser from '../../pages/auth/LoginUser';
+import { useEffect, useState } from 'react';
 
 const CartStack = createNativeStackNavigator();
 const CartNavigator = (): React.JSX.Element => {
-    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     return (
         <CartStack.Navigator screenOptions={{ headerShown: false }}>
             <CartStack.Screen
@@ -18,12 +18,8 @@ const CartNavigator = (): React.JSX.Element => {
                 component={CartOrder}
             />
             <CartStack.Screen
-                name={CartStackNames.DetailOrder}
-                component={DetailOrder}
-            />
-            <CartStack.Screen
                 name={CartStackNames.Search}
-                component={isLoggedIn ? SearchOrder : LoginUser}
+                component={SearchOrder}
             />
         </CartStack.Navigator>
     );

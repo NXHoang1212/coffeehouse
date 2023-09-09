@@ -9,6 +9,10 @@ const StyleDetailOrder = StyleSheet.create({
         flex: 1,
         backgroundColor: COLOR.WHITE,
     },
+    itemcontainer: {
+        height: HEIGHT(300),
+        width: WIDTH(100),
+    },
 });
 
 export default StyleDetailOrder;

@@ -12,14 +12,13 @@ import { RootState } from '../../redux/store/Store';
 const OtherStack = createNativeStackNavigator();
 
 const OtherNavigator = (): React.JSX.Element => {
-    const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
     return (
         <OtherStack.Navigator screenOptions={{ headerShown: false, }}>
             <OtherStack.Screen name={StackEnumOther.Another} component={Other} />
             <OtherStack.Screen name={StackEnumOther.General} component={Seeting} />
             <OtherStack.Screen name={StackEnumOther.Link} component={DeepLinkAcount} />
-            <OtherStack.Screen name={StackEnumOther.History} component={isLoggedIn ? HistoryOrder : AuthStackNavigate} />
-            <OtherStack.Screen name={StackEnumOther.User} component={isLoggedIn ? Information : AuthStackNavigate} />
+            <OtherStack.Screen name={StackEnumOther.History} component={HistoryOrder} />
+            <OtherStack.Screen name={StackEnumOther.User} component={Information} />
         </OtherStack.Navigator>
     );
 };

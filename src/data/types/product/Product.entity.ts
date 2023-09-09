@@ -5,7 +5,7 @@ export interface Products {
     _id: string;
     name: string;
     price: number;
-    image: string;
+    image: ImageSourcePropType;
     description: string;
     category: Category;
     size: string[];
@@ -20,7 +20,6 @@ export interface DetailProduct {
     image: ImageSourcePropType;
     description: string;
     category: Category;
-    size: string[];
-    topping: string[];
-    quantity: number;
+    size: any[];
+    topping: any[];
 }

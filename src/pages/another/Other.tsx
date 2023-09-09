@@ -8,47 +8,62 @@ import { StackParamsOther } from '../../data/types/other/StackOrther'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
 import SignOut from '../../components/profile/SignOut'
+import { useAuth } from '../../hooks/UseAuth'
+import { useDispatch } from 'react-redux'
+import { clearUser } from '../../redux/slices/AuthSlice'
 
 const Other = () => {
+  const { isLoggedIn, logout } = useAuth();
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung'
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   ThemLightStatusBar('dark-content', '#fff');
   const handeleGeneral = (destination: string) => {
-    if (destination === 'Notifee') {
+    if (destination === 'HistoryOrder') {
       //@ts-ignore
-      navigationDad.navigate('StackHomeNavigate', { screen: 'Notifee' })
+      navigation.navigate(isLoggedIn ? 'HistoryOrder' : 'AuthStackUser')
+    } else if (destination === 'Notifee') {
+      //@ts-ignore
+      navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     } else if (destination === 'DiscountUser') {
       //@ts-ignore
-      navigationDad.navigate('StackHomeNavigate', { screen: 'DiscountUser' })
+      navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
     } else if (destination === 'PlayMusic') {
       //@ts-ignore
       navigationDad.navigate('StackHomeNavigate', { screen: 'PlayMusic', })
     } else if (destination === 'FeedBackOrder') {
       //@ts-ignore
-      navigationDad.navigate('StackHomeNavigate', { screen: 'FeedBackOrder', })
+      navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'FeedBackOrder', })
     } else if (destination === 'ContactFeedBack') {
       //@ts-ignore
       navigationDad.navigate('StackHomeNavigate', { screen: 'ContactFeedBack', })
     } else if (destination === 'Location') {
       //@ts-ignore
-      navigationDad.navigate('StackHomeNavigate', { screen: 'SaveAddress', })
+      navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'SaveAddress', })
     } else if (destination === 'Rules') {
       //@ts-ignore
       navigationDad.navigate('StackHomeNavigate', { screen: 'Rules', params: { link } })
     } else if (destination === 'Setting') {
       //@ts-ignore
       navigationDad.navigate('Setting')
-    }
+    } else if (destination === 'Information') (
+      //@ts-ignore
+      navigation.navigate(isLoggedIn ? 'Information' : 'AuthStackUser')
+    )
   }
   const onCancelPress = () => {
     setVisible(false);
   };
   const onOKPress = () => {
     setVisible(false);
+    logout();
+    dispatch(clearUser());
   };
-  const handleLogout = () => { }
+  const handleLogout = () => {
+    setVisible(true);
+  }
   return (
     <View style={styleOther.container}>
       <View style={styleOther.viewheader}>
@@ -64,7 +79,7 @@ const Other = () => {
         <Text style={styleOther.textbodysup}>Tiện ích</Text>
         <View style={styleOther.viewbody}>
           <View style={styleOther.viewutilities}>
-            <TouchableOpacity style={styleOther.utilities} onPress={() => navigation.navigate('HistoryOrder')}>
+            <TouchableOpacity style={styleOther.utilities} onPress={() => handeleGeneral('HistoryOrder')}>
               <Image style={styleOther.iconutilities} source={infores.HISTORY} />
               <Text style={styleOther.textutilities}>Lịch sử đơn hàng</Text>
             </TouchableOpacity>
@@ -94,7 +109,7 @@ const Other = () => {
         </View>
         <Text style={styleOther.textaccount}>Tài khoản</Text>
         <View style={styleOther.viewaccount}>
-          <TouchableOpacity style={styleOther.account} onPress={() => navigation.navigate('Information')}>
+          <TouchableOpacity style={styleOther.account} onPress={() => handeleGeneral('Information')}>
             <Image style={styleOther.iconaccount} source={infores.ACCOUNT} />
             <Text style={styleOther.textinfor}>Thông tin cá nhân</Text>
             <Image style={styleOther.iconright} source={Icon.RIGHT} />
@@ -112,9 +127,9 @@ const Other = () => {
             <Image style={styleOther.iconright} source={Icon.RIGHT} />
           </TouchableOpacity>
           <View style={styleOther.lineinfor} />
-          {visible ? (
+          {isLoggedIn ? (
             <TouchableOpacity style={styleOther.account} onPress={handleLogout} >
-              <Image style={styleOther.iconlogout} source={infores.LOGIN} />
+              <Image style={styleOther.iconlogout} source={infores.LOGOUT} />
               <Text style={styleOther.textlogout}>Đăng xuất</Text>
               <Image style={styleOther.iconright} source={Icon.RIGHT} />
             </TouchableOpacity>
@@ -130,7 +145,6 @@ const Other = () => {
               <Image style={styleOther.iconright} source={Icon.RIGHT} />
             </TouchableOpacity>
           )}
-
         </View>
         <SignOut
           visible={visible}

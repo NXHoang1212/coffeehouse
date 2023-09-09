@@ -8,11 +8,12 @@ export const ApiProducts = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
         //đây là 1 api endpoint dùng để lấy dữ liệu từ server về client 
+        //void được dùng khi không có tham số truyền vào
         getProducts: build.query<{ data: Products[] }, void>({
             query: () => '/api/users/product',
         }),
 
-        getProductsById: build.query<{ data: Products }, string>({
+        getProductsById: build.query<{ data: Products[] }, string>({
             query: (id) => `/api/users/product/detail/${id}`,
         }),
     }),

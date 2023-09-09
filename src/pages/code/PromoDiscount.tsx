@@ -7,28 +7,30 @@ import { ThemLightStatusBar } from '../../constant/ThemLight';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack';
+import { useAuth } from '../../hooks/UseAuth';
 
 const PromoDiscount = () => {
+  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   ThemLightStatusBar('light-content', '#fd7e14');
   const link = 'https://order.thecoffeehouse.com/user-info/accountUser'
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'DiscountUser', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
     } else if (destination === 'HistoryBean') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'HistoryBean', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'HistoryBean' })
     } else if (destination === 'ChangeBean') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'ChangeBean', })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'ChangeBean' })
     } else if (destination === 'PermissionProfit') {
       //gắn url vào đây
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'PermissionProfit', params: { url: link } })
+      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Rules', params: { link } })
     } else if (destination === 'RankMember') {
       //@ts-ignore
-      navigation.navigate('StackHomeNavigate', { screen: 'RankMember', })
+      navigation.navigate('StackHomeNavigate', { screen: 'RankMember' })
     }
   }
 

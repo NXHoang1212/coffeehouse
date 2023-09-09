@@ -3,6 +3,8 @@ import LoginUser from "../../pages/auth/LoginUser";
 import InputPhone from "../../pages/auth/InputPhone";
 import ConfirmOtpCode from "../../pages/auth/ConfirmOtpCode";
 import CreateInformation from "../../pages/auth/CreateInformation";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/Store";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,7 @@ export enum AuthEnumStackNavigate {
 
 
 const AuthStackNavigate = (): React.JSX.Element => {
+
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
             <Stack.Screen name={AuthEnumStackNavigate.Login} component={LoginUser} />

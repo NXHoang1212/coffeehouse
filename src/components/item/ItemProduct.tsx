@@ -21,7 +21,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
 
   const handleProductDetail = () => {
     //@ts-ignore
-    navigation.navigate('DetailOrder', { id: item._id })
+    navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
   }
 
   return (
@@ -38,7 +38,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
               <FastImage
                 style={StyleItemProduct.imageproduct}
                 source={{
-                  uri: item.image,
+                  uri: item.image as string,
                   priority: FastImage.priority.high,
                 }}
               />

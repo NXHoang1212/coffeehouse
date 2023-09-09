@@ -29,7 +29,7 @@ export const ApiLogin = async (data: UserMethods) => {
 }
 
 
-//cập nhật thông tin user đường dẫn api: /api/users/update/:id
+
 export const ApiUpdateUser = async (id: string, data: UpdateUser) => {
     try {
         const response = await AxiosInstance().post(`/api/users/updateUserById/${id}`, data);
@@ -39,3 +39,11 @@ export const ApiUpdateUser = async (id: string, data: UpdateUser) => {
     }
 }
 
+export const ApiGetUserById = async (id: string) => {
+    try {
+        const response = await AxiosInstance().get(`/api/users/getUserById/${id}`);
+        return response.data;
+    } catch (error: any) {
+        console.log("🚀 ~ file: IndexUser.ts ~ line 59 ~ ApiLogin ~ error", error)
+    }
+}

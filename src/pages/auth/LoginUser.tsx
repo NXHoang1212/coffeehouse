@@ -11,10 +11,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
 import { loginGoogle } from '../../service/methods/LoginGoogle'
 import { useDispatch } from 'react-redux'
+import { useAuth } from '../../hooks/UseAuth'
 
 const LoginUser = () => {
     ThemLightStatusBar('dark-content', 'transparent');
     const dispatch = useDispatch();
+    const { login } = useAuth();
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const goBack = useGoBack();
     const focusLoginProps = FocusLogin();
@@ -80,13 +82,13 @@ const LoginUser = () => {
                                 <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Apple</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={loginFacebook}>
+                        <TouchableOpacity onPress={() => loginFacebook(dispatch, navigation, login)}>
                             <View style={StyleLoginUser.viewloginfb}>
                                 <Image source={Logo.FACEBOOK} style={StyleLoginUser.iconfb} />
                                 <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Facebook</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation)}>
+                        <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation, login)}>
                             <View style={StyleLoginUser.viewgg}>
                                 <Image source={Logo.GOOGLE} style={StyleLoginUser.iconfb} />
                                 <Text style={StyleLoginUser.textgoogle}>Đăng nhập bằng Google</Text>

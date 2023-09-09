@@ -10,24 +10,31 @@ import ItemWebView from '../../components/item/ItemWebView';
 import { FlashList } from '@huunguyen312/flash-list';
 import { DataRefreshHome } from '../../data/listitem/homepage/DataRefreshHome';
 import { DataCoffeLover } from '../../data/listitem/homepage/DataCoffeeLover';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack';
 
 const BottomSheetHome = () => {
+    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
     //sử dụng memo để tối ưu hóa performance
     const MemoziedItemWebView = React.memo(ItemWebView);
-
+    const handleGeneral = () => {
+        //@ts-ignore
+        navigation.navigate('Đặt hàng')
+    }
     return (
         <View style={StyleBottomSheetHome.container}>
             <View style={StyleBottomSheetHome.line} />
             <View style={StyleBottomSheetHome.vieworder}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleGeneral}>
                     <View style={StyleBottomSheetHome.viewshipper}>
                         <FastImage source={order.SHIPPER} style={StyleBottomSheetHome.imgshipper} />
                         <Text style={StyleBottomSheetHome.textshipper}>Giao Hàng</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={StyleBottomSheetHome.lineship} />
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleGeneral}>
                     <View style={StyleBottomSheetHome.viewbringship}>
                         <View style={StyleBottomSheetHome.viewimgbringship}>
                             <Image source={order.CARRIEDAWAY} style={StyleBottomSheetHome.imgbringship} />

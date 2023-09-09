@@ -9,7 +9,7 @@ import ModalOptionGender from '../../components/modal/OptionGender';
 import { FormatDate } from '../../utils/FormatDate';
 import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
 import { useSelector } from 'react-redux';
-import { Dispatch } from '@reduxjs/toolkit';
+import { MonitorChangeInput } from '../../utils/MonitorInput';
 
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -28,9 +28,38 @@ const Information = () => {
   const [open, setOpen] = useState<boolean>(false)
   const [genderModalVisible, setGenderModalVisible] = useState<boolean>(false);
   const handleGenderSelection = (selectedGender: string) => {
-    setGender(selectedGender);
-    setGenderModalVisible(false); // Đóng Modal sau khi chọn
+    monitorChangeInput('gender', selectedGender);
+    setGenderModalVisible(false)
   };
+  const [emailInputDisabled, setEmailInputDisabled] = useState<boolean>(!!email);
+  const [birthdayInputDisabled, setBirthdayInputDisabled] = useState<boolean>(!!birthday);
+  const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
+
+  const monitorChangeInput = (fieldName: string, newValue: string) => {
+    MonitorChangeInput(
+      fieldName,
+      newValue,
+      setName,
+      setHolder,
+      setEmail,
+      setGender,
+      setIsAnyFieldEmpty,
+    );
+    if (fieldName === 'name' && newValue === user.name) {
+      setIsAnyFieldEmpty(true);
+    } else if (fieldName === 'holder' && newValue === user.holder) {
+      setIsAnyFieldEmpty(true);
+    } else if (fieldName === 'email' && newValue === user.email) {
+      setIsAnyFieldEmpty(true);
+    } else if (fieldName === 'gender' && newValue === user.gender) {
+      setIsAnyFieldEmpty(true);
+    } else if (fieldName === 'birthday' && newValue === user.birthday) {
+      setIsAnyFieldEmpty(true);
+    }
+  }
+
+
+
   return (
     <View style={StyleInformation.container}>
       <View style={StyleInformation.viewheader}>
@@ -52,7 +81,7 @@ const Information = () => {
               style={StyleInformation.textinput}
               placeholder="Nhập tên của bạn *"
               value={name}
-              onChangeText={(name) => setName(name)}
+              onChangeText={(value) => monitorChangeInput('name', value)}
               onFocus={focusNameProps.onFocusName}
               onBlur={focusNameProps.onBlurName}
             />
@@ -62,36 +91,50 @@ const Information = () => {
               style={StyleInformation.textinput}
               placeholder="Nhập họ của bạn"
               value={holder}
-              onChangeText={(name) => setHolder(name)}
+              onChangeText={(value) => monitorChangeInput('holder', value)}
               onFocus={focusHoProps.onFocusHo}
               onBlur={focusHoProps.onBlurHo}
             />
           </View>
-          <View style={[StyleInformation.input, focusEmailProps.focusEmail && StyleInformation.focusedInput]}>
+          <View style={[StyleInformation.input, focusEmailProps.focusEmail && StyleInformation.focusedInput || emailInputDisabled && StyleInformation.disabledInput]}>
             <TextInput
               style={StyleInformation.textinput}
               placeholder="Email của bạn"
               value={email}
-              onChangeText={(name) => setEmail(name)}
-              onFocus={focusEmailProps.onFocusEmail}
-              onBlur={focusEmailProps.onBlurEmail}
+              onChangeText={(value) => monitorChangeInput('email', value)}
+              onFocus={() => {
+                focusEmailProps.onFocusEmail();
+                setEmailInputDisabled(false);
+              }}
+              onBlur={() => {
+                focusEmailProps.onBlurEmail();
+                setEmailInputDisabled(!!email);
+              }}
+              editable={!emailInputDisabled}
             />
           </View>
-          <View style={StyleInformation.inputdate}>
+          <View style={[StyleInformation.inputdate, birthdayInputDisabled && StyleInformation.disabledInput]}>
             <TextInput
               style={StyleInformation.textinput}
               value={birthday ? FormatDate(new Date(birthday)) : ''}
               placeholder="Chọn ngày sinh"
-              onTouchStart={() => [Keyboard.dismiss, setOpen(true)]}
+              onFocus={() => {
+                Keyboard.dismiss();
+                setBirthdayInputDisabled(false);
+                setOpen(true);
+              }}
+              editable={!birthdayInputDisabled}
             />
             <Image source={infores.DATEPICKER} style={StyleInformation.iconcalendar} />
             <DatePicker
               modal
               mode="date"
-              open={open} date={birthday ? new Date(birthday) : new Date()}
+              open={open}
+              date={birthday ? new Date(birthday) : new Date()}
               locale='vi'
               onConfirm={(date) => { setOpen(false), setBirthday(date.toISOString()) }}
-              onCancel={() => { setOpen(false) }} />
+              onCancel={() => { setOpen(false) }}
+            />
           </View>
           <View>
             <TouchableOpacity onPress={() => setGenderModalVisible(true)} style={StyleInformation.inputdate}>
@@ -101,8 +144,9 @@ const Information = () => {
               <Image source={Icon.DOWN} style={StyleInformation.icondown} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={[StyleInformation.update, (!name && !holder && !email && !gender) && StyleInformation.disabledUpdate]}
-            disabled={!name && !holder && !email && !gender}>
+          <TouchableOpacity
+            style={[StyleInformation.update, isAnyFieldEmpty && StyleInformation.disabledUpdate]}
+            disabled={isAnyFieldEmpty}  >
             <Text style={StyleInformation.textupdate}>Cập nhật tài khoản</Text>
           </TouchableOpacity>
           <TouchableOpacity style={StyleInformation.viewdelete}>
