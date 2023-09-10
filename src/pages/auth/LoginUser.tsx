@@ -6,12 +6,14 @@ import { Icon, Logo } from '../../constant/Icon'
 import { useGoBack } from '../../utils/GoBack'
 import { FocusLogin } from '../../hooks/Focus'
 import { loginFacebook } from '../../service/methods/LoginFacebook'
+import { loginGoogle } from '../../service/methods/LoginGoogle'
+import { loginSendOtp } from '../../service/methods/LoginSendOtp'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
-import { loginGoogle } from '../../service/methods/LoginGoogle'
 import { useDispatch } from 'react-redux'
 import { useAuth } from '../../hooks/UseAuth'
+
 
 const LoginUser = () => {
     ThemLightStatusBar('dark-content', 'transparent');
@@ -28,6 +30,7 @@ const LoginUser = () => {
     };
     const handleLogin = () => {
         focusLoginProps.onBlurLogin();
+        loginSendOtp(phone);
     };
     const handleNavigate = () => {
         //@ts-ignore
