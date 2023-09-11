@@ -32,6 +32,7 @@ const StyleConfirmOtp = StyleSheet.create({
         alignItems: 'center',
         gap: WIDTH(3),
         top: HEIGHT(22),
+        marginHorizontal: WIDTH(3),
     },
     viewfail: {
         flexDirection: 'row',

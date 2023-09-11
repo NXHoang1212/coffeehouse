@@ -30,7 +30,7 @@ const LoginUser = () => {
     };
     const handleLogin = () => {
         focusLoginProps.onBlurLogin();
-        loginSendOtp(phone);
+        loginSendOtp(phone, navigation);
     };
     const handleNavigate = () => {
         //@ts-ignore

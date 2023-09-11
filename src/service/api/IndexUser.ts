@@ -47,3 +47,4 @@ export const ApiGetUserById = async (id: string) => {
         console.log("🚀 ~ file: IndexUser.ts ~ line 59 ~ ApiLogin ~ error", error)
     }
 }
+
