@@ -1,7 +1,7 @@
 import { GoogleSignin, statusCodes, } from '@react-native-google-signin/google-signin';
 import { ApiLogin } from '../api/IndexUser';
 import { setUser } from '../../redux/slices/AuthSlice';
-import { User } from '../../data/types/auth/User.entity';
+import { User } from '../../data/types/User.entity';
 
 export const loginGoogle = async (dispatch: (arg0: { payload: User; type: "user/setUser"; }) => void, navigation: { navigate: (arg0: string) => void; }, login: () => void) => {
     try {

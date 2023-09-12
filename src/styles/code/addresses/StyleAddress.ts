@@ -58,6 +58,9 @@ const StyleSaveAddress = StyleSheet.create({
         backgroundColor: COLOR.GRAYBLAND1,
         marginLeft: WIDTH(4),
     },
+    viewitem: {
+        height: HEIGHT(100),
+    },
 });
 
 export default StyleSaveAddress;

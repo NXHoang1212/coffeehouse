@@ -6,7 +6,7 @@ import { TrunacteString } from "../../utils/TrunacteString";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { EnumStackNaviagte, ParamsStack } from "../../navigation/home/StackHomeNavigate";
-import { StackHomeNavigateNameEnum } from "../../data/types/navigation/TypeStack";
+import { StackHomeNavigateNameEnum } from "../../data/types/TypeStack";
 
 interface ItemWebViewProps {
   item: {

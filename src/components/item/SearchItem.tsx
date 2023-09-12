@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import React from 'react'
 import StyleItemProduct from '../../styles/item/StyleItemProduct'
-import { Products } from '../../data/types/product/Product.entity';
+import { Products } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
 

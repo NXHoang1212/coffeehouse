@@ -12,7 +12,7 @@ import { DataRefreshHome } from '../../data/listitem/homepage/DataRefreshHome';
 import { DataCoffeLover } from '../../data/listitem/homepage/DataCoffeeLover';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 
 const BottomSheetHome = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();

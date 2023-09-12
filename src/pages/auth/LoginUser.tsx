@@ -10,7 +10,7 @@ import { loginGoogle } from '../../service/methods/LoginGoogle'
 import { loginSendOtp } from '../../service/methods/LoginSendOtp'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { useDispatch } from 'react-redux'
 import { useAuth } from '../../hooks/UseAuth'
 

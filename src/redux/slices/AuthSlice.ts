@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User, UserData } from "../../data/types/auth/User.entity";
+import { User, UserData } from "../../data/types/User.entity";
 
 
 

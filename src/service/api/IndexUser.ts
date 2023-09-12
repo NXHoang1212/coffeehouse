@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HOST } from '../../constant/Host';
-import { UpdateUser, User } from '../../data/types/auth/User.entity';
+import { UpdateUser, User } from '../../data/types/User.entity';
 import AxiosInstance from '../../utils/AxiosIntance';
-import { UserMethods, UserData } from '../../data/types/auth/User.entity';
+import { UserMethods, UserData } from '../../data/types/User.entity';
 
 
 export const ApiUser = createApi({

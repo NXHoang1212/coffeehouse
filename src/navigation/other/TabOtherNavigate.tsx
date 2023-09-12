@@ -5,7 +5,7 @@ import Information from '../../pages/another/Information';
 import Seeting from '../../pages/another/ordinary/Setting';
 import Other from '../../pages/another/Other';
 import DeepLinkAcount from '../../pages/another/ordinary/DeepLinkAcount';
-import { StackEnumOther, StackParamsOther } from '../../data/types/other/StackOrther';
+import { StackEnumOther, StackParamsOther } from '../../data/types/StackOrther';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 

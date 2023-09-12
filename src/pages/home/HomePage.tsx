@@ -11,7 +11,7 @@ import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { useAuth } from '../../hooks/UseAuth'
 
 const HomePage = () => {

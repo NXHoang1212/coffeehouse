@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../../data/types/navigation/TypesTab";
+import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../../data/types/TypesTab";
 import HomePage from "../../pages/home/HomePage";
 import { TabCoffee } from '../../constant/Icon';
 import PromoDiscount from "../../pages/code/PromoDiscount";

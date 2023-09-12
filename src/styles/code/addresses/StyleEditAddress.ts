@@ -32,7 +32,7 @@ const StyleEditAddress = StyleSheet.create({
     },
     viewbody1: {
         width: WIDTH(100),
-        height: HEIGHT(45),
+        height: HEIGHT(48),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 0.5,
         flexDirection: 'column',
@@ -57,6 +57,7 @@ const StyleEditAddress = StyleSheet.create({
         justifyContent: 'center',
         marginHorizontal: WIDTH(2),
         top: HEIGHT(1),
+        gap: HEIGHT(0.2),
     },
     viewdelete: {
         flexDirection: 'row',
@@ -88,7 +89,7 @@ const StyleEditAddress = StyleSheet.create({
     },
     viewtextinput: {
         width: WIDTH(90),
-        height: HEIGHT(5),
+        height: HEIGHT(6.3),
         borderWidth: 1,
         borderColor: COLOR.GRAYBLAND,
         alignSelf: 'center',
@@ -111,6 +112,14 @@ const StyleEditAddress = StyleSheet.create({
         fontWeight: '500',
         left: WIDTH(3),
         letterSpacing: 0.5
+    },
+    textvalue: {
+        fontSize: FONTSIZE(1.9),
+        color: COLOR.BLACK,
+        fontWeight: '400',
+        left: WIDTH(2),
+        letterSpacing: 0.5,
+        width: WIDTH(80),
     },
     textinput: {
         fontSize: FONTSIZE(1.9),

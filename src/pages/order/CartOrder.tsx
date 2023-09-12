@@ -7,7 +7,7 @@ import ItemProduct from '../../components/item/ItemProduct'
 import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 import BottomSheetMenu from '../../components/modal/BottomSheetMenu'
 import { Provider } from 'react-native-paper'

@@ -5,9 +5,9 @@ import StyleSetting from '../../../styles/code/ordinary/StyleSetting';
 import { useGoBack } from '../../../utils/GoBack';
 import ToggleSwitch from 'toggle-switch-react-native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../../data/types/navigation/TypeStack';
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 import { useNavigation } from '@react-navigation/native';
-import { StackParamsOther } from '../../../data/types/other/StackOrther';
+import { StackParamsOther } from '../../../data/types/StackOrther';
 
 const Setting = () => {
   const url = 'https://thecoffeehouse.com/pages/chuyen-ca-phe-va-tra';

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import React, { useState } from 'react'
-import { DetailProduct } from '../../data/types/product/Product.entity';
+import { DetailProduct } from '../../data/types/Product.entity';
 import { Icon, TabCoffee } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
 import { useGoBack } from '../../utils/GoBack';

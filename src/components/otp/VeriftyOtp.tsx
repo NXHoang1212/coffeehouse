@@ -1,26 +1,39 @@
-import { TextInput, StyleSheet } from 'react-native';
-import { WIDTH, HEIGHT } from '../../constant/Responsive';
+import React from 'react';
+import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputKeyPressEventData } from 'react-native';
 import { COLOR } from '../../constant/Color';
+import { HEIGHT, WIDTH } from '../../constant/Responsive';
+
+
 
 type Props = {
   value: string;
   onChangeText: (text: string) => void;
-  onCompleted?: () => void;
+  onCompleted: () => void;
+  inputRef: any;
 }
+const VeriftyInput = ({ value, onChangeText, onCompleted, inputRef }: Props) => {
 
-const VeriftyInput = ({ value, onChangeText, onCompleted }: Props) => {
   return (
     <TextInput
       keyboardType="number-pad"
       maxLength={1}
       style={styles.container}
       value={value}
-      onChangeText={onChangeText}
+      onChangeText={(text) => {
+        onChangeText(text);
+        //nếu index === 0 thì sẽ không chuyển lui về input trước đó
+        if (text.length === 1) {
+          onCompleted();
+        } else if (text.length === 0) {
+          onCompleted();
+        }
+      }}
       autoComplete='off'
       autoCorrect={false}
       autoCapitalize='none'
       returnKeyType='next'
-      onSubmitEditing={onCompleted}
+      ref={inputRef}
+
     />
   );
 };

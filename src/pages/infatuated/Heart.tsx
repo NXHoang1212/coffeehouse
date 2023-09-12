@@ -4,7 +4,7 @@ import { Icon } from '../../constant/Icon'
 import styleHeart from '../../styles/infatuated/StyleHeart'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useNavigation } from '@react-navigation/native'
-import { StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useAuth } from '../../hooks/UseAuth'
 

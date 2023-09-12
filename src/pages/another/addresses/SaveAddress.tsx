@@ -6,17 +6,26 @@ import { useGoBack } from '../../../utils/GoBack'
 import StyleSaveAddress from '../../../styles/code/addresses/StyleAddress'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../../data/types/navigation/TypeStack';
+import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 import { useNavigation } from '@react-navigation/native';
+import { useGetAddressIdQuery } from '../../../service/api/IndexAddress';
+import { useSelector } from 'react-redux';
+import { FlashList } from '@huunguyen312/flash-list';
+import ItemAddress from '../../../components/item/ItemAddress';
 
 const Address = () => {
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const id = useSelector((state: any) => state.user._id)
+  console.log("🚀 ~ file: SaveAddress.tsx:18 ~ Address ~ id:", id)
+  const { data } = useGetAddressIdQuery(id);
+  const Address = data?.data;
+  console.log("🚀 ~ file: SaveAddress.tsx:21 ~ Address ~ Address:", Address)
+
   const handeleGeneral = (name: string) => {
     //@ts-ignore
     navigation.navigate('AddAddress', { name });
   }
-
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -43,6 +52,14 @@ const Address = () => {
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
+          <View style={StyleSaveAddress.viewitem}>
+            <FlashList
+              data={Address}
+              renderItem={({ item }) => <ItemAddress item={item} />}
+              keyExtractor={(item: any) => item._id}
+              estimatedItemSize={200}
+            />
+          </View>
         </View>
       </View>
     </GestureHandlerRootView>

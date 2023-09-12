@@ -1,7 +1,7 @@
 import { LoginManager, AccessToken, Profile } from "react-native-fbsdk-next";
 import { ApiLogin } from "../api/IndexUser";
 import { setUser } from "../../redux/slices/AuthSlice";
-import { User } from "../../data/types/auth/User.entity";
+import { User } from "../../data/types/User.entity";
 
 export const loginFacebook = async (dispatch: (arg0: { payload: User; type: "user/setUser"; }) => void, navigation: { navigate: (arg0: string) => void; }, login: () => void) => {
     try {

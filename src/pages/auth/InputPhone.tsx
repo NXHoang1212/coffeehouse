@@ -6,7 +6,7 @@ import { FocusLogin } from '../../hooks/Focus'
 import { useGoBack } from '../../utils/GoBack'
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/navigation/TypeStack'
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 
 const InputPhone = () => {
     const goBack = useGoBack();

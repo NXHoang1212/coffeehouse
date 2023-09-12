@@ -23,8 +23,7 @@ const DetailOrder = () => {
     <View style={StyleDetailOrder.container}>
       {showdetail?.map((item, index) => {
         return (<ItemDetailProduct key={index} item={item} />)
-      })
-      }
+      })}
     </View>
   )
 }

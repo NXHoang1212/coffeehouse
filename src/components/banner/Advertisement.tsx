@@ -5,7 +5,7 @@ import { WIDTH, HEIGHT } from '../../constant/Responsive';
 import Paginations from './Paginations';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { TabHomeNavigateEnum, TabHomeParamList } from '../../data/types/navigation/TypesTab';
+import { TabHomeNavigateEnum, TabHomeParamList } from '../../data/types/TypesTab';
 
 const data = [
     {

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Products } from "../../data/types/product/Product.entity";
+import { Products } from "../../data/types/Product.entity";
+import { ImageSourcePropType } from 'react-native';
 
 const initialState: Products = {
     _id: '',
     name: '',
     price: 0,
-    image: '',
+    image: '' as ImageSourcePropType,
     description: '',
     category: { _id: '', name: '', },
     size: [],

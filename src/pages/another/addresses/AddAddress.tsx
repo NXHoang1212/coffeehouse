@@ -1,18 +1,28 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import StyleAddAddress from '../../../styles/code/addresses/StyleAddAddress'
 import { Icon } from '../../../constant/Icon';
 import { useGoBack } from '../../../utils/GoBack';
 import { useRoute } from '@react-navigation/native';
+import { CreateAddress } from '../../../service/api/IndexAddress';
+import { useSelector } from 'react-redux';
 
 interface RouteParams {
   name: string;
+  setname: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const AddAddress = () => {
+const AddAddress: React.FC = () => {
   const goback = useGoBack();
-  const { name } = useRoute().params as RouteParams;
-  console.log(name)
+  const { name, setname } = useRoute().params as RouteParams;
+  console.log("🚀 ~ file: AddAddress.tsx:16 ~ AddAddress ~ name:", name)
+  const id = useSelector((state: any) => state.user._id)
+  console.log("🚀 ~ file: AddAddress.tsx:18 ~ AddAddress ~ id:", id)
+  const [DescribeAddRess, setDescribeAddRess] = useState<string>('')
+  const [other, setother] = useState<string>('')
+
+
+
   return (
     <View style={StyleAddAddress.container}>
       <View style={StyleAddAddress.viewheader}>
@@ -31,7 +41,12 @@ const AddAddress = () => {
               </View>
               :
               <View style={StyleAddAddress.viewinput}>
-                <TextInput style={StyleAddAddress.textinput} placeholder="Nhà / Cơ quan / Gym /..." />
+                <TextInput
+                  style={StyleAddAddress.textinput}
+                  placeholder="Nhà / Cơ quan / Gym /..."
+                  value={name}
+                  onChangeText={setname}
+                />
               </View>
             }
           </View>
@@ -45,19 +60,31 @@ const AddAddress = () => {
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Tòa nhà, số tầng</Text>
             <View style={StyleAddAddress.viewinput}>
-              <TextInput style={StyleAddAddress.textinput} placeholder="Tòa nhà, số tầng" />
+              <TextInput
+                style={StyleAddAddress.textinput}
+                placeholder="Tòa nhà, số tầng"
+
+              />
             </View>
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Cổng</Text>
             <View style={StyleAddAddress.viewinput}>
-              <TextInput style={StyleAddAddress.textinput} placeholder="Cổng" />
+              <TextInput
+                style={StyleAddAddress.textinput}
+                placeholder="Cổng"
+
+              />
             </View>
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Ghi chú khác</Text>
             <View style={StyleAddAddress.viewinput}>
-              <TextInput style={StyleAddAddress.textinput} placeholder="Hướng dẫn giao hàng" />
+              <TextInput
+                style={StyleAddAddress.textinput}
+                placeholder="Hướng dẫn giao hàng"
+
+              />
             </View>
           </View>
         </View>
@@ -65,18 +92,24 @@ const AddAddress = () => {
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Tòa nhà, số tầng</Text>
             <View style={StyleAddAddress.viewinput}>
-              <TextInput style={StyleAddAddress.textinput} placeholder="Tên người nhận" />
+              <TextInput
+                style={StyleAddAddress.textinput}
+              />
             </View>
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Số điện thoại</Text>
             <View style={StyleAddAddress.viewinput}>
-              <TextInput style={StyleAddAddress.textinput} placeholder="Số điện thoại" />
+              <TextInput
+                style={StyleAddAddress.textinput}
+                placeholder="Số điện thoại"
+
+              />
             </View>
           </View>
         </View>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity >
         <View style={StyleAddAddress.viewbutton}>
           <Text style={StyleAddAddress.textbutton}>Xong</Text>
         </View>

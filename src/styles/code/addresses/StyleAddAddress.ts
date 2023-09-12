@@ -69,7 +69,7 @@ const StyleAddAddress = StyleSheet.create({
     },
     viewtextinput: {
         width: WIDTH(90),
-        height: HEIGHT(5),
+        height: HEIGHT(6.3),
         borderWidth: 1,
         borderColor: COLOR.GRAYBLAND,
         alignSelf: 'center',
