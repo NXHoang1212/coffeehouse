@@ -21,59 +21,6 @@ const EditAddress: React.FC = () => {
   const id = item._id
   console.log("🚀 ~ file: EditAddress.tsx:22 ~ id:", id)
   console.log("🚀 ~ file: EditAddress.tsx:16 ~ item:", item)
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const [name, setName] = useState<string>(item.name);
-  const [address, setAddress] = useState<string>(item.DescribeAddRess);
-  const [other, setOther] = useState<string>(item.Other);
-  const [gate, setGate] = useState<string>(item.Gate);
-  const [note, setNote] = useState<string>(item.NoteOrther);
-  const [username, setUsername] = useState<string>(item.username);
-  const [phone, setPhone] = useState<string>(item.phone);
-  const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
-
-  const monitorAddressInput = (fieldName: string, newValue: string) => {
-    MonitorAddressInput(
-      fieldName,
-      newValue,
-      setName,
-      setAddress,
-      setOther,
-      setGate,
-      setNote,
-      setUsername,
-      setPhone,
-      setIsAnyFieldEmpty,
-    );
-  };
-
-  const handleNavigateMap = () => {
-    //@ts-ignore
-    navigation.navigate('MapsAddress')
-  }
-
-  const handleUpdateAddress = async () => {
-    const data: any = {
-      name: name,
-      DescribeAddRess: address,
-      Other: other,
-      Gate: gate,
-      NoteOrther: note,
-      username: username,
-      phone: phone,
-    }
-    console.log("🚀 ~ file: EditAddress.tsx:69 ~ handleUpdateAddress ~ data", data)
-    const res = await UpdateAddress(id, data)
-    if (res) {
-      Messenger('Cập nhật địa chỉ thành công', 'success')
-      //@ts-ignore
-      navigation.navigate('SaveAddress')
-    }
-  }
-
-
-
-    
-
 
   return (
     <View style={StyleEditAddress.container}>
