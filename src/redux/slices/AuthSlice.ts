@@ -48,6 +48,10 @@ const UserSlice = createSlice({
             state.gender = '';
             state.birthday = '';
         },
+        //cập nhật thông tin user
+        updateUser(state, action: PayloadAction<UserData>) {
+            
+        }
     },
 });
 

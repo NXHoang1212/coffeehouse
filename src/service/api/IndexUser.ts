@@ -33,7 +33,7 @@ export const ApiLogin = async (data: UserMethods) => {
 export const ApiUpdateUser = async (id: string, data: UpdateUser) => {
     try {
         const response = await AxiosInstance().post(`/api/users/updateUserById/${id}`, data);
-        return response;
+        return response.data;
     } catch (error: any) {
         console.log("🚀 ~ file: IndexUser.ts ~ line 59 ~ ApiLogin ~ error", error)
     }

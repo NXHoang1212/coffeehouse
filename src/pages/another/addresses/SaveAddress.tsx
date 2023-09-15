@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'react-native';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import { Icon, TabCoffee } from '../../../constant/Icon'
 import { useGoBack } from '../../../utils/GoBack'
@@ -12,20 +12,27 @@ import { useGetAddressIdQuery } from '../../../service/api/IndexAddress';
 import { useSelector } from 'react-redux';
 import { FlashList } from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
+import { useIsFocused } from '@react-navigation/native';
 
-const Address = () => {
+const Address: React.FC = () => {
   const goback = useGoBack();
+  const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: any) => state.user._id)
   console.log("🚀 ~ file: SaveAddress.tsx:18 ~ Address ~ id:", id)
-  const { data } = useGetAddressIdQuery(id);
-  const Address = data?.data;
-  console.log("🚀 ~ file: SaveAddress.tsx:21 ~ Address ~ Address:", Address)
+  //refetch là hàm để gọi lại api
+  const { data, refetch } = useGetAddressIdQuery(id)
+  const Addressess = data?.data;
+  console.log("🚀 ~ file: SaveAddress.tsx:21 ~ Address ~ Address:", Addressess)
 
   const handeleGeneral = (name: string) => {
     //@ts-ignore
     navigation.navigate('AddAddress', { name });
   }
+
+  useEffect(() => {
+    refetch()
+  }, [isFocused])
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -54,7 +61,7 @@ const Address = () => {
           <View style={StyleSaveAddress.line} />
           <View style={StyleSaveAddress.viewitem}>
             <FlashList
-              data={Address}
+              data={Addressess}
               renderItem={({ item }) => <ItemAddress item={item} />}
               keyExtractor={(item: any) => item._id}
               estimatedItemSize={200}

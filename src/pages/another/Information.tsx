@@ -10,10 +10,19 @@ import { FormatDate } from '../../utils/FormatDate';
 import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
 import { useSelector } from 'react-redux';
 import { MonitorChangeInput } from '../../utils/MonitorInput';
+import { ApiUpdateUser } from '../../service/api/IndexUser';
+import { Messenger } from '../../utils/ShowMessage';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/slices/AuthSlice';
 
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const dispatch = useDispatch();
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
@@ -55,6 +64,25 @@ const Information = () => {
       setIsAnyFieldEmpty(true);
     } else if (fieldName === 'birthday' && newValue === user.birthday) {
       setIsAnyFieldEmpty(true);
+    }
+  }
+
+  const handleUpdateUser = async () => {
+    const data: any = {
+      _id: id,
+      name: name,
+      holder: holder,
+      email: email,
+      gender: gender,
+      birthday: birthday,
+    }
+    const res = await ApiUpdateUser(id, data)
+    console.log("🚀 ~ file: Information.tsx:76 ~ handleUpdateUser ~ res:", res)
+    if (res) {
+      Messenger('Cập nhật thành công', 'success')
+      dispatch(setUser(res))
+      //@ts-ignore
+      navigation.navigate('Other')
     }
   }
 
@@ -146,7 +174,7 @@ const Information = () => {
           </View>
           <TouchableOpacity
             style={[StyleInformation.update, isAnyFieldEmpty && StyleInformation.disabledUpdate]}
-            disabled={isAnyFieldEmpty}  >
+            disabled={isAnyFieldEmpty} onPress={handleUpdateUser}>
             <Text style={StyleInformation.textupdate}>Cập nhật tài khoản</Text>
           </TouchableOpacity>
           <TouchableOpacity style={StyleInformation.viewdelete}>

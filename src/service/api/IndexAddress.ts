@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AddRess } from "../../data/types/AddRess.entity";
+import { AddRess, CreateAddRess } from "../../data/types/AddRess.entity";
 import AxiosInstance from "../../utils/AxiosIntance";
 import { HOST } from "../../constant/Host";
 
@@ -16,7 +16,7 @@ export const ApiAddress = createApi({
 export const { useGetAddressIdQuery } = ApiAddress;
 
 
-export const CreateAddress = async (data: AddRess) => {
+export const CreateAddress = async (data: CreateAddRess) => {
     try {
         const response = await AxiosInstance().post('/api/address/create', data);
         return response.data;

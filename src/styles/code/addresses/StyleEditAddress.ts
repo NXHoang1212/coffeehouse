@@ -150,6 +150,16 @@ const StyleEditAddress = StyleSheet.create({
         alignItems: 'center',
         top: HEIGHT(6),
     },
+    disabledUpdate: {
+        width: WIDTH(93),
+        height: HEIGHT(5.5),
+        backgroundColor: COLOR.ORANGE,
+        alignSelf: 'center',
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: HEIGHT(6),
+    },
     textbutton: {
         fontSize: FONTSIZE(2.2),
         color: COLOR.WHITE,

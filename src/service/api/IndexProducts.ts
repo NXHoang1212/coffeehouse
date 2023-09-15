@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HOST } from '../../constant/Host';
-import { Products } from '../../data/types/Product.entity';
+import { ProductGet, Products } from '../../data/types/Product.entity';
+import AxiosInstance from '../../utils/AxiosIntance';
 
 
 export const ApiProducts = createApi({
@@ -9,8 +10,8 @@ export const ApiProducts = createApi({
     endpoints: build => ({
         //đây là 1 api endpoint dùng để lấy dữ liệu từ server về client 
         //void được dùng khi không có tham số truyền vào
-        getProducts: build.query<{ data: Products[] }, void>({
-            query: () => '/api/users/product',
+        getProducts: build.query< {data: ProductGet[]}, void>({
+            query: () => '/api/users/product'
         }),
 
         getProductsById: build.query<{ data: Products[] }, string>({
@@ -20,3 +21,10 @@ export const ApiProducts = createApi({
 });
 
 export const { useGetProductsQuery, useGetProductsByIdQuery } = ApiProducts
+
+
+
+// export const getProducts = async () => {
+//     const res = await AxiosInstance().get('/api/users/product');
+//     return res.data;
+// }   

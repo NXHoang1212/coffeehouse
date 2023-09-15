@@ -9,18 +9,42 @@ import { useSelector } from 'react-redux';
 
 interface RouteParams {
   name: string;
-  setname: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AddAddress: React.FC = () => {
   const goback = useGoBack();
-  const { name, setname } = useRoute().params as RouteParams;
+  const route = useRoute();
+  const { name } = route.params as RouteParams;
+  const [nameAddress, setNameAdddress] = useState<string>(name)
   console.log("🚀 ~ file: AddAddress.tsx:16 ~ AddAddress ~ name:", name)
-  const id = useSelector((state: any) => state.user._id)
+  const user = useSelector((state: any) => state.user)
+  const id = user._id;
   console.log("🚀 ~ file: AddAddress.tsx:18 ~ AddAddress ~ id:", id)
   const [DescribeAddRess, setDescribeAddRess] = useState<string>('')
-  const [other, setother] = useState<string>('')
+  const [Other, SetOther] = useState<string>('')
+  const [Gate, SetGate] = useState<string>('')
+  const [NoteOther, SetNoteOther] = useState<string>('')
+  const [userName, setuserName] = useState<string>(user.name)
+  const [Phone, setPhone] = useState<string>(user.mobile)
 
+
+  const handeleCreateAddress = async () => {
+    try {
+      const res = await CreateAddress({
+        name: nameAddress,
+        DescribeAddRess: DescribeAddRess,
+        Other: Other,
+        Gate: Gate,
+        NoteOrther: NoteOther,
+        username: userName,
+        phone: Phone,
+        userId: id
+      })
+      console.log("🚀 ~ file: AddAddress.tsx:42 ~ handeleCreateAddress ~ res", res)
+    } catch (error: any) {
+
+    }
+  }
 
 
   return (
@@ -44,8 +68,8 @@ const AddAddress: React.FC = () => {
                 <TextInput
                   style={StyleAddAddress.textinput}
                   placeholder="Nhà / Cơ quan / Gym /..."
-                  value={name}
-                  onChangeText={setname}
+                  value={nameAddress}
+                  onChangeText={(text) => setNameAdddress(text)}
                 />
               </View>
             }
@@ -63,7 +87,8 @@ const AddAddress: React.FC = () => {
               <TextInput
                 style={StyleAddAddress.textinput}
                 placeholder="Tòa nhà, số tầng"
-
+                value={Other}
+                onChangeText={(text) => SetOther(text)}
               />
             </View>
           </View>
@@ -73,7 +98,8 @@ const AddAddress: React.FC = () => {
               <TextInput
                 style={StyleAddAddress.textinput}
                 placeholder="Cổng"
-
+                value={Gate}
+                onChangeText={(text) => SetGate(text)}
               />
             </View>
           </View>
@@ -83,17 +109,21 @@ const AddAddress: React.FC = () => {
               <TextInput
                 style={StyleAddAddress.textinput}
                 placeholder="Hướng dẫn giao hàng"
-
+                value={NoteOther}
+                onChangeText={(text) => SetNoteOther(text)}
               />
             </View>
           </View>
         </View>
         <View style={StyleAddAddress.viewbody2}>
           <View style={StyleAddAddress.viewhome}>
-            <Text style={StyleAddAddress.textTitle}>Tòa nhà, số tầng</Text>
+            <Text style={StyleAddAddress.textTitle}>Tên người nhận</Text>
             <View style={StyleAddAddress.viewinput}>
               <TextInput
                 style={StyleAddAddress.textinput}
+                placeholder="Tên người nhận"
+                value={userName}
+                onChangeText={(text) => setuserName(text)}
               />
             </View>
           </View>
@@ -103,13 +133,14 @@ const AddAddress: React.FC = () => {
               <TextInput
                 style={StyleAddAddress.textinput}
                 placeholder="Số điện thoại"
-
+                value={Phone}
+                onChangeText={(text) => setPhone(text)}
               />
             </View>
           </View>
         </View>
       </View>
-      <TouchableOpacity >
+      <TouchableOpacity onPress={handeleCreateAddress}>
         <View style={StyleAddAddress.viewbutton}>
           <Text style={StyleAddAddress.textbutton}>Xong</Text>
         </View>

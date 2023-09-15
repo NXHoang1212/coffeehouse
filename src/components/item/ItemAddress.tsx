@@ -29,8 +29,8 @@ const ItemAddress: React.FC<PropsItemProduct> = ({ item }) => {
                         {item.name.length > 0 ? <Text style={StyleItemGetAddress.textName}>{item.name}</Text> : null}
                         <Text style={StyleItemGetAddress.textDescribeAddRess}>{item.DescribeAddRess}</Text>
                         <View style={StyleItemGetAddress.viewuser}>
-                            <Text style={StyleItemGetAddress.textAddress}>{item.userId.name}</Text>
-                            <Text style={StyleItemGetAddress.textPhone}>{item.userId.mobile}</Text>
+                            <Text style={StyleItemGetAddress.textAddress}>{item.username}</Text>
+                            <Text style={StyleItemGetAddress.textPhone}>{item.phone}</Text>
                         </View>
                     </View>
                     <Image source={infores.EDIT} style={StyleItemGetAddress.iconEdit} />

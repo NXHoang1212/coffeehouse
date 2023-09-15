@@ -12,6 +12,13 @@ export interface Products {
     topping: string[];
 }
 
+export interface ProductGet {
+    _id: string;
+    name: string;
+    price: number;
+    image: ImageSourcePropType;
+    category: Category;
+}
 
 export interface DetailProduct {
     _id: string;

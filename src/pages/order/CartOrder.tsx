@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, memo } from 'react'
 import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
 import CategoryItem from '../../components/item/CategoryItem'
@@ -27,6 +27,7 @@ const CartOrder = () => {
   let currentCategory = '';
   const { data, isLoading } = useGetProductsQuery();
   const showProducts = data?.data;
+  console.log("🚀 ~ file: CartOrder.tsx:30 ~ CartOrder ~ showProducts:", showProducts)
   const dispatch = useDispatch();
   // Lưu danh sách sản phẩm vào redux khi sang màn hình tìm kiếm
   const handleSearch = () => {
@@ -45,7 +46,7 @@ const CartOrder = () => {
   };
   const scrollViewRef = useRef<ScrollView | null>(null);
   useScrollToTop(scrollViewRef);
-  const itemHeight = 150;
+  const itemHeight: any = 150;
   const scrollToCategory = (categoryName: String) => {
     if (scrollViewRef.current) {
       const index = showProducts?.findIndex( // Tìm vị trí của danh mục được chọn
@@ -88,8 +89,8 @@ const CartOrder = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={StyleOrder.line} /> 
-            <ScrollView ref={scrollViewRef}  
+            <View style={StyleOrder.line} />
+            <ScrollView ref={scrollViewRef}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{ flexGrow: 1 }}
               refreshControl={

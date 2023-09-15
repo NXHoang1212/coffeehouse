@@ -16,6 +16,8 @@ import AddAddress from "../../pages/another/addresses/AddAddress";
 import EditAddress from "../../pages/another/addresses/EditAddress";
 import AboutCoffee from "../../pages/another/ordinary/AboutCoffee";
 import Notifee from "../../pages/general/Notifee";
+import MapsAddress from "../../pages/another/addresses/MapsAddress";
+import SearchMapAddress from "../../pages/another/addresses/SearchMapAddress";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store/Store";
 import DetailOrder from "../../pages/order/DetailOrder";
@@ -49,6 +51,8 @@ export enum EnumStackNaviagte {
     About = 'AboutCoffee',
     Notication = 'Notifee',
     Detail = 'DetailOrder',
+    map = 'MapsAddress',
+    sreachmap = 'SearchMapAddress',
 }
 
 
@@ -73,6 +77,8 @@ const StackHomeNavigate = (): React.JSX.Element => {
             <Stack.Screen name={EnumStackNaviagte.About} component={AboutCoffee} />
             <Stack.Screen name={EnumStackNaviagte.Notication} component={Notifee} />
             <Stack.Screen name={EnumStackNaviagte.Detail} component={DetailOrder} />
+            <Stack.Screen name={EnumStackNaviagte.map} component={MapsAddress} />
+            <Stack.Screen name={EnumStackNaviagte.sreachmap} component={SearchMapAddress} />
         </Stack.Navigator>
     );
 };
