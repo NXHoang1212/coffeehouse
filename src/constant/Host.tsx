@@ -1,10 +1,13 @@
 export const HOST = {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     API: 'http://192.168.100.4:3000',
 }
 
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     //API:'http://192.168.1.20:3000'
@@ -13,6 +16,9 @@ export const HOST = {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
