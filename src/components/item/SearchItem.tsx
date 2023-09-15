@@ -5,22 +5,30 @@ import StyleItemProduct from '../../styles/item/StyleItemProduct'
 import { Products } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 
 interface PropsItemProduct {
     item: Products;
 }
 
 const SeacrchItem = ({ item }: PropsItemProduct) => {
+    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+    const handelDetail = () => {
+        //@ts-ignore
+        navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
+    }
     return (
         <View style={StyleItemProduct.container}>
             <View style={StyleItemProduct.viewbody}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handelDetail}>
                     <View style={StyleItemProduct.viewProduct}>
                         <View>
                             <FastImage
                                 style={StyleItemProduct.imageproduct}
                                 source={{
-                                    uri: item.image,
+                                    uri: item.image as string,
                                     priority: FastImage.priority.high,
                                 }}
                             />

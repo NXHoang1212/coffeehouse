@@ -15,6 +15,9 @@ const EditAddress: React.FC = () => {
   const { item } = useRoute().params as PropsEditAddress;
   console.log("🚀 ~ file: EditAddress.tsx:16 ~ item:", item)
 
+    
+
+
   return (
     <View style={StyleEditAddress.container}>
       <View style={StyleEditAddress.viewheader}>
