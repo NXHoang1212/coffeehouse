@@ -7,11 +7,14 @@ const StyleItemGetAddress = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE,
+        flexDirection: 'column',
+        marginBottom: HEIGHT(2),
     },
     viewbody: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal: WIDTH(5),
+        left: WIDTH(5),
+        gap: WIDTH(0.7),
     },
     iconAddress: {
         width: WIDTH(5),
@@ -29,7 +32,7 @@ const StyleItemGetAddress = StyleSheet.create({
     viewuser: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: WIDTH(1),
+        gap: WIDTH(1.5),
     },
     textDescribeAddRess: {
         fontSize: FONTSIZE(1.8),
@@ -53,6 +56,17 @@ const StyleItemGetAddress = StyleSheet.create({
         width: WIDTH(4),
         height: WIDTH(4),
         tintColor: COLOR.ORANGE,
+        right: WIDTH(5),
+    },
+    line: {
+        width: WIDTH(88),
+        height: HEIGHT(0.05),
+        backgroundColor: COLOR.GRAY,
+        alignSelf: 'flex-end',
+        marginTop: HEIGHT(1.5),
+    },
+    lastItem: {
+        borderBottomWidth: 0, // Ẩn đường kẻ
     },
 });
 

@@ -10,9 +10,6 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 
-type Props = {
-  item: any;
-}
 
 const MapsAddress = () => {
   const goBack = useGoBack();
@@ -57,7 +54,7 @@ const MapsAddress = () => {
       GetCurrentPosition((position: { latitude: any; longitude: any; }) => {
         if (position) {
           const { latitude, longitude } = position;
-          fetchNearbyPlaces(latitude, longitude, 500)
+          fetchNearbyPlaces(latitude, longitude, 400)
             .then(nearbyAddresses => {
               console.log('Nearby Addresses:', nearbyAddresses);
               if (nearbyAddresses) {
@@ -67,13 +64,20 @@ const MapsAddress = () => {
           setInitialRegion({
             latitude,
             longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: 0.009,
+            longitudeDelta: 0.009,
           });
         }
       });
     }, []),
   );
+
+  const handleSelectAddress = (item: any) => {
+    //truyền item.vicinity vào address 
+    //@ts-ignore
+    navigation.navigate('EditAddress', { item: { DescribeAddRess: item.vicinity } });
+    // navigation.navigate('EditAddress', { item: { DescribeAddRess: 'Giá trị cần truyền' } });
+  }
 
 
   return (
@@ -112,7 +116,6 @@ const MapsAddress = () => {
           showsScale={true}
           showsPointsOfInterest={true}
           region={initialRegion}
-
         >
           {initialRegion && (
             <Marker
@@ -130,15 +133,19 @@ const MapsAddress = () => {
           {nearbyAddresses.length === 0 ? (
             <Text style={StyleMapAddress.textinfo}>Không có địa điểm gần đó hoặc có sự cố xảy ra trong việc truy cập dữ liệu.</Text>
           ) : (
-            // Hiển thị danh sách địa điểm gần đó khi có dữ liệu
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-              {nearbyAddresses.map((address: any, index: any) => (
-                <TouchableOpacity key={index} style={StyleMapAddress.viewmap}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+              {nearbyAddresses.map((item: any, index: any) => (
+                <TouchableOpacity
+                  key={index}
+                  style={StyleMapAddress.viewmap}
+                  onPress={() => handleSelectAddress(item)}
+                >
+
                   <View style={StyleMapAddress.viewiconmap}>
                     <Image source={Icon.LOCATION} style={StyleMapAddress.iconmap} />
                     <View style={StyleMapAddress.viewtextmap}>
-                      <Text style={StyleMapAddress.textinfo}>{address.name}</Text>
-                      <Text style={StyleMapAddress.textinfo}>{address.vicinity}</Text>
+                      <Text style={StyleMapAddress.textinfo}>{item.name}</Text>
+                      <Text style={StyleMapAddress.textname}>{item.vicinity}</Text>
                     </View>
                   </View>
                   <View style={StyleMapAddress.linemap} />

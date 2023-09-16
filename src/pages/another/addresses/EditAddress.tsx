@@ -1,5 +1,6 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, StatusBar } from 'react-native';
 import React, { useState } from 'react'
+import { ThemLightStatusBar } from '../../../constant/ThemLight';
 import { Icon } from '../../../constant/Icon';
 import { useGoBack } from '../../../utils/GoBack';
 import StyleEditAddress from '../../../styles/code/addresses/StyleEditAddress';
@@ -8,20 +9,22 @@ import { AddRess } from '../../../data/types/AddRess.entity';
 import { MonitorAddressInput } from '../../../utils/MonitorInput';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
-import { UpdateAddress } from '../../../service/api/IndexAddress';
+import { UpdateAddress, DeleteAddress } from '../../../service/api/IndexAddress';
 import { Messenger } from '../../../utils/ShowMessage';
+import Modal from "react-native-modal";
 
 type PropsEditAddress = {
   item: AddRess;
 }
 
 const EditAddress: React.FC = () => {
+  ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
-  const { item } = useRoute().params as PropsEditAddress;
-  const id = item._id
-  console.log("🚀 ~ file: EditAddress.tsx:22 ~ id:", id)
-  console.log("🚀 ~ file: EditAddress.tsx:16 ~ item:", item)
+  const route = useRoute();
+  const { item } = route.params as PropsEditAddress;
+  console.log("🚀 ~ file: EditAddress.tsx:25 ~ item:", item)
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const id = item._id;
   const [name, setName] = useState<string>(item.name);
   const [address, setAddress] = useState<string>(item.DescribeAddRess);
   const [other, setOther] = useState<string>(item.Other);
@@ -30,6 +33,7 @@ const EditAddress: React.FC = () => {
   const [username, setUsername] = useState<string>(item.username);
   const [phone, setPhone] = useState<string>(item.phone);
   const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
 
   const monitorAddressInput = (fieldName: string, newValue: string) => {
     MonitorAddressInput(
@@ -70,7 +74,18 @@ const EditAddress: React.FC = () => {
     }
   }
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  }
 
+  const handleDeleteAddress = async () => {
+    const res = await DeleteAddress(id)
+    if (res) {
+      Messenger('Xóa địa chỉ thành công', 'success')
+      //@ts-ignore
+      navigation.navigate('SaveAddress')
+    }
+  }
 
   return (
     <View style={StyleEditAddress.container}>
@@ -128,7 +143,7 @@ const EditAddress: React.FC = () => {
             </View>
           </View>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={toggleModal}>
           <View style={StyleEditAddress.viewbody3}>
             <View style={StyleEditAddress.viewdelete}>
               <Image source={Icon.DELETE} style={StyleEditAddress.icondelete} />
@@ -140,10 +155,24 @@ const EditAddress: React.FC = () => {
       <TouchableOpacity
         style={[StyleEditAddress.disabledUpdate, isAnyFieldEmpty && StyleEditAddress.viewbutton]}
         disabled={isAnyFieldEmpty}
-        onPress={handleUpdateAddress}
-      >
+        onPress={handleUpdateAddress} >
         <Text style={StyleEditAddress.textbutton}>Xong</Text>
       </TouchableOpacity>
+      <Modal isVisible={isModalVisible} backdropOpacity={0.2} onBackdropPress={toggleModal}>
+        <StatusBar backgroundColor="rgba(0,0,0,0.2)" />
+        <View style={StyleEditAddress.modalcontainer}>
+          <Text style={StyleEditAddress.textmodalname}>Xác nhận</Text>
+          <Text style={StyleEditAddress.textmodalconfimr}>Bạn có chắc chắn muốn xóa địa chỉ này đã lưu rồi không</Text>
+          <View style={StyleEditAddress.viewmodalbutton}>
+            <TouchableOpacity style={StyleEditAddress.viewmodalcancel} onPress={toggleModal}>
+              <Text style={StyleEditAddress.textmodalcancel}>Hủy</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={StyleEditAddress.viewmodaldelete} onPress={handleDeleteAddress}>
+              <Text style={StyleEditAddress.textmodaldelete}>Xóa</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   )
 }

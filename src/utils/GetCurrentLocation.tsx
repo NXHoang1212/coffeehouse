@@ -9,8 +9,8 @@ export const GetCurrentPosition = (setInitialRegion: any) => {
             const newRegion = {
                 latitude,
                 longitude,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
+                latitudeDelta: 0.009,
+                longitudeDelta: 0.009,
             };
             setInitialRegion(newRegion);
         },

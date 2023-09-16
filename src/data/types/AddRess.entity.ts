@@ -4,6 +4,7 @@ export interface AddRess {
     _id: number;
     name: string;
     DescribeAddRess: string;
+    vicinity: string;
     Other: string;
     Gate: string;
     NoteOrther: string;

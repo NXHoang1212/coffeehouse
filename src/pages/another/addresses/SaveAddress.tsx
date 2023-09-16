@@ -1,5 +1,5 @@
 import { View, Text, Image } from 'react-native';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import { Icon, TabCoffee } from '../../../constant/Icon'
 import { useGoBack } from '../../../utils/GoBack'
@@ -19,17 +19,16 @@ const Address: React.FC = () => {
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: any) => state.user._id)
-  console.log("🚀 ~ file: SaveAddress.tsx:18 ~ Address ~ id:", id)
-  //refetch là hàm để gọi lại api
   const { data, refetch } = useGetAddressIdQuery(id)
-  const Addressess = data?.data;
-  console.log("🚀 ~ file: SaveAddress.tsx:21 ~ Address ~ Address:", Addressess)
-
+  const Addressess: any = data?.data;
+  const [selectedAddressType, setSelectedAddressType] = useState<string>(''); // Thêm biến trạng thái để theo dõi loại địa chỉ được chọn
+  const isLastItem = (currentIndex: number) => {
+    return currentIndex === Addressess?.length - 1;
+  }
   const handeleGeneral = (name: string) => {
     //@ts-ignore
     navigation.navigate('AddAddress', { name });
   }
-
   useEffect(() => {
     refetch()
   }, [isFocused])
@@ -62,7 +61,7 @@ const Address: React.FC = () => {
           <View style={StyleSaveAddress.viewitem}>
             <FlashList
               data={Addressess}
-              renderItem={({ item }) => <ItemAddress item={item} />}
+              renderItem={({ item, index }) => <ItemAddress item={item} isLastItem={isLastItem(index)} />}
               keyExtractor={(item: any) => item._id}
               estimatedItemSize={200}
             />

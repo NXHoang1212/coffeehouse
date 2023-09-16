@@ -10,14 +10,16 @@ import StyleItemGetAddress from '../../styles/item/StyleItemAddress';
 
 interface PropsItemProduct {
     item: AddRess;
+    isLastItem: any;
 }
 
-const ItemAddress: React.FC<PropsItemProduct> = ({ item }) => {
+const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const handleEdit = () => {
         //@ts-ignore
         navigation.navigate('EditAddress', { item });
     }
+
     return (
         <View style={StyleItemGetAddress.container}>
             <TouchableOpacity onPress={handleEdit}>
@@ -35,6 +37,7 @@ const ItemAddress: React.FC<PropsItemProduct> = ({ item }) => {
                     </View>
                     <Image source={infores.EDIT} style={StyleItemGetAddress.iconEdit} />
                 </View>
+                {!isLastItem && <View style={StyleItemGetAddress.line} />}
             </TouchableOpacity>
         </View>
     )

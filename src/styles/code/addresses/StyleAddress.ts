@@ -26,7 +26,7 @@ const StyleSaveAddress = StyleSheet.create({
         fontSize: FONTSIZE(2.3),
         color: COLOR.BLACK,
         fontWeight: 'bold',
-        marginLeft: WIDTH(24)
+        marginLeft: WIDTH(30)
     },
     viewbody: {
         top: HEIGHT(2),
@@ -53,10 +53,10 @@ const StyleSaveAddress = StyleSheet.create({
         fontWeight: 'bold',
     },
     line: {
-        width: WIDTH(97),
+        width: WIDTH(88),
         height: HEIGHT(0.2),
         backgroundColor: COLOR.GRAYBLAND1,
-        marginLeft: WIDTH(4),
+        alignSelf: 'flex-end'
     },
     viewitem: {
         height: HEIGHT(100),

@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, RefreshControl } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import StyleHomePage from '../../styles/home/StyleHomePage'
 import { Logo, category, Icon } from '../../constant/Icon'
 import FastImage from 'react-native-fast-image'
@@ -13,9 +13,11 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { useAuth } from '../../hooks/UseAuth'
+import { socket } from '../../utils/Socket'
 
 const HomePage = () => {
   const { isLoggedIn } = useAuth();
+
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const loadingData = LoadingScroll();
   const scroll = useRef(null);
@@ -50,6 +52,13 @@ const HomePage = () => {
       navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
+
+  useEffect(() => {
+    socket.on("connection", (data) => {
+      console.log("Received data from server:", data);
+      // Thực hiện xử lý dữ liệu ở đây
+    });
+  }, []);
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>

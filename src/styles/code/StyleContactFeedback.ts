@@ -29,7 +29,7 @@ const StyleContacFeedBack = StyleSheet.create({
         marginLeft: WIDTH(22)
     },
     viewcontact: {
-        top: HEIGHT(2),
+        top: HEIGHT(3),
         flexDirection: 'column',
     },
     viewcontactitem: {
@@ -37,8 +37,8 @@ const StyleContacFeedBack = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: WIDTH(100),
-        height: HEIGHT(42),
-        gap: HEIGHT(1.3),
+        height: HEIGHT(39),
+        gap: HEIGHT(1.5),
         backgroundColor: COLOR.WHITE,
     },
     handlecontact: {
@@ -62,7 +62,7 @@ const StyleContacFeedBack = StyleSheet.create({
     },
     viewtextcontact: {},
     textContact: {
-        fontSize: FONTSIZE(2),
+        fontSize: FONTSIZE(1.8),
         color: COLOR.BLACK,
         left: WIDTH(3),
     },

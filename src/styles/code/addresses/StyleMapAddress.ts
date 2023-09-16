@@ -34,6 +34,7 @@ export const StyleMapAddress = StyleSheet.create({
     containermap: {
         width: WIDTH(100),
         height: HEIGHT(100),
+        alignSelf: 'center',
     },
     viewlocation: {
         position: 'absolute',
@@ -63,8 +64,7 @@ export const StyleMapAddress = StyleSheet.create({
     },
     iconmap: {
         width: WIDTH(6),
-        height: HEIGHT(3),
-        right: WIDTH(1),
+        height: HEIGHT(2.5),
     },
     viewtextmap: {
         flexDirection: 'column',
@@ -73,6 +73,13 @@ export const StyleMapAddress = StyleSheet.create({
     textinfo: {
         fontSize: FONTSIZE(2),
         color: COLOR.BLACK,
+        fontWeight: '600',
+        letterSpacing: WIDTH(0.1),
+        width: WIDTH(95),
+    },
+    textname: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.GRAY,
         fontWeight: '600',
         letterSpacing: WIDTH(0.1),
     },
@@ -84,7 +91,7 @@ export const StyleMapAddress = StyleSheet.create({
         width: WIDTH(100),
         height: HEIGHT(0.05),
         backgroundColor: COLOR.GRAYBLAND,
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
     },
 })
 

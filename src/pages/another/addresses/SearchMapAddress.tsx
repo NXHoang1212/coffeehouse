@@ -2,7 +2,7 @@ import { Text, View, Image, StyleSheet, TextInput, TouchableOpacity } from 'reac
 import { COLOR } from '../../../constant/Color';
 import React, { useState, useEffect } from 'react';
 import { Icon } from '../../../constant/Icon';
-import { HEIGHT, WIDTH } from '../../../constant/Responsive';
+import { HEIGHT, WIDTH, FONTSIZE } from '../../../constant/Responsive';
 import { useGoBack } from '../../../utils/GoBack';
 import { KEY } from '../../../constant/Host';
 import axios from 'axios';
@@ -11,22 +11,15 @@ const SearchMapAddress: React.FC = () => {
   const goback = useGoBack();
   const MAPGOOGLE = 'AIzaSyDFPSKwgFMBgSA0NjWimRQhF0l-IDs_fe4';
   const [search, setSearch] = useState('');
-  const [predictions, setPredictions] = useState([]);
+  const [predictions, setPredictions] = useState<any>([]);
 
   const handleSearch = async () => {
     try {
       const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${MAPGOOGLE}`;
       const res = await axios.get(apiUrl);
       const data = res.data;
-
-      if (data.status === 'OK') {
-        // Trích xuất danh sách địa điểm từ data.predictions
-        const predictions = data.predictions;
-        // Hiển thị danh sách predictions cho người dùng
-        setPredictions(predictions);
-      } else {
-        console.log("No results found or API error");
-      }
+      setPredictions(data.predictions);
+      console.log(data.predictions);
     } catch (error) {
       console.log(error);
     }
@@ -53,8 +46,8 @@ const SearchMapAddress: React.FC = () => {
         </View>
       </View>
       <TouchableOpacity style={styles.viewmap} onPress={goback}>
-        <Image source={Icon.LOCATION} style={styles.iconmap} />
-        <Text>Chọn trên bản đồ</Text>
+        <Image source={Icon.MAPS} style={styles.iconmap} />
+        <Text style={styles.textmap}>Chọn trên bản đồ</Text>
         <Image source={Icon.RIGHT} style={styles.iconright} />
       </TouchableOpacity>
       <View>
@@ -109,8 +102,9 @@ const styles = StyleSheet.create({
     top: HEIGHT(2),
   },
   iconmap: {
-    width: WIDTH(5),
-    height: HEIGHT(3.2),
+    width: WIDTH(6),
+    height: HEIGHT(2.7),
+    marginLeft: WIDTH(2),
   },
   iconleft: {
     width: WIDTH(5.5),
@@ -121,5 +115,10 @@ const styles = StyleSheet.create({
     height: HEIGHT(1.5),
     marginLeft: 'auto',
     right: WIDTH(2),
-  }
+  },
+  textmap: {
+    fontSize: FONTSIZE(1.9),
+    fontWeight: '400',
+    color: COLOR.BLACK,
+  },
 })

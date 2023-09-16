@@ -3,18 +3,24 @@ import React, { useState } from 'react'
 import StyleAddAddress from '../../../styles/code/addresses/StyleAddAddress'
 import { Icon } from '../../../constant/Icon';
 import { useGoBack } from '../../../utils/GoBack';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { CreateAddress } from '../../../service/api/IndexAddress';
 import { useSelector } from 'react-redux';
+import { Messenger } from '../../../utils/ShowMessage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 
 interface RouteParams {
   name: string;
+  address: string;
 }
 
 const AddAddress: React.FC = () => {
   const goback = useGoBack();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute();
-  const { name } = route.params as RouteParams;
+  const { name, address } = route.params as RouteParams;
+  console.log("🚀 ~ file: AddAddress.tsx:23 ~ address:", address)
   const [nameAddress, setNameAdddress] = useState<string>(name)
   console.log("🚀 ~ file: AddAddress.tsx:16 ~ AddAddress ~ name:", name)
   const user = useSelector((state: any) => state.user)
@@ -40,12 +46,19 @@ const AddAddress: React.FC = () => {
         phone: Phone,
         userId: id
       })
+      if (res) {
+        Messenger('Thêm địa chỉ thành công', 'success')
+        goback()
+      }
       console.log("🚀 ~ file: AddAddress.tsx:42 ~ handeleCreateAddress ~ res", res)
     } catch (error: any) {
 
     }
   }
-
+  const navigateMap = () => {
+    //@ts-ignore
+    navigation.navigate('MapsAddress')
+  }
 
   return (
     <View style={StyleAddAddress.container}>
@@ -76,7 +89,7 @@ const AddAddress: React.FC = () => {
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Địa chỉ</Text>
-            <TouchableOpacity style={StyleAddAddress.viewtextinput}>
+            <TouchableOpacity style={StyleAddAddress.viewtextinput} onPress={navigateMap}>
               <Text style={StyleAddAddress.textinput}>Chọn địa chỉ</Text>
               <Image source={Icon.RIGHT} style={StyleAddAddress.iconArrow} />
             </TouchableOpacity>

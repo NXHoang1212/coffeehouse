@@ -14,54 +14,17 @@ interface PropsItemProduct {
 }
 
 const SeacrchItem = ({ item }: PropsItemProduct) => {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const handelDetail = () => {
         //@ts-ignore
         navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
     }
+
+
     return (
         <View style={StyleItemProduct.container}>
             <View style={StyleItemProduct.viewbody}>
                 <TouchableOpacity onPress={handelDetail}>
-=======
-    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam.stackm>>();
-    const handleDetail = () => {
-        //@ts-ignore
-        navigation.navigate('DetailOrder', { id: item._id })
-    }
-
-    return (
-        <View style={StyleItemProduct.container}>
-            <View style={StyleItemProduct.viewbody}>
-                <TouchableOpacity onPress={handleDetail}>
->>>>>>> Stashed changes
-=======
-    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam.stackm>>();
-    const handleDetail = () => {
-        //@ts-ignore
-        navigation.navigate('DetailOrder', { id: item._id })
-    }
-
-    return (
-        <View style={StyleItemProduct.container}>
-            <View style={StyleItemProduct.viewbody}>
-                <TouchableOpacity onPress={handleDetail}>
->>>>>>> Stashed changes
-=======
-    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam.stackm>>();
-    const handleDetail = () => {
-        //@ts-ignore
-        navigation.navigate('DetailOrder', { id: item._id })
-    }
-
-    return (
-        <View style={StyleItemProduct.container}>
-            <View style={StyleItemProduct.viewbody}>
-                <TouchableOpacity onPress={handleDetail}>
->>>>>>> Stashed changes
                     <View style={StyleItemProduct.viewProduct}>
                         <View>
                             <FastImage

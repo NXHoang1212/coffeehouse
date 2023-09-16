@@ -45,18 +45,7 @@ export const Icon = {
     LINK: require('../assets/images/iconlink.png'),
     HARAVAN: require('../assets/images/iconharavan.png'),
     BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-    MAPS: require('../assets/images/iconmaps.png'),
->>>>>>> Stashed changes
-=======
-    MAPS: require('../assets/images/iconmaps.png'),
->>>>>>> Stashed changes
-=======
-    MAPS: require('../assets/images/iconmaps.png'),
->>>>>>> Stashed changes
+    MAPS: require('../assets/images/Iconmap.png'),
     LOCATION: require('../assets/images/iconlocation.png'),
     SEND: require('../assets/images/iconsend.png'),
 }
