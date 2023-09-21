@@ -46,7 +46,7 @@ export const Icon = {
     HARAVAN: require('../assets/images/iconharavan.png'),
     BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
     MAPS: require('../assets/images/Iconmap.png'),
-    LOCATION: require('../assets/images/iconlocation.png'),
+    LOCATION: require('../assets/images/IconLocation.png'),
     SEND: require('../assets/images/iconsend.png'),
 }
 

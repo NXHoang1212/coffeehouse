@@ -56,7 +56,6 @@ const HomePage = () => {
   useEffect(() => {
     socket.on("connection", (data) => {
       console.log("Received data from server:", data);
-      // Thực hiện xử lý dữ liệu ở đây
     });
   }, []);
   return (

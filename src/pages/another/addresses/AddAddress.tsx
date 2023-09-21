@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import StyleAddAddress from '../../../styles/code/addresses/StyleAddAddress'
 import { Icon } from '../../../constant/Icon';
 import { useGoBack } from '../../../utils/GoBack';
@@ -12,28 +12,25 @@ import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 
 interface RouteParams {
   name: string;
-  address: string;
+
 }
 
 const AddAddress: React.FC = () => {
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute();
-  const { name, address } = route.params as RouteParams;
-  console.log("🚀 ~ file: AddAddress.tsx:23 ~ address:", address)
+  const { name } = route.params as RouteParams;
+  const InforAddress = useSelector((state: any) => state.address)
   const [nameAddress, setNameAdddress] = useState<string>(name)
-  console.log("🚀 ~ file: AddAddress.tsx:16 ~ AddAddress ~ name:", name)
   const user = useSelector((state: any) => state.user)
   const id = user._id;
-  console.log("🚀 ~ file: AddAddress.tsx:18 ~ AddAddress ~ id:", id)
-  const [DescribeAddRess, setDescribeAddRess] = useState<string>('')
-  const [Other, SetOther] = useState<string>('')
-  const [Gate, SetGate] = useState<string>('')
-  const [NoteOther, SetNoteOther] = useState<string>('')
-  const [userName, setuserName] = useState<string>(user.name)
-  const [Phone, setPhone] = useState<string>(user.mobile)
-
-
+  const DescribeAddRess = InforAddress.DescribeAddRess
+  const [Other, SetOther] = useState<string>('');
+  const [Gate, SetGate] = useState<string>('');
+  const [NoteOther, SetNoteOther] = useState<string>('');
+  const [userName, setuserName] = useState<string>(user.name);
+  const [Phone, setPhone] = useState<string>(user.mobile);
+  
   const handeleCreateAddress = async () => {
     try {
       const res = await CreateAddress({
@@ -90,7 +87,11 @@ const AddAddress: React.FC = () => {
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Địa chỉ</Text>
             <TouchableOpacity style={StyleAddAddress.viewtextinput} onPress={navigateMap}>
-              <Text style={StyleAddAddress.textinput}>Chọn địa chỉ</Text>
+              {DescribeAddRess ?
+                <Text style={StyleAddAddress.textinput}>{DescribeAddRess}</Text>
+                :
+                <Text style={StyleAddAddress.textinput}>Chọn địa chỉ</Text>
+              }
               <Image source={Icon.RIGHT} style={StyleAddAddress.iconArrow} />
             </TouchableOpacity>
           </View>

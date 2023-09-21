@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import ProductReducer from '../slices/ProductSlices';
+import AddressReducer from '../slices/AddressSlice';
 import { ApiProducts } from '../../service/api/IndexProducts';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
@@ -19,16 +20,15 @@ const store = configureStore({
     reducer: {
         product: ProductReducer,
         [ApiProducts.reducerPath]: ApiProducts.reducer,
+        address: AddressReducer,
         user: persistedReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
     },
 
     //đây là middleware của api endpoint [ApiProducts]
-    middleware: (getDefaultMiddleware) => {
-        return getDefaultMiddleware({
-            serializableCheck: false,
-        }).concat(ApiProducts.middleware).concat(ApiAddress.middleware)
-    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false,
+    }).concat(ApiProducts.middleware, ApiAddress.middleware),
 });
 
 setupListeners(store.dispatch);

@@ -34,7 +34,7 @@ export const MonitorAddressInput = (
     fieldName: string,
     newValue: string,
     setName: (value: string) => void,
-    setAddRess: (value: string) => void,
+    address: string,
     setOther: (value: string) => void,
     setGate: (value: string) => void,
     setNote: (value: string) => void,
@@ -47,7 +47,7 @@ export const MonitorAddressInput = (
             setName(newValue);
             break;
         case 'address':
-            setAddRess(newValue);
+            address = newValue;
             break;
         case 'other':
             setOther(newValue);

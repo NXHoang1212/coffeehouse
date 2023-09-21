@@ -26,7 +26,7 @@ export const CreateAddress = async (data: CreateAddRess) => {
 };
 
 
-export const UpdateAddress = async (id: number, data: AddRess) => {
+export const UpdateAddress = async (id: string, data: AddRess) => {
     try {
         const response = await AxiosInstance().post(`/api/address/update/${id}`, data);
         return response.data;
@@ -36,7 +36,7 @@ export const UpdateAddress = async (id: number, data: AddRess) => {
 };
 
 
-export const DeleteAddress = async (id: number) => {
+export const DeleteAddress = async (id: string) => {
     try {
         const response = await AxiosInstance().delete(`/api/address/delete/${id}`);
         return response.data;

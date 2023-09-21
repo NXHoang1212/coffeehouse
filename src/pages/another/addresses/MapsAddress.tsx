@@ -1,7 +1,7 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar, TextInput } from 'react-native';
 import { StyleMapAddress } from '../../../styles/code/addresses/StyleMapAddress';
-import { Icon } from '../../../constant/Icon';
-import React, { useState, useEffect, useCallback } from 'react';
+import { Icon } from '../../../constant/Icon'
+import React, { useState, useCallback } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { useGoBack } from '../../../utils/GoBack';
 import { RequestLocationPermission } from '../../../utils/PermissionMaps';
@@ -9,15 +9,28 @@ import { GetCurrentPosition } from '../../../utils/GetCurrentLocation';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
+import { useDispatch } from 'react-redux';
+import { setMap } from '../../../redux/slices/AddressSlice';
+import Modal from "react-native-modal";
+import { Picker } from '@react-native-picker/picker';
+import Location from '../../../data/json/HCM.json';
+import { findDistrictName, findWardName } from '../../../utils/IndexAddress';
+import { MonitorAddressInput } from '../../../utils/MonitorInput';
 
-
-const MapsAddress = () => {
+const MapsAddress: React.FC = () => {
   const goBack = useGoBack();
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const dispatch = useDispatch();
   const [initialRegion, setInitialRegion] = useState<any>(null);
   const [nearbyAddresses, setNearbyAddresses] = useState<any>([]);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [selectedDistrict, setSelectedDistrict] = useState<any>(null);
+  const [selectedWard, setSelectedWard] = useState<any>(null);
+  const [address, setAddress] = useState<string>('');
 
-  // Hàm xử lý sự kiện khi người dùng nhấn vào nút trở về vị trí hiện tại
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  }
+
   const handleReturnToCurrentLocation = () => {
     GetCurrentPosition((position: { latitude: any; longitude: any; }) => {
       if (position) {
@@ -54,9 +67,9 @@ const MapsAddress = () => {
       GetCurrentPosition((position: { latitude: any; longitude: any; }) => {
         if (position) {
           const { latitude, longitude } = position;
-          fetchNearbyPlaces(latitude, longitude, 400)
+          fetchNearbyPlaces(latitude, longitude, 100)
             .then(nearbyAddresses => {
-              console.log('Nearby Addresses:', nearbyAddresses);
+              // console.log('Nearby Addresses:', nearbyAddresses);
               if (nearbyAddresses) {
                 setNearbyAddresses(nearbyAddresses);
               }
@@ -73,11 +86,26 @@ const MapsAddress = () => {
   );
 
   const handleSelectAddress = (item: any) => {
-    //truyền item.vicinity vào address 
+    //Thêm tphcm vào cuối
+    const InforMap = `${item.vicinity},TP.Hồ Chí Minh`;
+    dispatch(setMap({ DescribeAddRess: InforMap }));
     //@ts-ignore
-    navigation.navigate('EditAddress', { item: { DescribeAddRess: item.vicinity } });
-    // navigation.navigate('EditAddress', { item: { DescribeAddRess: 'Giá trị cần truyền' } });
+    goBack();
   }
+
+  const handleSelectDistrict = (itemValue: any) => {
+    setSelectedDistrict(itemValue);
+    const ward = Location.Ward.filter((item: any) => item.parent_code === itemValue);
+  }
+
+  const handleDone = () => {
+    const districtName = findDistrictName(selectedDistrict, Location);
+    const wardName = findWardName(selectedWard, Location);
+    const InforMap = `${address}, ${wardName}, ${districtName},TP.Hồ Chí Minh`;
+    dispatch(setMap({ DescribeAddRess: InforMap }));
+    goBack();
+  }
+
 
 
   return (
@@ -88,8 +116,8 @@ const MapsAddress = () => {
         </TouchableOpacity>
         <Text style={StyleMapAddress.textheader}>Chọn địa chỉ</Text>
         {/* @ts-ignore */}
-        <TouchableOpacity onPress={() => navigation.navigate('SearchMapAddress')}>
-          <Image source={Icon.SEARCH} />
+        <TouchableOpacity onPress={toggleModal}>
+          <Image source={Icon.PLUS} />
         </TouchableOpacity>
       </View>
       <View style={StyleMapAddress.line} />
@@ -97,26 +125,11 @@ const MapsAddress = () => {
         <TouchableOpacity style={StyleMapAddress.viewlocation} onPress={handleReturnToCurrentLocation}>
           <Image source={Icon.SEND} style={StyleMapAddress.iconmap} />
         </TouchableOpacity>
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={StyleMapAddress.containermap}
-          initialRegion={initialRegion}
-          showsUserLocation={true}
-          showsMyLocationButton={false}
-          showsCompass={true}
-          showsBuildings={true}
-          showsTraffic={true}
-          showsIndoors={true}
-          showsIndoorLevelPicker={true}
-          rotateEnabled={true}
-          scrollEnabled={true}
-          pitchEnabled={true}
-          toolbarEnabled={true}
-          moveOnMarkerPress={true}
-          showsScale={true}
-          showsPointsOfInterest={true}
-          region={initialRegion}
-        >
+        <MapView provider={PROVIDER_GOOGLE} style={StyleMapAddress.containermap} initialRegion={initialRegion}
+          showsUserLocation={true} showsMyLocationButton={false} showsCompass={true}
+          showsBuildings={true} showsTraffic={true} showsIndoors={true} showsIndoorLevelPicker={true}
+          rotateEnabled={true} scrollEnabled={true} pitchEnabled={true} toolbarEnabled={true}
+          moveOnMarkerPress={true} showsScale={true} showsPointsOfInterest={true} region={initialRegion}>
           {initialRegion && (
             <Marker
               coordinate={{
@@ -138,9 +151,7 @@ const MapsAddress = () => {
                 <TouchableOpacity
                   key={index}
                   style={StyleMapAddress.viewmap}
-                  onPress={() => handleSelectAddress(item)}
-                >
-
+                  onPress={() => handleSelectAddress(item)} >
                   <View style={StyleMapAddress.viewiconmap}>
                     <Image source={Icon.LOCATION} style={StyleMapAddress.iconmap} />
                     <View style={StyleMapAddress.viewtextmap}>
@@ -155,6 +166,41 @@ const MapsAddress = () => {
           )}
         </View>
       </View>
+      <Modal isVisible={isModalVisible} backdropOpacity={0.2} onBackdropPress={toggleModal}>
+        <StatusBar backgroundColor="rgba(0,0,0,0.2)" />
+        <View style={StyleMapAddress.modalcontainer}>
+          <Picker
+            selectedValue={selectedDistrict}
+            onValueChange={(itemValue) => handleSelectDistrict(itemValue)}
+            style={StyleMapAddress.picker} >
+            <Picker.Item label="Chọn quận huyện" value={null} />
+            {Location.District.map((item: any, index: any) => (
+              <Picker.Item key={index} label={item.name_with_type} value={item.code} />
+            ))}
+          </Picker>
+          <Picker
+            selectedValue={selectedWard}
+            onValueChange={(itemValue) => setSelectedWard(itemValue)}
+            style={StyleMapAddress.picker} >
+            <Picker.Item label="Chọn phường xã" value={null} />
+            {Location.Ward.filter((item: any) => item.parent_code === selectedDistrict).map((item: any, index: any) => (
+              <Picker.Item key={index} label={item.name_with_type} value={item.code} />
+            ))}
+          </Picker>
+          <TextInput
+            style={StyleMapAddress.textinput}
+            placeholder="Nhập địa chỉ cụ thể"
+            placeholderTextColor="#fff"
+            multiline={true}
+            numberOfLines={4}
+            value={address}
+            onChangeText={(text) => setAddress(text)}
+          />
+          <TouchableOpacity style={StyleMapAddress.viewbutton} onPress={handleDone}>
+            <Text style={StyleMapAddress.textbutton}>Xong</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   )
 }

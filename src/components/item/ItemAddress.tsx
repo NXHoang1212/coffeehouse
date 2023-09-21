@@ -6,6 +6,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { AddRess } from '../../data/types/AddRess.entity';
 import StyleItemGetAddress from '../../styles/item/StyleItemAddress';
+import { useDispatch } from 'react-redux';
+import { setAddress } from '../../redux/slices/AddressSlice';
 
 
 interface PropsItemProduct {
@@ -15,9 +17,11 @@ interface PropsItemProduct {
 
 const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+    const dispatch = useDispatch();
     const handleEdit = () => {
         //@ts-ignore
-        navigation.navigate('EditAddress', { item });
+        navigation.navigate('EditAddress');
+        dispatch(setAddress(item))
     }
 
     return (

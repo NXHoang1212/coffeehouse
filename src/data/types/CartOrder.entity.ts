@@ -1,12 +1,24 @@
-export interface ProductCart {
+export interface CartOrder {
   _id: string;
-  name: string;
-  photo: string;
-  price: number;
-  weight: number;
-  category_id?: string;
-  count: number;
-  buycount?: number;
+  NameProduct: string;
+  PriceProduct: number;
+  SizeProduct: string;
+  ToppingProduct: string;
+  QuantityProduct: number;
+  NoteProduct: string;
+  AmountShipping: number;
+  UserId: string;
+}
+
+export interface GetCartOrder {
+  NameProduct: string;
+  PriceProduct: number;
+  SizeProduct: string;
+  ToppingProduct: string;
+  QuantityProduct: number;
+  NoteProduct: string;
+  AmountShipping: number;
+  UserId: string;
 }
 
 export enum CartStackNames {

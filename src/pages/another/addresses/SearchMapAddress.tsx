@@ -1,34 +1,14 @@
-import { Text, View, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { COLOR } from '../../../constant/Color';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '../../../constant/Icon';
 import { HEIGHT, WIDTH, FONTSIZE } from '../../../constant/Responsive';
 import { useGoBack } from '../../../utils/GoBack';
-import { KEY } from '../../../constant/Host';
-import axios from 'axios';
 
 const SearchMapAddress: React.FC = () => {
   const goback = useGoBack();
-  const MAPGOOGLE = 'AIzaSyDFPSKwgFMBgSA0NjWimRQhF0l-IDs_fe4';
-  const [search, setSearch] = useState('');
-  const [predictions, setPredictions] = useState<any>([]);
-
-  const handleSearch = async () => {
-    try {
-      const apiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&key=${MAPGOOGLE}`;
-      const res = await axios.get(apiUrl);
-      const data = res.data;
-      setPredictions(data.predictions);
-      console.log(data.predictions);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleSearch();
-  }, [search]);
-
+  const [search, setSearch] = useState<string>('');
+  const [data, setData] = useState<any>([]);;
 
   return (
     <View style={styles.container}>
@@ -38,11 +18,7 @@ const SearchMapAddress: React.FC = () => {
         </TouchableOpacity>
         <View style={styles.input}>
           <Image source={Icon.SEARCH} style={styles.search} />
-          <TextInput
-            placeholder="Tìm kiếm địa chỉ"
-            onChangeText={(text) => setSearch(text)}
-            value={search}
-          />
+          <TextInput placeholder="Tìm kiếm" value={search}/>
         </View>
       </View>
       <TouchableOpacity style={styles.viewmap} onPress={goback}>
@@ -50,13 +26,14 @@ const SearchMapAddress: React.FC = () => {
         <Text style={styles.textmap}>Chọn trên bản đồ</Text>
         <Image source={Icon.RIGHT} style={styles.iconright} />
       </TouchableOpacity>
-      <View>
-        {predictions.map((prediction: any) => (
-          <View key={prediction.id}>
-            <Text>{prediction.description}</Text>
-            <Text>{prediction.place_id}</Text>
-          </View>
-        ))}
+      <View style={styles.viewitem}>
+        {data.map((item: any, index: any) => {
+          return (
+            <TouchableOpacity key={index}>
+              <Text style={styles.textitem}>{item.name}</Text>
+            </TouchableOpacity>
+          )
+        })}
       </View>
     </View>
   )
@@ -100,6 +77,7 @@ const styles = StyleSheet.create({
     height: HEIGHT(7),
     backgroundColor: COLOR.WHITE,
     top: HEIGHT(2),
+    marginBottom: HEIGHT(2),
   },
   iconmap: {
     width: WIDTH(6),
@@ -117,6 +95,14 @@ const styles = StyleSheet.create({
     right: WIDTH(2),
   },
   textmap: {
+    fontSize: FONTSIZE(1.9),
+    fontWeight: '400',
+    color: COLOR.BLACK,
+  },
+  viewitem: {
+    paddingHorizontal: WIDTH(2),
+  },
+  textitem: {
     fontSize: FONTSIZE(1.9),
     fontWeight: '400',
     color: COLOR.BLACK,
