@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserData } from "../../data/types/User.entity";
 
-
-
 const initialState: User = {
     _id: '',
     role: '',
@@ -50,7 +48,7 @@ const UserSlice = createSlice({
         },
         //cập nhật thông tin user
         updateUser(state, action: PayloadAction<UserData>) {
-            
+
         }
     },
 });

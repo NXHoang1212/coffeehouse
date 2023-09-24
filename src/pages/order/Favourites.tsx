@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import styleFavourite from '../../styles/infatuated/StyleFavourite'
+import styleFavourite from '../../styles/order/StyleFavourite'
 import { Icon } from '../../constant/Icon'
 import { useGoBack } from '../../utils/GoBack'
 

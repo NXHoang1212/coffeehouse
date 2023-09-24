@@ -27,9 +27,7 @@ const CartOrder = () => {
   let currentCategory = '';
   const { data, isLoading } = useGetProductsQuery();
   const showProducts = data?.data;
-  console.log("🚀 ~ file: CartOrder.tsx:30 ~ CartOrder ~ showProducts:", showProducts)
   const dispatch = useDispatch();
-  // Lưu danh sách sản phẩm vào redux khi sang màn hình tìm kiếm
   const handleSearch = () => {
     dispatch(setProducts(showProducts));
     //@ts-ignore
@@ -49,7 +47,7 @@ const CartOrder = () => {
   const itemHeight: any = 150;
   const scrollToCategory = (categoryName: String) => {
     if (scrollViewRef.current) {
-      const index = showProducts?.findIndex( // Tìm vị trí của danh mục được chọn
+      const index = showProducts?.findIndex(
         (item) => item.category.name === categoryName
       );
       if (index !== undefined && index !== -1) {

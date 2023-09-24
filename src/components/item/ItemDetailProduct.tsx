@@ -9,6 +9,9 @@ import StyleItemDetailProduct from '../../styles/item/StyleItemDetailProduct';
 import { ToggleDescription } from '../../utils/ToggleDescription';
 import { handleMinus, handlePlus } from '../../utils/Total';
 import { CheckBox } from 'react-native-elements';
+import { useAuth } from '../../hooks/UseAuth';
+import { CreateEmptyCart } from '../../service/api/IndexCart';
+import { useSelector } from 'react-redux';
 
 interface PropsDetailItemProduct {
     item: DetailProduct;
@@ -16,11 +19,26 @@ interface PropsDetailItemProduct {
 
 const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     const goBack = useGoBack();
+    const { isLoggedIn } = useAuth();
+    const user = useSelector((state: any) => state.user);
+    const id = user._id
+    console.log("🚀 ~ file: ItemDetailProduct.tsx:25 ~ ItemDetailProduct ~ id:", id)
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
     const toltalPrice = quantity * item.price;
     const AddToCart = () => {
-        goBack();
+        if (isLoggedIn) {
+            const data = {
+                NameProduct: item.name,
+                PriceProduct: item.price,
+                QuantityProduct: quantity,
+                SizeProduct: item.size,
+                ToppingProduct: item.topping,
+                NoteProduct: '',
+            }
+        } else {
+            console.log('Chưa đăng nhập');
+        }
     }
 
     return (

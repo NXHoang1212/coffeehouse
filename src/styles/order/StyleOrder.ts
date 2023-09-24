@@ -71,7 +71,7 @@ const StyleOrder = StyleSheet.create({
         marginTop: HEIGHT(3),
     },
     viewbody: {
-        flex: 1,
+        
         marginTop: HEIGHT(2),
         gap: HEIGHT(3),
     },
@@ -79,9 +79,9 @@ const StyleOrder = StyleSheet.create({
         height: HEIGHT(100),
     },
     viewbottom: {
-        // height: HEIGHT(100),
+
         marginHorizontal: WIDTH(5),
-        zIndex: -1,
+        // zIndex: -1,
     },
 });
 

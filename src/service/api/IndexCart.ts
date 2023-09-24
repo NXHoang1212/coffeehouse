@@ -1,24 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { AddRess } from "../../data/types/AddRess.entity";
 import AxiosInstance from "../../utils/AxiosIntance";
 import { HOST } from "../../constant/Host";
+import { CartOrder, GetCartOrder } from '../../data/types/CartOrder.entity';
+
 
 export const ApiCart = createApi({
-    reducerPath: 'apiAddress',
+    reducerPath: 'ApiCart',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        getAddressId: build.query<{ data: AddRess }, string>({
-            query: (id) => `/api/address/GetAddress/${id}`
+        getCart: build.query<GetCartOrder[], void>({
+            query: (id) => `/api/users/cart/getCard/${id}`,
         }),
     }),
 });
 
-export const { useGetAddressIdQuery } = ApiCart;
+export const { useGetCartQuery } = ApiCart;
 
 
-export const CreateEmptyCart = async (data: AddRess) => {
+export const CreateEmptyCart = async (data: CartOrder) => {
     try {
-        const response = await AxiosInstance().post('/api/address/create', data);
+        const response = await AxiosInstance().post('/api/users/cart/create', data);
         return response.data;
     } catch (error: any) {
         console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)
@@ -26,9 +27,9 @@ export const CreateEmptyCart = async (data: AddRess) => {
 };
 
 
-export const UpdateCart = async (id: number, data: AddRess) => {
+export const UpdateCart = async (id: number, data: GetCartOrder) => {
     try {
-        const response = await AxiosInstance().post(`/api/address/update/${id}`, data);
+        const response = await AxiosInstance().post(`/api/users/cart/UpdateCart/${id}`, data);
         return response.data;
     } catch (error: any) {
         console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)
@@ -38,7 +39,7 @@ export const UpdateCart = async (id: number, data: AddRess) => {
 
 export const DeleteCart = async (id: number) => {
     try {
-        const response = await AxiosInstance().delete(`/api/address/delete/${id}`);
+        const response = await AxiosInstance().delete(`/api/users/delete/${id}`);
         return response.data;
     } catch (error: any) {
         console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)

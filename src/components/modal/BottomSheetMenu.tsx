@@ -1,4 +1,4 @@
-import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView } from 'react-native'
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { Portal } from 'react-native-paper'
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
@@ -13,50 +13,48 @@ interface Props {
 }
 
 const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss = true, setSelectedCategory }: Props) => {
+    const bottomsheetHeight = Dimensions.get('window').height * 0.5;
+    const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const [open, setopen] = useState<boolean>(show);
-    const scrollViewRef = useRef<ScrollView | null>(null);
-    const bottom = useRef(new Animated.Value(-1000)).current;
+    const onGestureEvent = (event: any) => {
+        if (event.nativeEvent.translationY > 0) {
+            bottomsheet.setValue(-event.nativeEvent.translationY)
+        }
+    }
+    const onGestureEnd = (event: any) => {
+        if (event.nativeEvent.translationY > bottomsheetHeight / 2) {
+            onDismiss();
+        } else {
+            bottomsheet.setValue(0);
+        }
+    }
     useEffect(() => {
         if (show) {
-            setopen(show);
-            Animated.timing(bottom, {
+            setopen(show)
+            Animated.timing(bottomsheet, {
                 toValue: 0,
                 duration: 500,
-                useNativeDriver: true,
+                useNativeDriver: false
             }).start();
         } else {
-            Animated.timing(bottom, {
-                toValue: -1000,
+            Animated.timing(bottomsheet, {
+                toValue: -bottomsheetHeight,
                 duration: 500,
-                useNativeDriver: true,
+                useNativeDriver: false
             }).start(() => {
                 setopen(false);
             })
         }
-    }, [show]);
+    }, [show])
     if (!open) {
         return null;
-    }
-    const onGesture = (event: any) => {
-        if (event.nativeEvent.translationY > 0) {
-            bottom.setValue(-event.nativeEvent.translationY)
-        }
-    }
-    const onGestureEnd = (event: any) => {
-        if (event.nativeEvent.translationY > 0) {
-            if (event.nativeEvent.translationY >= 100) {
-                onDismiss();
-            } else {
-                bottom.setValue(0)
-            }
-        }
     }
 
     return (
         <Portal>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
-            <PanGestureHandler onGestureEvent={onGesture} onEnded={onGestureEnd}>
-                <Animated.View style={[StyleBottomSheetMenu.container]}>
+            <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
+                <Animated.View style={[StyleBottomSheetMenu.container, { bottom: bottomsheet }]}>
                     <View style={StyleBottomSheetMenu.header}>
                         <Text style={StyleBottomSheetMenu.textitle}>Danh mục</Text>
                         <TouchableOpacity onPress={onDismiss}>

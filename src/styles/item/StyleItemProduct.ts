@@ -6,7 +6,6 @@ import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 const StyleItemProduct = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.WHITE,
     },
     viewbody: {
         flexDirection: 'column',
@@ -61,6 +60,12 @@ const StyleItemProduct = StyleSheet.create({
     },
     iconplus: {
         tintColor: COLOR.WHITE,
+    },
+    viewbottomsheet: {
+        backgroundColor: COLOR.BLACK,
+    },
+    viewdetailproduct: {
+        
     },
 });
 

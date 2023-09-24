@@ -47,11 +47,9 @@ const BannerSlider = () => {
     const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
     const slideRef = useRef<FlatList<{ destination: string; id: string; image: ImageSourcePropType }> | null>(null);
     const [autoplay, setAutoplay] = useState<boolean>(true);
-    //hàm này để lấy vị trí của item đầu tiên và cuối cùng khi cuộn nếu đang ở hình cuối thì sẽ lướt tới hình đầu và ngược lại nếu hình đầu thì lướt nguợc tới hình cuối
     const viewableItemsChange = useRef(({ viewableItems }: any) => {
         setCurrentIndex(viewableItems[0].index);
     }).current;
-    //hàm này để tự động chuyển slide
     useEffect(() => {
         const interval = setInterval(() => {
             if (autoplay && slideRef.current) {
@@ -75,7 +73,6 @@ const BannerSlider = () => {
     );
     const handleImagePress = (item: Destination) => {
         const destination = item.destination;
-        //as là để ép kiểu cho destination vì nó là string nên là không thể truyền vào navigate
         navigation.navigate(destination as TabHomeNavigateEnum);
     };
 
@@ -115,8 +112,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     viewimage: {
-        // justifyContent: 'center',
-        // alignItems: 'center',
         elevation: 6,
         height: HEIGHT(17.8),
         top: HEIGHT(2),

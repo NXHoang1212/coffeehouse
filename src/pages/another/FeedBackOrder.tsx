@@ -5,7 +5,7 @@ import { useGoBack } from '../../utils/GoBack';
 import StyleFeedBackOrder from '../../styles/code/StyleFeedBackOrder';
 import { Icon } from '../../constant/Icon';
 
-const FeedBackOrder = () => {
+const FeedBackOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   return (

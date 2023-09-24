@@ -90,6 +90,7 @@ export const TabCoffee = {
     HOME: require('../assets/images/IconHome.png'),
     HEART: require('../assets/images/iconHeart.png'),
     OTHER: require('../assets/images/Icontabmenu.png'),
+    CART: require('../assets/images/iconemptycart.png'),
 }
 
 /*TÍCH ĐIỂM BEAN */

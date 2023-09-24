@@ -14,6 +14,7 @@ export const COLOR = {
     GREEN: '#00C48C',
     RED: '#FF0000',
     VIOLET: '#8A2BE2',
+    BLACKTRANSPARENT: 'rgba(0,0,0,0.5)',
 };
 
 // '#E5E5E5'

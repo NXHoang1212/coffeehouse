@@ -9,7 +9,7 @@ import React from "react";
 import { Image, StyleSheet } from "react-native";
 import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
-import Heart from "../../pages/infatuated/Heart";
+import CartOrder from "../../pages/cart/CartOrder";
 import OtherNavigator from "../other/TabOtherNavigate";
 import { useState } from "react";
 
@@ -27,9 +27,9 @@ const TabNavigate: TabHomeNavigateType[] = [
         icon: TabCoffee.ORDER,
     },
     {
-        component: Heart,
-        name: TabHomeNavigateEnum.Heart,
-        icon: TabCoffee.HEART,
+        component: CartOrder,
+        name: TabHomeNavigateEnum.Cart,
+        icon: TabCoffee.CART,
     },
     {
         component: PromoDiscount,
@@ -69,8 +69,8 @@ const TabHomeNavigate = () => {
                             <Image
                                 source={item.icon}
                                 style={{
-                                    width: 22,
-                                    height: 22,
+                                    width: 24,
+                                    height: 24,
                                     tintColor: focused ? COLOR.ORANGE : COLOR.GRAY,
                                 }}
                             />

@@ -3,7 +3,7 @@ import { COLOR } from '../../constant/Color';
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 
 
-const styleHeart = StyleSheet.create({
+const styleCartOrder = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE
@@ -38,7 +38,7 @@ const styleHeart = StyleSheet.create({
         borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
-        left: WIDTH(21)
+        left: WIDTH(13)
     },
     viewnotify: {
         width: WIDTH(8.5),
@@ -52,4 +52,4 @@ const styleHeart = StyleSheet.create({
     },
 });
 
-export default styleHeart;
+export default styleCartOrder;
