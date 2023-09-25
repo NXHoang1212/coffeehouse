@@ -1,15 +1,18 @@
-import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar } from 'react-native'
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
-import { Portal } from 'react-native-paper'
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
 import { Icon } from '../../constant/Icon'
 import { PanGestureHandler } from 'react-native-gesture-handler'
+import { Portal } from 'react-native-paper'
 import { DetailProduct } from '../../data/types/Product.entity'
 import StyleBottomSheetDetailOrder from '../../styles/order/StyleBottomSheetDetailOrder'
 import { FormatPrice } from '../../utils/FormatPrice'
 import { CheckBox } from 'react-native-elements'
 import { handleMinus, handlePlus } from '../../utils/Total'
+import { useSelector } from 'react-redux'
 import { CreateEmptyCart } from '../../service/api/IndexCart'
+import { Messenger } from '../../utils/ShowMessage'
+
 
 interface Props {
     show: boolean;
@@ -19,14 +22,16 @@ interface Props {
     children: React.ReactNode;
 }
 
-const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true, item, children }: Props) => {
+const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
+    const user = useSelector((state: any) => state.user);
+    const id = user._id
     const [open, setopen] = useState<boolean>(show);
     const [quantity, setQuantity] = useState<number>(1);
-    const [selectedSize, setSelectedSize] = useState<string>(item.size[0].price);
-    const [selectedTopping, setSelectedTopping] = useState<string[]>([]);
-    const AddToCart = () => { }
+    const [selectedSize, setSelectedSize] = useState<any>(item.size[0].price);
+    const [selectedTopping, setSelectedTopping] = useState<any>([]);
+    const [note, setNote] = useState<string>('');
     const onGestureEvent = (event: any) => {
         if (event.nativeEvent.translationY > 0) {
             bottomsheet.setValue(-event.nativeEvent.translationY)
@@ -61,10 +66,11 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
         return null;
     }
 
-    const total = (selectedSize: string, selectedTopping: string[], quantity: number) => {
-        let total = parseInt(selectedSize) * quantity;
-        selectedTopping.forEach((item) => {
-            total += parseInt(item) * quantity;
+    const total = (selectedSize: any, selectedTopping: any, quantity: number) => {
+        let total = 0;
+        total += parseInt(selectedSize) * quantity;
+        selectedTopping.forEach((item: any) => {
+            total += parseInt(item.price) * quantity;
         })
         return total;
     }
@@ -77,10 +83,33 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
         }
     }
 
-    
+    const handleSelectTopping = (toppingItem: any) => {
+        if (selectedTopping.length === 2) {
+            if (selectedTopping.includes(toppingItem)) {
+                setSelectedTopping(selectedTopping.filter((item: any) => item !== toppingItem))
+            }
+        } else {
+            if (selectedTopping.includes(toppingItem)) {
+                setSelectedTopping(selectedTopping.filter((item: any) => item !== toppingItem))
+            } else {
+                setSelectedTopping([...selectedTopping, toppingItem])
+            }
+        }
+    }
+
+    const AddToCart = () => {
+        if (selectedSize === null) {
+            Messenger('Vui lòng chọn size', 'error')
+        } else {
+            if (selectedTopping.length === 0) {
+                Messenger('Vui lòng chọn topping', 'error')
+            } else {
+            }
+        }
+    }
 
     return (
-        <Portal>
+        <Modal animationType="slide" transparent={true} onRequestClose={onDismiss}>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
             <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <Animated.View style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
@@ -94,12 +123,12 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
                 </PanGestureHandler>
                 <View style={StyleBottomSheetDetailOrder.line} />
                 <View style={StyleBottomSheetDetailOrder.body}>
-                    <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 }} showsVerticalScrollIndicator={false}>
+                    <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 150 }} showsVerticalScrollIndicator={false}>
                         <View style={StyleBottomSheetDetailOrder.body}>
                             <View style={StyleBottomSheetDetailOrder.viewsize}>
                                 <Text style={StyleBottomSheetDetailOrder.textsize}>Size</Text>
                                 {item.size.map((sizeItem, index) => (
-                                    <View key={index} style={StyleBottomSheetDetailOrder.viewsizearray}>
+                                    <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => handleSelectSize(sizeItem)}>
                                         <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                                             <CheckBox
                                                 checkedIcon='dot-circle-o'
@@ -116,7 +145,7 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
                                             </View>
                                         </View>
                                         {item.size.length - 1 === index ? null : <View style={StyleBottomSheetDetailOrder.lineitem} />}
-                                    </View>
+                                    </TouchableOpacity>
                                 ))}
                                 <View style={StyleBottomSheetDetailOrder.lineitem} />
                             </View>
@@ -124,16 +153,17 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
                                 <Text style={StyleBottomSheetDetailOrder.textsize}>Topping</Text>
                                 <Text style={StyleBottomSheetDetailOrder.textminisize}>Chọn tối đa 2 loại</Text>
                                 {item.topping.map((toppingItem, index) => (
-                                    <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray}>
+                                    <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => handleSelectTopping(toppingItem)}>
                                         <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                                             <CheckBox
-                                                checked={false}
                                                 checkedIcon='check-square'
                                                 uncheckedIcon='square-o'
                                                 checkedColor='#FFC107'
                                                 uncheckedColor='#000'
                                                 size={20}
-                                                
+                                                checked={selectedTopping.includes(toppingItem)}
+                                                onPress={() => handleSelectTopping(toppingItem)}
+                                                disabled={selectedTopping.length === 2 && !selectedTopping.includes(toppingItem)}
                                             />
                                             <View style={StyleBottomSheetDetailOrder.viewsizename}>
                                                 <Text style={StyleBottomSheetDetailOrder.textsizename}>{toppingItem.name}</Text>
@@ -151,30 +181,32 @@ const BottomSheetDetailOrder = ({ show, onDismiss, enableBackDropDismiss = true,
                                     style={StyleBottomSheetDetailOrder.inputnote}
                                     placeholder="Thêm ghi chú"
                                     placeholderTextColor="#BDBDBD"
-                                    multiline={true}    // Cho phép nhập nhiều dòng
-                                    numberOfLines={4}   // Số dòng tối đa   
+                                    multiline={true}
+                                    numberOfLines={4}
+                                    onChangeText={(text) => setNote(text)}
+                                    value={note}
                                 />
                             </View>
                         </View>
-                        <View style={StyleBottomSheetDetailOrder.viewbutton}>
-                            <View style={StyleBottomSheetDetailOrder.viewquantity}>
-                                <TouchableOpacity style={StyleBottomSheetDetailOrder.viewminus} onPress={handleMinus(quantity, setQuantity)}>
-                                    <Image source={Icon.MINUS} style={StyleBottomSheetDetailOrder.iconminus} />
-                                </TouchableOpacity>
-                                <Text style={StyleBottomSheetDetailOrder.textnumber}>{quantity}</Text>
-                                <TouchableOpacity style={StyleBottomSheetDetailOrder.viewplus} onPress={handlePlus(quantity, setQuantity)}>
-                                    <Image source={Icon.PLUS} style={StyleBottomSheetDetailOrder.iconplus} />
-                                </TouchableOpacity>
-                            </View>
-                            <TouchableOpacity style={StyleBottomSheetDetailOrder.button} onPress={AddToCart}>
-                                <Text style={StyleBottomSheetDetailOrder.textbutton}>Chọn</Text>
-                                <Text style={StyleBottomSheetDetailOrder.textbutton}>{FormatPrice(total(selectedSize, selectedTopping, quantity))}</Text>
+                    </ScrollView>
+                    <View style={StyleBottomSheetDetailOrder.viewbutton}>
+                        <View style={StyleBottomSheetDetailOrder.viewquantity}>
+                            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewminus} onPress={handleMinus(quantity, setQuantity)}>
+                                <Image source={Icon.MINUS} style={StyleBottomSheetDetailOrder.iconminus} />
+                            </TouchableOpacity>
+                            <Text style={StyleBottomSheetDetailOrder.textnumber}>{quantity}</Text>
+                            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewplus} onPress={handlePlus(quantity, setQuantity)}>
+                                <Image source={Icon.PLUS} style={StyleBottomSheetDetailOrder.iconplus} />
                             </TouchableOpacity>
                         </View>
-                    </ScrollView>
+                        <TouchableOpacity style={StyleBottomSheetDetailOrder.button} onPress={AddToCart}>
+                            <Text style={StyleBottomSheetDetailOrder.textbutton}>Chọn</Text>
+                            <Text style={StyleBottomSheetDetailOrder.textbutton}>{FormatPrice(total(selectedSize, selectedTopping, quantity))}</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </Animated.View>
-        </Portal >
+        </Modal>
     )
 }
 

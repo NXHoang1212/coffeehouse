@@ -38,7 +38,7 @@ const StyleBottomSheetDetailOrder = StyleSheet.create({
         width: WIDTH(3),
         height: WIDTH(3),
         tintColor: COLOR.GRAYBLAND,
-        left: WIDTH(26),
+        left: WIDTH(28),
     },
     line: {
         width: WIDTH(100),
@@ -140,9 +140,12 @@ const StyleBottomSheetDetailOrder = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: WIDTH(3),
+        borderTopWidth: WIDTH(0.3),
+        borderTopColor: COLOR.GRAYBLAND,
         paddingTop: HEIGHT(0.2),
         backgroundColor: COLOR.WHITE,
         height: HEIGHT(7),
+        bottom: HEIGHT(16.2),
     },
     viewquantity: {
         flexDirection: 'row',

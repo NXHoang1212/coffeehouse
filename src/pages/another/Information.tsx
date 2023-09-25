@@ -52,6 +52,7 @@ const Information = () => {
       setHolder,
       setEmail,
       setGender,
+      setBirthday,
       setIsAnyFieldEmpty,
     );
     if (fieldName === 'name' && newValue === user.name) {
@@ -146,6 +147,7 @@ const Information = () => {
               style={StyleInformation.textinput}
               value={birthday ? FormatDate(new Date(birthday)) : ''}
               placeholder="Chọn ngày sinh"
+              onChangeText={(value) => monitorChangeInput('birthday', value)}
               onFocus={() => {
                 Keyboard.dismiss();
                 setBirthdayInputDisabled(false);

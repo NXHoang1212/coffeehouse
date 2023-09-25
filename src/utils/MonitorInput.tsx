@@ -7,6 +7,7 @@ export const MonitorChangeInput = (
     setHolder: (value: string) => void,
     setEmail: (value: string) => void,
     setGender: (value: string) => void,
+    setBirthday: (value: string) => void,
     setIsAnyFieldChanged: (value: boolean) => void,
 ) => {
     switch (fieldName) {
@@ -22,6 +23,8 @@ export const MonitorChangeInput = (
         case 'gender':
             setGender(newValue);
             break;
+        case 'birthday':
+            setBirthday(newValue);
         default:
             break;
     }
