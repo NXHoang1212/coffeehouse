@@ -14,7 +14,7 @@ export type TabHomeParamList = {
 export enum TabHomeNavigateEnum {
     HomePage = 'Trang chủ',
     PromoDiscount = 'Ưu đãi',
-    Cart = 'Giỏ hàng',
+    Cart = 'Đơn hàng',
     Order = 'Đặt hàng',
     Other = 'Khác',
 }

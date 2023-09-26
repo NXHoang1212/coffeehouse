@@ -1,20 +1,20 @@
 export interface CartOrder {
   _id: string;
   NameProduct: string;
-  PriceProduct: number;
-  SizeProduct: string;
-  ToppingProduct: string;
+  PriceProduct: string;
+  SizeProduct: string[];
+  ToppingProduct: string[];
   QuantityProduct: number;
   NoteProduct: string;
-  AmountShipping: number;
+  AmountShipping: string;
   UserId: string;
 }
 
 export interface GetCartOrder {
   NameProduct: string;
   PriceProduct: number;
-  SizeProduct: string;
-  ToppingProduct: string;
+  SizeProduct: string[];
+  ToppingProduct: string[];
   QuantityProduct: number;
   NoteProduct: string;
   AmountShipping: number;

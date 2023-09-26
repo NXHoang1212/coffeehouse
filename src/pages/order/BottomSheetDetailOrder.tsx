@@ -12,8 +12,8 @@ import { handleMinus, handlePlus } from '../../utils/Total'
 import { useSelector } from 'react-redux'
 import { CreateEmptyCart } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
-
-
+import { useDispatch } from 'react-redux'
+import { AddCart } from '../../redux/slices/CartSlice'
 interface Props {
     show: boolean;
     onDismiss: () => void;
@@ -25,12 +25,13 @@ interface Props {
 const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
+    const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user);
     const id = user._id
     const [open, setopen] = useState<boolean>(show);
     const [quantity, setQuantity] = useState<number>(1);
-    const [selectedSize, setSelectedSize] = useState<any>(item.size[0].price);
     const [selectedTopping, setSelectedTopping] = useState<any>([]);
+    const [selectedSize, setSelectedSize] = useState<any>([]);
     const [note, setNote] = useState<string>('');
     const onGestureEvent = (event: any) => {
         if (event.nativeEvent.translationY > 0) {
@@ -46,12 +47,13 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
     }
     useEffect(() => {
         if (show) {
-            setopen(show)
+            setopen(show);
             Animated.timing(bottomsheet, {
                 toValue: 0,
                 duration: 500,
                 useNativeDriver: false
             }).start();
+            setSelectedSize(item.size[0]);
         } else {
             Animated.timing(bottomsheet, {
                 toValue: -bottomsheetHeight,
@@ -59,28 +61,29 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                 useNativeDriver: false
             }).start(() => {
                 setopen(false);
-            })
+            });
         }
-    }, [show])
+    }, [show]);
+
     if (!open) {
         return null;
     }
 
     const total = (selectedSize: any, selectedTopping: any, quantity: number) => {
         let total = 0;
-        total += parseInt(selectedSize) * quantity;
-        selectedTopping.forEach((item: any) => {
-            total += parseInt(item.price) * quantity;
-        })
-        return total;
+        if (selectedSize !== null) {
+            total += parseInt(selectedSize.price);
+        }
+        if (selectedTopping.length !== 0) {
+            selectedTopping.forEach((item: any) => {
+                total += parseInt(item.price);
+            })
+        }
+        return total * quantity;
     }
 
     const handleSelectSize = (sizeItem: any) => {
-        if (sizeItem.price === selectedSize) {
-            setSelectedSize(item.size[0].price)
-        } else {
-            setSelectedSize(sizeItem.price)
-        }
+        setSelectedSize(sizeItem); // Lựa chọn kích thước đầy đủ (bao gồm giá và tên)
     }
 
     const handleSelectTopping = (toppingItem: any) => {
@@ -104,6 +107,22 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
             if (selectedTopping.length === 0) {
                 Messenger('Vui lòng chọn topping', 'error')
             } else {
+                const data: any = {
+                    NameProuct: item.name,
+                    PriceProduct: total(selectedSize, selectedTopping, quantity),
+                    SizeProduct: selectedSize,
+                    ToppingProduct: selectedTopping,
+                    QuantityProduct: quantity,
+                    NoteProduct: note,
+                    AmountShipping: 0,
+                    UserId: id,
+                }
+                const res: any = CreateEmptyCart(data)
+                if (res) {
+                    Messenger('Thêm vào giỏ hàng thành công', 'success')
+                    onDismiss()
+                    dispatch(AddCart(res))
+                }
             }
         }
     }
@@ -136,7 +155,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                                                 checkedColor='#FFC107'
                                                 uncheckedColor='#000'
                                                 size={20}
-                                                checked={selectedSize === sizeItem.price}
+                                                checked={selectedSize === sizeItem}
                                                 onPress={() => handleSelectSize(sizeItem)}
                                             />
                                             <View style={StyleBottomSheetDetailOrder.viewsizename}>

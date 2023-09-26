@@ -9,7 +9,7 @@ import React from "react";
 import { Image, StyleSheet } from "react-native";
 import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
-import CartOrder from "../../pages/cart/CartOrder";
+import Order from "../../pages/cart/Order";
 import OtherNavigator from "../other/TabOtherNavigate";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ const TabNavigate: TabHomeNavigateType[] = [
         icon: TabCoffee.ORDER,
     },
     {
-        component: CartOrder,
+        component: Order,
         name: TabHomeNavigateEnum.Cart,
         icon: TabCoffee.CART,
     },

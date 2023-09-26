@@ -4,9 +4,31 @@ import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 
 
 const styleCartOrder = StyleSheet.create({
+    containernoitem: {
+        flex: 1,
+        backgroundColor: COLOR.WHITE,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        gap: HEIGHT(2)
+    },
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE
+    },
+    iconnoitem: {
+        width: WIDTH(15),
+        height: HEIGHT(7),
+    },
+    viewbacknoorder: {
+
+    },
+    textbacknoorder: {
+        fontSize: FONTSIZE(2),
+        fontWeight: 'bold',
+        color: COLOR.ORANGE,
+        width: WIDTH(90),
+        textAlign: 'center',
     },
     viewheader: {
         flexDirection: 'row',
@@ -49,6 +71,9 @@ const styleCartOrder = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: WIDTH(6)
+    },
+    viewbody: {
+        flex: 1,
     },
 });
 

@@ -38,6 +38,7 @@ const StyleFeedBackOrder = StyleSheet.create({
     iconNoOrder: {
         width: WIDTH(12.3),
         height: HEIGHT(6),
+        tintColor: COLOR.ORANGE
     },
     textNoOrder: {
         fontSize: FONTSIZE(2),

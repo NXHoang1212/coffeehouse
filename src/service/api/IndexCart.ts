@@ -8,7 +8,7 @@ export const ApiCart = createApi({
     reducerPath: 'ApiCart',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        getCart: build.query<GetCartOrder[], void>({
+        getCart: build.query<{ data: CartOrder[] }, string>({
             query: (id) => `/api/users/cart/getCard/${id}`,
         }),
     }),
