@@ -26,7 +26,7 @@ const Information = () => {
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
-  const user = useSelector((state: any) => state.user)
+  const user = useSelector((state: any) => state.user.user)
   const id = user._id
   console.log("🚀 ~ file: CreateInformation.tsx:31 ~ CreateInformation ~ _id:", id)
   const [name, setName] = useState<string>(user.name)

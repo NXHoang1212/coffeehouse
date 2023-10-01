@@ -95,7 +95,7 @@ const StyleAddAddress = StyleSheet.create({
     },
     textinput: {
         fontSize: FONTSIZE(1.9),
-        color: COLOR.GRAY,
+        color: COLOR.BLACK,
         fontWeight: '600',
         left: WIDTH(2),
         letterSpacing: 0.5,

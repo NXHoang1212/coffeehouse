@@ -34,6 +34,7 @@ const UserSlice = createSlice({
             state.birthday = action.payload.birthday;
         },
         clearUser(state) {
+            //xóa hết dữ liệu của user
             state._id = '';
             state.role = '';
             state.googleId = '';
@@ -42,14 +43,7 @@ const UserSlice = createSlice({
             state.name = '';
             state.holder = '';
             state.avatar = '';
-            state.mobile = '';
-            state.gender = '';
-            state.birthday = '';
         },
-        //cập nhật thông tin user
-        updateUser(state, action: PayloadAction<UserData>) {
-
-        }
     },
 });
 

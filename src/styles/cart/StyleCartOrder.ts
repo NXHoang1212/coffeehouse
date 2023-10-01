@@ -14,7 +14,7 @@ const styleCartOrder = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: COLOR.WHITE
+        backgroundColor: COLOR.GRAYBLAND1
     },
     iconnoitem: {
         width: WIDTH(15),
@@ -34,13 +34,16 @@ const styleCartOrder = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        left: WIDTH(3),
-        top: HEIGHT(1)
+        backgroundColor: COLOR.WHITE,
+        height: HEIGHT(6),
+        borderBottomWidth: 0.5,
+        borderBottomColor: COLOR.GRAY,
     },
     textheader: {
-        fontSize: FONTSIZE(2.2),
+        fontSize: FONTSIZE(2.3),
         fontWeight: 'bold',
-        color: COLOR.BLACK,
+        color: COLOR.ORANGE,
+        left: WIDTH(3)
     },
     iconpromo: {
         width: WIDTH(6),
@@ -70,10 +73,12 @@ const styleCartOrder = StyleSheet.create({
         borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
-        right: WIDTH(6)
+        right: WIDTH(4)
     },
     viewbody: {
-        flex: 1,
+        marginTop: HEIGHT(1.2),
+        backgroundColor: COLOR.WHITE,
+        height: HEIGHT(100),
     },
 });
 

@@ -1,5 +1,6 @@
 import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
+import { LoadingScroll } from '../../hooks/Loading'
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
 import { Icon } from '../../constant/Icon'
 import { PanGestureHandler } from 'react-native-gesture-handler'
@@ -14,6 +15,8 @@ import { CreateEmptyCart } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
 import { useDispatch } from 'react-redux'
 import { AddCart } from '../../redux/slices/CartSlice'
+import ActivityIndicator from '../../components/activity/ActivityIndicator'
+import { RootState } from '../../redux/store/Store'
 interface Props {
     show: boolean;
     onDismiss: () => void;
@@ -26,7 +29,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const dispatch = useDispatch();
-    const user = useSelector((state: any) => state.user);
+    const { isLoading, setIsLoading } = LoadingScroll();
+    const user = useSelector((state: RootState) => state.user.user);
     const id = user._id
     const [open, setopen] = useState<boolean>(show);
     const [quantity, setQuantity] = useState<number>(1);
@@ -104,25 +108,24 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         if (selectedSize === null) {
             Messenger('Vui lòng chọn size', 'error')
         } else {
-            if (selectedTopping.length === 0) {
-                Messenger('Vui lòng chọn topping', 'error')
-            } else {
-                const data: any = {
-                    NameProuct: item.name,
-                    PriceProduct: total(selectedSize, selectedTopping, quantity),
-                    SizeProduct: selectedSize,
-                    ToppingProduct: selectedTopping,
-                    QuantityProduct: quantity,
-                    NoteProduct: note,
-                    AmountShipping: 0,
-                    UserId: id,
-                }
-                const res: any = CreateEmptyCart(data)
-                if (res) {
-                    Messenger('Thêm vào giỏ hàng thành công', 'success')
-                    onDismiss()
-                    dispatch(AddCart(res))
-                }
+            const data: any = {
+                NameProduct: item.name,
+                PriceProduct: total(selectedSize, selectedTopping, quantity),
+                SizeProduct: selectedSize,
+                ToppingProduct: selectedTopping,
+                QuantityProduct: quantity,
+                NoteProduct: note,
+                AmountShipping: 0,
+                UserId: id,
+            }
+            const response: any = CreateEmptyCart(data);
+            if (response) {
+                dispatch(AddCart(data));
+                setIsLoading(true);
+                setTimeout(() => {
+                    Messenger('Thêm vào giỏ hàng thành công', 'success');
+                    onDismiss();
+                }, 2000);
             }
         }
     }
@@ -132,6 +135,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
             <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <Animated.View style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
+                {isLoading ? <ActivityIndicator /> : null}
                 <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
                     <View style={StyleBottomSheetDetailOrder.header}>
                         <Text style={StyleBottomSheetDetailOrder.texttitle}>{item.name}</Text>

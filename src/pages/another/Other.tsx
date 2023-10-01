@@ -10,11 +10,14 @@ import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../dat
 import SignOut from '../../components/profile/SignOut'
 import { useAuth } from '../../hooks/UseAuth'
 import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store/Store'
 import { clearUser } from '../../redux/slices/AuthSlice'
+import { removeCart } from '../../redux/slices/CartSlice'
+import { resetStore } from '../../redux/store/Store'
 
 const Other = () => {
   const { isLoggedIn, logout } = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung'
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
@@ -57,9 +60,11 @@ const Other = () => {
     setVisible(false);
   };
   const onOKPress = () => {
-    setVisible(false);
-    logout();
     dispatch(clearUser());
+    dispatch(removeCart());
+    resetStore();
+    logout();
+    setVisible(false);
   };
   const handleLogout = () => {
     setVisible(true);

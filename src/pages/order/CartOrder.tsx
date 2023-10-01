@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl } from 'react-native'
-import React, { useState, useRef, memo } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
 import CategoryItem from '../../components/item/CategoryItem'
@@ -25,7 +25,7 @@ const CartOrder = () => {
   const [show, setShow] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<String>('');
   let currentCategory = '';
-  const { data, isLoading } = useGetProductsQuery();
+  const { data, isLoading, refetch } = useGetProductsQuery();
   const showProducts = data?.data;
   const dispatch = useDispatch();
   const handleSearch = () => {
@@ -56,6 +56,9 @@ const CartOrder = () => {
       }
     }
   };
+  useEffect(() => {
+    refetch()
+  }, [showProducts])
   if (isLoading) {
     return (
       <View style={StyleOrder.container}>

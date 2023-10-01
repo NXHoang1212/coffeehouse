@@ -13,15 +13,16 @@ import { useSelector } from 'react-redux';
 import { FlashList } from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
 import { useIsFocused } from '@react-navigation/native';
+import { RootState } from '../../../redux/store/Store';
 
 const Address: React.FC = () => {
   const goback = useGoBack();
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: any) => state.user._id)
+  const id = useSelector((state: RootState) => state.user.user._id);
   const { data, refetch } = useGetAddressIdQuery(id)
   const Addressess: any = data?.data;
-  const [selectedAddressType, setSelectedAddressType] = useState<string>(''); // Thêm biến trạng thái để theo dõi loại địa chỉ được chọn
+  const [selectedAddressType, setSelectedAddressType] = useState<string>('');
   const isLastItem = (currentIndex: number) => {
     return currentIndex === Addressess?.length - 1;
   }

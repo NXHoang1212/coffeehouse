@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { Messenger } from '../../../utils/ShowMessage';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
+import { RootState } from '../../../redux/store/Store';
 
 interface RouteParams {
   name: string;
@@ -20,9 +21,9 @@ const AddAddress: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute();
   const { name } = route.params as RouteParams;
-  const InforAddress = useSelector((state: any) => state.address)
+  const InforAddress = useSelector((state: RootState) => state.address)
   const [nameAddress, setNameAdddress] = useState<string>(name)
-  const user = useSelector((state: any) => state.user)
+  const user = useSelector((state: RootState) => state.user.user)
   const id = user._id;
   const DescribeAddRess = InforAddress.DescribeAddRess
   const [Other, SetOther] = useState<string>('');

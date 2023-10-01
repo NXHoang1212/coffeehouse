@@ -28,6 +28,16 @@ export const useAuth = () => {
         }
     };
 
+    const logoutReduxPersist = async () => {
+        try {
+            await AsyncStorage.removeItem('root');
+            console.log("🚀 ~ file: UseAuth.tsx:22 ~ logout ~ Đăng xuất thành công và đã xóa trạng thái đăng nhập khỏi AsyncStorage");
+            setLoggedIn(false);
+        } catch (error) {
+            console.error('Lỗi khi xóa trạng thái đăng nhập:', error);
+        }
+    }
+
     // Hàm kiểm tra trạng thái đăng nhập khi ứng dụng khởi động
     const checkLoginStatus = async () => {
         try {
@@ -47,6 +57,6 @@ export const useAuth = () => {
     useEffect(() => {
         checkLoginStatus();
     }, [isFocused]);
-    
-    return { isLoggedIn, login, logout, checkLoginStatus };
+
+    return { isLoggedIn, login, logout, checkLoginStatus, logoutReduxPersist };
 };

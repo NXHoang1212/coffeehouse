@@ -16,6 +16,15 @@ export const ApiCart = createApi({
 
 export const { useGetCartQuery } = ApiCart;
 
+export const GetApiCart = async (id: number) => {
+    try {
+        const response = await AxiosInstance().get(`/api/users/cart/getCard/${id}`);
+        return response.data;
+    } catch (error: any) {
+        console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)
+    }
+}
+
 
 export const CreateEmptyCart = async (data: CartOrder) => {
     try {

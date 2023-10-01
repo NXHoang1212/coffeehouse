@@ -3,7 +3,6 @@ import { COLOR } from '../../constant/Color';
 import { WIDTH, HEIGHT, FONTSIZE } from "../../constant/Responsive";
 import { FONTSTYLE } from "../../constant/Fonts";
 
-
 const StyleOrder = StyleSheet.create({
     container: {
         flex: 1,
@@ -71,7 +70,7 @@ const StyleOrder = StyleSheet.create({
         marginTop: HEIGHT(3),
     },
     viewbody: {
-        
+
         marginTop: HEIGHT(2),
         gap: HEIGHT(3),
     },
@@ -86,3 +85,6 @@ const StyleOrder = StyleSheet.create({
 });
 
 export default StyleOrder;
+
+
+

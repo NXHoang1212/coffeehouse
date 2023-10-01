@@ -4,7 +4,7 @@ export interface CartOrder {
   PriceProduct: string;
   SizeProduct: string[];
   ToppingProduct: string[];
-  QuantityProduct: number;
+  QuantityProduct: string;
   NoteProduct: string;
   AmountShipping: string;
   UserId: string;
@@ -15,7 +15,7 @@ export interface GetCartOrder {
   PriceProduct: number;
   SizeProduct: string[];
   ToppingProduct: string[];
-  QuantityProduct: number;
+  QuantityProduct: string;
   NoteProduct: string;
   AmountShipping: number;
   UserId: string;

@@ -48,6 +48,7 @@ export const Icon = {
     MAPS: require('../assets/images/Iconmap.png'),
     LOCATION: require('../assets/images/IconLocation.png'),
     SEND: require('../assets/images/iconsend.png'),
+    DELIVERYADDRESS: require('../assets/images/icondeliveryaddress.png'),
 }
 
 /* THÔNG TIN */

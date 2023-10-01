@@ -1,17 +1,19 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useEffect, useState } from "react";
 import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../../data/types/TypesTab";
 import HomePage from "../../pages/home/HomePage";
 import { TabCoffee } from '../../constant/Icon';
 import PromoDiscount from "../../pages/code/PromoDiscount";
-import Other from "../../pages/another/Other";
 import { COLOR } from "../../constant/Color";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
 import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
-import Order from "../../pages/cart/Order";
 import OtherNavigator from "../other/TabOtherNavigate";
-import { useState } from "react";
+import Order from "../../pages/cart/Order";
+import { useSelector } from "react-redux";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { RootState } from "../../redux/store/Store";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
@@ -44,6 +46,14 @@ const TabNavigate: TabHomeNavigateType[] = [
 ]
 
 const TabHomeNavigate = () => {
+    const cart = useSelector((state: RootState) => state.cart.cart.QuantityProduct);
+    console.log("🚀 ~ file: TabHomeNavigate.tsx:52 ~ TabHomeNavigate ~ cart:", cart)
+    const [cartlength, setCartlength] = useState<any>('');
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        setCartlength(cart)
+    }, [isFocused, cart])
+
     return (
         <BottomTabNavigate.Navigator
             screenOptions=
@@ -75,6 +85,7 @@ const TabHomeNavigate = () => {
                                 }}
                             />
                         ),
+                        tabBarBadge: item.name === 'Đơn hàng' && cartlength ? cartlength : null,
                     }}
                 />
             ))}

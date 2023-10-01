@@ -15,6 +15,14 @@ export const ApiAddress = createApi({
 
 export const { useGetAddressIdQuery } = ApiAddress;
 
+export const GetApiAddress = async (id: string) => {
+    try {
+        const response = await AxiosInstance().get(`/api/address/GetAddress/${id}`);
+        return response.data;
+    } catch (error: any) {
+        console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)
+    }
+};
 
 export const CreateAddress = async (data: CreateAddRess) => {
     try {

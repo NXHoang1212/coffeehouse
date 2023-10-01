@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 import ProductReducer from '../slices/ProductSlices';
 import AddressReducer from '../slices/AddressSlice';
 import CartReducer from '../slices/CartSlice';
@@ -9,6 +10,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import UserReducer from '../slices/AuthSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AnyAction, CombinedState, Reducer } from 'redux';
 
 
 const persistConfig: any = {
@@ -16,7 +18,12 @@ const persistConfig: any = {
     storage: AsyncStorage,
 }
 
-const persistedReducer = persistReducer(persistConfig, UserReducer);
+const rootReducer: Reducer<CombinedState<any>, AnyAction> = combineReducers({
+    user: UserReducer,
+    cart: CartReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: {
@@ -25,11 +32,9 @@ const store = configureStore({
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
         user: persistedReducer,
-        cart: CartReducer,
+        cart: persistedReducer,
         [ApiCart.reducerPath]: ApiCart.reducer,
     },
-
-    //đây là middleware của api endpoint [ApiProducts]
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware),
@@ -40,5 +45,11 @@ setupListeners(store.dispatch);
 
 export default store;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;;
+export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);
+
+export const resetStore = async () => {
+    await persistor.purge();
+    store.dispatch({ type: 'RESET' });
+    await persistor.flush();
+};

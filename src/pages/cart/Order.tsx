@@ -12,15 +12,25 @@ import { useSelector } from 'react-redux'
 import { FlashList } from '@huunguyen312/flash-list'
 import { useGetCartQuery } from '../../service/api/IndexCart'
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
+import { RootState } from '../../redux/store/Store'
+import { useRoute } from '@react-navigation/native';
 
-const Order = () => {
+
+const Order: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
+  const route = useRoute<any>();
+  const item = route.params?.item;
+  console.log("🚀 ~ file: Order.tsx:24 ~ item:", item);
   const { isLoggedIn } = useAuth();
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: any) => state.user._id)
+  const user = useSelector((state: RootState) => state.user.user)
+  let id = user._id
   const { data, refetch } = useGetCartQuery(id)
   const datacart = data?.data
+
+
+
   const freshcontrol = () => {
     refetch()
   }
@@ -36,9 +46,9 @@ const Order = () => {
 
   useEffect(() => {
     refetch()
-  }, [isFocused])
+  }, [isFocused, datacart])
 
-  if (!data) {
+  if (datacart?.length === 0) {
     return (
       <View style={styleCartOrder.containernoitem}>
         <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
@@ -53,7 +63,7 @@ const Order = () => {
   return (
     <View style={styleCartOrder.container}>
       <View style={styleCartOrder.viewheader}>
-        <Text style={styleCartOrder.textheader}>Sản phẩm giỏ hàng</Text>
+        <Text style={styleCartOrder.textheader}>Thông tin đơn hàng</Text>
         <TouchableOpacity style={styleCartOrder.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
           <Image source={Icon.PROMO} style={styleCartOrder.iconpromo} />
         </TouchableOpacity>

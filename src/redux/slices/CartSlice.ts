@@ -7,7 +7,7 @@ const initialState: CartOrder = {
     PriceProduct: '',
     SizeProduct: [],
     ToppingProduct: [],
-    QuantityProduct: 0,
+    QuantityProduct: '',
     NoteProduct: '',
     AmountShipping: '',
     UserId: '',
@@ -18,7 +18,7 @@ const CartSlice = createSlice({
     initialState,
     reducers: {
         AddCart: (state, action: PayloadAction<CartOrder>) => {
-            state._id = action.payload._id;
+            // state._id = action.payload._id;
             state.NameProduct = action.payload.NameProduct;
             state.PriceProduct = action.payload.PriceProduct;
             state.SizeProduct = action.payload.SizeProduct;
@@ -28,20 +28,20 @@ const CartSlice = createSlice({
             state.AmountShipping = action.payload.AmountShipping;
             state.UserId = action.payload.UserId;
         },
-        removeCart: (state, action: PayloadAction<CartOrder>) => {
-            state._id = action.payload._id;
-            state.NameProduct = action.payload.NameProduct;
-            state.PriceProduct = action.payload.PriceProduct;
-            state.SizeProduct = action.payload.SizeProduct;
-            state.ToppingProduct = action.payload.ToppingProduct;
-            state.QuantityProduct = action.payload.QuantityProduct;
-            state.NoteProduct = action.payload.NoteProduct;
-            state.AmountShipping = action.payload.AmountShipping;
-            state.UserId = action.payload.UserId;
-        }
+        removeCart: (state) => {
+            state._id = '';
+            state.NameProduct = '';
+            state.PriceProduct = '';
+            state.SizeProduct = [];
+            state.ToppingProduct = [];
+            state.QuantityProduct = '';
+            state.NoteProduct = '';
+            state.AmountShipping = '';
+            state.UserId = '';
+        },
     },
 });
 
 
-export const { AddCart, removeCart } = CartSlice.actions;
 export default CartSlice.reducer;
+export const { AddCart, removeCart } = CartSlice.actions;
