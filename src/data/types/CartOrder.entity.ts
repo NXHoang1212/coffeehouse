@@ -18,7 +18,7 @@ export interface GetCartOrder {
   QuantityProduct: string;
   NoteProduct: string;
   AmountShipping: number;
-  UserId: string;
+  UserId: any;
 }
 
 export enum CartStackNames {

@@ -13,13 +13,16 @@ interface PropsDetailItemProduct {
 
 const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-    //kiểm tra có param nào truyền vào không
     const route = useRoute<any>();
     const address = route.params?.item;
-    console.log("🚀 ~ file: ItemInformationOrder.tsx:19 ~ address:", address);
+    const [note, setNote] = useState<string>('');
     const SelectedAddress = () => {
         //@ts-ignore
         navigation.navigate('StackHomeNavigate', { screen: 'SelectedAddressOrder' })
+    }
+    const UpdateOrder = () => {
+        //@ts-ignore
+        navigation.navigate('StackHomeNavigate', { screen: 'UpdateOrderUser', params: { item: item } })
     }
     return (
         <View style={StyleItemInformationOrder.container}>
@@ -40,10 +43,22 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 </View>
             ) : (
                 <TouchableOpacity style={StyleItemInformationOrder.viewaddress} onPress={SelectedAddress}>
-                    <Text style={StyleItemInformationOrder.textaddress}>Vui lòng mời bạn chọn địa chỉ giao hàng</Text>
+                    <Text style={StyleItemInformationOrder.textaddress}>Vui lòng chọn địa chỉ giao tới</Text>
                 </TouchableOpacity>
             )}
-
+            <TextInput
+                placeholder='Thêm hướng dẫn cho shipper....'
+                style={StyleItemInformationOrder.textinput}
+                onChangeText={(text) => setNote(text)}
+                value={note}
+            />
+            <View style={StyleItemInformationOrder.itemuser}>
+                <TouchableOpacity onPress={UpdateOrder}>
+                    <Text style={StyleItemInformationOrder.textuser}>{item.UserId.name}</Text>
+                    <Text style={StyleItemInformationOrder.textuser}>{item.UserId.mobile}</Text>
+                    <Text style={StyleItemInformationOrder.textline}>-------------------------</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

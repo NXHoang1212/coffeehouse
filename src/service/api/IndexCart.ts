@@ -9,7 +9,7 @@ export const ApiCart = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
         getCart: build.query<{ data: CartOrder[] }, string>({
-            query: (id) => `/api/users/cart/getCard/${id}`,
+            query: (id) => `/api/users/cart/getCart/${id}`,
         }),
     }),
 });
@@ -18,7 +18,7 @@ export const { useGetCartQuery } = ApiCart;
 
 export const GetApiCart = async (id: number) => {
     try {
-        const response = await AxiosInstance().get(`/api/users/cart/getCard/${id}`);
+        const response = await AxiosInstance().get(`/api/users/cart/getCart/${id}`);
         return response.data;
     } catch (error: any) {
         console.log("🚀 ~ file: IndexAddress.ts ~ line 59 ~ ApiLogin ~ error", error)

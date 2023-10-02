@@ -53,6 +53,7 @@ const StyleItemInformationOrder = StyleSheet.create({
     textdetailaddress: {
         fontSize: FONTSIZE(1.6),
         color: COLOR.BLACK,
+        width: WIDTH(88),
     },
     vieweditaddress: {
 
@@ -62,6 +63,31 @@ const StyleItemInformationOrder = StyleSheet.create({
         height: WIDTH(5),
         tintColor: COLOR.ORANGE,
     },
+    textinput: {
+        width: WIDTH(94),
+        height: WIDTH(10),
+        borderWidth: 1,
+        borderColor: COLOR.GRAY,
+        borderRadius: WIDTH(3),
+        marginTop: HEIGHT(1),
+        paddingHorizontal: WIDTH(3),
+    },
+    itemuser: {
+        marginTop: HEIGHT(2),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    textuser: {
+        fontSize: FONTSIZE(1.8),
+        fontWeight: '500',
+        color: COLOR.GRAY,
+    },
+    textline: {
+        fontSize: FONTSIZE(1.8),
+        fontWeight: '700',
+        color: COLOR.BLACK,
+    }
 });
 
 

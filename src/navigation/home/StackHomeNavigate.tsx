@@ -20,6 +20,7 @@ import MapsAddress from "../../pages/another/addresses/MapsAddress";
 import SearchMapAddress from "../../pages/another/addresses/SearchMapAddress";
 import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
 import DetailOrder from "../../pages/order/DetailOrder";
+import UpdateOrderUser from "../../pages/cart/UpdateOrderUser";
 
 
 const Stack = createNativeStackNavigator();
@@ -52,7 +53,8 @@ export enum EnumStackNaviagte {
     Detail = 'DetailOrder',
     map = 'MapsAddress',
     sreachmap = 'SearchMapAddress',
-    selected = 'SelectedAddressOrder'
+    selected = 'SelectedAddressOrder',
+    user = 'UpdateOrderUser'
 }
 
 
@@ -80,6 +82,7 @@ const StackHomeNavigate = (): React.JSX.Element => {
             <Stack.Screen name={EnumStackNaviagte.map} component={MapsAddress} />
             <Stack.Screen name={EnumStackNaviagte.sreachmap} component={SearchMapAddress} />
             <Stack.Screen name={EnumStackNaviagte.selected} component={SelectedAddressOrder} />
+            <Stack.Screen name={EnumStackNaviagte.user} component={UpdateOrderUser} />
         </Stack.Navigator>
     );
 };

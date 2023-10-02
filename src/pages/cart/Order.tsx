@@ -28,9 +28,7 @@ const Order: React.FC = () => {
   let id = user._id
   const { data, refetch } = useGetCartQuery(id)
   const datacart = data?.data
-
-
-
+  console.log("🚀 ~ file: Order.tsx:31 ~ datacart:", datacart)
   const freshcontrol = () => {
     refetch()
   }
