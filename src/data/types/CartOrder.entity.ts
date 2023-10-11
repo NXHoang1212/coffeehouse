@@ -1,24 +1,31 @@
 export interface CartOrder {
   _id: string;
-  NameProduct: string;
-  PriceProduct: string;
-  SizeProduct: string[];
-  ToppingProduct: string[];
-  QuantityProduct: string;
-  NoteProduct: string;
-  AmountShipping: string;
   UserId: string;
+  ProductId: [
+    {
+      NameProduct: string;
+      PriceProduct: string;
+      QuantityProduct: string;
+      ToppingProduct: string[];
+      SizeProduct: string,
+      NoteProduct: string;
+    }
+  ]
 }
 
 export interface GetCartOrder {
-  NameProduct: string;
-  PriceProduct: number;
-  SizeProduct: string[];
-  ToppingProduct: string[];
-  QuantityProduct: string;
-  NoteProduct: string;
-  AmountShipping: number;
+  _id: string;
   UserId: any;
+  ProductId: [
+    {
+      NameProduct: string;
+      PriceProduct: number;
+      QuantityProduct: number;
+      ToppingProduct: any[];
+      SizeProduct: any,
+      NoteProduct: string;
+    }
+  ]
 }
 
 export enum CartStackNames {

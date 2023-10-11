@@ -22,7 +22,6 @@ interface Props {
     onDismiss: () => void;
     enableBackDropDismiss?: boolean;
     item: DetailProduct;
-    children: React.ReactNode;
 }
 
 const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
@@ -109,18 +108,21 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
             Messenger('Vui lòng chọn size', 'error')
         } else {
             const data: any = {
-                NameProduct: item.name,
-                PriceProduct: total(selectedSize, selectedTopping, quantity),
-                SizeProduct: selectedSize,
-                ToppingProduct: selectedTopping,
-                QuantityProduct: quantity,
-                NoteProduct: note,
-                AmountShipping: 0,
                 UserId: id,
+                ProductId: [
+                    {
+                        NameProduct: item.name,
+                        PriceProduct: total(selectedSize, selectedTopping, quantity),
+                        QuantityProduct: quantity,
+                        ToppingProduct: selectedTopping,
+                        SizeProduct: selectedSize,
+                        NoteProduct: note
+                    }
+                ]
             }
             const response: any = CreateEmptyCart(data);
             if (response) {
-                dispatch(AddCart(data));
+                // dispatch(AddCart(data));
                 setIsLoading(true);
                 setTimeout(() => {
                     Messenger('Thêm vào giỏ hàng thành công', 'success');

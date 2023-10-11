@@ -46,13 +46,13 @@ const TabNavigate: TabHomeNavigateType[] = [
 ]
 
 const TabHomeNavigate = () => {
-    const cart = useSelector((state: RootState) => state.cart.cart.QuantityProduct);
-    console.log("🚀 ~ file: TabHomeNavigate.tsx:52 ~ TabHomeNavigate ~ cart:", cart)
-    const [cartlength, setCartlength] = useState<any>('');
     const isFocused = useIsFocused();
+    const [cartlength, setCartlength] = useState<string>('');
+    const cart = useSelector((state: RootState) => state.cart.cart);
+    console.log("🚀 ~ file: TabHomeNavigate.tsx ~ line 86 ~ TabHomeNavigate ~ cart", cart)
     useEffect(() => {
-        setCartlength(cart)
-    }, [isFocused, cart])
+        setCartlength(cart.length);
+    }, [isFocused, cart]);
 
     return (
         <BottomTabNavigate.Navigator
@@ -85,7 +85,7 @@ const TabHomeNavigate = () => {
                                 }}
                             />
                         ),
-                        tabBarBadge: item.name === 'Đơn hàng' && cartlength ? cartlength : null,
+                        tabBarBadge: item.name === TabHomeNavigateEnum.Order ? cartlength : undefined,
                     }}
                 />
             ))}

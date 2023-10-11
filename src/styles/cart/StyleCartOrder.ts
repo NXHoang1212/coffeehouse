@@ -78,7 +78,6 @@ const styleCartOrder = StyleSheet.create({
     viewbody: {
         marginTop: HEIGHT(1.2),
         backgroundColor: COLOR.WHITE,
-        height: HEIGHT(100),
     },
 });
 

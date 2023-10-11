@@ -26,7 +26,7 @@ const UpdateOrderUser: React.FC = () => {
             }
             const response = await ApiUpdateUser(id, data)
             console.log("🚀 ~ file: UpdateOrderUser.tsx:23 ~ response", response);
-            if (response) {
+            if (response.status === true) {
                 Messenger('Cập nhật thành công', 'success')
                 goBack()
             }
@@ -45,7 +45,7 @@ const UpdateOrderUser: React.FC = () => {
             <View style={styles.viewbody}>
                 <View style={styles.viewname}>
                     <Text style={styles.textname}>Tên người nhận</Text>
-                    <TextInput style={styles.textinput} value={name} onChangeText={(text) => setName(text)} />
+                    <TextInput style={styles.textinput} value={name} onChangeText={(text) => setName(text)} autoFocus={true} />
                 </View>
                 <View style={styles.viewname}>
                     <Text style={styles.textname}>Số điện thoại</Text>

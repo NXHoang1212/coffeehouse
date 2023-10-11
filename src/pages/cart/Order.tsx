@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
@@ -9,29 +9,25 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useIsFocused } from '@react-navigation/native'
 import { useAuth } from '../../hooks/UseAuth'
 import { useSelector } from 'react-redux'
-import { FlashList } from '@huunguyen312/flash-list'
 import { useGetCartQuery } from '../../service/api/IndexCart'
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
 import { RootState } from '../../redux/store/Store'
-import { useRoute } from '@react-navigation/native';
-
 
 const Order: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
-  const route = useRoute<any>();
-  const item = route.params?.item;
-  console.log("🚀 ~ file: Order.tsx:24 ~ item:", item);
   const { isLoggedIn } = useAuth();
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const user = useSelector((state: RootState) => state.user.user)
-  let id = user._id
+  const id = user._id
+  console.log("🚀 ~ file: Order.tsx:30 ~ id:", id)
   const { data, refetch } = useGetCartQuery(id)
-  const datacart = data?.data
-  console.log("🚀 ~ file: Order.tsx:31 ~ datacart:", datacart)
-  const freshcontrol = () => {
-    refetch()
-  }
+  const datacart = data?.data.filter(item => item !== null).map(item => ({
+    ...item,
+    ProductId: item?.ProductId || '',
+    _id: item?._id || '',
+  }));
+  console.log("🚀 ~ file: Order.tsx:24 ~ datacart", datacart)
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
@@ -41,11 +37,21 @@ const Order: React.FC = () => {
       navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
-
   useEffect(() => {
     refetch()
-  }, [isFocused, datacart])
-
+  }, [isFocused])
+  if (!isLoggedIn) {
+    return (
+      <View style={styleCartOrder.containernoitem}>
+        <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
+        <Text style={styleCartOrder.textbacknoorder}>Bạn chưa đăng nhập vui lòng đăng nhập để xem thông tin đơn hàng</Text>
+        {/* @ts-ignore */}
+        <TouchableOpacity style={styleCartOrder.viewbacknoorder} onPress={() => navigation.navigate('AuthStackUser')}>
+          <Text style={styleCartOrder.textbacknoorder}>Đăng nhập</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
   if (datacart?.length === 0) {
     return (
       <View style={styleCartOrder.containernoitem}>
@@ -70,15 +76,9 @@ const Order: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>
-        <FlashList
-          data={datacart}
-          renderItem={({ item }) => <ItemInformationOrder item={item} />}
-          keyExtractor={(item: any) => item._id}
-          showsVerticalScrollIndicator={false}
-          estimatedItemSize={200}
-          refreshing={false}
-          onRefresh={freshcontrol}
-        />
+        {datacart?.map((item: any, index: any) => (
+          <ItemInformationOrder key={index} item={item} />
+        ))}
       </View>
     </View>
   )

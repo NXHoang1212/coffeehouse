@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl, Animated } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
@@ -56,6 +56,7 @@ const CartOrder = () => {
       }
     }
   };
+  const scrollY = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     refetch()
   }, [showProducts])
@@ -91,9 +92,13 @@ const CartOrder = () => {
               </View>
             </View>
             <View style={StyleOrder.line} />
-            <ScrollView ref={scrollViewRef}
+            <Animated.ScrollView ref={scrollViewRef}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={{ flexGrow: 1 }}
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: true }
+              )}
               refreshControl={
                 <RefreshControl
                   refreshing={false}
@@ -121,7 +126,7 @@ const CartOrder = () => {
                   setSelectedCategory={handleCategorySelect}
                 ></BottomSheetMenu>
               </View>
-            </ScrollView>
+            </Animated.ScrollView>
             <View >
             </View>
           </View>
