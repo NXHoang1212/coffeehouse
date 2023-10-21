@@ -47,7 +47,6 @@ export const useAuth = () => {
             } else {
                 setLoggedIn(false);
             }
-            console.log("🚀 ~ file: UseAuth.tsx:37 ~ checkLoginStatus ~ Kiểm tra trạng thái đăng nhập khi ứng dụng khởi động");
         } catch (error) {
             console.error('Lỗi khi kiểm tra trạng thái đăng nhập:', error);
         }

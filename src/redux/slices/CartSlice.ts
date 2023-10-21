@@ -6,9 +6,11 @@ const initialState: CartOrder = {
     UserId: '',
     ProductId: [
         {
+            _id: '',
+            ProductId: '',
             NameProduct: '',
-            PriceProduct: '',
-            QuantityProduct: '',
+            PriceProduct: 0,
+            QuantityProduct: 0,
             ToppingProduct: [],
             SizeProduct: '',
             NoteProduct: '',
@@ -30,9 +32,11 @@ const CartSlice = createSlice({
             state.UserId = '';
             state.ProductId = [
                 {
+                    _id: '',
+                    ProductId: '',
                     NameProduct: '',
-                    PriceProduct: '',
-                    QuantityProduct: '',
+                    PriceProduct: 0,
+                    QuantityProduct: 0,
                     ToppingProduct: [],
                     SizeProduct: '',
                     NoteProduct: '',

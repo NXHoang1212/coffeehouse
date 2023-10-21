@@ -103,15 +103,13 @@ const StyleItemInformationOrder = StyleSheet.create({
         backgroundColor: COLOR.GRAYBLAND1,
         alignSelf: 'center',
         marginTop: HEIGHT(2),
-        marginBottom: HEIGHT(1),
     },
     viewlineprogess: {
         width: WIDTH(88.5),
         height: HEIGHT(0.1),
         backgroundColor: COLOR.GRAYBLAND,
         alignSelf: 'flex-end',
-        top: HEIGHT(1),
-        marginBottom: HEIGHT(2),
+        
     },
     viewlinetotalprogess: {
         width: WIDTH(97),
@@ -123,7 +121,7 @@ const StyleItemInformationOrder = StyleSheet.create({
     },
     viewitemproduct: {
         flexDirection: 'column',
-        gap: HEIGHT(0.5),
+        gap: HEIGHT(1.5),
     },
     viewproduct: {
 
@@ -165,6 +163,7 @@ const StyleItemInformationOrder = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: WIDTH(4),
+        marginBottom: HEIGHT(1),
     },
     textnameproduct: {
         fontSize: FONTSIZE(1.8),
@@ -194,15 +193,12 @@ const StyleItemInformationOrder = StyleSheet.create({
     },
     viewswipeedit: {
         width: WIDTH(15),
-        height: HEIGHT(10.5),
         backgroundColor: COLOR.GRAYBLAND,
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     viewswipedelete: {
         width: WIDTH(15),
-        height: HEIGHT(10.5),
         backgroundColor: COLOR.RED,
         justifyContent: 'center',
         alignItems: 'center',
@@ -255,7 +251,7 @@ const StyleItemInformationOrder = StyleSheet.create({
         paddingHorizontal: WIDTH(3),
         position: 'absolute',
         zIndex: 1,
-        bottom: 9,
+        bottom: 51,
         borderTopLeftRadius: WIDTH(3),
         borderTopRightRadius: WIDTH(3),
     },

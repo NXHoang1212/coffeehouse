@@ -49,7 +49,7 @@ const TabHomeNavigate = () => {
     const isFocused = useIsFocused();
     const [cartlength, setCartlength] = useState<string>('');
     const cart = useSelector((state: RootState) => state.cart.cart);
-    console.log("🚀 ~ file: TabHomeNavigate.tsx ~ line 86 ~ TabHomeNavigate ~ cart", cart)
+    // console.log("🚀 ~ file: TabHomeNavigate.tsx ~ line 86 ~ TabHomeNavigate ~ cart", cart)
     useEffect(() => {
         setCartlength(cart.length);
     }, [isFocused, cart]);

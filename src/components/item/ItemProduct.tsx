@@ -25,8 +25,11 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { isLoggedIn } = useAuth();
   const user = useSelector((state: RootState) => state.user.user._id);
-  console.log("🚀 ~ file: ItemProduct.tsx:65 ~ user", user)
   const [show, setShow] = useState<boolean>(false);
+  const [size, setSize] = useState<{ name: string, price: number }>({
+    name: 'Vừa',
+    price: 0,
+  });
 
   const handleProductDetail = () => {
     //@ts-ignore
@@ -35,19 +38,24 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
 
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
-      if (!item.size || item.size.length === 0 && !item.topping || item.topping.length === 0) {
-        // Nếu sản phẩm không có thông tin size và topping, thêm sản phẩm vào giỏ hàng trực tiếp
-        handleAddToCart(item);
-      } else {
-        // Nếu sản phẩm có thông tin size và topping, hiển thị BottomSheet
-        setShow(true);
+      if (item.topping.length > 0 && item.size.length > 0) {
+        // Kiểm tra các thông tin bên trong topping
+        const toppingValid = item.topping.every(topping => topping.name.trim() !== "" && topping.price.trim() !== "");
+
+        // Kiểm tra các thông tin bên trong size
+        const sizeValid = item.size.every(size => size.name.trim() !== "" && size.price.trim() !== "");
+
+        if (toppingValid && sizeValid) {
+          setShow(true);
+        } else {
+          handleAddToCart(item);
+        }
       }
     } else {
       //@ts-ignore
       navigation.navigate('AuthStackUser', { screen: 'Login' });
     }
   }
-  
 
 
   const handleAddToCart = async (item: DetailProduct) => {
@@ -59,11 +67,14 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             NameProduct: item.name,
             PriceProduct: item.price,
             QuantityProduct: 1,
+            SizeProduct: size,
           }
         ]
       }
       const response = await CreateEmptyCart(data);
-      console.log("🚀 ~ file: ItemProduct.tsx:108 ~ response", response)
+      if (response) {
+        Messenger('Thêm vào giỏ hàng thành công', 'success');
+      }
     } catch (error: any) {
       console.log("🚀 ~ file: ItemProduct.tsx:110 ~ error", error)
     }

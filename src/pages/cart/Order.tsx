@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
@@ -9,25 +9,17 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useIsFocused } from '@react-navigation/native'
 import { useAuth } from '../../hooks/UseAuth'
 import { useSelector } from 'react-redux'
-import { useGetCartQuery } from '../../service/api/IndexCart'
+
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
 import { RootState } from '../../redux/store/Store'
+import { useGetCartQuery } from '../../service/api/IndexCart'
 
 const Order: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const { isLoggedIn } = useAuth();
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const user = useSelector((state: RootState) => state.user.user)
-  const id = user._id
-  console.log("🚀 ~ file: Order.tsx:30 ~ id:", id)
-  const { data, refetch } = useGetCartQuery(id)
-  const datacart = data?.data.filter(item => item !== null).map(item => ({
-    ...item,
-    ProductId: item?.ProductId || '',
-    _id: item?._id || '',
-  }));
-  console.log("🚀 ~ file: Order.tsx:24 ~ datacart", datacart)
+  const id = useSelector((state: RootState) => state.user.user._id)
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
@@ -37,9 +29,13 @@ const Order: React.FC = () => {
       navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
+  const { data, refetch } = useGetCartQuery(id);
+  const datacart = data?.data
   useEffect(() => {
-    refetch()
-  }, [isFocused])
+    if (isFocused) {
+      refetch()
+    }
+  }, [isFocused, refetch, data])
   if (!isLoggedIn) {
     return (
       <View style={styleCartOrder.containernoitem}>
@@ -52,7 +48,7 @@ const Order: React.FC = () => {
       </View>
     )
   }
-  if (datacart?.length === 0) {
+  if (data?.data.filter((item => item !== null)).length === 0 || data?.data.length === 0) {
     return (
       <View style={styleCartOrder.containernoitem}>
         <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
@@ -76,9 +72,16 @@ const Order: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>
-        {datacart?.map((item: any, index: any) => (
-          <ItemInformationOrder key={index} item={item} />
-        ))}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {datacart?.map((item: any, index: number) => {
+            return (
+              <ItemInformationOrder
+                key={index}
+                item={item}
+              />
+            )
+          })}
+        </ScrollView>
       </View>
     </View>
   )

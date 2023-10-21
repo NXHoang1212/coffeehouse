@@ -12,7 +12,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AnyAction, CombinedState, Reducer } from 'redux';
 
-
 const persistConfig: any = {
     key: 'root',
     storage: AsyncStorage,
@@ -24,6 +23,7 @@ const rootReducer: Reducer<CombinedState<any>, AnyAction> = combineReducers({
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 
 const store = configureStore({
     reducer: {
@@ -38,6 +38,7 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
     }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware),
+    devTools: process.env.NODE_ENV !== 'production' ? true : false,
 });
 
 setupListeners(store.dispatch);

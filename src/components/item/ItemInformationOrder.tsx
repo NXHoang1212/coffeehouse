@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import { Icon, infores } from '../../constant/Icon';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import StyleItemInformationOrder from '../../styles/item/StyleItemInformationOrder';
 import { GetCartOrder } from '../../data/types/CartOrder.entity';
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +10,11 @@ import { useRoute } from '@react-navigation/native';
 import { FormatPrice } from '../../utils/FormatPrice';
 import { Swipeable } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
+import BottomUpdateOrder from '../../pages/order/BottomUpdateOrder';
+import { DeleteCartProductId, DeleteAllCart } from '../../service/api/IndexCart';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { useIsFocused } from '@react-navigation/native';
 
 interface PropsDetailItemProduct {
     item: GetCartOrder;
@@ -18,50 +23,53 @@ interface PropsDetailItemProduct {
 const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const route = useRoute<any>();
+    const isFocused = useIsFocused();
     const address = route.params?.item;
+    const id = useSelector((state: RootState) => state.user.user._id);
     const [note, setNote] = useState<string>('');
+    const [show, setshow] = useState<boolean>(false);
+    const [SelectProduct, setSelectProduct] = useState<any>(undefined);
     const shipper = 18;
     const SelectedAddress = () => {
         //@ts-ignore
         navigation.navigate('StackHomeNavigate', { screen: 'SelectedAddressOrder' })
     }
-    const UpdateOrder = () => {
+    const UpdateUserOrder = () => {
         //@ts-ignore
         navigation.navigate('StackHomeNavigate', { screen: 'UpdateOrderUser', params: { item: item } })
     }
-    const renderright = () => {
+    const handleShowBottomSheet = (item: any) => {
+        setSelectProduct(item);
+        setshow(true);
+    }
+    const renderright = (product: any) => {
         return (
             <View style={StyleItemInformationOrder.viewitemswipe}>
-                <TouchableOpacity style={StyleItemInformationOrder.viewswipeedit}>
+                <TouchableOpacity style={StyleItemInformationOrder.viewswipeedit} onPress={() => handleShowBottomSheet(product)} >
                     <Image source={infores.EDIT} style={StyleItemInformationOrder.icondelete} />
                 </TouchableOpacity>
-                <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete}>
+                <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => DeleteCartProductId(id, product._id)}>
                     <Image source={Icon.DELETE} style={StyleItemInformationOrder.icondelete} />
                 </TouchableOpacity>
             </View>
-        )
-    }
-
+        );
+    };
     const TotalPrice = () => {
         let total = 0;
-        item.ProductId.map((product) => {
+        item?.ProductId.map((product) => {
             total += product.PriceProduct * product.QuantityProduct;
         })
         return total;
     }
-
-    //tổng toàn bộ tiền
     const TotalAllPrice = () => {
         return TotalPrice() + shipper;
     }
-
-
     return (
         <View style={StyleItemInformationOrder.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }} showsVerticalScrollIndicator={false}>
                 <View style={StyleItemInformationOrder.header}>
                     <Text style={StyleItemInformationOrder.texttilte}>Giao hàng tận nơi</Text>
-                    <TouchableOpacity style={StyleItemInformationOrder.viewdelete}>
+                    <TouchableOpacity style={StyleItemInformationOrder.viewdelete} onPress={() => DeleteAllCart(item._id)}>
                         <Text style={StyleItemInformationOrder.textedit}>Xóa đơn hàng</Text>
                     </TouchableOpacity>
                 </View>
@@ -86,9 +94,9 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                     value={note}
                 />
                 <View style={StyleItemInformationOrder.itemuser}>
-                    <TouchableOpacity onPress={UpdateOrder}>
-                        <Text style={StyleItemInformationOrder.textuser}>{item.UserId.name}</Text>
-                        <Text style={StyleItemInformationOrder.textuser}>{item.UserId.mobile}</Text>
+                    <TouchableOpacity onPress={UpdateUserOrder}>
+                        <Text style={StyleItemInformationOrder.textuser}>{item?.UserId.name}</Text>
+                        <Text style={StyleItemInformationOrder.textuser}>{item?.UserId.mobile}</Text>
                         <Text style={StyleItemInformationOrder.textline}>----------------------------</Text>
                     </TouchableOpacity>
                     <View style={StyleItemInformationOrder.viewline} />
@@ -108,8 +116,8 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={StyleItemInformationOrder.viewitemproduct}>
-                        {item.ProductId.map((product, index) => (
-                            <Swipeable renderRightActions={renderright} key={index}>
+                        {item?.ProductId.map((product, index) => (
+                            <Swipeable renderRightActions={() => renderright(product)} key={index}>
                                 <View style={StyleItemInformationOrder.itemproduct}>
                                     <View >
                                         <Image source={infores.EDIT} style={StyleItemInformationOrder.iconedit} />
@@ -132,11 +140,9 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                                         <Text style={StyleItemInformationOrder.textpriceproduct}>{FormatPrice(product.PriceProduct)}</Text>
                                     </View>
                                 </View>
-                                <View>
-                                    {index === item.ProductId.length - 1 ? null : (
-                                        <View style={StyleItemInformationOrder.viewlineprogess} />
-                                    )}
-                                </View>
+                                {index === item.ProductId.length - 1 ? null : (
+                                    <View style={StyleItemInformationOrder.viewlineprogess} />
+                                )}
                             </Swipeable>
                         ))}
                     </View>
@@ -162,13 +168,14 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
             </ScrollView>
             <LinearGradient style={StyleItemInformationOrder.viewbutton} colors={['#FA8C16', '#FA8C16']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
                 <View>
-                    <Text style={StyleItemInformationOrder.textbutton}>Giao hàng {item.ProductId ? item.ProductId.length : 0} sản phẩm</Text>
+                    <Text style={StyleItemInformationOrder.textbutton}>Giao hàng {item?.ProductId ? item?.ProductId.length : 0} sản phẩm</Text>
                     <Text style={StyleItemInformationOrder.textbutton}>{FormatPrice(TotalAllPrice())}</Text>
                 </View>
                 <TouchableOpacity style={StyleItemInformationOrder.vieworder}>
                     <Text style={StyleItemInformationOrder.textorder}>Đặt hàng</Text>
                 </TouchableOpacity>
             </LinearGradient>
+            <BottomUpdateOrder show={show} onDismiss={() => setshow(false)} ProductId={SelectProduct} />
         </View >
     )
 }

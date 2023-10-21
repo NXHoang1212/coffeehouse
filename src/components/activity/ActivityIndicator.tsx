@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native'
 const ActivityIndicator = () => {
     return (
         <View style={styles.container}>
-            <CircleFade size={28} color="#000" />
+            <CircleFade size={30} color="#000" />
         </View>
     )
 }

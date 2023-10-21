@@ -54,7 +54,7 @@ export enum EnumStackNaviagte {
     map = 'MapsAddress',
     sreachmap = 'SearchMapAddress',
     selected = 'SelectedAddressOrder',
-    user = 'UpdateOrderUser'
+    user = 'UpdateOrderUser',
 }
 
 
