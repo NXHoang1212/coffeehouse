@@ -17,24 +17,12 @@ import { socket } from '../../utils/Socket'
 
 const HomePage = () => {
   const { isLoggedIn } = useAuth();
-
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const loadingData = LoadingScroll();
   const scroll = useRef(null);
   useScrollToTop(scroll);
-  const [showRefresh, setShowRefresh] = useState<boolean>(false);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
   ThemLightStatusBar('dark-content', backgroundColor);
-  const onRefresh = () => {
-    setShowRefresh(true);
-    setTimeout(() => {
-      setShowRefresh(false);
-      loadingData.setIsLoading(true);
-      setTimeout(() => {
-        loadingData.setIsLoading(false);
-      }, 1000);
-    }, 1000);
-  }
+  
   const onScroll = (event: any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     if (offsetY > 100) {
@@ -77,9 +65,8 @@ const HomePage = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {loadingData.isLoading && <ActivityIndicator />}
       <ScrollView showsVerticalScrollIndicator={false} ref={scroll} onScroll={onScroll}
-        refreshControl={<RefreshControl refreshing={false} onRefresh={onRefresh} />}>
+        refreshControl={<RefreshControl refreshing={false} onRefresh={() => { }} />}>
         <View style={StyleHomePage.viewbody}>
           <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
             <View style={StyleHomePage.viewtextcard}>

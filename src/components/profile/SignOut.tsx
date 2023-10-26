@@ -15,8 +15,8 @@ const SignOut = ({ visible, title, message, onCancelPress, onOKPress }: any) => 
                         <TouchableOpacity
                             style={styles.okButton}
                             onPress={() => {
-                                onOKPress(); // Thực hiện hành động khi nhấn "OK" (đăng xuất, chuyển trạng thái, vv.)
-                                onCancelPress(); // Đặt lại trạng thái `visible` thành `false` để ẩn modal
+                                onOKPress();
+                                onCancelPress();
                             }}
                         >
                             <Text style={styles.okButtonText}>OK</Text>

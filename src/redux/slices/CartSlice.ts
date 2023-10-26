@@ -3,14 +3,19 @@ import { CartOrder } from "../../data/types/CartOrder.entity";
 
 const initialState: CartOrder = {
     _id: '',
-    NameProduct: '',
-    PriceProduct: '',
-    SizeProduct: [],
-    ToppingProduct: [],
-    QuantityProduct: '',
-    NoteProduct: '',
-    AmountShipping: '',
     UserId: '',
+    ProductId: [
+        {
+            _id: '',
+            ProductId: '',
+            NameProduct: '',
+            PriceProduct: 0,
+            QuantityProduct: 0,
+            ToppingProduct: [],
+            SizeProduct: '',
+            NoteProduct: '',
+        }
+    ]
 }
 
 const CartSlice = createSlice({
@@ -18,26 +23,25 @@ const CartSlice = createSlice({
     initialState,
     reducers: {
         AddCart: (state, action: PayloadAction<CartOrder>) => {
-            // state._id = action.payload._id;
-            state.NameProduct = action.payload.NameProduct;
-            state.PriceProduct = action.payload.PriceProduct;
-            state.SizeProduct = action.payload.SizeProduct;
-            state.ToppingProduct = action.payload.ToppingProduct;
-            state.QuantityProduct = action.payload.QuantityProduct;
-            state.NoteProduct = action.payload.NoteProduct;
-            state.AmountShipping = action.payload.AmountShipping;
+            state._id = action.payload._id;
             state.UserId = action.payload.UserId;
+            state.ProductId = action.payload.ProductId;
         },
         removeCart: (state) => {
             state._id = '';
-            state.NameProduct = '';
-            state.PriceProduct = '';
-            state.SizeProduct = [];
-            state.ToppingProduct = [];
-            state.QuantityProduct = '';
-            state.NoteProduct = '';
-            state.AmountShipping = '';
             state.UserId = '';
+            state.ProductId = [
+                {
+                    _id: '',
+                    ProductId: '',
+                    NameProduct: '',
+                    PriceProduct: 0,
+                    QuantityProduct: 0,
+                    ToppingProduct: [],
+                    SizeProduct: '',
+                    NoteProduct: '',
+                }
+            ]
         },
     },
 });

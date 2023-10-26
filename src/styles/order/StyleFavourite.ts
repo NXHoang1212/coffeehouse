@@ -22,15 +22,20 @@ const styleFavourite = StyleSheet.create({
         fontSize: FONTSIZE(2),
         fontWeight: 'bold',
         color: COLOR.BLACK,
-        left: WIDTH(25)
+        left: WIDTH(23)
     },
     line: {
         width: WIDTH(100),
         height: HEIGHT(0.1),
-        backgroundColor: COLOR.GRAYBLAND1,
+        backgroundColor: COLOR.BLACKTRANSPARENT,
         alignSelf: 'center',
         marginTop: HEIGHT(2),
-    }
+    },
+    viewbody: {
+        height: HEIGHT(100),
+        marginHorizontal: WIDTH(3),
+        marginTop: HEIGHT(2),
+    },
 });
 
 export default styleFavourite;

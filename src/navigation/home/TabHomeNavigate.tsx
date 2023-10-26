@@ -12,8 +12,9 @@ import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 import OtherNavigator from "../other/TabOtherNavigate";
 import Order from "../../pages/cart/Order";
 import { useSelector } from "react-redux";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { RootState } from "../../redux/store/Store";
+import { useGetCartQuery } from "../../service/api/IndexCart";
+import { useAuth } from "../../hooks/UseAuth";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 //tabhomenavigatetype sẽ dùng [] để chứa các tab navigate
@@ -46,14 +47,22 @@ const TabNavigate: TabHomeNavigateType[] = [
 ]
 
 const TabHomeNavigate = () => {
-    const cart = useSelector((state: RootState) => state.cart.cart.QuantityProduct);
-    console.log("🚀 ~ file: TabHomeNavigate.tsx:52 ~ TabHomeNavigate ~ cart:", cart)
-    const [cartlength, setCartlength] = useState<any>('');
-    const isFocused = useIsFocused();
+    let id = useSelector((state: RootState) => state.user.user._id)
+    const { isLoggedIn } = useAuth();
+    const { data } = useGetCartQuery(id, { skip: !id, refetchOnMountOrArgChange: true, refetchOnReconnect: true });
+    const datacart = data?.data.filter(item => item !== null).map(item => ({
+        ...item,
+        ProductId: item ? item.ProductId || '' : '',
+        _id: item ? item._id || '' : '',
+    }));
+    const [count, setCount] = useState<string | undefined>(undefined);
     useEffect(() => {
-        setCartlength(cart)
-    }, [isFocused, cart])
-
+        if (datacart?.length !== 0 && datacart?.some(item => item.ProductId && item.ProductId.length > 0)) {
+            setCount(datacart?.reduce((total, item) => total + item.ProductId.length, 0).toString())
+        } else {
+            setCount(undefined)
+        }
+    }, [datacart, count])
     return (
         <BottomTabNavigate.Navigator
             screenOptions=
@@ -85,7 +94,7 @@ const TabHomeNavigate = () => {
                                 }}
                             />
                         ),
-                        tabBarBadge: item.name === 'Đơn hàng' && cartlength ? cartlength : null,
+                        tabBarBadge: item.name === TabHomeNavigateEnum.Cart && isLoggedIn ? count : undefined,
                     }}
                 />
             ))}

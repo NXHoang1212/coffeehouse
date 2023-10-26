@@ -4,7 +4,7 @@ import { WIDTH, HEIGHT, FONTSIZE } from "../../constant/Responsive";
 import { FONTSTYLE } from "../../constant/Fonts";
 
 
-const StyleBottomSheetDetailOrder = StyleSheet.create({
+const StyleBottomUpdateOrder = StyleSheet.create({
     backdrop: {
         flex: 1,
         backgroundColor: COLOR.BLACKTRANSPARENT,
@@ -201,14 +201,10 @@ const StyleBottomSheetDetailOrder = StyleSheet.create({
         color: COLOR.WHITE,
         letterSpacing: WIDTH(0.1),
     },
-    viewloading: {
-        position: 'absolute',
-        justifyContent: 'center',
-        alignItems: 'center',
-        top: HEIGHT(10),
-        width: WIDTH(100),
-    }
+    viewtotal: {},
+    texttotal: {},
+    texttotalprice: {},
 
 });
 
-export default StyleBottomSheetDetailOrder;
+export default StyleBottomUpdateOrder;

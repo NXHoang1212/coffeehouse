@@ -1,26 +1,67 @@
 export interface CartOrder {
   _id: string;
-  NameProduct: string;
-  PriceProduct: string;
-  SizeProduct: string[];
-  ToppingProduct: string[];
-  QuantityProduct: string;
-  NoteProduct: string;
-  AmountShipping: string;
   UserId: string;
+  ProductId: [
+    {
+      _id: string;
+      ProductId: string;
+      NameProduct: string;
+      PriceProduct: number;
+      QuantityProduct: number;
+      ToppingProduct: any[];
+      SizeProduct: any,
+      NoteProduct: string;
+    }
+  ]
 }
 
 export interface GetCartOrder {
-  NameProduct: string;
-  PriceProduct: number;
-  SizeProduct: string[];
-  ToppingProduct: string[];
-  QuantityProduct: string;
-  NoteProduct: string;
-  AmountShipping: number;
-  UserId: string;
+  _id: number;
+  UserId: any;
+  ProductId: [
+    {
+      _id: string;
+      ProductId: string;
+      NameProduct: string;
+      PriceProduct: number;
+      QuantityProduct: number;
+      ToppingProduct: any[];
+      SizeProduct: any,
+      NoteProduct: string;
+    }
+  ]
 }
 
+export interface UpdateCartOrder {
+  UserId: string;
+  ProductId: [
+    {
+      ProductId: string;
+      NameProduct: string;
+      PriceProduct: number;
+      QuantityProduct: number;
+      ToppingProduct: any[];
+      SizeProduct: any,
+      NoteProduct: string;
+    }
+  ]
+}
+
+export interface DetailProductOrder {
+  UserId: string;
+  ProductId: [
+    {
+      _id: string;
+      ProductId: string;
+      NameProduct: string;
+      PriceProduct: number;
+      QuantityProduct: number;
+      ToppingProduct: any[];
+      SizeProduct: any,
+      NoteProduct: string;
+    }
+  ]
+}
 export enum CartStackNames {
   Login = 'Login',
   Cart = 'CartOrder',

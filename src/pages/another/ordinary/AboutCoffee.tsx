@@ -11,7 +11,6 @@ interface RouteParams {
 }
 const AboutCoffee = () => {
   const { url } = useRoute().params as RouteParams;
-  console.log("🚀 ~ file: AboutCoffee.tsx:14 ~ AboutCoffee ~ url:", url)
   const goback = useGoBack();
 
   return (

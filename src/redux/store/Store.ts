@@ -1,8 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createImmutableStateInvariantMiddleware, } from '@reduxjs/toolkit'
 import { combineReducers } from '@reduxjs/toolkit';
 import ProductReducer from '../slices/ProductSlices';
 import AddressReducer from '../slices/AddressSlice';
 import CartReducer from '../slices/CartSlice';
+import MethodAmountReducer from '../slices/MethodAmountSlice';
 import { ApiProducts } from '../../service/api/IndexProducts';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { ApiCart } from '../../service/api/IndexCart';
@@ -11,33 +12,42 @@ import UserReducer from '../slices/AuthSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AnyAction, CombinedState, Reducer } from 'redux';
-
-
+import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
+import { ApiFavourites } from '../../service/api/IndexFavourites';
 const persistConfig: any = {
     key: 'root',
     storage: AsyncStorage,
 }
 
-const rootReducer: Reducer<CombinedState<any>, AnyAction> = combineReducers({
+const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; }>, AnyAction> = combineReducers({
     user: UserReducer,
-    cart: CartReducer,
+    product: ProductReducer,
+    methodamount: MethodAmountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+
+
+
 const store = configureStore({
     reducer: {
-        product: ProductReducer,
+        product: persistedReducer,
         [ApiProducts.reducerPath]: ApiProducts.reducer,
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
         user: persistedReducer,
-        cart: persistedReducer,
+        cart: CartReducer,
+        methodamount: persistedReducer,
         [ApiCart.reducerPath]: ApiCart.reducer,
+        [ApiFavourites.reducerPath]: ApiFavourites.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
-    }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware),
+        immutableCheck: {
+            ignoredPaths: ['product', 'user', 'methodamount', 'address', 'cart'],
+        }
+    }).concat( ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
 });
 
 setupListeners(store.dispatch);

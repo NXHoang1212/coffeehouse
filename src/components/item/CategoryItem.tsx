@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import StyleCategoryItem from '../../styles/item/StyleCategoryItem'
 import { category } from '../../constant/Icon'
 import BottomSheetMenu from '../modal/BottomSheetMenu';
+import { Provider } from 'react-native-paper';
 
 type Props = {
     setSelectedCategory: (categoryName: String) => void;

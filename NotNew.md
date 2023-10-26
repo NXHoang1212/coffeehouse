@@ -44,3 +44,36 @@ export const MonitorChangeInput = (Props: MonitorInputProps) => {
     setIsAnyFieldEmpty(true);
 };
  -->
+
+
+
+<!-- 
+Ở trong Redux Tolkit RTK Query là một dạng mới của Thằng Redux được dùng để clear code và dễ dàng      trong việc viết code
+    Ở trong Redux Tolkit RTK Query có 3 loại query là Query, Mutation và QueryCache
+    Query là một loại query được dùng để lấy dữ liệu từ server
+    Mutation là một loại query được dùng để thay đổi dữ liệu trên server
+    QueryCache là một loại query được dùng để lưu trữ dữ liệu lấy được từ server
+    Ở trong Redux Tolkit RTK Query có 3 loại query là Query, Mutation và QueryCache
+    Query là một loại query được dùng để lấy dữ liệu từ server
+    Mutation là một loại query được dùng để thay đổi dữ liệu trên server
+    QueryCache là một loại query được dùng để lưu trữ dữ liệu lấy được từ server
+-->
+
+<!--
+ Ở trong RTK Query Có kiểu dữ liệu Omit là một kiểu dữ liệu được dùng để bỏ đi một số key trong một   object
+    Ví dụ như Omit<{name: string, age: number}, 'name'> là một kiểu dữ liệu được dùng để bỏ đi key name trong object {name: string, age: number}
+    Còn nếu dùng Omit<{name: string, age: number}, 'age'> thì sẽ bỏ đi key age trong object {name: string, age: number}
+    Và nếu dùng Omit<{name: string, age: number}, 'name' | 'age'> thì sẽ bỏ đi key name và key age trong object {name: string, age: number}
+    Còn dùng Partial thì sẽ bỏ đi tất cả các key trong object {name: string, age: number}
+    ví dụ như Partial<{name: string, age: number}> sẽ bỏ đi tất cả các key trong object {name: string, age: number}
+    Và Partial<{name: string, age: number}> sẽ trả về một kiểu dữ liệu là {name?: string, age?: number}
+    Dùng Pick thì sẽ lấy ra một số key trong object {name: string, age: number}
+    Ví dụ như Pick<{name: string, age: number}, 'name'> sẽ lấy ra key name trong object {name: string, age: number}
+    Và Pick<{name: string, age: number}, 'age'> sẽ lấy ra key age trong object {name: string, age: number}
+-->
+
+<!-- 
+Còn providesTags trong RTK Query được dùng để callback mỗi khi một query được gọi và mong muốn là chạy
+sẽ trả về return  một mảng chứa các tag và phải thêm as const để báo rằng cho type này là nó sẽ readonly, không thể mutate được 
+Còn invalidateTags trong RTK Query được dùng để callback mỗi khi một query được gọi và mong muốn là chạy lại query đó sẽ dựa vào các tag được truyền vào và thực thi lại query đó
+ -->

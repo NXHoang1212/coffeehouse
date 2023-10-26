@@ -1,10 +1,8 @@
 import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { LoadingScroll } from '../../hooks/Loading'
-import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
 import { Icon } from '../../constant/Icon'
 import { PanGestureHandler } from 'react-native-gesture-handler'
-import { Portal } from 'react-native-paper'
 import { DetailProduct } from '../../data/types/Product.entity'
 import StyleBottomSheetDetailOrder from '../../styles/order/StyleBottomSheetDetailOrder'
 import { FormatPrice } from '../../utils/FormatPrice'
@@ -14,15 +12,15 @@ import { useSelector } from 'react-redux'
 import { CreateEmptyCart } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
 import { useDispatch } from 'react-redux'
-import { AddCart } from '../../redux/slices/CartSlice'
 import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import { RootState } from '../../redux/store/Store'
+import { AddCart } from '../../redux/slices/CartSlice'
+
 interface Props {
     show: boolean;
     onDismiss: () => void;
     enableBackDropDismiss?: boolean;
     item: DetailProduct;
-    children: React.ReactNode;
 }
 
 const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
@@ -109,14 +107,18 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
             Messenger('Vui lòng chọn size', 'error')
         } else {
             const data: any = {
-                NameProduct: item.name,
-                PriceProduct: total(selectedSize, selectedTopping, quantity),
-                SizeProduct: selectedSize,
-                ToppingProduct: selectedTopping,
-                QuantityProduct: quantity,
-                NoteProduct: note,
-                AmountShipping: 0,
                 UserId: id,
+                ProductId: [
+                    {
+                        NameProduct: item.name,
+                        ProductId: item._id,
+                        PriceProduct: total(selectedSize, selectedTopping, quantity),
+                        QuantityProduct: quantity,
+                        ToppingProduct: selectedTopping,
+                        SizeProduct: selectedSize,
+                        NoteProduct: note
+                    }
+                ]
             }
             const response: any = CreateEmptyCart(data);
             if (response) {
@@ -132,10 +134,12 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
 
     return (
         <Modal animationType="slide" transparent={true} onRequestClose={onDismiss}>
-            <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
+            <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDetailOrder.backdrop} />
             <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <Animated.View style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
-                {isLoading ? <ActivityIndicator /> : null}
+                <View style={StyleBottomSheetDetailOrder.viewloading}>
+                    {isLoading ? <ActivityIndicator /> : null}
+                </View>
                 <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
                     <View style={StyleBottomSheetDetailOrder.header}>
                         <Text style={StyleBottomSheetDetailOrder.texttitle}>{item.name}</Text>
@@ -212,21 +216,21 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                             </View>
                         </View>
                     </ScrollView>
-                    <View style={StyleBottomSheetDetailOrder.viewbutton}>
-                        <View style={StyleBottomSheetDetailOrder.viewquantity}>
-                            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewminus} onPress={handleMinus(quantity, setQuantity)}>
-                                <Image source={Icon.MINUS} style={StyleBottomSheetDetailOrder.iconminus} />
-                            </TouchableOpacity>
-                            <Text style={StyleBottomSheetDetailOrder.textnumber}>{quantity}</Text>
-                            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewplus} onPress={handlePlus(quantity, setQuantity)}>
-                                <Image source={Icon.PLUS} style={StyleBottomSheetDetailOrder.iconplus} />
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity style={StyleBottomSheetDetailOrder.button} onPress={AddToCart}>
-                            <Text style={StyleBottomSheetDetailOrder.textbutton}>Chọn</Text>
-                            <Text style={StyleBottomSheetDetailOrder.textbutton}>{FormatPrice(total(selectedSize, selectedTopping, quantity))}</Text>
+                </View>
+                <View style={StyleBottomSheetDetailOrder.viewbutton}>
+                    <View style={StyleBottomSheetDetailOrder.viewquantity}>
+                        <TouchableOpacity style={StyleBottomSheetDetailOrder.viewminus} onPress={handleMinus(quantity, setQuantity)}>
+                            <Image source={Icon.MINUS} style={StyleBottomSheetDetailOrder.iconminus} />
+                        </TouchableOpacity>
+                        <Text style={StyleBottomSheetDetailOrder.textnumber}>{quantity}</Text>
+                        <TouchableOpacity style={StyleBottomSheetDetailOrder.viewplus} onPress={handlePlus(quantity, setQuantity)}>
+                            <Image source={Icon.PLUS} style={StyleBottomSheetDetailOrder.iconplus} />
                         </TouchableOpacity>
                     </View>
+                    <TouchableOpacity style={StyleBottomSheetDetailOrder.button} onPress={AddToCart}>
+                        <Text style={StyleBottomSheetDetailOrder.textbutton}>Chọn</Text>
+                        <Text style={StyleBottomSheetDetailOrder.textbutton}>{FormatPrice(total(selectedSize, selectedTopping, quantity))}</Text>
+                    </TouchableOpacity>
                 </View>
             </Animated.View>
         </Modal>

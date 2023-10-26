@@ -6,13 +6,14 @@ import { useGoBack } from '../../utils/GoBack'
 import { FlashList } from '@huunguyen312/flash-list'
 import { useSelector } from 'react-redux'
 import SeacrchItem from '../../components/item/SearchItem'
-
+import { RootState } from '../../redux/store/Store'
+import { ThemLightStatusBar } from '../../constant/ThemLight'
 
 const SearchOrder = () => {
   const goBack = useGoBack()
+  ThemLightStatusBar('dark-content', '#fff')
   const [search, setSearch] = useState<string>('')
-  // Lọc danh sách sản phẩm trực tiếp từ danh sách gốc
-  const products = useSelector((state: any) => state.product)
+  const products = useSelector((state: RootState) => state.product.product)
     .filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase()))
 
 

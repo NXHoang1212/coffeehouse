@@ -15,7 +15,6 @@ interface RouteParams {
 const Rules = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const { link } = useRoute().params as RouteParams;
-  console.log("🚀 ~ file: Rules.tsx:16 ~ Rules ~ url:", link)
   const goback = useGoBack();
   return (
     <View style={StyleRules.container}>

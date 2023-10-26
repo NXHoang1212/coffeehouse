@@ -1,13 +1,6 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import WebViewUrl from "../../components/redirectUrl/WebView";
-import Favourites from "../../pages/order/Favourites";
 import AuthStackNavigate from "../auth/AuthUserNavigate";
-import RankMember from "../../pages/code/RankMember";
-import HistoryBean from "../../pages/code/HistoryBean";
-import ChangeBean from "../../pages/code/ChangeBean";
-import PermissionProfit from "../../pages/code/PermissionProfit";
-import DiscountUser from "../../pages/discount/DiscountUser";
-import Rules from "../../pages/another/Rules";
 import PlayMusic from "../../pages/another/PlayMusic";
 import FeedBackOrder from "../../pages/another/FeedBackOrder";
 import ContactFeedBack from "../../pages/another/ContactFeedBack";
@@ -15,11 +8,19 @@ import Address from "../../pages/another/addresses/SaveAddress";
 import AddAddress from "../../pages/another/addresses/AddAddress";
 import EditAddress from "../../pages/another/addresses/EditAddress";
 import AboutCoffee from "../../pages/another/ordinary/AboutCoffee";
-import Notifee from "../../pages/general/Notifee";
 import MapsAddress from "../../pages/another/addresses/MapsAddress";
 import SearchMapAddress from "../../pages/another/addresses/SearchMapAddress";
-import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
+import Favourites from "../../pages/order/Favourites";
+import RankMember from "../../pages/code/RankMember";
+import HistoryBean from "../../pages/code/HistoryBean";
+import ChangeBean from "../../pages/code/ChangeBean";
+import PermissionProfit from "../../pages/code/PermissionProfit";
+import DiscountUser from "../../pages/discount/DiscountUser";
+import Rules from "../../pages/another/Rules";
+import Notifee from "../../pages/general/Notifee";
 import DetailOrder from "../../pages/order/DetailOrder";
+import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
+import UpdateOrderUser from "../../pages/cart/UpdateOrderUser";
 
 
 const Stack = createNativeStackNavigator();
@@ -52,7 +53,8 @@ export enum EnumStackNaviagte {
     Detail = 'DetailOrder',
     map = 'MapsAddress',
     sreachmap = 'SearchMapAddress',
-    selected = 'SelectedAddressOrder'
+    selected = 'SelectedAddressOrder',
+    user = 'UpdateOrderUser',
 }
 
 
@@ -80,6 +82,7 @@ const StackHomeNavigate = (): React.JSX.Element => {
             <Stack.Screen name={EnumStackNaviagte.map} component={MapsAddress} />
             <Stack.Screen name={EnumStackNaviagte.sreachmap} component={SearchMapAddress} />
             <Stack.Screen name={EnumStackNaviagte.selected} component={SelectedAddressOrder} />
+            <Stack.Screen name={EnumStackNaviagte.user} component={UpdateOrderUser} />
         </Stack.Navigator>
     );
 };

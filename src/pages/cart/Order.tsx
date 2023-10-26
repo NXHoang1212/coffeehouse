@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
@@ -9,31 +9,16 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useIsFocused } from '@react-navigation/native'
 import { useAuth } from '../../hooks/UseAuth'
 import { useSelector } from 'react-redux'
-import { FlashList } from '@huunguyen312/flash-list'
-import { useGetCartQuery } from '../../service/api/IndexCart'
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
 import { RootState } from '../../redux/store/Store'
-import { useRoute } from '@react-navigation/native';
-
+import { useGetCartQuery } from '../../service/api/IndexCart'
 
 const Order: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
-  const route = useRoute<any>();
-  const item = route.params?.item;
-  console.log("🚀 ~ file: Order.tsx:24 ~ item:", item);
   const { isLoggedIn } = useAuth();
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const user = useSelector((state: RootState) => state.user.user)
-  let id = user._id
-  const { data, refetch } = useGetCartQuery(id)
-  const datacart = data?.data
-
-
-
-  const freshcontrol = () => {
-    refetch()
-  }
+  const id = useSelector((state: RootState) => state.user.user._id)
   const handeleGeneral = (destination: string) => {
     if (destination === 'DiscountUser') {
       //@ts-ignore
@@ -43,12 +28,35 @@ const Order: React.FC = () => {
       navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
     }
   }
-
+  const { data, refetch } = useGetCartQuery(id);
+  const datacart = data?.data.filter(item => item !== null).map(item => ({
+    ...item,
+    ProductId: item ? item.ProductId || '' : '',
+    _id: item ? item._id || '' : '',
+  }));
   useEffect(() => {
-    refetch()
-  }, [isFocused, datacart])
-
-  if (datacart?.length === 0) {
+    if (isFocused) {
+      refetch()
+    }
+  }, [isFocused, refetch, data])
+  const onsRefresh = () => {
+    setTimeout(() => {
+      refetch()
+    }, 2000);
+  }
+  if (!isLoggedIn) {
+    return (
+      <View style={styleCartOrder.containernoitem}>
+        <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
+        <Text style={styleCartOrder.textbacknoorder}>Bạn chưa đăng nhập vui lòng đăng nhập để xem thông tin đơn hàng</Text>
+        {/* @ts-ignore */}
+        <TouchableOpacity style={styleCartOrder.viewbacknoorder} onPress={() => navigation.navigate('AuthStackUser')}>
+          <Text style={styleCartOrder.textbacknoorder}>Đăng nhập</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+  if (datacart?.length === 0 || !datacart?.some(item => item.ProductId && item.ProductId.length > 0)) {
     return (
       <View style={styleCartOrder.containernoitem}>
         <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
@@ -72,15 +80,11 @@ const Order: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>
-        <FlashList
-          data={datacart}
-          renderItem={({ item }) => <ItemInformationOrder item={item} />}
-          keyExtractor={(item: any) => item._id}
-          showsVerticalScrollIndicator={false}
-          estimatedItemSize={200}
-          refreshing={false}
-          onRefresh={freshcontrol}
-        />
+        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={false} onRefresh={onsRefresh} />}>
+          {datacart?.map((item: any, index: number) => {
+            return (<ItemInformationOrder key={index} item={item} />)
+          })}
+        </ScrollView>
       </View>
     </View>
   )
