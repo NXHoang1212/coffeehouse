@@ -109,7 +109,7 @@ const StyleItemInformationOrder = StyleSheet.create({
         height: HEIGHT(0.1),
         backgroundColor: COLOR.GRAYBLAND,
         alignSelf: 'flex-end',
-        
+
     },
     viewlinetotalprogess: {
         width: WIDTH(97),
@@ -140,13 +140,14 @@ const StyleItemInformationOrder = StyleSheet.create({
     },
     viewtouchplus: {
         width: WIDTH(20),
-        height: WIDTH(8),
+        height: WIDTH(7.5),
         borderRadius: WIDTH(5),
         backgroundColor: COLOR.SKINBLAND,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         gap: WIDTH(1),
+        top: HEIGHT(0.3),
     },
     textheaderproduct: {
         fontSize: FONTSIZE(1.8),
@@ -154,8 +155,8 @@ const StyleItemInformationOrder = StyleSheet.create({
         color: COLOR.ORANGE
     },
     iconplus: {
-        width: WIDTH(3),
-        height: WIDTH(3),
+        width: WIDTH(2.8),
+        height: WIDTH(2.8),
         tintColor: COLOR.ORANGE,
     },
     itemproduct: {
@@ -211,6 +212,7 @@ const StyleItemInformationOrder = StyleSheet.create({
     viewtotal: {
         marginHorizontal: WIDTH(3),
         marginBottom: HEIGHT(1),
+        marginTop: HEIGHT(1),
     },
     texttotal: {
         fontSize: FONTSIZE(2),
@@ -229,17 +231,58 @@ const StyleItemInformationOrder = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    viewdiscount: {
+        marginHorizontal: WIDTH(3),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
     viewamount: {
         marginHorizontal: WIDTH(3),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: HEIGHT(2),
     },
     texindex: {
         fontSize: FONTSIZE(1.8),
         fontWeight: '400',
         color: COLOR.BLACK,
+    },
+    textbutton: {
+        fontSize: FONTSIZE(1.7),
+        fontWeight: '700',
+        color: COLOR.WHITE,
+    },
+    viewchooseamount: {
+        marginHorizontal: WIDTH(3),
+        flexDirection: 'column',
+        gap: HEIGHT(1),
+        marginTop: HEIGHT(1),
+        marginBottom: HEIGHT(2),
+    },
+    viewmethod: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: WIDTH(3),
+    },
+    iconmethod: {
+        width: WIDTH(7),
+        height: WIDTH(7),
+    },
+    textamount: {
+        fontSize: FONTSIZE(1.9),
+        fontWeight: '700',
+        color: COLOR.BLACK,
+    },
+    textmethod: {
+        fontSize: FONTSIZE(1.8),
+        fontWeight: '400',
+        color: COLOR.BLACK,
+    },
+    iconright: {
+        width: WIDTH(4),
+        height: WIDTH(4),
+        marginLeft: 'auto',
     },
     viewbutton: {
         flexDirection: 'row',
@@ -249,9 +292,6 @@ const StyleItemInformationOrder = StyleSheet.create({
         height: HEIGHT(8),
         backgroundColor: COLOR.SKINBLAND,
         paddingHorizontal: WIDTH(3),
-        position: 'absolute',
-        zIndex: 1,
-        bottom: 51,
         borderTopLeftRadius: WIDTH(3),
         borderTopRightRadius: WIDTH(3),
     },
@@ -267,11 +307,6 @@ const StyleItemInformationOrder = StyleSheet.create({
         fontSize: FONTSIZE(1.8),
         fontWeight: '700',
         color: COLOR.ORANGE,
-    },
-    textbutton: {
-        fontSize: FONTSIZE(1.7),
-        fontWeight: '700',
-        color: COLOR.WHITE,
     },
 });
 

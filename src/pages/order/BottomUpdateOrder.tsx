@@ -8,9 +8,8 @@ import { CheckBox } from 'react-native-elements'
 import { handleMinus, handlePlus } from '../../utils/Total'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store/Store'
-import { UpdateCart } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
-import { GetApiCart } from '../../service/api/IndexCart'
+import { useUpdateCartMutation } from '../../service/api/IndexCart'
 
 interface Props {
     show: boolean;
@@ -22,12 +21,16 @@ interface Props {
 const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
-    const _id = useSelector((state: RootState) => state.user.user._id);
+    const id = useSelector((state: RootState) => state.user.user._id);
     const [open, setopen] = useState<boolean>(show);
     const [note, setNote] = useState<string>(ProductId?.NoteProduct);
     const [quantity, setQuantity] = useState<number>(ProductId?.QuantityProduct);
-    const [size, setSize] = useState<any>(ProductId?.SizeProduct?.name + " " + ProductId?.SizeProduct?.price);
+    const [size, setSize] = useState<any>({
+        name: ProductId?.SizeProduct.name,
+        price: ProductId?.SizeProduct.price
+    });
     const [selectedTopping, setSelectedTopping] = useState<any>([]);
+    const [updateCart] = useUpdateCartMutation();
     const onGestureEvent = (event: any) => {
         if (event.nativeEvent.translationY > 0) {
             bottomsheet.setValue(-event.nativeEvent.translationY)
@@ -58,7 +61,10 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
             });
         }
         setQuantity(ProductId?.QuantityProduct)
-        setSize(ProductId?.SizeProduct?.name + " " + ProductId?.SizeProduct?.price)
+        setSize({
+            name: ProductId?.SizeProduct.name,
+            price: ProductId?.SizeProduct.price
+        })
         setNote(ProductId?.NoteProduct)
     }, [show]);
     const handleSelectTopping = (toppingItem: any) => {
@@ -71,7 +77,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     const handleUpdateCart = async () => {
         try {
             const data: any = {
-                ProductId: ProductId.ProductId._id,
+                ProductId: ProductId.ProductId._id, // Sử dụng ProductId.ProductId._id thay vì IdProduct
                 NameProduct: ProductId.NameProduct,
                 PriceProduct: Total(size, selectedTopping, quantity),
                 QuantityProduct: quantity,
@@ -79,18 +85,19 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                 SizeProduct: size,
                 NoteProduct: note
             }
-            const IdProduct = ProductId._id
-            const response = await UpdateCart(_id, IdProduct, data)
+            const response = await updateCart({ id, ProductId: ProductId._id, data });
             if (response) {
                 setTimeout(() => {
-                    Messenger("Cập nhật giỏ hàng thành công", "success")
-                    onDismiss()
+                    Messenger("Cập nhật thành công", "success")
+                    onDismiss();
                 }, 2000);
+                console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ response:", response);
             }
         } catch (error: any) {
-            console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:", error)
+            console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:", error);
         }
     }
+
 
     if (!open) {
         return null;
@@ -115,7 +122,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                             <View style={StyleBottomUpdateOrder.viewsize}>
                                 <Text style={StyleBottomUpdateOrder.textsize}>Size</Text>
                                 {ProductId.ProductId.size.map((sizeItem: any, index: any) => (
-                                    <TouchableOpacity key={index} style={StyleBottomUpdateOrder.viewsizearray} onPress={() => setSize(sizeItem.name + " " + sizeItem.price)}>
+                                    <TouchableOpacity key={index} style={StyleBottomUpdateOrder.viewsizearray} onPress={() => setSize(sizeItem)}>
                                         <View style={StyleBottomUpdateOrder.viewcheckitem}>
                                             <CheckBox
                                                 checkedIcon='dot-circle-o'
@@ -123,8 +130,8 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                                                 checkedColor='#FFC107'
                                                 uncheckedColor='#000'
                                                 size={20}
-                                                checked={size === sizeItem.name + " " + sizeItem.price}
-                                                onPress={() => setSize(sizeItem.name + " " + sizeItem.price)}
+                                                checked={size.name === sizeItem.name}
+                                                onPress={() => setSize(sizeItem)}
                                             />
                                             <View style={StyleBottomUpdateOrder.viewsizename}>
                                                 <Text style={StyleBottomUpdateOrder.textsizename}>{sizeItem.name}</Text>

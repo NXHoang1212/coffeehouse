@@ -14,16 +14,17 @@ interface PropsDetailOrder {
 const DetailOrder = () => {
   ThemLightStatusBar('light-content', '#000');
   const { id } = useRoute().params as PropsDetailOrder;
-  console.log("🚀 ~ file: DetailOrder.tsx:136 ~ DetailOrder ~ id", id)
   const { data } = useGetProductsByIdQuery(id);
   const showdetail = data?.data;
-  console.log("🚀 ~ file: DetailOrder.tsx:20 ~ DetailOrder ~ showdetail:", showdetail)
 
   return (
     <View style={StyleDetailOrder.container}>
-      {showdetail?.map((item, index) => {
-        return (<ItemDetailProduct key={index} item={item} />)
-      })}
+      <FlashList
+        data={showdetail}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => <ItemDetailProduct item={item} />}
+        estimatedItemSize={150}
+      />
     </View>
   )
 }

@@ -7,34 +7,44 @@ import { CartOrder, GetCartOrder, UpdateCartOrder } from '../../data/types/CartO
 export const ApiCart = createApi({
     reducerPath: 'ApiCart',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
-    tagTypes: ['ApiCart'],
+    tagTypes: ['CartOrder'],
     endpoints: build => ({
         getCart: build.query<{ data: CartOrder[] }, string>({
             query: (id) => `/api/users/cart/getCart/${id}`,
-            // providesTags: (result) =>
-            //     result
-            //         ? [
-            //             ...result.data.map(({ id }) => ({ type: 'ApiCart', id })),
-            //             { type: 'ApiCart', id: 'LIST' },
-            //         ]
-            //         : [{ type: 'ApiCart', id: 'LIST' }],
-            
+            providesTags(result) {
+                if (result && Array.isArray(result.data)) {
+                    const validData = result.data.filter(item => item && item._id).map(item => ({ type: 'CartOrder', _id: item._id } as const));
+                    return [...validData, { type: 'CartOrder', id: 'CART' }];
+                }
+                return [{ type: 'CartOrder', id: 'CART' }];
+            }
         }),
-        detailCart: build.query<{ data: GetCartOrder[] }, { id: number, productId: number }>({
-            query: ({ id, productId }) => `/api/users/cart/detailCart/${id}/${productId}`,
-        }),
-        updateCart: build.mutation<UpdateCartOrder, { id: number, productId: number, data: UpdateCartOrder }>({
-            query: ({ id, productId, data }) => ({
-                url: `/api/users/cart/update/${id}/${productId}`,
+        UpdateCart: build.mutation<{ data: CartOrder }, { id: number, ProductId: number, data: UpdateCartOrder }>({
+            query: ({ id, ProductId, data }) => ({
+                url: `/api/users/cart/update/${id}/${ProductId}`,
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: ['ApiCart'],
+            invalidatesTags: [{ type: 'CartOrder', id: 'CART' }]
+        }),
+        DeleteCartProductId: build.mutation<{ data: CartOrder }, { id: number, ProductId: number }>({
+            query: ({ id, ProductId }) => ({
+                url: `/api/users/cart/delete/${id}/${ProductId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: 'CartOrder', id: 'CART' }]
+        }),
+        DeleteAllCart: build.mutation<{ data: CartOrder }, number>({
+            query: (id) => ({
+                url: `/api/users/cart/deleteAll/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: 'CartOrder', id: 'CART' }]
         }),
     }),
 });
 
-export const { useGetCartQuery, useDetailCartQuery, useUpdateCartMutation } = ApiCart;
+export const { useGetCartQuery, useUpdateCartMutation, useDeleteCartProductIdMutation, useDeleteAllCartMutation } = ApiCart;
 
 export const GetApiCart = async (id: number) => {
     try {

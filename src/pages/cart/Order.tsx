@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
@@ -9,7 +9,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useIsFocused } from '@react-navigation/native'
 import { useAuth } from '../../hooks/UseAuth'
 import { useSelector } from 'react-redux'
-
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
 import { RootState } from '../../redux/store/Store'
 import { useGetCartQuery } from '../../service/api/IndexCart'
@@ -30,12 +29,21 @@ const Order: React.FC = () => {
     }
   }
   const { data, refetch } = useGetCartQuery(id);
-  const datacart = data?.data
+  const datacart = data?.data.filter(item => item !== null).map(item => ({
+    ...item,
+    ProductId: item ? item.ProductId || '' : '',
+    _id: item ? item._id || '' : '',
+  }));
   useEffect(() => {
     if (isFocused) {
       refetch()
     }
   }, [isFocused, refetch, data])
+  const onsRefresh = () => {
+    setTimeout(() => {
+      refetch()
+    }, 2000);
+  }
   if (!isLoggedIn) {
     return (
       <View style={styleCartOrder.containernoitem}>
@@ -48,7 +56,7 @@ const Order: React.FC = () => {
       </View>
     )
   }
-  if (data?.data.filter((item => item !== null)).length === 0 || data?.data.length === 0) {
+  if (datacart?.length === 0 || !datacart?.some(item => item.ProductId && item.ProductId.length > 0)) {
     return (
       <View style={styleCartOrder.containernoitem}>
         <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
@@ -72,14 +80,9 @@ const Order: React.FC = () => {
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={false} onRefresh={onsRefresh} />}>
           {datacart?.map((item: any, index: number) => {
-            return (
-              <ItemInformationOrder
-                key={index}
-                item={item}
-              />
-            )
+            return (<ItemInformationOrder key={index} item={item} />)
           })}
         </ScrollView>
       </View>

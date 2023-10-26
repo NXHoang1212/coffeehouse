@@ -49,6 +49,13 @@ export const Icon = {
     LOCATION: require('../assets/images/IconLocation.png'),
     SEND: require('../assets/images/iconsend.png'),
     DELIVERYADDRESS: require('../assets/images/icondeliveryaddress.png'),
+    METHOD: require('../assets/images/iconmethodamount.png'),
+    MONEY: require('../assets/images/iconmoney.png'),
+    ZALOPAY: require('../assets/images/iconzalopay.png'),
+    MOMO: require('../assets/images/iconmomo.png'),
+    VNPAY: require('../assets/images/iconvnpay.png'),
+    CARDBANK: require('../assets/images/iconcardbank.png'),
+    CHECKED: require('../assets/images/iconfavouriteschecked.png'),
 }
 
 /* THÔNG TIN */

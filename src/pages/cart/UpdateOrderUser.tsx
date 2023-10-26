@@ -15,7 +15,6 @@ const UpdateOrderUser: React.FC = () => {
     const route = useRoute<any>()
     const item = route.params?.item;
     const id = useSelector((state: RootState) => state.user.user._id)
-    console.log("🚀 ~ file: UpdateOrderUser.tsx:18 ~ id:", id);
     const [name, setName] = useState<any>(item.UserId.name)
     const [mobile, setMobile] = useState<any>(item.UserId.mobile)
     const UpdateUser = async () => {
@@ -26,7 +25,7 @@ const UpdateOrderUser: React.FC = () => {
             }
             const response = await ApiUpdateUser(id, data)
             console.log("🚀 ~ file: UpdateOrderUser.tsx:23 ~ response", response);
-            if (response.status === true) {
+            if (response) {
                 Messenger('Cập nhật thành công', 'success')
                 goBack()
             }

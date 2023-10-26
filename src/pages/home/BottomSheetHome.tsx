@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, FlatList, StatusBar } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import StyleBottomSheetHome from '../../styles/home/StyleBottomSheetHome';
 import { order, Banner } from '../../constant/Icon';
 import FastImage from 'react-native-fast-image';
@@ -18,8 +18,8 @@ const BottomSheetHome = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
     //sử dụng memo để tối ưu hóa performance
-    const MemoziedItemWebView = React.memo(ItemWebView);
-    const handleGeneral = () => {
+    const MemoziedItemWebView = useMemo(() => ItemWebView, []);
+    const handleGeneral = () => {   
         //@ts-ignore
         navigation.navigate('Đặt hàng')
     }

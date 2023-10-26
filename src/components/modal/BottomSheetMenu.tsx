@@ -1,4 +1,4 @@
-import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions } from 'react-native'
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, StatusBar, Dimensions } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { Portal } from 'react-native-paper'
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu'
@@ -53,6 +53,7 @@ const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss = true, setSel
     return (
         <Portal>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
+            <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
                 <Animated.View style={[StyleBottomSheetMenu.container, { bottom: bottomsheet }]}>
                     <View style={StyleBottomSheetMenu.header}>

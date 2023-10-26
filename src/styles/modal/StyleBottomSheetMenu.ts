@@ -17,7 +17,7 @@ const StyleBottomSheetMenu = StyleSheet.create({
         backgroundColor: COLOR.WHITE,
         borderTopLeftRadius: WIDTH(5),
         borderTopRightRadius: WIDTH(5),
-        height: HEIGHT(40),
+        height: HEIGHT(45),
         elevation: 8,
     },
     header: {

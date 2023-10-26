@@ -26,7 +26,6 @@ const CreateInformation = () => {
   const [open, setOpen] = useState<boolean>(false)
   const user = useSelector((state: any) => state.user)
   const id = user._id
-  console.log("🚀 ~ file: CreateInformation.tsx:31 ~ CreateInformation ~ _id:", id)
   const [name, setName] = useState<string>(user.name)
   const [holder, setHolder] = useState<string>(user.holder)
   const [email, setEmail] = useState<string>(user.email)

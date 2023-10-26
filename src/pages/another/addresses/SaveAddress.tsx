@@ -30,9 +30,7 @@ const Address: React.FC = () => {
     //@ts-ignore
     navigation.navigate('AddAddress', { name });
   }
-  useEffect(() => {
-    refetch()
-  }, [isFocused])
+
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

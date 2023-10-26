@@ -14,7 +14,7 @@ export const TotalPrice = (price: number, quantity: number) => {
 export const Total = (selectedSize: any, selectedTopping: any, quantity: number) => {
     let total = 0;
     if (selectedSize) {
-        total += parseInt(selectedSize.split(" ")[1])
+        total += parseInt(selectedSize.price)
     }
     if (selectedTopping) {
         selectedTopping.forEach((item: any) => {

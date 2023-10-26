@@ -11,10 +11,10 @@ import { FormatPrice } from '../../utils/FormatPrice';
 import { Swipeable } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import BottomUpdateOrder from '../../pages/order/BottomUpdateOrder';
-import { DeleteCartProductId, DeleteAllCart } from '../../service/api/IndexCart';
+import MethodAmount from '../modal/MethodAmount';
+import { useDeleteAllCartMutation, useDeleteCartProductIdMutation } from '../../service/api/IndexCart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
-import { useIsFocused } from '@react-navigation/native';
 
 interface PropsDetailItemProduct {
     item: GetCartOrder;
@@ -23,13 +23,16 @@ interface PropsDetailItemProduct {
 const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const route = useRoute<any>();
-    const isFocused = useIsFocused();
     const address = route.params?.item;
     const id = useSelector((state: RootState) => state.user.user._id);
+    const method = useSelector((state: RootState) => state.methodamount.methodamount);
+    const [openModal, setopenModal] = useState<boolean>(false);
     const [note, setNote] = useState<string>('');
     const [show, setshow] = useState<boolean>(false);
     const [SelectProduct, setSelectProduct] = useState<any>(undefined);
     const shipper = 18;
+    const [DeleteAllCart] = useDeleteAllCartMutation();
+    const [DeleteCartProductId] = useDeleteCartProductIdMutation();
     const SelectedAddress = () => {
         //@ts-ignore
         navigation.navigate('StackHomeNavigate', { screen: 'SelectedAddressOrder' })
@@ -43,12 +46,13 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
         setshow(true);
     }
     const renderright = (product: any) => {
+        const ProductId: number = product._id
         return (
             <View style={StyleItemInformationOrder.viewitemswipe}>
                 <TouchableOpacity style={StyleItemInformationOrder.viewswipeedit} onPress={() => handleShowBottomSheet(product)} >
                     <Image source={infores.EDIT} style={StyleItemInformationOrder.icondelete} />
                 </TouchableOpacity>
-                <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => DeleteCartProductId(id, product._id)}>
+                <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => DeleteCartProductId({ id, ProductId })}>
                     <Image source={Icon.DELETE} style={StyleItemInformationOrder.icondelete} />
                 </TouchableOpacity>
             </View>
@@ -57,7 +61,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const TotalPrice = () => {
         let total = 0;
         item?.ProductId.map((product) => {
-            total += product.PriceProduct * product.QuantityProduct;
+            total += product.PriceProduct
         })
         return total;
     }
@@ -66,7 +70,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     }
     return (
         <View style={StyleItemInformationOrder.container}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 130 }} showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }} showsVerticalScrollIndicator={false}>
                 <View style={StyleItemInformationOrder.header}>
                     <Text style={StyleItemInformationOrder.texttilte}>Giao hàng tận nơi</Text>
                     <TouchableOpacity style={StyleItemInformationOrder.viewdelete} onPress={() => DeleteAllCart(item._id)}>
@@ -110,7 +114,8 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 <View style={StyleItemInformationOrder.viewproduct}>
                     <View style={StyleItemInformationOrder.viewheaderproduct}>
                         <Text style={StyleItemInformationOrder.textheaderchoose}>Sản phẩm đã chọn</Text>
-                        <TouchableOpacity style={StyleItemInformationOrder.viewtouchplus}>
+                        {/* @ts-ignore */}
+                        <TouchableOpacity style={StyleItemInformationOrder.viewtouchplus} onPress={() => navigation.navigate('TabHomeNavigate', { screen: 'Đặt hàng' })}>
                             <Image source={Icon.PLUS} style={StyleItemInformationOrder.iconplus} />
                             <Text style={StyleItemInformationOrder.textheaderproduct}>Thêm</Text>
                         </TouchableOpacity>
@@ -157,25 +162,48 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 </View>
                 <View style={StyleItemInformationOrder.viewlinetotalprogess} />
                 <View style={StyleItemInformationOrder.viewtotalshipper}>
-                    <Text style={StyleItemInformationOrder.texindex}>Phí Ship</Text>
+                    <Text style={StyleItemInformationOrder.texindex}>Phí giao hàng</Text>
                     <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(shipper)}</Text>
+                </View>
+                <View style={StyleItemInformationOrder.viewlinetotalprogess} />
+                <View style={StyleItemInformationOrder.viewdiscount}>
+                    <Text style={StyleItemInformationOrder.texindex}>Mã giảm giá</Text>
+                    <Text style={StyleItemInformationOrder.texindex}>0đ</Text>
                 </View>
                 <View style={StyleItemInformationOrder.viewlinetotalprogess} />
                 <View style={StyleItemInformationOrder.viewamount}>
                     <Text style={StyleItemInformationOrder.texindex}>Số tiền thanh toán</Text>
                     <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(TotalAllPrice())}</Text>
                 </View>
-            </ScrollView>
-            <LinearGradient style={StyleItemInformationOrder.viewbutton} colors={['#FA8C16', '#FA8C16']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
-                <View>
-                    <Text style={StyleItemInformationOrder.textbutton}>Giao hàng {item?.ProductId ? item?.ProductId.length : 0} sản phẩm</Text>
-                    <Text style={StyleItemInformationOrder.textbutton}>{FormatPrice(TotalAllPrice())}</Text>
+                <View style={StyleItemInformationOrder.linespace} />
+                <View style={StyleItemInformationOrder.viewchooseamount}>
+                    <Text style={StyleItemInformationOrder.textamount}>Thanh Toán</Text>
+                    <TouchableOpacity style={StyleItemInformationOrder.viewmethod} onPress={() => setopenModal(true)}>
+                        {method.image ? (
+                            <Image source={method.image ? method.image : null} style={StyleItemInformationOrder.iconmethod} />
+                        ) : (
+                            <Image source={Icon.METHOD} style={StyleItemInformationOrder.iconmethod} />
+                        )}
+                        {method.name ? (
+                            <Text style={StyleItemInformationOrder.textmethod}>{method.name}</Text>
+                        ) : (
+                            <Text style={StyleItemInformationOrder.textmethod}>Chọn phương thức thanh toán</Text>
+                        )}
+                        <Image source={Icon.RIGHT} style={StyleItemInformationOrder.iconright} />
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={StyleItemInformationOrder.vieworder}>
-                    <Text style={StyleItemInformationOrder.textorder}>Đặt hàng</Text>
-                </TouchableOpacity>
-            </LinearGradient>
+                <LinearGradient style={StyleItemInformationOrder.viewbutton} colors={['#FA8C16', '#FA8C16']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                    <View>
+                        <Text style={StyleItemInformationOrder.textbutton}>Giao hàng {item?.ProductId ? item?.ProductId.length : 0} sản phẩm</Text>
+                        <Text style={StyleItemInformationOrder.textbutton}>{FormatPrice(TotalAllPrice())}</Text>
+                    </View>
+                    <TouchableOpacity style={StyleItemInformationOrder.vieworder}>
+                        <Text style={StyleItemInformationOrder.textorder}>Đặt hàng</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
+            </ScrollView>
             <BottomUpdateOrder show={show} onDismiss={() => setshow(false)} ProductId={SelectProduct} />
+            <MethodAmount openModal={openModal} onDismiss={() => setopenModal(false)} />
         </View >
     )
 }
