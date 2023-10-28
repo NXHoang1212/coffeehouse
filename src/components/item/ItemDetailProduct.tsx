@@ -22,12 +22,10 @@ interface PropsDetailItemProduct {
 
 const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     const goBack = useGoBack();
-    const { isLoggedIn } = useAuth();
     let id = useSelector((state: RootState) => state.user.user._id);
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
     const toltalPrice = quantity * item.price;
-
 
     const AddToFavourites = async () => {
         try {

@@ -20,7 +20,6 @@ const MethodAmount: React.FC<Props> = ({ openModal, onDismiss, enableBackDropDis
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const [open, setopen] = useState<boolean>(openModal);
     const methodAmount = useSelector((state: RootState) => state.methodamount.methodamount);
-    console.log(methodAmount);
     const data = DataMethod.map((item: any, index: number) => {
         return {
             id: index,

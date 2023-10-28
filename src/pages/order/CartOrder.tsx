@@ -34,13 +34,8 @@ const CartOrder = () => {
       dispatch(setProducts(showProducts));
       hasDispatched.current = true;
     }
-    //@ts-ignore
-    navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser');
+    navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser' as any);
   }, [dispatch, setProducts, showProducts, navigation, isLoggedIn]);
-  const handleFavourites = useCallback(() => {
-    //@ts-ignore
-    navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser', { screen: 'Favourites', });
-  }, [navigation, isLoggedIn]);
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
     setShow(false);
@@ -86,7 +81,7 @@ const CartOrder = () => {
               <TouchableOpacity onPress={handleSearch}>
                 <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={handleFavourites}>
+              <TouchableOpacity onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser' as any, { screen: 'Favourites', })}>
                 <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
               </TouchableOpacity>
             </View>
@@ -95,21 +90,14 @@ const CartOrder = () => {
           <Animated.ScrollView ref={scrollViewRef}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ flexGrow: 1 }}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-              { useNativeDriver: true }
-            )}
-            refreshControl={
-              <RefreshControl
-                refreshing={false}
-                onRefresh={() => { }}
-              />}>
+            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+            refreshControl={<RefreshControl refreshing={false} onRefresh={() => { }} />}>
             <View style={StyleOrder.viewbody}>
               <CategoryItem setSelectedCategory={handleCategorySelect} />
               <View style={StyleOrder.viewbottom}>
                 <FlashList
                   data={showProducts}
-                  renderItem={({ item }: any) => {
+                  renderItem={({ item }) => {
                     const isFirstItem = currentCategory !== item.category.name;
                     currentCategory = item.category.name;
                     return (<ItemProduct item={item} showCategory={isFirstItem} isFirstItem={isFirstItem} />)

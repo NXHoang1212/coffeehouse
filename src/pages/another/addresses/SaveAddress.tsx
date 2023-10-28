@@ -17,20 +17,16 @@ import { RootState } from '../../../redux/store/Store';
 
 const Address: React.FC = () => {
   const goback = useGoBack();
-  const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id);
-  const { data, refetch } = useGetAddressIdQuery(id)
-  const Addressess: any = data?.data;
-  const [selectedAddressType, setSelectedAddressType] = useState<string>('');
+  const { data } = useGetAddressIdQuery(id)
+  const Addressess = data?.data;
+  // const isLastItem = (currentIndex: number) => {
+  //   return currentIndex === Addressess?.length - 1;
+  // }
   const isLastItem = (currentIndex: number) => {
-    return currentIndex === Addressess?.length - 1;
+    return Addressess && currentIndex === Addressess.length - 1;
   }
-  const handeleGeneral = (name: string) => {
-    //@ts-ignore
-    navigation.navigate('AddAddress', { name });
-  }
-
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -42,17 +38,17 @@ const Address: React.FC = () => {
           <Text style={StyleSaveAddress.textHeader}>Địa chỉ đã lưu</Text>
         </View>
         <View style={StyleSaveAddress.viewbody}>
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('Nhà')}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: 'Nhà' })}>
             <Image source={TabCoffee.HOME} style={StyleSaveAddress.iconAddress} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ nhà</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('Công ty')}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: 'Công ty' })}>
             <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => handeleGeneral('')}>
+          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: '' })}>
             <Image source={Icon.PLUS} style={StyleSaveAddress.iconplus} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>

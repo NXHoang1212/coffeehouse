@@ -32,11 +32,6 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
     price: 0,
   });
 
-  const handleProductDetail = () => {
-    //@ts-ignore
-    navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
-  }
-
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
       if (item.topping.length > 0 && item.size.length > 0) {
@@ -49,12 +44,10 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
         }
       }
     } else {
-      //@ts-ignore
-      navigation.navigate('AuthStackUser', { screen: 'Login' });
+      navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
     }
   }
-
-
+  
   const handleAddToCart = async (item: DetailProduct) => {
     try {
       const data: any = {
@@ -85,7 +78,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
           </View>
         )}
-        <TouchableOpacity onPress={handleProductDetail}>
+        <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder', params: { id: item._id } })}>
           <View style={StyleItemProduct.viewProduct}>
             <View>
               <Animated.Image

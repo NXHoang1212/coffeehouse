@@ -84,10 +84,6 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         return total * quantity;
     }
 
-    const handleSelectSize = (sizeItem: any) => {
-        setSelectedSize(sizeItem); // Lựa chọn kích thước đầy đủ (bao gồm giá và tên)
-    }
-
     const handleSelectTopping = (toppingItem: any) => {
         if (selectedTopping.length === 2) {
             if (selectedTopping.includes(toppingItem)) {
@@ -133,9 +129,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
     }
 
     return (
-        <Modal animationType="slide" transparent={true} onRequestClose={onDismiss}>
+        <Modal animationType="slide" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDetailOrder.backdrop} />
-            <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <Animated.View style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
                 <View style={StyleBottomSheetDetailOrder.viewloading}>
                     {isLoading ? <ActivityIndicator /> : null}
@@ -155,7 +150,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                             <View style={StyleBottomSheetDetailOrder.viewsize}>
                                 <Text style={StyleBottomSheetDetailOrder.textsize}>Size</Text>
                                 {item.size.map((sizeItem, index) => (
-                                    <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => handleSelectSize(sizeItem)}>
+                                    <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => setSelectedSize(sizeItem)}>
                                         <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                                             <CheckBox
                                                 checkedIcon='dot-circle-o'
@@ -164,7 +159,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                                                 uncheckedColor='#000'
                                                 size={20}
                                                 checked={selectedSize === sizeItem}
-                                                onPress={() => handleSelectSize(sizeItem)}
+                                                onPress={() => setSelectedSize(sizeItem)}
                                             />
                                             <View style={StyleBottomSheetDetailOrder.viewsizename}>
                                                 <Text style={StyleBottomSheetDetailOrder.textsizename}>{sizeItem.name}</Text>

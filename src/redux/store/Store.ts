@@ -14,21 +14,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AnyAction, CombinedState, Reducer } from 'redux';
 import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
 import { ApiFavourites } from '../../service/api/IndexFavourites';
+
+
 const persistConfig: any = {
     key: 'root',
     storage: AsyncStorage,
 }
 
-const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; }>, AnyAction> = combineReducers({
+const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; cart: any }>, AnyAction> = combineReducers({
     user: UserReducer,
     product: ProductReducer,
     methodamount: MethodAmountReducer,
+    cart: CartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-
-
 
 const store = configureStore({
     reducer: {
@@ -37,17 +37,16 @@ const store = configureStore({
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
         user: persistedReducer,
-        cart: CartReducer,
+        cart: persistedReducer,
         methodamount: persistedReducer,
         [ApiCart.reducerPath]: ApiCart.reducer,
         [ApiFavourites.reducerPath]: ApiFavourites.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-        serializableCheck: false,
-        immutableCheck: {
-            ignoredPaths: ['product', 'user', 'methodamount', 'address', 'cart'],
-        }
-    }).concat( ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+            immutableCheck: false,
+        }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
 });
 
 setupListeners(store.dispatch);

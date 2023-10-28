@@ -19,15 +19,15 @@ const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const dispatch = useDispatch();
 
-    const SelectedAddress = () => {
-        dispatch(setAddress(item))
-        //@ts-ignore
-        navigation.navigate('EditAddress')
-    }
+    // const SelectedAddress = () => {
+    //     dispatch(setAddress(item))
+    //     //@ts-ignore
+    //     navigation.navigate('EditAddress')
+    // }
 
     return (
         <View style={StyleItemGetAddress.container}>
-            <TouchableOpacity onPress={SelectedAddress}>
+            <TouchableOpacity onPress={() => { dispatch(setAddress(item)); navigation.navigate('EditAddress' as any) }}>
                 <View style={StyleItemGetAddress.viewbody}>
                     <View>
                         <Image source={infores.ADDRESS} style={StyleItemGetAddress.iconAddress} />

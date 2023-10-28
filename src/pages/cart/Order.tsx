@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
@@ -19,15 +19,7 @@ const Order: React.FC = () => {
   const isFocused = useIsFocused();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id)
-  const handeleGeneral = (destination: string) => {
-    if (destination === 'DiscountUser') {
-      //@ts-ignore
-      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
-    } else if (destination === 'Notifee') {
-      //@ts-ignore
-      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
-    }
-  }
+  const cart = useSelector((state: RootState) => state.cart.cart)
   const { data, refetch } = useGetCartQuery(id);
   const datacart = data?.data.filter(item => item !== null).map(item => ({
     ...item,
@@ -61,8 +53,7 @@ const Order: React.FC = () => {
       <View style={styleCartOrder.containernoitem}>
         <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
         <Text style={styleCartOrder.textbacknoorder}>Bạn chưa có đơn hàng vui lòng quay lại đặt hàng</Text>
-        {/* @ts-ignore */}
-        <TouchableOpacity style={styleCartOrder.viewbacknoorder} onPress={() => navigation.navigate('Đặt hàng')}>
+        <TouchableOpacity style={styleCartOrder.viewbacknoorder} onPress={() => navigation.navigate('Đặt hàng' as any)}>
           <Text style={styleCartOrder.textbacknoorder}>Quay lại</Text>
         </TouchableOpacity>
       </View>
@@ -72,19 +63,21 @@ const Order: React.FC = () => {
     <View style={styleCartOrder.container}>
       <View style={styleCartOrder.viewheader}>
         <Text style={styleCartOrder.textheader}>Thông tin đơn hàng</Text>
-        <TouchableOpacity style={styleCartOrder.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
+        <TouchableOpacity style={styleCartOrder.viewpromo} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'DiscountUser' })}>
           <Image source={Icon.PROMO} style={styleCartOrder.iconpromo} />
         </TouchableOpacity>
-        <TouchableOpacity style={styleCartOrder.viewnotify} onPress={() => handeleGeneral('Notifee')}>
+        <TouchableOpacity style={styleCartOrder.viewnotify} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'Notifee' })}>
           <Image source={Icon.NOTIFY} style={styleCartOrder.iconnotify} />
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>
-        <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={false} onRefresh={onsRefresh} />}>
-          {datacart?.map((item: any, index: number) => {
-            return (<ItemInformationOrder key={index} item={item} />)
-          })}
-        </ScrollView>
+        <FlatList
+          data={datacart}
+          renderItem={({ item }: any) => <ItemInformationOrder item={item} />}
+          keyExtractor={(item: any) => item._id}
+          showsVerticalScrollIndicator={false}
+          refreshControl={<RefreshControl refreshing={false} onRefresh={onsRefresh} />}
+        />
       </View>
     </View>
   )

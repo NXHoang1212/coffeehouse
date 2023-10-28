@@ -15,16 +15,12 @@ interface PropsItemProduct {
 
 const SeacrchItem = ({ item }: PropsItemProduct) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-    const handelDetail = () => {
-        //@ts-ignore
-        navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
-    }
 
 
     return (
         <View style={StyleItemProduct.container}>
             <View style={StyleItemProduct.viewbody}>
-                <TouchableOpacity onPress={handelDetail}>
+                <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder', params: { id: item._id } })}>
                     <View style={StyleItemProduct.viewProduct}>
                         <View>
                             <FastImage

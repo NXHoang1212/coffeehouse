@@ -13,7 +13,14 @@ const initialState: MethodAmountState = {
 
 const MethodAmounSlice = createSlice({
     name: 'methodamount',
-    initialState,
+    initialState: {
+        ...initialState,
+        ignoredPath: 'methodamount',
+        ignoredNested: {
+            one: 'one',
+            two: 'two',
+        },
+    },
     reducers: {
         AddMethodAmount: (state, action: PayloadAction<MethodAmountState>) => {
             state.name = action.payload.name;

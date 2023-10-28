@@ -22,7 +22,6 @@ const HomePage = () => {
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
   ThemLightStatusBar('dark-content', backgroundColor);
-  
   const onScroll = (event: any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     if (offsetY > 100) {
@@ -31,16 +30,6 @@ const HomePage = () => {
       setBackgroundColor('#FFF7E6');
     }
   };
-  const handeleGeneral = (destination: string) => {
-    if (destination === 'DiscountUser') {
-      //@ts-ignore
-      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' })
-    } else if (destination === 'Notifee') {
-      //@ts-ignore
-      navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' })
-    }
-  }
-
   useEffect(() => {
     socket.on("connection", (data) => {
       console.log("Received data from server:", data);
@@ -51,16 +40,15 @@ const HomePage = () => {
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
-          {
-            isLoggedIn ? <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text> :
-              <Text style={StyleHomePage.textheader}>CloudTea nhé!</Text>
+          {isLoggedIn ? <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
+            : <Text style={StyleHomePage.textheader}>CloudTea nhé!</Text>
           }
         </View>
         <View style={StyleHomePage.headerIcon}>
-          <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => handeleGeneral('DiscountUser')}>
+          <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' } as any)}>
             <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
           </TouchableOpacity>
-          <TouchableOpacity style={StyleHomePage.viewbell} onPress={() => handeleGeneral('Notifee')}>
+          <TouchableOpacity style={StyleHomePage.viewbell} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' } as any)}>
             <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
           </TouchableOpacity>
         </View>

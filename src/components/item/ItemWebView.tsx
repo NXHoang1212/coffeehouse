@@ -22,8 +22,7 @@ const ItemWebView = ({ item }: ItemWebViewProps) => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamsStack>>();
 
   const openWebView = () => {
-    // @ts-ignore
-    navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl, {
+    navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl as any, {
       screen: EnumStackNaviagte.WebView,
       params: {
         name: item.name,

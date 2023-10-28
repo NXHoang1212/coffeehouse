@@ -15,10 +15,9 @@ const Setting = () => {
   const [isOn, setIsOn] = useState<boolean>(false);
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const handeleGeneral = () => {
-    //@ts-ignore
-    navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'AboutCoffee', params: { url: url } })
-  }
+  // const handeleGeneral = () => {
+  //   navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'AboutCoffee', params: { url: url } })
+  // }
   return (
     <View style={StyleSetting.container}>
       <View style={StyleSetting.viewheader}>
@@ -43,7 +42,7 @@ const Setting = () => {
             <Image source={Icon.RIGHT} style={StyleSetting.iconright} />
           </TouchableOpacity>
           <View style={StyleSetting.line} />
-          <TouchableOpacity style={StyleSetting.handlegeneral} onPress={handeleGeneral}>
+          <TouchableOpacity style={StyleSetting.handlegeneral} onPress={() => navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl as any, { screen: 'AboutCoffee', params: { url: url } })}>
             <Image source={Icon.ABOUT} style={StyleSetting.iconGeneral} />
             <Text style={StyleSetting.textGeneral}>Về chúng tôi</Text>
             <Image source={Icon.RIGHT} style={StyleSetting.iconright} />

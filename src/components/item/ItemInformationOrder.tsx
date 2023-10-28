@@ -33,23 +33,11 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const shipper = 18;
     const [DeleteAllCart] = useDeleteAllCartMutation();
     const [DeleteCartProductId] = useDeleteCartProductIdMutation();
-    const SelectedAddress = () => {
-        //@ts-ignore
-        navigation.navigate('StackHomeNavigate', { screen: 'SelectedAddressOrder' })
-    }
-    const UpdateUserOrder = () => {
-        //@ts-ignore
-        navigation.navigate('StackHomeNavigate', { screen: 'UpdateOrderUser', params: { item: item } })
-    }
-    const handleShowBottomSheet = (item: any) => {
-        setSelectProduct(item);
-        setshow(true);
-    }
     const renderright = (product: any) => {
         const ProductId: number = product._id
         return (
             <View style={StyleItemInformationOrder.viewitemswipe}>
-                <TouchableOpacity style={StyleItemInformationOrder.viewswipeedit} onPress={() => handleShowBottomSheet(product)} >
+                <TouchableOpacity style={StyleItemInformationOrder.viewswipeedit} onPress={() => { setshow(true), setSelectProduct(product) }}>
                     <Image source={infores.EDIT} style={StyleItemInformationOrder.icondelete} />
                 </TouchableOpacity>
                 <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => DeleteCartProductId({ id, ProductId })}>
@@ -65,9 +53,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
         })
         return total;
     }
-    const TotalAllPrice = () => {
-        return TotalPrice() + shipper;
-    }
+    
     return (
         <View style={StyleItemInformationOrder.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }} showsVerticalScrollIndicator={false}>
@@ -82,12 +68,12 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                         <View style={StyleItemInformationOrder.viewtextaddress}>
                             <Text style={StyleItemInformationOrder.textdetailaddress}>{address.DescribeAddRess}</Text>
                         </View>
-                        <TouchableOpacity style={StyleItemInformationOrder.vieweditaddress} onPress={() => SelectedAddress()}>
+                        <TouchableOpacity style={StyleItemInformationOrder.vieweditaddress} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'SelectedAddressOrder' })}>
                             <Image source={Icon.RIGHT} style={StyleItemInformationOrder.iconedit} />
                         </TouchableOpacity>
                     </View>
                 ) : (
-                    <TouchableOpacity style={StyleItemInformationOrder.viewaddress} onPress={SelectedAddress}>
+                    <TouchableOpacity style={StyleItemInformationOrder.viewaddress} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'SelectedAddressOrder' })}>
                         <Text style={StyleItemInformationOrder.textaddress}>Vui lòng chọn địa chỉ giao tới</Text>
                     </TouchableOpacity>
                 )}
@@ -98,7 +84,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                     value={note}
                 />
                 <View style={StyleItemInformationOrder.itemuser}>
-                    <TouchableOpacity onPress={UpdateUserOrder}>
+                    <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'UpdateOrderUser', params: { item: item } })}>
                         <Text style={StyleItemInformationOrder.textuser}>{item?.UserId.name}</Text>
                         <Text style={StyleItemInformationOrder.textuser}>{item?.UserId.mobile}</Text>
                         <Text style={StyleItemInformationOrder.textline}>----------------------------</Text>
@@ -173,7 +159,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 <View style={StyleItemInformationOrder.viewlinetotalprogess} />
                 <View style={StyleItemInformationOrder.viewamount}>
                     <Text style={StyleItemInformationOrder.texindex}>Số tiền thanh toán</Text>
-                    <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(TotalAllPrice())}</Text>
+                    <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(TotalPrice() + shipper)}</Text>
                 </View>
                 <View style={StyleItemInformationOrder.linespace} />
                 <View style={StyleItemInformationOrder.viewchooseamount}>
@@ -195,7 +181,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 <LinearGradient style={StyleItemInformationOrder.viewbutton} colors={['#FA8C16', '#FA8C16']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
                     <View>
                         <Text style={StyleItemInformationOrder.textbutton}>Giao hàng {item?.ProductId ? item?.ProductId.length : 0} sản phẩm</Text>
-                        <Text style={StyleItemInformationOrder.textbutton}>{FormatPrice(TotalAllPrice())}</Text>
+                        <Text style={StyleItemInformationOrder.textbutton}>{FormatPrice(TotalPrice() + shipper)}</Text>
                     </View>
                     <TouchableOpacity style={StyleItemInformationOrder.vieworder}>
                         <Text style={StyleItemInformationOrder.textorder}>Đặt hàng</Text>

@@ -17,24 +17,19 @@ import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 const BottomSheetHome = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
-    //sử dụng memo để tối ưu hóa performance
     const MemoziedItemWebView = useMemo(() => ItemWebView, []);
-    const handleGeneral = () => {   
-        //@ts-ignore
-        navigation.navigate('Đặt hàng')
-    }
     return (
         <View style={StyleBottomSheetHome.container}>
             <View style={StyleBottomSheetHome.line} />
             <View style={StyleBottomSheetHome.vieworder}>
-                <TouchableOpacity onPress={handleGeneral}>
+                <TouchableOpacity onPress={() => navigation.navigate('Đặt hàng' as any)}>
                     <View style={StyleBottomSheetHome.viewshipper}>
                         <FastImage source={order.SHIPPER} style={StyleBottomSheetHome.imgshipper} />
                         <Text style={StyleBottomSheetHome.textshipper}>Giao Hàng</Text>
                     </View>
                 </TouchableOpacity>
                 <View style={StyleBottomSheetHome.lineship} />
-                <TouchableOpacity onPress={handleGeneral}>
+                <TouchableOpacity onPress={() => navigation.navigate('Đặt hàng' as any)}>
                     <View style={StyleBottomSheetHome.viewbringship}>
                         <View style={StyleBottomSheetHome.viewimgbringship}>
                             <Image source={order.CARRIEDAWAY} style={StyleBottomSheetHome.imgbringship} />

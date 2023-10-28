@@ -14,12 +14,6 @@ type Props = {
 const ItemSelectedAddressOrder: React.FC<Props> = ({ address }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const [selectedAddressType, setSelectedAddressType] = useState<boolean>(false);
-    const handleSelectedAddress = (address: any) => {
-        if (selectedAddressType === true) {
-            //@ts-ignore
-            navigation.navigate('TabHomeNavigate', { screen: 'Đơn hàng', params: { item: address } })
-        }
-    }
 
     return (
         <SafeAreaView>
@@ -44,7 +38,7 @@ const ItemSelectedAddressOrder: React.FC<Props> = ({ address }) => {
                     </View>
                 </View>
             </View>
-            <TouchableOpacity style={StyleItemSelectedAddress.viewdone} onPress={() => handleSelectedAddress(address)}>
+            <TouchableOpacity style={StyleItemSelectedAddress.viewdone} onPress={() => navigation.navigate('TabHomeNavigate' as any, { screen: 'Đơn hàng', params: { item: address } })}>
                 <Text style={StyleItemSelectedAddress.textdone}>Xong</Text>
             </TouchableOpacity>
         </SafeAreaView>

@@ -10,6 +10,9 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store/Store'
 import { Messenger } from '../../utils/ShowMessage'
 import { useUpdateCartMutation } from '../../service/api/IndexCart'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store/Store'
+import { AddCart } from '../../redux/slices/CartSlice'
 
 interface Props {
     show: boolean;
@@ -22,6 +25,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const id = useSelector((state: RootState) => state.user.user._id);
+    const dispatch = useDispatch<AppDispatch>();
     const [open, setopen] = useState<boolean>(show);
     const [note, setNote] = useState<string>(ProductId?.NoteProduct);
     const [quantity, setQuantity] = useState<number>(ProductId?.QuantityProduct);
@@ -77,7 +81,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     const handleUpdateCart = async () => {
         try {
             const data: any = {
-                ProductId: ProductId.ProductId._id, // Sử dụng ProductId.ProductId._id thay vì IdProduct
+                ProductId: ProductId.ProductId._id,
                 NameProduct: ProductId.NameProduct,
                 PriceProduct: Total(size, selectedTopping, quantity),
                 QuantityProduct: quantity,
@@ -90,8 +94,8 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                 setTimeout(() => {
                     Messenger("Cập nhật thành công", "success")
                     onDismiss();
+                    dispatch(AddCart(data))
                 }, 2000);
-                console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ response:", response);
             }
         } catch (error: any) {
             console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:", error);
