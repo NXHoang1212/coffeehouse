@@ -10,6 +10,12 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store/Store'
 import { Messenger } from '../../utils/ShowMessage'
 import { useUpdateCartMutation } from '../../service/api/IndexCart'
+<<<<<<< HEAD
+=======
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store/Store'
+import { AddCart } from '../../redux/slices/CartSlice'
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 
 interface Props {
     show: boolean;
@@ -22,6 +28,10 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const id = useSelector((state: RootState) => state.user.user._id);
+<<<<<<< HEAD
+=======
+    const dispatch = useDispatch<AppDispatch>();
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
     const [open, setopen] = useState<boolean>(show);
     const [note, setNote] = useState<string>(ProductId?.NoteProduct);
     const [quantity, setQuantity] = useState<number>(ProductId?.QuantityProduct);
@@ -77,7 +87,11 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     const handleUpdateCart = async () => {
         try {
             const data: any = {
+<<<<<<< HEAD
                 ProductId: ProductId.ProductId._id, // Sử dụng ProductId.ProductId._id thay vì IdProduct
+=======
+                ProductId: ProductId.ProductId._id,
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
                 NameProduct: ProductId.NameProduct,
                 PriceProduct: Total(size, selectedTopping, quantity),
                 QuantityProduct: quantity,
@@ -90,8 +104,13 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                 setTimeout(() => {
                     Messenger("Cập nhật thành công", "success")
                     onDismiss();
+<<<<<<< HEAD
                 }, 2000);
                 console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ response:", response);
+=======
+                    dispatch(AddCart(data))
+                }, 2000);
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
             }
         } catch (error: any) {
             console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:", error);

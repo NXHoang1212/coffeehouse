@@ -13,7 +13,6 @@ interface RouteParams {
 }
 
 const PermissionProfit = () => {
-  //as là một kiểu dữ liệu giống như type of
   const { url } = useRoute().params as RouteParams;
   console.log(url)
   const goback = useGoBack();

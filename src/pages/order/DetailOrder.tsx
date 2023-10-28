@@ -12,7 +12,7 @@ interface PropsDetailOrder {
 }
 
 const DetailOrder = () => {
-  ThemLightStatusBar('light-content', '#000');
+  ThemLightStatusBar('dark-content', '#fff');
   const { id } = useRoute().params as PropsDetailOrder;
   const { data } = useGetProductsByIdQuery(id);
   const showdetail = data?.data;

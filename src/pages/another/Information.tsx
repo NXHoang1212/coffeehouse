@@ -16,17 +16,18 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store/Store';
 import { setUser } from '../../redux/slices/AuthSlice';
 
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
-  const user = useSelector((state: any) => state.user.user)
+  const user = useSelector((state: RootState) => state.user.user)
   const id = user._id
   const [name, setName] = useState<string>(user.name)
   const [holder, setHolder] = useState<string>(user.holder)
@@ -35,10 +36,10 @@ const Information = () => {
   const [birthday, setBirthday] = useState<string>(user.birthday)
   const [open, setOpen] = useState<boolean>(false)
   const [genderModalVisible, setGenderModalVisible] = useState<boolean>(false);
-  const handleGenderSelection = (selectedGender: string) => {
-    monitorChangeInput('gender', selectedGender);
-    setGenderModalVisible(false)
-  };
+  // const handleGenderSelection = (selectedGender: string) => {
+  //   monitorChangeInput('gender', selectedGender);
+  //   setGenderModalVisible(false)
+  // };
   const [emailInputDisabled, setEmailInputDisabled] = useState<boolean>(!!email);
   const [birthdayInputDisabled, setBirthdayInputDisabled] = useState<boolean>(!!birthday);
   const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
@@ -77,16 +78,12 @@ const Information = () => {
       birthday: birthday,
     }
     const res = await ApiUpdateUser(id, data)
-    console.log("🚀 ~ file: Information.tsx:76 ~ handleUpdateUser ~ res:", res)
     if (res) {
       Messenger('Cập nhật thành công', 'success')
       dispatch(setUser(res))
-      //@ts-ignore
-      navigation.navigate('Other')
+      navigation.navigate('Other' as any)
     }
   }
-
-
 
   return (
     <View style={StyleInformation.container}>
@@ -185,7 +182,10 @@ const Information = () => {
           <ModalOptionGender
             visible={genderModalVisible}
             onClose={() => setGenderModalVisible(false)}
-            onSelectGender={handleGenderSelection}
+            onSelectGender={(selectedGender) => {
+              monitorChangeInput('gender', selectedGender);
+              setGenderModalVisible(false)
+            }}
           />
         </View>
       </ScrollView>

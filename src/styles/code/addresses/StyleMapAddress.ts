@@ -1,6 +1,6 @@
 import { WIDTH, HEIGHT, FONTSIZE } from '../../../constant/Responsive'
-import { COLOR } from '../../../constant/Color'
 import { StyleSheet } from 'react-native';
+import { COLOR } from '../../../constant/Color';
 
 
 export const StyleMapAddress = StyleSheet.create({

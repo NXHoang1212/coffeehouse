@@ -31,30 +31,11 @@ const EditAddress: React.FC = () => {
   const [phone, setPhone] = useState<string>(InforAddress.phone);
   const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
-  
-  const back = () => {
-    dispatch(setAddress({
-      _id: '',
-      name: '',
-      DescribeAddRess: '',
-      Other: '',
-      Gate: '',
-      NoteOrther: '',
-      userId: '',
-      username: '',
-      phone: ''
-    }))
-    goback();
-  }
 
   const monitorAddressInput = (fieldName: string, newValue: string) => {
     MonitorAddressInput(fieldName, newValue, setName, address, setOther, setGate, setNote, setUsername, setPhone, setIsAnyFieldEmpty,);
   };
 
-  const handleNavigateMap = () => {
-    //@ts-ignore
-    navigation.navigate('MapsAddress')
-  }
   useEffect(() => {
     if (name && address && other && gate && note && username && phone) {
       setIsAnyFieldEmpty(false)
@@ -72,12 +53,10 @@ const EditAddress: React.FC = () => {
       username: username,
       phone: phone,
     }
-    console.log("🚀 ~ file: EditAddress.tsx:69 ~ handleUpdateAddress ~ data", data)
     const res = await UpdateAddress(id, data)
     if (res) {
       Messenger('Cập nhật địa chỉ thành công', 'success')
-      //@ts-ignore
-      navigation.navigate('SaveAddress')
+      navigation.navigate('SaveAddress' as any)
     }
   }
 
@@ -89,15 +68,14 @@ const EditAddress: React.FC = () => {
     const res = await DeleteAddress(id)
     if (res) {
       Messenger('Xóa địa chỉ thành công', 'success')
-      //@ts-ignore
-      navigation.navigate('SaveAddress')
+      navigation.navigate('SaveAddress' as any)
     }
   }
 
   return (
     <View style={StyleEditAddress.container}>
       <View style={StyleEditAddress.viewheader}>
-        <TouchableOpacity onPress={back}>
+        <TouchableOpacity onPress={() => { dispatch(setAddress({ _id: '', name: '', DescribeAddRess: '', Other: '', Gate: '', NoteOrther: '', userId: '', username: '', phone: '' })); goback() }}>
           <Image source={Icon.BACK} style={StyleEditAddress.iconBack} />
         </TouchableOpacity>
         <Text style={StyleEditAddress.textHeader}>Sửa địa chỉ đã lưu</Text>
@@ -112,7 +90,7 @@ const EditAddress: React.FC = () => {
           </View>
           <View style={StyleEditAddress.viewhome}>
             <Text style={StyleEditAddress.textTitle}>Địa chỉ</Text>
-            <TouchableOpacity style={StyleEditAddress.viewtextinput} onPress={handleNavigateMap}>
+            <TouchableOpacity style={StyleEditAddress.viewtextinput} onPress={() => navigation.navigate('MapsAddress' as any)}>
               <Text style={StyleEditAddress.textvalue}>{address}</Text>
               <Image source={Icon.RIGHT} style={StyleEditAddress.iconArrow} />
             </TouchableOpacity>

@@ -15,10 +15,25 @@ const initialState: AddRess = {
 
 const AddressSlice = createSlice({
     name: 'Address',
-    initialState,
+    initialState: {
+        ...initialState,
+        ignoredPath: 'address',
+        ignoredNested: {
+            one: 'one',
+            two: 'two',
+        },
+    },
     reducers: {
         setAddress(state, action: PayloadAction<AddRess>) {
-            return action.payload;
+            state._id = action.payload._id;
+            state.name = action.payload.name;
+            state.DescribeAddRess = action.payload.DescribeAddRess;
+            state.Other = action.payload.Other;
+            state.Gate = action.payload.Gate;
+            state.NoteOrther = action.payload.NoteOrther;
+            state.userId = action.payload.userId;
+            state.username = action.payload.username;
+            state.phone = action.payload.phone;
         },
         setMap(state, action) {
             state.DescribeAddRess = action.payload.DescribeAddRess;

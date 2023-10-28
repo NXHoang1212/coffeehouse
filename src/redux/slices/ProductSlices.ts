@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, } from "@reduxjs/toolkit";
 import { Products } from "../../data/types/Product.entity";
 import { ImageSourcePropType } from 'react-native';
 
@@ -15,7 +15,14 @@ const initialState: Products = {
 
 const ProductsSlice = createSlice({
     name: 'Products',
-    initialState,
+    initialState: {
+        ...initialState,
+        ignoredPath: 'Products',
+        ignoredNested: {
+            one: 'one',
+            two: 'two',
+        },
+    },
     reducers: {
         setProducts: (state, action) => {
             return action.payload;

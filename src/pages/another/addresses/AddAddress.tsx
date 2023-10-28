@@ -31,7 +31,7 @@ const AddAddress: React.FC = () => {
   const [NoteOther, SetNoteOther] = useState<string>('');
   const [userName, setuserName] = useState<string>(user.name);
   const [Phone, setPhone] = useState<string>(user.mobile);
-  
+
   const handeleCreateAddress = async () => {
     try {
       const res = await CreateAddress({
@@ -48,14 +48,9 @@ const AddAddress: React.FC = () => {
         Messenger('Thêm địa chỉ thành công', 'success')
         goback()
       }
-      console.log("🚀 ~ file: AddAddress.tsx:42 ~ handeleCreateAddress ~ res", res)
     } catch (error: any) {
-
+      console.log("🚀 ~ file: AddAddress.tsx:52 ~ handeleCreateAddress ~ error:", error)
     }
-  }
-  const navigateMap = () => {
-    //@ts-ignore
-    navigation.navigate('MapsAddress')
   }
 
   return (
@@ -87,7 +82,7 @@ const AddAddress: React.FC = () => {
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Địa chỉ</Text>
-            <TouchableOpacity style={StyleAddAddress.viewtextinput} onPress={navigateMap}>
+            <TouchableOpacity style={StyleAddAddress.viewtextinput} onPress={() => navigation.navigate('MapsAddress' as any)}>
               {DescribeAddRess ?
                 <Text style={StyleAddAddress.textinput}>{DescribeAddRess}</Text>
                 :

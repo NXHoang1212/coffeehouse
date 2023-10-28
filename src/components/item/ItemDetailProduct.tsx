@@ -22,13 +22,19 @@ interface PropsDetailItemProduct {
 
 const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     const goBack = useGoBack();
+<<<<<<< HEAD
     const { isLoggedIn } = useAuth();
+=======
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
     let id = useSelector((state: RootState) => state.user.user._id);
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
     const toltalPrice = quantity * item.price;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
     const AddToFavourites = async () => {
         try {
             const data = {

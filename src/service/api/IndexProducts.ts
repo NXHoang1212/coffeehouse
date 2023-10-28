@@ -8,8 +8,6 @@ export const ApiProducts = createApi({
     reducerPath: 'apiProducts',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        //đây là 1 api endpoint dùng để lấy dữ liệu từ server về client 
-        //void được dùng khi không có tham số truyền vào
         getProducts: build.query<{ data: DetailProduct[] }, void>({
             query: () => '/api/users/product'
         }),
@@ -22,9 +20,3 @@ export const ApiProducts = createApi({
 
 export const { useGetProductsQuery, useGetProductsByIdQuery } = ApiProducts
 
-
-
-// export const getProducts = async () => {
-//     const res = await AxiosInstance().get('/api/users/product');
-//     return res.data;
-// }   

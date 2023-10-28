@@ -1,7 +1,16 @@
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const SignOut = ({ visible, title, message, onCancelPress, onOKPress }: any) => {
+
+interface Props {
+    visible: boolean;
+    title: string;
+    message: string;
+    onCancelPress: () => void;
+    onOKPress: () => void;
+}
+
+const SignOut = ({ visible, title, message, onCancelPress, onOKPress }: Props) => {
     return (
         <Modal visible={visible} animationType='fade' transparent>
             <View style={styles.modalContainer}>
@@ -17,8 +26,12 @@ const SignOut = ({ visible, title, message, onCancelPress, onOKPress }: any) => 
                             onPress={() => {
                                 onOKPress();
                                 onCancelPress();
+<<<<<<< HEAD
                             }}
                         >
+=======
+                            }} >
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
                             <Text style={styles.okButtonText}>OK</Text>
                         </TouchableOpacity>
                     </View>

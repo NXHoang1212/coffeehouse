@@ -7,7 +7,6 @@ import { Icon } from '../../constant/Icon';
 import StyleRules from '../../styles/other/StyleRules';
 import { ThemLightStatusBar } from '../../constant/ThemLight';
 
-//định nghĩa dữ liệu url
 interface RouteParams {
   link: string;
 }

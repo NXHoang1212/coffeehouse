@@ -13,8 +13,12 @@ const SearchOrder = () => {
   const goBack = useGoBack()
   ThemLightStatusBar('dark-content', '#fff')
   const [search, setSearch] = useState<string>('')
+<<<<<<< HEAD
   const products = useSelector((state: RootState) => state.product.product)
     .filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase()))
+=======
+  const products = useSelector((state: RootState) => state.product.product).filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase()))
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 
 
   return (

@@ -1,13 +1,6 @@
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import WebViewUrl from "../../components/redirectUrl/WebView";
-import Favourites from "../../pages/order/Favourites";
 import AuthStackNavigate from "../auth/AuthUserNavigate";
-import RankMember from "../../pages/code/RankMember";
-import HistoryBean from "../../pages/code/HistoryBean";
-import ChangeBean from "../../pages/code/ChangeBean";
-import PermissionProfit from "../../pages/code/PermissionProfit";
-import DiscountUser from "../../pages/discount/DiscountUser";
-import Rules from "../../pages/another/Rules";
 import PlayMusic from "../../pages/another/PlayMusic";
 import FeedBackOrder from "../../pages/another/FeedBackOrder";
 import ContactFeedBack from "../../pages/another/ContactFeedBack";
@@ -15,11 +8,21 @@ import Address from "../../pages/another/addresses/SaveAddress";
 import AddAddress from "../../pages/another/addresses/AddAddress";
 import EditAddress from "../../pages/another/addresses/EditAddress";
 import AboutCoffee from "../../pages/another/ordinary/AboutCoffee";
-import Notifee from "../../pages/general/Notifee";
 import MapsAddress from "../../pages/another/addresses/MapsAddress";
 import SearchMapAddress from "../../pages/another/addresses/SearchMapAddress";
-import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
+import Favourites from "../../pages/order/Favourites";
+import RankMember from "../../pages/code/RankMember";
+import HistoryBean from "../../pages/code/HistoryBean";
+import ChangeBean from "../../pages/code/ChangeBean";
+import PermissionProfit from "../../pages/code/PermissionProfit";
+import DiscountUser from "../../pages/discount/DiscountUser";
+import Rules from "../../pages/another/Rules";
+import Notifee from "../../pages/general/Notifee";
 import DetailOrder from "../../pages/order/DetailOrder";
+<<<<<<< HEAD
+=======
+import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 import UpdateOrderUser from "../../pages/cart/UpdateOrderUser";
 
 

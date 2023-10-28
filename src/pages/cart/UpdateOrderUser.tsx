@@ -9,11 +9,21 @@ import { Messenger } from '../../utils/ShowMessage'
 import { ApiUpdateUser } from '../../service/api/IndexUser'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store/Store'
+<<<<<<< HEAD
+=======
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store/Store'
+import { updateUserData } from '../../redux/slices/AuthSlice'
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 
 const UpdateOrderUser: React.FC = () => {
     const goBack = useGoBack()
     const route = useRoute<any>()
     const item = route.params?.item;
+<<<<<<< HEAD
+=======
+    const dispatch = useDispatch<AppDispatch>();
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
     const id = useSelector((state: RootState) => state.user.user._id)
     const [name, setName] = useState<any>(item.UserId.name)
     const [mobile, setMobile] = useState<any>(item.UserId.mobile)
@@ -24,10 +34,17 @@ const UpdateOrderUser: React.FC = () => {
                 mobile: mobile
             }
             const response = await ApiUpdateUser(id, data)
+<<<<<<< HEAD
             console.log("🚀 ~ file: UpdateOrderUser.tsx:23 ~ response", response);
             if (response) {
                 Messenger('Cập nhật thành công', 'success')
                 goBack()
+=======
+            if (response) {
+                Messenger('Cập nhật thành công', 'success')
+                goBack()
+                dispatch(updateUserData(data))
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
             }
         } catch (error) {
             console.log("🚀 ~ file: UpdateOrderUser.tsx:28 ~ error", error)

@@ -18,7 +18,14 @@ const initialState: User = {
 
 const UserSlice = createSlice({
     name: 'user',
-    initialState,
+    initialState: {
+        ...initialState,
+        ignoredPath: 'users',
+        ignoredNested: {
+            one: 'one',
+            two: 'two',
+        },
+    },
     reducers: {
         setUser(state, action: PayloadAction<User>) {
             state._id = action.payload._id;
@@ -33,8 +40,11 @@ const UserSlice = createSlice({
             state.gender = action.payload.gender;
             state.birthday = action.payload.birthday;
         },
+        updateUserData(state, action: PayloadAction<UserData>) {
+            state.name = action.payload.name;
+            state.mobile = action.payload.mobile;
+        },
         clearUser(state) {
-            //xóa hết dữ liệu của user
             state._id = '';
             state.role = '';
             state.googleId = '';
@@ -49,4 +59,4 @@ const UserSlice = createSlice({
 
 
 export default UserSlice.reducer;
-export const { setUser, clearUser } = UserSlice.actions;
+export const { setUser, clearUser, updateUserData } = UserSlice.actions;

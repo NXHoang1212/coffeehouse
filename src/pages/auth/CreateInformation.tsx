@@ -12,19 +12,22 @@ import { CheckBox } from 'react-native-elements'
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiUpdateUser } from '../../service/api/IndexUser';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { setUser } from '../../redux/slices/AuthSlice';
+import { RootState } from '../../redux/store/Store';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch();
   const [checked, setChecked] = useState<boolean>(false)
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
   const [open, setOpen] = useState<boolean>(false)
-  const user = useSelector((state: any) => state.user)
+  const user = useSelector((state: RootState) => state.user.user)
   const id = user._id
   const [name, setName] = useState<string>(user.name)
   const [holder, setHolder] = useState<string>(user.holder)
@@ -42,16 +45,13 @@ const CreateInformation = () => {
         birthday: birthday
       }
       const response = await ApiUpdateUser(id, data)
-      console.log("🚀 ~ file: CreateInformation.tsx:42 ~ handle ~ response", response)
-      //nếu cập nhật thành công thì lưu vào redux và chuyển sang trang chủ
       if (response) {
         const user = response.data
         dispatch(setUser(user))
-        //@ts-ignore
-        navigation.navigate('TabHomeNavigate', { screen: 'Trang chủ' })
+        navigation.navigate('TabHomeNavigate' as any, { screen: 'Trang chủ' })
       }
     } catch (error: any) {
-      console.log("🚀 ~ file: CreateInformation.tsx:44 ~ handle ~ error", error)
+      console.log("🚀 ~ file: CreateInformation.tsx:133 ~ handle ~ error", error)
     }
   }
 

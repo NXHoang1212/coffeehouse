@@ -31,11 +31,14 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
     name: 'Vừa',
     price: 0,
   });
+<<<<<<< HEAD
 
   const handleProductDetail = () => {
     //@ts-ignore
     navigation.navigate('StackHomeNavigate', { screen: 'DetailOrder', params: { id: item._id } })
   }
+=======
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
@@ -49,6 +52,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
         }
       }
     } else {
+<<<<<<< HEAD
       //@ts-ignore
       navigation.navigate('AuthStackUser', { screen: 'Login' });
     }
@@ -77,6 +81,34 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
     }
   }
 
+=======
+      navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
+    }
+  }
+  
+  const handleAddToCart = async (item: DetailProduct) => {
+    try {
+      const data: any = {
+        UserId: user,
+        ProductId: [
+          {
+            NameProduct: item.name,
+            PriceProduct: item.price,
+            QuantityProduct: 1,
+            SizeProduct: size,
+          }
+        ]
+      }
+      const response = await CreateEmptyCart(data);
+      if (response) {
+        Messenger('Thêm vào giỏ hàng thành công', 'success');
+      }
+    } catch (error: any) {
+      console.log("🚀 ~ file: ItemProduct.tsx:110 ~ error", error)
+    }
+  }
+
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
   return (
     <View style={StyleItemProduct.container}>
       <View style={StyleItemProduct.viewbody}>
@@ -85,7 +117,11 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
           </View>
         )}
+<<<<<<< HEAD
         <TouchableOpacity onPress={handleProductDetail}>
+=======
+        <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder', params: { id: item._id } })}>
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
           <View style={StyleItemProduct.viewProduct}>
             <View>
               <Animated.Image

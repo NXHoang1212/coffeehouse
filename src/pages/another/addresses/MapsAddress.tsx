@@ -1,21 +1,17 @@
 import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar, TextInput } from 'react-native';
 import { StyleMapAddress } from '../../../styles/code/addresses/StyleMapAddress';
 import { Icon } from '../../../constant/Icon'
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import { useGoBack } from '../../../utils/GoBack';
 import { RequestLocationPermission } from '../../../utils/PermissionMaps';
 import { GetCurrentPosition } from '../../../utils/GetCurrentLocation';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 import { useDispatch } from 'react-redux';
 import { setMap } from '../../../redux/slices/AddressSlice';
 import Modal from "react-native-modal";
 import { Picker } from '@react-native-picker/picker';
 import Location from '../../../data/json/HCM.json';
 import { findDistrictName, findWardName } from '../../../utils/IndexAddress';
-import { MonitorAddressInput } from '../../../utils/MonitorInput';
 
 const MapsAddress: React.FC = () => {
   const goBack = useGoBack();
@@ -61,35 +57,24 @@ const MapsAddress: React.FC = () => {
       });
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      RequestLocationPermission();
-      GetCurrentPosition((position: { latitude: any; longitude: any; }) => {
-        if (position) {
-          const { latitude, longitude } = position;
-          fetchNearbyPlaces(latitude, longitude, 100)
-            .then(nearbyAddresses => {
-              // console.log('Nearby Addresses:', nearbyAddresses);
-              if (nearbyAddresses) {
-                setNearbyAddresses(nearbyAddresses);
-              }
-            });
-          setInitialRegion({
-            latitude,
-            longitude,
-            latitudeDelta: 0.009,
-            longitudeDelta: 0.009,
+  useEffect(() => {
+    RequestLocationPermission();
+    GetCurrentPosition((position: { latitude: any; longitude: any; }) => {
+      if (position) {
+        const { latitude, longitude } = position;
+        fetchNearbyPlaces(latitude, longitude, 100)
+          .then(nearbyAddresses => {
+            if (nearbyAddresses) {
+              setNearbyAddresses(nearbyAddresses);
+            }
           });
-        }
-      });
-    }, []),
-  );
-
+        setInitialRegion({ latitude, longitude, latitudeDelta: 0.009, longitudeDelta: 0.009, });
+      }
+    });
+  }, []);
   const handleSelectAddress = (item: any) => {
-    //Thêm tphcm vào cuối
     const InforMap = `${item.vicinity},TP.Hồ Chí Minh`;
     dispatch(setMap({ DescribeAddRess: InforMap }));
-    //@ts-ignore
     goBack();
   }
 
@@ -115,7 +100,6 @@ const MapsAddress: React.FC = () => {
           <Image source={Icon.BACK} />
         </TouchableOpacity>
         <Text style={StyleMapAddress.textheader}>Chọn địa chỉ</Text>
-        {/* @ts-ignore */}
         <TouchableOpacity onPress={toggleModal}>
           <Image source={Icon.PLUS} />
         </TouchableOpacity>
@@ -174,7 +158,7 @@ const MapsAddress: React.FC = () => {
             onValueChange={(itemValue) => handleSelectDistrict(itemValue)}
             style={StyleMapAddress.picker} >
             <Picker.Item label="Chọn quận huyện" value={null} />
-            {Location.District.map((item: any, index: any) => (
+            {Location.District.map((item: any, index: number) => (
               <Picker.Item key={index} label={item.name_with_type} value={item.code} />
             ))}
           </Picker>
@@ -183,7 +167,7 @@ const MapsAddress: React.FC = () => {
             onValueChange={(itemValue) => setSelectedWard(itemValue)}
             style={StyleMapAddress.picker} >
             <Picker.Item label="Chọn phường xã" value={null} />
-            {Location.Ward.filter((item: any) => item.parent_code === selectedDistrict).map((item: any, index: any) => (
+            {Location.Ward.filter((item: any) => item.parent_code === selectedDistrict).map((item: any, index: number) => (
               <Picker.Item key={index} label={item.name_with_type} value={item.code} />
             ))}
           </Picker>

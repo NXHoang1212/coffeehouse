@@ -8,6 +8,7 @@ import { Icon } from '../../constant/Icon';
 const ChangeBean = () => {
   const goback = useGoBack();
   ThemLightStatusBar('dark-content', '#fff');
+  
   return (
     <View style={StyleChangeBean.container}>
       <View style={StyleChangeBean.viewheader}>

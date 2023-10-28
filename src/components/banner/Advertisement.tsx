@@ -55,7 +55,6 @@ const BannerSlider = () => {
             if (autoplay && slideRef.current) {
                 const nextIndex = (currentIndex + 1) % data.length;
                 if (currentIndex === data.length - 1 && nextIndex === 0) {
-                    // Nếu bạn đang ở cuối danh sách, chuyển tới hình đầu
                     slideRef.current.scrollToIndex({ index: 0 });
                 } else {
                     slideRef.current.scrollToIndex({ index: nextIndex });

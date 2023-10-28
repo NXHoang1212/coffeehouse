@@ -14,14 +14,13 @@ const InputPhone = () => {
     const focusLoginProps = FocusLogin();
     const [phone, setPhone] = useState<string>('')
     const isPhoneValid = phone.length === 10 || phone.length === 9;
-    const handlePhoneChange = (text: string) => {
-        setPhone(text);
-    };
-    const handleLogin = () => {
-        //@ts-ignore
-        navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser, { screen: 'ConfirmOtpCode', })
-        focusLoginProps.onBlurLogin();
-    };
+    // const handlePhoneChange = (text: string) => {
+    //     setPhone(text);
+    // };
+    // const handleLogin = () => {
+    //     navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'ConfirmOtpCode', })
+    //     focusLoginProps.onBlurLogin();
+    // };
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={StyleInputPhone.container}>
@@ -45,7 +44,7 @@ const InputPhone = () => {
                         keyboardType="numeric"
                         maxLength={10}
                         value={phone}
-                        onChangeText={handlePhoneChange}
+                        onChangeText={(text) => setPhone(text)}
                         onFocus={focusLoginProps.onFocusLogin}
                         onBlur={focusLoginProps.onBlurLogin}
                     />
@@ -55,14 +54,14 @@ const InputPhone = () => {
                         </TouchableOpacity>
                     )}
                 </View>
-                <TouchableOpacity onPress={handleLogin} disabled={!isPhoneValid}>
+                <TouchableOpacity onPress={() => { navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'ConfirmOtpCode', }); focusLoginProps.onBlurLogin() }} disabled={!isPhoneValid}>
                     <View
                         style={[StyleInputPhone.viewlogin, { backgroundColor: isPhoneValid ? 'orange' : 'gray' },]}   >
                         <Text style={StyleInputPhone.textlogin}>Đăng nhập</Text>
                     </View>
                 </TouchableOpacity>
             </View>
-        </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback >
     )
 }
 

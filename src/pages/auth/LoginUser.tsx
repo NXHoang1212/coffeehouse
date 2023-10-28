@@ -24,18 +24,6 @@ const LoginUser = () => {
     const focusLoginProps = FocusLogin();
     const [phone, setPhone] = useState<string>('')
     const isPhoneValid = phone.length === 10;
-    const handlePhoneChange = (text: string) => {
-        setPhone(text);
-        focusLoginProps.onFocusLogin();
-    };
-    const handleLogin = () => {
-        focusLoginProps.onBlurLogin();
-        loginSendOtp(phone, navigation);
-    };
-    const handleNavigate = () => {
-        //@ts-ignore
-        navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser, { screen: 'CreateInformation', })
-    }
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={StyleLoginUser.container}>
@@ -62,12 +50,12 @@ const LoginUser = () => {
                             keyboardType="numeric"
                             maxLength={10}
                             value={phone}
-                            onChangeText={handlePhoneChange}
+                            onChangeText={(text) => { setPhone(text), focusLoginProps.onFocusLogin() }}
                             onFocus={focusLoginProps.onFocusLogin}
                             onBlur={focusLoginProps.onBlurLogin}
                         />
                     </View>
-                    <TouchableOpacity onPress={handleLogin} disabled={!isPhoneValid}>
+                    <TouchableOpacity onPress={() => { focusLoginProps.onBlurLogin(), loginSendOtp(phone, navigation) }} disabled={!isPhoneValid}>
                         <View
                             style={[StyleLoginUser.viewlogin, { backgroundColor: isPhoneValid ? 'orange' : 'gray' },]}   >
                             <Text style={StyleLoginUser.textlogin}>Đăng nhập</Text>
@@ -79,7 +67,7 @@ const LoginUser = () => {
                         <View style={StyleLoginUser.lineor} />
                     </View>
                     <View style={StyleLoginUser.viewloginOther}>
-                        <TouchableOpacity onPress={handleNavigate}>
+                        <TouchableOpacity onPress={() => navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'CreateInformation', })}>
                             <View style={StyleLoginUser.viewapple}>
                                 <Image source={Logo.APPLE} style={StyleLoginUser.iconfb} />
                                 <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Apple</Text>

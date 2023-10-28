@@ -34,6 +34,7 @@ const CartOrder = () => {
       dispatch(setProducts(showProducts));
       hasDispatched.current = true;
     }
+<<<<<<< HEAD
     //@ts-ignore
     navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser');
   }, [dispatch, setProducts, showProducts, navigation, isLoggedIn]);
@@ -41,6 +42,10 @@ const CartOrder = () => {
     //@ts-ignore
     navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser', { screen: 'Favourites', });
   }, [navigation, isLoggedIn]);
+=======
+    navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser' as any);
+  }, [dispatch, setProducts, showProducts, navigation, isLoggedIn]);
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
     setShow(false);
@@ -86,7 +91,11 @@ const CartOrder = () => {
               <TouchableOpacity onPress={handleSearch}>
                 <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
               </TouchableOpacity>
+<<<<<<< HEAD
               <TouchableOpacity onPress={handleFavourites}>
+=======
+              <TouchableOpacity onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser' as any, { screen: 'Favourites', })}>
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
                 <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
               </TouchableOpacity>
             </View>
@@ -95,6 +104,7 @@ const CartOrder = () => {
           <Animated.ScrollView ref={scrollViewRef}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ flexGrow: 1 }}
+<<<<<<< HEAD
             onScroll={Animated.event(
               [{ nativeEvent: { contentOffset: { y: scrollY } } }],
               { useNativeDriver: true }
@@ -104,12 +114,20 @@ const CartOrder = () => {
                 refreshing={false}
                 onRefresh={() => { }}
               />}>
+=======
+            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+            refreshControl={<RefreshControl refreshing={false} onRefresh={() => { }} />}>
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
             <View style={StyleOrder.viewbody}>
               <CategoryItem setSelectedCategory={handleCategorySelect} />
               <View style={StyleOrder.viewbottom}>
                 <FlashList
                   data={showProducts}
+<<<<<<< HEAD
                   renderItem={({ item }: any) => {
+=======
+                  renderItem={({ item }) => {
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
                     const isFirstItem = currentCategory !== item.category.name;
                     currentCategory = item.category.name;
                     return (<ItemProduct item={item} showCategory={isFirstItem} isFirstItem={isFirstItem} />)

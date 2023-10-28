@@ -5,14 +5,13 @@ import LinearGradient from 'react-native-linear-gradient';
 
 interface ModalOptionProps {
     visible: boolean;
-    //void là không trả về gì cả
     onClose: () => void;
     onSelectGender: (gender: string) => void;
 }
 
 const ModalOptionGender: React.FC<ModalOptionProps> = ({ visible, onClose, onSelectGender }) => {
     return (
-        <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose}>
+        <Modal visible={visible} animationType="slide" transparent={true} onRequestClose={onClose} hardwareAccelerated={true} statusBarTranslucent={true}>
             <LinearGradient colors={['#e8e3e3', '#e8e3e3']} style={StyleOptionGender.modalContainer}>
                 <View style={StyleOptionGender.modalContent}>
                     <Text style={StyleOptionGender.modalTitle}>Giới tính của bạn?</Text>

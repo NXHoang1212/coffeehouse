@@ -14,15 +14,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AnyAction, CombinedState, Reducer } from 'redux';
 import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
 import { ApiFavourites } from '../../service/api/IndexFavourites';
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 const persistConfig: any = {
     key: 'root',
     storage: AsyncStorage,
 }
 
+<<<<<<< HEAD
 const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; }>, AnyAction> = combineReducers({
     user: UserReducer,
     product: ProductReducer,
     methodamount: MethodAmountReducer,
+=======
+const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; cart: any }>, AnyAction> = combineReducers({
+    user: UserReducer,
+    product: ProductReducer,
+    methodamount: MethodAmountReducer,
+    cart: CartReducer,
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -37,17 +50,29 @@ const store = configureStore({
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
         user: persistedReducer,
+<<<<<<< HEAD
         cart: CartReducer,
+=======
+        cart: persistedReducer,
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
         methodamount: persistedReducer,
         [ApiCart.reducerPath]: ApiCart.reducer,
         [ApiFavourites.reducerPath]: ApiFavourites.reducer,
     },
+<<<<<<< HEAD
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
         immutableCheck: {
             ignoredPaths: ['product', 'user', 'methodamount', 'address', 'cart'],
         }
     }).concat( ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
+=======
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+            immutableCheck: false,
+        }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
+>>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 });
 
 setupListeners(store.dispatch);
