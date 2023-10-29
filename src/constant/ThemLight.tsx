@@ -1,5 +1,5 @@
 import { StatusBar } from 'react-native';
-
+import { useEffect } from 'react';
 
 export const ThemLightStatusBar = (style: 'dark-content' | 'light-content', color: string) => {
     StatusBar.setBarStyle(style);

@@ -1,35 +1,19 @@
-import { createSlice, } from "@reduxjs/toolkit";
-import { Products } from "../../data/types/Product.entity";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DetailProduct, Products } from "../../data/types/Product.entity";
 import { ImageSourcePropType } from 'react-native';
+import { useGetProductsQuery } from "../../service/api/IndexProducts";
 
-const initialState: Products = {
-    _id: '',
-    name: '',
-    price: 0,
-    image: '' as ImageSourcePropType,
-    description: '',
-    category: { _id: '', name: '', },
-    size: [],
-    topping: [],
-}
+const initialState: DetailProduct[] = [];
 
-const ProductsSlice = createSlice({
+const productsSlice = createSlice({
     name: 'Products',
-    initialState: {
-        ...initialState,
-        ignoredPath: 'Products',
-        ignoredNested: {
-            one: 'one',
-            two: 'two',
-        },
-    },
+    initialState,
     reducers: {
-        setProducts: (state, action) => {
+        setProducts: (state, action: PayloadAction<DetailProduct[]>) => {
             return action.payload;
         },
     },
 });
 
-
-export default ProductsSlice.reducer;
-export const { setProducts } = ProductsSlice.actions;
+export default productsSlice.reducer;
+export const { setProducts } = productsSlice.actions;

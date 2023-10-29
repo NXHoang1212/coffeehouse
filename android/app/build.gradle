@@ -163,7 +163,7 @@ dependencies {
 
     implementation project(':react-native-fbsdk-next')
 
-     implementation project(':react-native-geolocation-service')
+    implementation project(':react-native-geolocation-service')
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 

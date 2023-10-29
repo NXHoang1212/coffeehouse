@@ -11,10 +11,8 @@ import { handleMinus, handlePlus } from '../../utils/Total'
 import { useSelector } from 'react-redux'
 import { CreateEmptyCart } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
-import { useDispatch } from 'react-redux'
 import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import { RootState } from '../../redux/store/Store'
-import { AddCart } from '../../redux/slices/CartSlice'
 
 interface Props {
     show: boolean;
@@ -26,10 +24,8 @@ interface Props {
 const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
-    const dispatch = useDispatch();
     const { isLoading, setIsLoading } = LoadingScroll();
-    const user = useSelector((state: RootState) => state.user.user);
-    const id = user._id
+    const id = useSelector((state: RootState) => state.user.user._id)
     const [open, setopen] = useState<boolean>(show);
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedTopping, setSelectedTopping] = useState<any>([]);
@@ -118,7 +114,6 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
             }
             const response: any = CreateEmptyCart(data);
             if (response) {
-                dispatch(AddCart(data));
                 setIsLoading(true);
                 setTimeout(() => {
                     Messenger('Thêm vào giỏ hàng thành công', 'success');

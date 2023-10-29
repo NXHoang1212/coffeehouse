@@ -9,7 +9,7 @@ export const ApiCart = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     tagTypes: ['CartOrder'],
     endpoints: build => ({
-        getCart: build.query<{ data: CartOrder[] }, string>({
+        getCart: build.query<{ data: CartOrder[] }, number>({
             query: (id) => `/api/users/cart/getCart/${id}`,
             providesTags(result) {
                 if (result && Array.isArray(result.data)) {

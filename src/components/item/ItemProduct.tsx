@@ -1,21 +1,21 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct'
 import { DetailProduct, ProductGet, Products } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import BottomSheetDetailOrder from '../../pages/order/BottomSheetDetailOrder';;
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/UseAuth';
 import { CreateEmptyCart } from '../../service/api/IndexCart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { Messenger } from '../../utils/ShowMessage';
-import Animated from 'react-native-reanimated';
+import { ProductContext } from '../../service/provider/ProductContext';
+
 interface PropsItemProduct {
   item: DetailProduct;
   showCategory: boolean;
@@ -25,13 +25,10 @@ interface PropsItemProduct {
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { isLoggedIn } = useAuth();
+  const { setProducts } = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.user.user._id);
   const [show, setShow] = useState<boolean>(false);
-  const [size, setSize] = useState<{ name: string, price: number }>({
-    name: 'Vừa',
-    price: 0,
-  });
-
+  const [size, setSize] = useState<{ name: string, price: number }>({ name: 'Vừa', price: 0 });
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
       if (item.topping.length > 0 && item.size.length > 0) {
@@ -47,7 +44,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
       navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
     }
   }
-  
+
   const handleAddToCart = async (item: DetailProduct) => {
     try {
       const data: any = {
@@ -70,6 +67,11 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
     }
   }
 
+  const onLoad = useCallback(() => {
+    FastImage.preload([{ uri: item.image as string }]);
+  }, []);
+
+
   return (
     <View style={StyleItemProduct.container}>
       <View style={StyleItemProduct.viewbody}>
@@ -78,16 +80,18 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
           </View>
         )}
-        <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder', params: { id: item._id } })}>
+        <TouchableOpacity onPress={() => { setProducts([item]), navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder' }) }}>
           <View style={StyleItemProduct.viewProduct}>
             <View>
-              <Animated.Image
+              <FastImage
                 style={StyleItemProduct.imageproduct}
                 source={{
                   uri: item.image as string,
+                  priority: FastImage.priority.normal,
+                  cache: FastImage.cacheControl.immutable,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-                sharedTransitionTag={item._id}
+                onLoad={onLoad}
               />
             </View>
             <View style={StyleItemProduct.viewitemtextproduct}>

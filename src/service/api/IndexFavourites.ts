@@ -8,7 +8,7 @@ export const ApiFavourites = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     tagTypes: ['Favourites'],
     endpoints: build => ({
-        getFavourites: build.query<{ data: GetFarvourites[] }, string>({
+        getFavourites: build.query<{ data: GetFarvourites[] }, number>({
             query: (id) => `/api/users/favourites/get/${id}`,
         }),
     }),

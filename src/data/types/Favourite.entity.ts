@@ -1,4 +1,5 @@
-export interface GetFarvourites {
+
+export declare interface Favourite {
     _id: string;
     ProductId: string;
     UserId: string;
@@ -15,4 +16,3 @@ export interface CreateFavourite {
     UserId: string;
     status: string;
 }
-

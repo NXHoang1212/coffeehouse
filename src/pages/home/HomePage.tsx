@@ -4,21 +4,18 @@ import StyleHomePage from '../../styles/home/StyleHomePage'
 import { Logo, category, Icon } from '../../constant/Icon'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient';
-import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import BottomSheetHome from './BottomSheetHome'
-import { LoadingScroll } from '../../hooks/Loading'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { useAuth } from '../../hooks/UseAuth'
-import { socket } from '../../utils/Socket'
 
 const HomePage = () => {
   const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const scroll = useRef(null);
+  const scroll = useRef<ScrollView | null>(null);
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
   ThemLightStatusBar('dark-content', backgroundColor);
@@ -30,11 +27,6 @@ const HomePage = () => {
       setBackgroundColor('#FFF7E6');
     }
   };
-  useEffect(() => {
-    socket.on("connection", (data) => {
-      console.log("Received data from server:", data);
-    });
-  }, []);
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>

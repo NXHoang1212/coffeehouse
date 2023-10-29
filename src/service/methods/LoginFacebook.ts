@@ -15,12 +15,10 @@ export const loginFacebook = async (dispatch: (arg0: { payload: User; type: "use
                 console.log('Something went wrong obtaining access token');
             } else {
                 const profile = await Profile.getCurrentProfile();
-                console.log("🚀 ~ file: LoginFacebook.ts:20 ~ loginFacebook ~ profile", profile)
                 const data: any = {
                     facebookId: profile?.userID
                 }
                 const response = await ApiLogin(data);
-                console.log("🚀 ~ file: LoginFacebook.ts:20 ~ loginFacebook ~ res", response)
                 const user = {
                     ...response.user,
                     name: profile?.firstName,

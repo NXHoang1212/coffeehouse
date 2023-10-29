@@ -11,9 +11,8 @@ import { TrunacteString } from '../../utils/TrunacteString';
 import { useGoBack } from '../../utils/GoBack';
 
 const WebViewUrl = () => {
-  const goBack = useGoBack(); // Gọi Hook ở đây
+  const goBack = useGoBack();
   const params = useRoute<ParamsUrl['route']>().params
-  console.log(params)
   const onShare = async () => {
     try {
       const result = await Share.share({ message: params.url });

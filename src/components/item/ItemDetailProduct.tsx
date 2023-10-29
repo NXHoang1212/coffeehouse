@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { DetailProduct } from '../../data/types/Product.entity';
 import { Icon, TabCoffee } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
@@ -9,7 +9,6 @@ import StyleItemDetailProduct from '../../styles/item/StyleItemDetailProduct';
 import { ToggleDescription } from '../../utils/ToggleDescription';
 import { handleMinus, handlePlus } from '../../utils/Total';
 import { CheckBox } from 'react-native-elements';
-import { useAuth } from '../../hooks/UseAuth';
 import { CreateEmptyCart } from '../../service/api/IndexCart';
 import { CreateFavourites } from '../../service/api/IndexFavourites';
 import { useSelector } from 'react-redux';
@@ -26,10 +25,27 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
     const toltalPrice = quantity * item.price;
+    const [selectedTopping, setSelectedTopping] = useState<any>([]);
+    const [selectedSize, setSelectedSize] = useState<any>(null);
+    const [note, setNote] = useState<string>('');
+
+    const handleSelectTopping = (toppingItem: any) => {
+        if (selectedTopping.length === 2) {
+            if (selectedTopping.includes(toppingItem)) {
+                setSelectedTopping(selectedTopping.filter((item: any) => item !== toppingItem))
+            }
+        } else {
+            if (selectedTopping.includes(toppingItem)) {
+                setSelectedTopping(selectedTopping.filter((item: any) => item !== toppingItem))
+            } else {
+                setSelectedTopping([...selectedTopping, toppingItem])
+            }
+        }
+    }
 
     const AddToFavourites = async () => {
         try {
-            const data = {
+            const data: any = {
                 UserId: id,
                 ProductId: item._id,
                 status: 'Đã thích'
@@ -47,6 +63,35 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
         }
     }
 
+    const onLoad = () => {
+        FastImage.preload([{ uri: item.image as string }]);
+    }
+    const AddToCart = () => {
+        if (selectedSize === null) {
+            Messenger('Vui lòng chọn size', 'error')
+        } else {
+            const data: any = {
+                UserId: id,
+                ProductId: [
+                    {
+                        NameProduct: item.name,
+                        ProductId: item._id,
+                        PriceProduct: toltalPrice,
+                        QuantityProduct: quantity,
+                        ToppingProduct: selectedTopping,
+                        SizeProduct: selectedSize,
+                        NoteProduct: note
+                    }
+                ]
+            }
+            const response: any = CreateEmptyCart(data);
+            if (response) {
+                setTimeout(() => {
+                    Messenger('Thêm vào giỏ hàng thành công', 'success');
+                }, 2000);
+            }
+        }
+    }
     return (
         <View style={StyleItemDetailProduct.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -56,8 +101,11 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                             style={StyleItemDetailProduct.imageproduct}
                             source={{
                                 uri: item.image as string,
-                                priority: FastImage.priority.high,
+                                priority: FastImage.priority.normal,
+                                cache: FastImage.cacheControl.immutable,
                             }}
+                            resizeMode={FastImage.resizeMode.cover}
+                            onLoad={onLoad}
                         />
                         <TouchableOpacity onPress={goBack} style={StyleItemDetailProduct.viewback}>
                             <Image source={Icon.BORDERCANCEL} style={StyleItemDetailProduct.iconback} />
@@ -84,21 +132,21 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                             <Text style={StyleItemDetailProduct.textsize}>Size</Text>
                             {item.size.map((sizeItem, index) => (
                                 <View key={index} style={StyleItemDetailProduct.viewsizearray}>
-                                    <View style={StyleItemDetailProduct.viewcheckitem}>
+                                    <TouchableOpacity style={StyleItemDetailProduct.viewcheckitem} onPress={() => setSelectedSize(sizeItem)}>
                                         <CheckBox
-                                            checked={false}
                                             checkedIcon='dot-circle-o'
                                             uncheckedIcon='circle-o'
                                             checkedColor='#FFC107'
                                             uncheckedColor='#000'
                                             size={20}
-                                            onPress={() => console.log('')}
+                                            checked={selectedSize === sizeItem}
+                                            onPress={() => setSelectedSize(sizeItem)}
                                         />
                                         <View style={StyleItemDetailProduct.viewsizename}>
                                             <Text style={StyleItemDetailProduct.textsizename}>{sizeItem.name}</Text>
                                             <Text style={StyleItemDetailProduct.textsizeprice}>{FormatPrice(parseInt(sizeItem.price))}</Text>
                                         </View>
-                                    </View>
+                                    </TouchableOpacity>
                                     {item.size.length - 1 === index ? null : <View style={StyleItemDetailProduct.lineitem} />}
                                 </View>
                             ))}
@@ -112,13 +160,14 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                                 <TouchableOpacity key={index} style={StyleItemDetailProduct.viewsizearray}>
                                     <View style={StyleItemDetailProduct.viewcheckitem}>
                                         <CheckBox
-                                            checked={false}
                                             checkedIcon='check-square'
                                             uncheckedIcon='square-o'
                                             checkedColor='#FFC107'
                                             uncheckedColor='#000'
                                             size={20}
-                                            onPress={() => console.log('')}
+                                            checked={selectedTopping.includes(toppingItem)}
+                                            onPress={() => handleSelectTopping(toppingItem)}
+                                            disabled={selectedTopping.length === 2 && !selectedTopping.includes(toppingItem)}
                                         />
                                         <View style={StyleItemDetailProduct.viewsizename}>
                                             <Text style={StyleItemDetailProduct.textsizename}>{toppingItem.name}</Text>
@@ -139,6 +188,8 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                             placeholderTextColor="#BDBDBD"
                             multiline={true}
                             numberOfLines={4}
+                            value={note}
+                            onChangeText={(text) => setNote(text)}
                         />
                     </View>
                     <View style={StyleItemDetailProduct.line} />
@@ -154,7 +205,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                         <Image source={Icon.PLUS} style={StyleItemDetailProduct.iconplus} />
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={StyleItemDetailProduct.button}>
+                <TouchableOpacity style={StyleItemDetailProduct.button} onPress={AddToCart}>
                     <Text style={StyleItemDetailProduct.textbutton}>Chọn</Text>
                     <Text style={StyleItemDetailProduct.textbutton}>{FormatPrice(toltalPrice)}</Text>
                 </TouchableOpacity>

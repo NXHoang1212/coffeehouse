@@ -28,8 +28,8 @@ const Favourites = () => {
       <View style={styleFavourite.viewbody}>
         <FlashList
           data={favourites}
-          renderItem={({ item }: any) => <ItemProduct item={item.ProductId} showCategory={false} isFirstItem={false} />}
-          keyExtractor={(item: any) => item._id}
+          renderItem={({ item }) => <ItemProduct item={item.ProductId} showCategory={false} isFirstItem={false} />}
+          keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
           estimatedItemSize={200}
         />

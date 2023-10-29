@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ImageSourcePropType } from 'react-native';
 
-interface MethodAmountState {
+export interface MethodAmountState {
     name: string;
     image: ImageSourcePropType;
 }

@@ -1,11 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { COLOR } from '../../constant/Color';
 import { WIDTH, HEIGHT, FONTSIZE } from "../../constant/Responsive";
 import { FONTSTYLE } from "../../constant/Fonts";
 
+const { width, height } = Dimensions.get('window');
+
 const StyleOrder = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: COLOR.WHITE,
     },
     viewheader: {
@@ -78,7 +79,7 @@ const StyleOrder = StyleSheet.create({
         height: HEIGHT(100),
     },
     viewbottom: {
-        height: HEIGHT(1100),
+        height: height * 12.65,
         marginHorizontal: WIDTH(5),
         // zIndex: -1,
     },

@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux'
 import SeacrchItem from '../../components/item/SearchItem'
 import { RootState } from '../../redux/store/Store'
 import { ThemLightStatusBar } from '../../constant/ThemLight'
+import { useNavigation } from '@react-navigation/native';
 
 const SearchOrder = () => {
   const goBack = useGoBack()
+  const navigation = useNavigation()
   ThemLightStatusBar('dark-content', '#fff')
   const [search, setSearch] = useState<string>('')
-  const products = useSelector((state: RootState) => state.product.product).filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase()))
-
+  const products = useSelector((state: RootState) => state.product).filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <View style={StyleSearchOrder.container}>
@@ -37,7 +38,7 @@ const SearchOrder = () => {
             </TouchableOpacity>
           )}
         </View>
-        <TouchableOpacity onPress={goBack}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={StyleSearchOrder.textcancel}>Hủy</Text>
         </TouchableOpacity>
       </View>
@@ -50,6 +51,7 @@ const SearchOrder = () => {
             renderItem={({ item }: any) => <SeacrchItem item={item} />}
             estimatedItemSize={150}
             showsVerticalScrollIndicator={false}
+            extraData={search}
           />
         ) : null}
       </View>

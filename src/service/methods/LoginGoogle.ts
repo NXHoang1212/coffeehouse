@@ -12,12 +12,10 @@ export const loginGoogle = async (dispatch: (arg0: { payload: User; type: "user/
         });
         await GoogleSignin.hasPlayServices();
         const userInfo = await GoogleSignin.signIn();
-        // console.log("🚀 ~ file: LoginGoogle.ts:15 ~ loginGoogle ~ userInfo:", userInfo.user.email)
         const data: any = {
             googleId: userInfo.user.id,
         }
         const response = await ApiLogin(data);
-        console.log("🚀 ~ file: LoginGoogle.ts:17 ~ loginGoogle ~ res", response)
         const user = {
             ...response.user,
             email: userInfo.user.email,

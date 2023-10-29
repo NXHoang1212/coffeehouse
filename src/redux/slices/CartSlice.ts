@@ -23,16 +23,9 @@ const CartSlice = createSlice({
     initialState,
     reducers: {
         AddCart: (state, action: PayloadAction<CartOrder>) => {
-            ;
-            //push là thêm vào cuối mảng ProductId 1 phần tử mới 
-            state.ProductId.push(action.payload.ProductId[0]);
-        },
-        updateCartItem: (state, action) => {
-            // Tìm sản phẩm trong danh sách ProductId theo action.payload.ProductId và cập nhật thông tin mới
-            const updatedProductIndex = state.ProductId.findIndex(product => product._id === action.payload.ProductId);
-            if (updatedProductIndex !== -1) {
-                state.ProductId[updatedProductIndex] = { ...state.ProductId[updatedProductIndex], ...action.payload.data };
-            }
+            state._id = action.payload._id;
+            state.UserId = action.payload.UserId;
+            state.ProductId = action.payload.ProductId;
         },
         removeCart: (state) => {
             state._id = '';
@@ -50,16 +43,9 @@ const CartSlice = createSlice({
                 }
             ]
         },
-        //xóa từng sản phẩm trong danh sách ProductId theo action.payload.ProductId
-        removeCartItem: (state, action) => {
-            const removedProductIndex = state.ProductId.findIndex(product => product._id === action.payload.ProductId);
-            if (removedProductIndex !== -1) {
-                state.ProductId.splice(removedProductIndex, 1);
-            }
-        },
     },
 });
 
 
 export default CartSlice.reducer;
-export const { AddCart, removeCart, updateCartItem, removeCartItem } = CartSlice.actions;
+export const { AddCart, removeCart,  } = CartSlice.actions;

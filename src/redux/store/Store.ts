@@ -3,7 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import ProductReducer from '../slices/ProductSlices';
 import AddressReducer from '../slices/AddressSlice';
 import CartReducer from '../slices/CartSlice';
-import MethodAmountReducer from '../slices/MethodAmountSlice';
+import MethodAmountReducer, { MethodAmountState } from '../slices/MethodAmountSlice';
 import { ApiProducts } from '../../service/api/IndexProducts';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { ApiCart } from '../../service/api/IndexCart';
@@ -11,28 +11,26 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import UserReducer from '../slices/AuthSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AnyAction, CombinedState, Reducer } from 'redux';
 import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
 import { ApiFavourites } from '../../service/api/IndexFavourites';
-
 
 const persistConfig: any = {
     key: 'root',
     storage: AsyncStorage,
 }
 
-const rootReducer: Reducer<CombinedState<{ product: any; user: any; methodamount: any; cart: any }>, AnyAction> = combineReducers({
+
+const rootReducer = combineReducers({
     user: UserReducer,
-    product: ProductReducer,
-    methodamount: MethodAmountReducer,
     cart: CartReducer,
+    methodamount: MethodAmountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: {
-        product: persistedReducer,
+        product: ProductReducer,
         [ApiProducts.reducerPath]: ApiProducts.reducer,
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,

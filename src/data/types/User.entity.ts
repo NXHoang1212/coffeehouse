@@ -14,7 +14,7 @@ export interface UserMethods {
 export interface User extends UserData { }
 
 export interface UserData {
-    _id: string;
+    _id: number;
     role: string;
     googleId: string;
     facebookId: string;

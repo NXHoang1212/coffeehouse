@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, ImageSourcePropType } from 'react-native';
 import { Icon, infores } from '../../constant/Icon';
 import React, { useState, useEffect } from 'react'
 import StyleItemInformationOrder from '../../styles/item/StyleItemInformationOrder';
@@ -53,7 +53,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
         })
         return total;
     }
-    
+
     return (
         <View style={StyleItemInformationOrder.container}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }} showsVerticalScrollIndicator={false}>
@@ -100,8 +100,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 <View style={StyleItemInformationOrder.viewproduct}>
                     <View style={StyleItemInformationOrder.viewheaderproduct}>
                         <Text style={StyleItemInformationOrder.textheaderchoose}>Sản phẩm đã chọn</Text>
-                        {/* @ts-ignore */}
-                        <TouchableOpacity style={StyleItemInformationOrder.viewtouchplus} onPress={() => navigation.navigate('TabHomeNavigate', { screen: 'Đặt hàng' })}>
+                        <TouchableOpacity style={StyleItemInformationOrder.viewtouchplus} onPress={() => navigation.navigate('TabHomeNavigate' as any, { screen: 'Đặt hàng' })}>
                             <Image source={Icon.PLUS} style={StyleItemInformationOrder.iconplus} />
                             <Text style={StyleItemInformationOrder.textheaderproduct}>Thêm</Text>
                         </TouchableOpacity>
@@ -166,7 +165,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                     <Text style={StyleItemInformationOrder.textamount}>Thanh Toán</Text>
                     <TouchableOpacity style={StyleItemInformationOrder.viewmethod} onPress={() => setopenModal(true)}>
                         {method.image ? (
-                            <Image source={method.image ? method.image : null} style={StyleItemInformationOrder.iconmethod} />
+                            <Image source={method.image as ImageSourcePropType} style={StyleItemInformationOrder.iconmethod} />
                         ) : (
                             <Image source={Icon.METHOD} style={StyleItemInformationOrder.iconmethod} />
                         )}

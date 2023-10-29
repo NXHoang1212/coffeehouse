@@ -62,6 +62,7 @@ export enum EnumStackNaviagte {
 const StackHomeNavigate = (): React.JSX.Element => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, }}>
+            <Stack.Screen name={EnumStackNaviagte.Detail} component={DetailOrder} />
             <Stack.Screen name={EnumStackNaviagte.WebView} component={WebViewUrl} />
             <Stack.Screen name={EnumStackNaviagte.Favourite} component={Favourites} />
             <Stack.Screen name={EnumStackNaviagte.Rank} component={RankMember} />
@@ -78,7 +79,6 @@ const StackHomeNavigate = (): React.JSX.Element => {
             <Stack.Screen name={EnumStackNaviagte.Edit} component={EditAddress} />
             <Stack.Screen name={EnumStackNaviagte.About} component={AboutCoffee} />
             <Stack.Screen name={EnumStackNaviagte.Notication} component={Notifee} />
-            <Stack.Screen name={EnumStackNaviagte.Detail} component={DetailOrder} />
             <Stack.Screen name={EnumStackNaviagte.map} component={MapsAddress} />
             <Stack.Screen name={EnumStackNaviagte.sreachmap} component={SearchMapAddress} />
             <Stack.Screen name={EnumStackNaviagte.selected} component={SelectedAddressOrder} />
