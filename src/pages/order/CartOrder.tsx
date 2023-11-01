@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl, Animated } from 'react-native'
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useRef, useEffect, useContext, useCallback, memo } from 'react'
 import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
 import CategoryItem from '../../components/item/CategoryItem'
@@ -11,24 +11,23 @@ import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../dat
 import { ThemLightStatusBar } from '../../constant/ThemLight'
 import BottomSheetMenu from '../../components/modal/BottomSheetMenu'
 import { Provider } from 'react-native-paper'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../../redux/store/Store'
-import { useAuth } from '../../hooks/UseAuth'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store/Store'
 import { FlashList } from '@huunguyen312/flash-list'
-import { useIsFocused } from '@react-navigation/native'
-import { setProducts } from '../../redux/slices/ProductSlices'
-import { useGetProductsQuery } from '../../service/api/IndexProducts'
-import { ProductContext } from '../../service/provider/ProductContext'
+import { DetailProduct } from '../../data/types/Product.entity'
+import { useGetFavouritesQuery } from '../../service/api/IndexFavourites'
 
 const CartOrder = () => {
   ThemLightStatusBar('dark-content', '#fff')
-  const dispatch = useDispatch<AppDispatch>();
-  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const [show, setShow] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<String>('');
   let currentCategory = '';
-  const showProducts = useSelector((state: RootState) => state.product)
+  let showProducts = useSelector((state: RootState) => state.product)
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+  let id = useSelector((state: RootState) => state.user.user._id);
+  const { data, refetch } = useGetFavouritesQuery(id)
+  const favourites: any = data?.data.length
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
     setShow(false);
@@ -44,6 +43,11 @@ const CartOrder = () => {
   };
   const scrollY = useRef(new Animated.Value(0)).current;
 
+  const renderItem = useCallback((product: DetailProduct) => {
+    const isFirstItem = currentCategory !== product.category.name;
+    currentCategory = product.category.name;
+    return (<ItemProduct item={product} isFirstItem={isFirstItem} showCategory={isFirstItem} />)
+  }, []);
 
   return (
     <TouchableWithoutFeedback>
@@ -62,8 +66,11 @@ const CartOrder = () => {
             <TouchableOpacity onPress={() => navigation.navigate(isLoggedIn ? 'SearchOrder' : 'AuthStackUser' as any)}>
               <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser' as any, { screen: 'Favourites', })}>
+            <TouchableOpacity style={StyleOrder.viewfavourites} onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : 'AuthStackUser' as any, { screen: 'Favourites', })}>
               <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
+              {favourites > 0 && <View style={StyleOrder.viewcount}>
+                <Text style={StyleOrder.textcount}>{favourites}</Text>
+              </View>}
             </TouchableOpacity>
           </View>
         </View>
@@ -72,22 +79,23 @@ const CartOrder = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ flexGrow: 1 }}
           onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
-          refreshControl={<RefreshControl refreshing={false} onRefresh={() => { }} />}>
+        >
           <View style={StyleOrder.viewbody}>
             <CategoryItem setSelectedCategory={handleCategorySelect} />
             <View style={StyleOrder.viewbottom}>
               <FlashList
                 data={showProducts}
-                renderItem={({ item }) => {
-                  const isFirstItem = currentCategory !== item.category.name;
-                  currentCategory = item.category.name;
-                  return (<ItemProduct item={item} showCategory={isFirstItem} isFirstItem={isFirstItem} />)
-                }}
-                keyExtractor={(item: any) => item._id}
+                renderItem={({ item }) => renderItem(item)}
+                keyExtractor={(item, index) => item._id + index}
                 showsVerticalScrollIndicator={false}
-                estimatedItemSize={100}
+                estimatedItemSize={200}
                 extraData={showProducts}
                 removeClippedSubviews={true}
+                viewabilityConfig={{
+                  waitForInteraction: true,
+                  itemVisiblePercentThreshold: 50,
+                  minimumViewTime: 1000,
+                }}
               />
             </View>
           </View>
@@ -104,4 +112,4 @@ const CartOrder = () => {
   )
 }
 
-export default CartOrder
+export default memo(CartOrder)

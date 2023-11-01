@@ -12,18 +12,18 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { useDispatch } from 'react-redux'
-import { useAuth } from '../../hooks/UseAuth'
-
+import { setLoggedIn } from '../../redux/slices/IsLoggedIn'
+import { AppDispatch } from '../../redux/store/Store'
 
 const LoginUser = () => {
     ThemLightStatusBar('dark-content', 'transparent');
-    const dispatch = useDispatch();
-    const { login } = useAuth();
+    const dispatch = useDispatch<AppDispatch>();
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const goBack = useGoBack();
     const focusLoginProps = FocusLogin();
     const [phone, setPhone] = useState<string>('')
     const isPhoneValid = phone.length === 10;
+    const login = () => { dispatch(setLoggedIn(true)) }
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={StyleLoginUser.container}>

@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, TouchableNativeFeedback } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import { DetailProduct } from '../../data/types/Product.entity';
 import { Icon, TabCoffee } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
@@ -9,19 +9,25 @@ import StyleItemDetailProduct from '../../styles/item/StyleItemDetailProduct';
 import { ToggleDescription } from '../../utils/ToggleDescription';
 import { handleMinus, handlePlus } from '../../utils/Total';
 import { CheckBox } from 'react-native-elements';
-import { CreateEmptyCart } from '../../service/api/IndexCart';
-import { CreateFavourites } from '../../service/api/IndexFavourites';
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
+import { useCreateFavouritesMutation } from '../../service/api/IndexFavourites';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { Messenger } from '../../utils/ShowMessage';
-
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 interface PropsDetailItemProduct {
     item: DetailProduct;
 }
 
 const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     const goBack = useGoBack();
+    const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     let id = useSelector((state: RootState) => state.user.user._id);
+    let isLogin = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+    const [createFavourites] = useCreateFavouritesMutation();
+    const [CreateEmptyCart] = useCreateEmptyCartMutation();
     const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
     const toltalPrice = quantity * item.price;
@@ -44,22 +50,18 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
     }
 
     const AddToFavourites = async () => {
-        try {
+        if (isLogin) {
             const data: any = {
                 UserId: id,
                 ProductId: item._id,
                 status: 'Đã thích'
             }
-            const response = await CreateFavourites(data);
+            const response: any = await createFavourites(data);
             if (response) {
-                setTimeout(() => {
-                    Messenger('Đã thêm vào danh sách yêu thích', 'success')
-                }, 1000);
-            } else {
-                Messenger('Đã có lỗi xảy ra', 'error')
+                Messenger('Thêm vào yêu thích thành công', 'success')
             }
-        } catch (error) {
-            console.log(error);
+        } else {
+            navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
         }
     }
 
@@ -88,6 +90,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
             if (response) {
                 setTimeout(() => {
                     Messenger('Thêm vào giỏ hàng thành công', 'success');
+                    goBack();
                 }, 2000);
             }
         }
@@ -107,7 +110,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                             resizeMode={FastImage.resizeMode.cover}
                             onLoad={onLoad}
                         />
-                        <TouchableOpacity onPress={goBack} style={StyleItemDetailProduct.viewback}>
+                        <TouchableOpacity style={StyleItemDetailProduct.viewback} onPress={() => navigation.goBack()}>
                             <Image source={Icon.BORDERCANCEL} style={StyleItemDetailProduct.iconback} />
                         </TouchableOpacity>
                     </View>

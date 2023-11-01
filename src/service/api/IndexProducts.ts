@@ -22,6 +22,6 @@ export const { useGetProductsQuery, useGetProductsByIdQuery } = ApiProducts
 
 
 export const GetProducts = async () => {
-    const res = await AxiosInstance().get("/api/users/product");
+    const res = await AxiosInstance().get('/api/users/product');
     return res.data;
 }

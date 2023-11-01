@@ -4,6 +4,7 @@ export enum StackHomeNavigateNameEnum {
     TabHomePage = 'TabHomeNavigate',
     StackHomeUrl = 'StackHomeNavigate',
     AuthStackUser = 'AuthStackUser',
+    slash = 'slahwellcome',
 }
 
 
@@ -11,6 +12,7 @@ export type StackHomeNavigateTypeParam = {
     TabHomeNavigate: undefined;
     StackHomeNavigate: undefined;
     AuthStackUser: undefined;
+    slahwellcome: undefined;
 }
 
 

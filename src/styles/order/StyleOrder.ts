@@ -57,12 +57,12 @@ const StyleOrder = StyleSheet.create({
         gap: WIDTH(3),
     },
     iconsearch: {
-        width: WIDTH(4),
-        height: WIDTH(4),
+        width: WIDTH(4.2),
+        height: WIDTH(4.2),
     },
     iconheart: {
-        width: WIDTH(4),
-        height: WIDTH(4),
+        width: WIDTH(4.5),
+        height: WIDTH(4.5),
     },
     line: {
         width: WIDTH(100),
@@ -71,7 +71,6 @@ const StyleOrder = StyleSheet.create({
         marginTop: HEIGHT(3),
     },
     viewbody: {
-
         marginTop: HEIGHT(2),
         gap: HEIGHT(3),
     },
@@ -81,7 +80,24 @@ const StyleOrder = StyleSheet.create({
     viewbottom: {
         height: height * 12.65,
         marginHorizontal: WIDTH(5),
-        // zIndex: -1,
+    },
+    viewfavourites: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    viewcount: {
+        width: WIDTH(4),
+        height: WIDTH(4),
+        borderRadius: WIDTH(2),
+        backgroundColor: COLOR.RED,
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: HEIGHT(0.5),
+        right: WIDTH(1),
+    },
+    textcount: {
+        fontSize: FONTSIZE(1.5),
+        color: COLOR.WHITE,
     },
 });
 

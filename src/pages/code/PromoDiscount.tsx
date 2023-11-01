@@ -7,15 +7,15 @@ import { ThemLightStatusBar } from '../../constant/ThemLight';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
-import { useAuth } from '../../hooks/UseAuth';
+import { RootState } from '../../redux/store/Store';
+import { useSelector } from 'react-redux';
 
 const PromoDiscount = () => {
-  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   ThemLightStatusBar('light-content', '#fd7e14');
   const link = 'https://order.thecoffeehouse.com/user-info/accountUser'
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
 
-  
   return (
     <View style={StylePromoDiscount.container}>
       <LinearGradient colors={['#fd7e14', '#ff4f0a']} style={StylePromoDiscount.viewheader}>

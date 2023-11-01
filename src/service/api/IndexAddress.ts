@@ -7,7 +7,7 @@ export const ApiAddress = createApi({
     reducerPath: 'apiAddress',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        getAddressId: build.query<{ data: AddRess[] }, string>({
+        getAddressId: build.query<{ data: AddRess[] }, number>({
             query: (id) => `/api/address/GetAddress/${id}`
         }),
     }),

@@ -6,17 +6,16 @@ import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useAuth } from '../../hooks/UseAuth'
 import { useSelector } from 'react-redux'
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
-import { RootState } from '../../redux/store/Store'
+import { RootState, AppDispatch } from '../../redux/store/Store'
 import { useGetCartQuery } from '../../service/api/IndexCart'
 
 const Order: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
-  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id)
+  const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
   const { data, refetch } = useGetCartQuery(id);
   const datacart = data?.data.filter(item => item !== null).map(item => ({
     ...item,
@@ -29,6 +28,8 @@ const Order: React.FC = () => {
       refetch()
     }, 2000);
   }
+
+
   if (!isLoggedIn) {
     return (
       <View style={styleCartOrder.containernoitem}>

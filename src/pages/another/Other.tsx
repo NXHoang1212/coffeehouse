@@ -8,16 +8,16 @@ import { StackParamsOther } from '../../data/types/StackOrther'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import SignOut from '../../components/profile/SignOut'
-import { useAuth } from '../../hooks/UseAuth'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../redux/store/Store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../redux/store/Store'
 import { clearUser } from '../../redux/slices/AuthSlice'
 import { removeCart } from '../../redux/slices/CartSlice'
 import { resetStore } from '../../redux/store/Store'
+import { ResetLoggedIn } from '../../redux/slices/IsLoggedIn'
 
 const Other = () => {
-  const { isLoggedIn, logout } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
+  const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
   const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung'
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
@@ -30,8 +30,8 @@ const Other = () => {
   const onOKPress = () => {
     dispatch(clearUser());
     dispatch(removeCart());
+    dispatch(ResetLoggedIn());
     resetStore();
-    logout();
     setVisible(false);
   };
   const handleLogout = () => {
@@ -107,11 +107,8 @@ const Other = () => {
               <Image style={styleOther.iconright} source={Icon.RIGHT} />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity
-              style={styleOther.account}
-              onPress={() => {
-                navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'Login' })
-              }}>
+            <TouchableOpacity style={styleOther.account}
+              onPress={() => { navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'Login' }) }}>
               <Image style={styleOther.iconlogout} source={infores.LOGIN} />
               <Text style={styleOther.textlogout}>Đăng nhập</Text>
               <Image style={styleOther.iconright} source={Icon.RIGHT} />

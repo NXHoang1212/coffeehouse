@@ -10,11 +10,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 import { socket } from './src/utils/Socket'
 import { ProductContextProvider } from './src/service/provider/ProductContext';
-import { useIsFocused } from '@react-navigation/native'
-import { fetchProducts } from './src/redux/slices/ProductSlices'
 
-function App(): JSX.Element {
-
+const App = (): JSX.Element => {
   useEffect(() => {
     socket.on("connection", (data) => {
       console.log("Received data from server:", data);
@@ -25,12 +22,12 @@ function App(): JSX.Element {
       <StoreProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <PaperProvider>
-              <ProductContextProvider>
+            <ProductContextProvider>
+              <PaperProvider>
                 <AppNavigate />
-                <FlashMessage position="top" />
-              </ProductContextProvider>
-            </PaperProvider>
+              </PaperProvider>
+            </ProductContextProvider>
+            <FlashMessage position="top" />
           </GestureHandlerRootView>
         </PersistGate>
       </StoreProvider>

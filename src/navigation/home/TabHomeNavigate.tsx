@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useEffect, useState } from "react";
-import { FlashList } from "@huunguyen312/flash-list";
 import { TabHomeParamList, TabHomeNavigateEnum, TabHomeNavigateType } from "../../data/types/TypesTab";
 import HomePage from "../../pages/home/HomePage";
 import { TabCoffee } from '../../constant/Icon';
@@ -12,13 +11,10 @@ import CartNavigator from "../cart/TabOrderNavigare";
 import { HEIGHT, WIDTH, FONTSIZE } from "../../constant/Responsive";
 import OtherNavigator from "../other/TabOtherNavigate";
 import Order from "../../pages/cart/Order";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store/Store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store/Store";
 import { useGetCartQuery } from "../../service/api/IndexCart";
-import { setProducts } from "../../redux/slices/ProductSlices";
-import { GetProducts } from "../../service/api/IndexProducts";
 import { useAuth } from "../../hooks/UseAuth";
-import { useIsFocused } from "@react-navigation/native";
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 const TabNavigate: TabHomeNavigateType[] = [
@@ -50,10 +46,8 @@ const TabNavigate: TabHomeNavigateType[] = [
 ]
 
 const TabHomeNavigate = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const isFocused = useIsFocused();
     let id = useSelector((state: RootState) => state.user.user._id)
-    const { isLoggedIn } = useAuth();
+    let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
     const { data } = useGetCartQuery(id, { skip: !id, refetchOnMountOrArgChange: true, refetchOnReconnect: true });
     const datacart = data?.data.filter(item => item !== null).map(item => ({
         ...item,
@@ -67,9 +61,6 @@ const TabHomeNavigate = () => {
         } else {
             setCount(undefined)
         }
-        GetProducts().then((res) => {
-            dispatch(setProducts(res));
-        })
     }, [datacart, count])
 
 

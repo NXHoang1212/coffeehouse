@@ -1,16 +1,15 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, Pressable } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct'
-import { DetailProduct, ProductGet, Products } from '../../data/types/Product.entity';
+import { DetailProduct } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
-import { useNavigation, CommonActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import BottomSheetDetailOrder from '../../pages/order/BottomSheetDetailOrder';;
-import { useAuth } from '../../hooks/UseAuth';
-import { CreateEmptyCart } from '../../service/api/IndexCart';
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { Messenger } from '../../utils/ShowMessage';
@@ -24,9 +23,10 @@ interface PropsItemProduct {
 
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const { isLoggedIn } = useAuth();
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
   const { setProducts } = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.user.user._id);
+  const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [show, setShow] = useState<boolean>(false);
   const [size, setSize] = useState<{ name: string, price: number }>({ name: 'Vừa', price: 0 });
   const handleShowBottomSheet = (item: DetailProduct) => {
@@ -80,7 +80,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
           </View>
         )}
-        <TouchableOpacity onPress={() => { setProducts([item]), navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder' }) }}>
+        <Pressable onPress={() => { setProducts([item]), navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder' }) }}>
           <View style={StyleItemProduct.viewProduct}>
             <View>
               <FastImage
@@ -102,7 +102,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
               <Image source={Icon.PLUS} style={StyleItemProduct.iconplus} />
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </Pressable>
         <BottomSheetDetailOrder
           item={item}
           show={show}
@@ -113,4 +113,8 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   )
 }
 
-export default ItemProduct
+
+export default memo(ItemProduct);
+
+
+

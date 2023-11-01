@@ -30,7 +30,7 @@ export const ApiLogin = async (data: UserMethods) => {
 
 
 
-export const ApiUpdateUser = async (id: string, data: UpdateUser) => {
+export const ApiUpdateUser = async (id: number, data: UpdateUser) => {
     try {
         const response = await AxiosInstance().post(`/api/users/updateUserById/${id}`, data);
         return response.data;

@@ -12,7 +12,6 @@ import { useGetAddressIdQuery } from '../../../service/api/IndexAddress';
 import { useSelector } from 'react-redux';
 import { FlashList } from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
-import { useIsFocused } from '@react-navigation/native';
 import { RootState } from '../../../redux/store/Store';
 
 const Address: React.FC = () => {
@@ -21,9 +20,6 @@ const Address: React.FC = () => {
   const id = useSelector((state: RootState) => state.user.user._id);
   const { data } = useGetAddressIdQuery(id)
   const Addressess = data?.data;
-  // const isLastItem = (currentIndex: number) => {
-  //   return currentIndex === Addressess?.length - 1;
-  // }
   const isLastItem = (currentIndex: number) => {
     return Addressess && currentIndex === Addressess.length - 1;
   }

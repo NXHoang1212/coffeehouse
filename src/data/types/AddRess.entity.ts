@@ -21,7 +21,7 @@ export interface CreateAddRess {
     Other: string;
     Gate: string;
     NoteOrther: string;
-    userId: string;
+    userId: number;
     username: string;
     phone: string;
 }

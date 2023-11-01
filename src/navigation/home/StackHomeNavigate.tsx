@@ -21,6 +21,7 @@ import Notifee from "../../pages/general/Notifee";
 import DetailOrder from "../../pages/order/DetailOrder";
 import SelectedAddressOrder from "../../pages/cart/SelectedAddressOrder";
 import UpdateOrderUser from "../../pages/cart/UpdateOrderUser";
+import SlashWellcome from "../../pages/slash/SlashWellcome";
 
 
 const Stack = createNativeStackNavigator();
@@ -61,7 +62,7 @@ export enum EnumStackNaviagte {
 
 const StackHomeNavigate = (): React.JSX.Element => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false, }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }} >
             <Stack.Screen name={EnumStackNaviagte.Detail} component={DetailOrder} />
             <Stack.Screen name={EnumStackNaviagte.WebView} component={WebViewUrl} />
             <Stack.Screen name={EnumStackNaviagte.Favourite} component={Favourites} />

@@ -17,6 +17,12 @@ const DetailOrder = () => {
         keyExtractor={item => item._id}
         renderItem={({ item }) => <ItemDetailProduct item={item} />}
         estimatedItemSize={100}
+        removeClippedSubviews={true}
+        viewabilityConfig={{
+          waitForInteraction: true,
+          itemVisiblePercentThreshold: 50,
+          minimumViewTime: 1000,
+        }}
       />
     </View>
   )

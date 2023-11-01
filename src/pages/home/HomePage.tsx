@@ -10,11 +10,12 @@ import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
-import { useAuth } from '../../hooks/UseAuth'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store/Store'
 
 const HomePage = () => {
-  const { isLoggedIn } = useAuth();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
   const scroll = useRef<ScrollView | null>(null);
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');

@@ -19,6 +19,14 @@ export const ApiCart = createApi({
                 return [{ type: 'CartOrder', id: 'CART' }];
             }
         }),
+        CreateEmptyCart: build.mutation<{ data: CartOrder }, CartOrder>({
+            query: (data) => ({
+                url: `/api/users/cart/create`,
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: [{ type: 'CartOrder', id: 'CART' }]
+        }),
         UpdateCart: build.mutation<{ data: CartOrder }, { id: number, ProductId: number, data: UpdateCartOrder }>({
             query: ({ id, ProductId, data }) => ({
                 url: `/api/users/cart/update/${id}/${ProductId}`,
@@ -44,7 +52,7 @@ export const ApiCart = createApi({
     }),
 });
 
-export const { useGetCartQuery, useUpdateCartMutation, useDeleteCartProductIdMutation, useDeleteAllCartMutation } = ApiCart;
+export const { useGetCartQuery, useCreateEmptyCartMutation, useUpdateCartMutation, useDeleteCartProductIdMutation, useDeleteAllCartMutation } = ApiCart;
 
 export const GetApiCart = async (id: number) => {
     try {

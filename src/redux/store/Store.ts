@@ -3,8 +3,8 @@ import { combineReducers } from '@reduxjs/toolkit';
 import ProductReducer from '../slices/ProductSlices';
 import AddressReducer from '../slices/AddressSlice';
 import CartReducer from '../slices/CartSlice';
-import MethodAmountReducer, { MethodAmountState } from '../slices/MethodAmountSlice';
-import { ApiProducts } from '../../service/api/IndexProducts';
+import IsLoggedInReducer from '../slices/IsLoggedIn';
+import MethodAmountReducer from '../slices/MethodAmountSlice';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { ApiCart } from '../../service/api/IndexCart';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
@@ -21,6 +21,7 @@ const persistConfig: any = {
 
 
 const rootReducer = combineReducers({
+    isLoggedIn: IsLoggedInReducer,
     user: UserReducer,
     cart: CartReducer,
     methodamount: MethodAmountReducer,
@@ -30,8 +31,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: {
+        IsLoggedIn: persistedReducer,
         product: ProductReducer,
-        [ApiProducts.reducerPath]: ApiProducts.reducer,
         address: AddressReducer,
         [ApiAddress.reducerPath]: ApiAddress.reducer,
         user: persistedReducer,
@@ -44,7 +45,7 @@ const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: false,
             immutableCheck: false,
-        }).concat(ApiProducts.middleware, ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
+        }).concat(ApiAddress.middleware, ApiCart.middleware, ApiFavourites.middleware, RTKQueryLogger),
 });
 
 setupListeners(store.dispatch);

@@ -9,7 +9,7 @@ import { FormatPrice } from '../../utils/FormatPrice'
 import { CheckBox } from 'react-native-elements'
 import { handleMinus, handlePlus } from '../../utils/Total'
 import { useSelector } from 'react-redux'
-import { CreateEmptyCart } from '../../service/api/IndexCart'
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart'
 import { Messenger } from '../../utils/ShowMessage'
 import ActivityIndicator from '../../components/activity/ActivityIndicator'
 import { RootState } from '../../redux/store/Store'
@@ -26,6 +26,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const { isLoading, setIsLoading } = LoadingScroll();
     const id = useSelector((state: RootState) => state.user.user._id)
+    const [CreateEmptyCart] = useCreateEmptyCartMutation();
     const [open, setopen] = useState<boolean>(show);
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedTopping, setSelectedTopping] = useState<any>([]);

@@ -16,3 +16,4 @@ export interface CreateFavourite {
     UserId: string;
     status: string;
 }
+
