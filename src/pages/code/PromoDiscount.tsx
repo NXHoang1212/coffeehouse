@@ -1,9 +1,8 @@
 import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import StylePromoDiscount from '../../styles/code/StylePromoDiscount'
 import { Icon, Bean, infores } from '../../constant/Icon';
 import LinearGradient from 'react-native-linear-gradient'
-import { ThemLightStatusBar } from '../../constant/ThemLight';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
@@ -12,9 +11,18 @@ import { useSelector } from 'react-redux';
 
 const PromoDiscount = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  ThemLightStatusBar('light-content', '#fd7e14');
   const link = 'https://order.thecoffeehouse.com/user-info/accountUser'
   let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('#fd7e14');
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#fd7e14');
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={StylePromoDiscount.container}>

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, Pressable, PixelRatio  } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct'
@@ -52,6 +52,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
         ProductId: [
           {
             NameProduct: item.name,
+            ProductId: item._id,
             PriceProduct: item.price,
             QuantityProduct: 1,
             SizeProduct: size,

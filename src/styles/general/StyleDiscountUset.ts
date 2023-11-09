@@ -6,7 +6,7 @@ import { FONTSTYLE } from "../../constant/Fonts";
 const StyleDiscountUser = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.WHITE
+        backgroundColor: COLOR.GRAYBLAND1
     },
     viewheader: {
         flexDirection: 'row',
@@ -26,6 +26,18 @@ const StyleDiscountUser = StyleSheet.create({
         color: COLOR.BLACK,
         fontWeight: 'bold',
         marginLeft: WIDTH(20)
+    },
+    viewbody: {
+        flex: 1,
+        marginTop: HEIGHT(2),
+        marginHorizontal: WIDTH(3),
+        paddingBottom: HEIGHT(2),
+    },
+    textbody: {
+        fontSize: FONTSIZE(2),
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+        marginBottom: HEIGHT(1.2)
     },
 });
 

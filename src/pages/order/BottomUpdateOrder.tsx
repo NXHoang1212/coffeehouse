@@ -13,15 +13,17 @@ import { useUpdateCartMutation } from '../../service/api/IndexCart'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux/store/Store'
 import { AddCart } from '../../redux/slices/CartSlice'
+import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount'
 
 interface Props {
     show: boolean;
     onDismiss: () => void;
     enableBackDropDismiss?: boolean;
     ProductId: any;
+    checkPromo: () => void;
 }
 
-const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId }) => {
+const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId, checkPromo }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const id = useSelector((state: RootState) => state.user.user._id);
@@ -95,13 +97,12 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                     Messenger("Cập nhật thành công", "success")
                     onDismiss();
                     dispatch(AddCart(data))
-                }, 2000);
+                }, 1500);
             }
         } catch (error: any) {
             console.log("🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:", error);
         }
     }
-
 
     if (!open) {
         return null;
@@ -147,30 +148,32 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                                 ))}
                                 <View style={StyleBottomUpdateOrder.lineitem} />
                             </View>
-                            <View style={StyleBottomUpdateOrder.viewsize}>
-                                <Text style={StyleBottomUpdateOrder.textsize}>Topping</Text>
-                                <Text style={StyleBottomUpdateOrder.textminisize}>Chọn tối đa 2 loại</Text>
-                                {ProductId.ProductId.topping.map((toppingItem: any, index: any) => (
-                                    <TouchableOpacity key={index} style={StyleBottomUpdateOrder.viewsizearray} onPress={() => handleSelectTopping(toppingItem)}>
-                                        <View style={StyleBottomUpdateOrder.viewcheckitem}>
-                                            <CheckBox
-                                                checkedIcon='check-square'
-                                                uncheckedIcon='square-o'
-                                                checkedColor='#FFC107'
-                                                uncheckedColor='#000'
-                                                size={20}
-                                                checked={selectedTopping.includes(toppingItem)}
-                                                onPress={() => handleSelectTopping(toppingItem)}
-                                            />
-                                            <View style={StyleBottomUpdateOrder.viewsizename}>
-                                                <Text style={StyleBottomUpdateOrder.textsizename}>{toppingItem.name}</Text>
-                                                <Text style={StyleBottomUpdateOrder.textsizeprice}>{FormatPrice(parseInt(toppingItem.price))}</Text>
+                            {ProductId?.ProductId.topping.length > 1 ? (
+                                <View style={StyleBottomUpdateOrder.viewsize}>
+                                    <Text style={StyleBottomUpdateOrder.textsize}>Topping</Text>
+                                    <Text style={StyleBottomUpdateOrder.textminisize}>Chọn tối đa 2 loại</Text>
+                                    {ProductId?.ProductId.topping.map((toppingItem: any, index: any) => (
+                                        <TouchableOpacity key={index} style={StyleBottomUpdateOrder.viewsizearray} onPress={() => handleSelectTopping(toppingItem)}>
+                                            <View style={StyleBottomUpdateOrder.viewcheckitem}>
+                                                <CheckBox
+                                                    checkedIcon='check-square'
+                                                    uncheckedIcon='square-o'
+                                                    checkedColor='#FFC107'
+                                                    uncheckedColor='#000'
+                                                    size={20}
+                                                    checked={selectedTopping.includes(toppingItem)}
+                                                    onPress={() => handleSelectTopping(toppingItem)}
+                                                />
+                                                <View style={StyleBottomUpdateOrder.viewsizename}>
+                                                    <Text style={StyleBottomUpdateOrder.textsizename}>{toppingItem.name}</Text>
+                                                    <Text style={StyleBottomUpdateOrder.textsizeprice}>{FormatPrice(parseInt(toppingItem.price))}</Text>
+                                                </View>
                                             </View>
-                                        </View>
-                                        {ProductId.ProductId.topping.length - 1 === index ? null : <View style={StyleBottomUpdateOrder.lineitem} />}
-                                    </TouchableOpacity>
-                                ))}
-                            </View>
+                                            {ProductId.ProductId.topping.length - 1 === index ? null : <View style={StyleBottomUpdateOrder.lineitem} />}
+                                        </TouchableOpacity>
+                                    ))}
+                                </View>
+                            ) : null}
                             <View style={StyleBottomUpdateOrder.viewnote}>
                                 <Text style={StyleBottomUpdateOrder.textnote}>Yêu cầu khác</Text>
                                 <Text style={StyleBottomUpdateOrder.textmininote}>Những tùy chọn khác</Text>
@@ -197,7 +200,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                             <Image source={Icon.PLUS} style={StyleBottomUpdateOrder.iconplus} />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={StyleBottomUpdateOrder.button} onPress={handleUpdateCart}>
+                    <TouchableOpacity style={StyleBottomUpdateOrder.button} onPress={() => { handleUpdateCart(); checkPromo() }}>
                         <Text style={StyleBottomUpdateOrder.textbutton}>Thay đổi</Text>
                         <Text style={StyleBottomUpdateOrder.textbutton}>{FormatPrice(Total(size, selectedTopping, quantity))}</Text>
                     </TouchableOpacity>

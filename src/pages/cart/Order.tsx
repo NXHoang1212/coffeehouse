@@ -1,8 +1,7 @@
-import { View, Text, Image, TouchableOpacity, ScrollView, RefreshControl, FlatList } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StatusBar, RefreshControl, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import styleCartOrder from '../../styles/cart/StyleCartOrder'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { useNavigation } from '@react-navigation/native'
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -10,12 +9,16 @@ import { useSelector } from 'react-redux'
 import ItemInformationOrder from '../../components/item/ItemInformationOrder'
 import { RootState, AppDispatch } from '../../redux/store/Store'
 import { useGetCartQuery } from '../../service/api/IndexCart'
+import { useGetDiscountQuery } from '../../service/api/IndexDiscount'
 
 const Order: React.FC = () => {
-  ThemLightStatusBar('dark-content', '#fff');
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('#fff');
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id)
   const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+  const { data: dataDiscount } = useGetDiscountQuery();
+  const count = dataDiscount?.data.length;
   const { data, refetch } = useGetCartQuery(id);
   const datacart = data?.data.filter(item => item !== null).map(item => ({
     ...item,
@@ -28,7 +31,13 @@ const Order: React.FC = () => {
       refetch()
     }, 2000);
   }
-
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#fff');
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   if (!isLoggedIn) {
     return (
@@ -58,6 +67,7 @@ const Order: React.FC = () => {
         <Text style={styleCartOrder.textheader}>Thông tin đơn hàng</Text>
         <TouchableOpacity style={styleCartOrder.viewpromo} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'DiscountUser' })}>
           <Image source={Icon.PROMO} style={styleCartOrder.iconpromo} />
+          <Text style={styleCartOrder.textpromo}>{count}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styleCartOrder.viewnotify} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'Notifee' })}>
           <Image source={Icon.NOTIFY} style={styleCartOrder.iconnotify} />

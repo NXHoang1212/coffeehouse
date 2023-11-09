@@ -1,8 +1,7 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import styleOther from '../../styles/other/StyleOther'
 import { Icon, infores } from '../../constant/Icon'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackParamsOther } from '../../data/types/StackOrther'
 import { useNavigation } from '@react-navigation/native'
@@ -14,6 +13,7 @@ import { clearUser } from '../../redux/slices/AuthSlice'
 import { removeCart } from '../../redux/slices/CartSlice'
 import { resetStore } from '../../redux/store/Store'
 import { ResetLoggedIn } from '../../redux/slices/IsLoggedIn'
+import { useGetDiscountQuery } from '../../service/api/IndexDiscount'
 
 const Other = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,8 +22,10 @@ const Other = () => {
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung'
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  ThemLightStatusBar('dark-content', '#fff');
-
+  const { data: dataDiscount } = useGetDiscountQuery();
+  const count = dataDiscount?.data.length;
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('#fff');
   const onCancelPress = () => {
     setVisible(false);
   };
@@ -37,12 +39,22 @@ const Other = () => {
   const handleLogout = () => {
     setVisible(true);
   }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#fff');
+    });
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={styleOther.container}>
       <View style={styleOther.viewheader}>
         <Text style={styleOther.textheader}>Khác</Text>
         <TouchableOpacity style={styleOther.viewpromo} onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'DiscountUser' })}>
           <Image style={styleOther.iconpromo} source={Icon.PROMO} />
+          <Text style={styleOther.textpromo}>{count}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styleOther.viewnotify} onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser' as any, { screen: 'Notifee' })}>
           <Image style={styleOther.iconnotify} source={Icon.NOTIFY} />

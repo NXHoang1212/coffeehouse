@@ -50,6 +50,11 @@ const styleCartOrder = StyleSheet.create({
         height: HEIGHT(2),
         tintColor: COLOR.ORANGE,
     },
+    textpromo: {
+        fontSize: FONTSIZE(1.8),
+        fontWeight: 'bold',
+        color: COLOR.BLACK
+    },
     iconnotify: {
         width: WIDTH(5),
         height: HEIGHT(2.3),
@@ -63,7 +68,9 @@ const styleCartOrder = StyleSheet.create({
         borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
-        left: WIDTH(13)
+        left: WIDTH(13),
+        flexDirection: 'row',
+        gap: WIDTH(2)
     },
     viewnotify: {
         width: WIDTH(8.5),

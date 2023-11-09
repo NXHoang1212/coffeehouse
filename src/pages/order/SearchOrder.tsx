@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Image, TouchableOpacity, TouchableNativeFeedback, Keyboard } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import StyleSearchOrder from '../../styles/order/StyleSearchOrder'
 import { Icon } from '../../constant/Icon'
 import { useGoBack } from '../../utils/GoBack'

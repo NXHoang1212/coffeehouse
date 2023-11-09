@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
 import { socket } from './src/utils/Socket'
 import { ProductContextProvider } from './src/service/provider/ProductContext';
+import { ApplyPromoContextProvider } from './src/service/provider/ApplyPromoContext'
 
 const App = (): JSX.Element => {
   useEffect(() => {
@@ -22,12 +23,14 @@ const App = (): JSX.Element => {
       <StoreProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <ProductContextProvider>
-              <PaperProvider>
-                <AppNavigate />
-              </PaperProvider>
-            </ProductContextProvider>
-            <FlashMessage position="top" />
+            <PaperProvider>
+              <ProductContextProvider>
+                <ApplyPromoContextProvider>
+                  <FlashMessage position="top" />
+                  <AppNavigate />
+                </ApplyPromoContextProvider>
+              </ProductContextProvider>
+            </PaperProvider>
           </GestureHandlerRootView>
         </PersistGate>
       </StoreProvider>

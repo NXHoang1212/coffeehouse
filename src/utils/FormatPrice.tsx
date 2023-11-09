@@ -16,7 +16,7 @@ export const Total = (selectedSize: any, selectedTopping: any, quantity: number)
     if (selectedSize) {
         total += parseInt(selectedSize.price)
     }
-    if (selectedTopping) {
+    if (selectedTopping.length > 1) {
         selectedTopping.forEach((item: any) => {
             total += parseInt(item.price)
         })

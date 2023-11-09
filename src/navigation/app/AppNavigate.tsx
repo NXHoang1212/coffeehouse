@@ -6,7 +6,6 @@ import TabHomeNavigate from "../home/TabHomeNavigate";
 import AuthStackNavigate from "../auth/AuthUserNavigate";
 import SlashWellcome from "../../pages/slash/SlashWellcome";
 
-
 const Stack = createNativeStackNavigator<StackHomeNavigateTypeParam>();
 
 

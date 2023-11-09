@@ -1,11 +1,11 @@
-import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, RefreshControl } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, RefreshControl, } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import StyleHomePage from '../../styles/home/StyleHomePage'
 import { Logo, category, Icon } from '../../constant/Icon'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient';
 import BottomSheetHome from './BottomSheetHome'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
+import { useGetDiscountQuery } from '../../service/api/IndexDiscount'
 import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -19,15 +19,31 @@ const HomePage = () => {
   const scroll = useRef<ScrollView | null>(null);
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
-  ThemLightStatusBar('dark-content', backgroundColor);
+  const { data } = useGetDiscountQuery();
+  const count = data?.data.length;
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor(backgroundColor);
   const onScroll = (event: any) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     if (offsetY > 100) {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#fff');
       setBackgroundColor('#fff');
     } else {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#FFF7E6');
       setBackgroundColor('#FFF7E6');
     }
   };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor(backgroundColor);
+    });
+    return unsubscribe;
+  }, [navigation, StatusBar]);
+
+
   return (
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>
@@ -40,6 +56,7 @@ const HomePage = () => {
         <View style={StyleHomePage.headerIcon}>
           <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' } as any)}>
             <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
+            <Text style={StyleHomePage.textpromo}>{count}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={StyleHomePage.viewbell} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' } as any)}>
             <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />

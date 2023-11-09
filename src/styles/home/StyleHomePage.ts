@@ -43,6 +43,8 @@ const StyleHomePage = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 5,
+        flexDirection: 'row',
+        gap: WIDTH(2.2),
     },
     viewbell: {
         width: WIDTH(8.8),
@@ -57,6 +59,11 @@ const StyleHomePage = StyleSheet.create({
         width: WIDTH(5.3),
         height: HEIGHT(2.8),
         tintColor: COLOR.ORANGEBOLD,
+    },
+    textpromo: {
+        fontSize: FONTSIZE(1.8),
+        color: COLOR.BLACK,
+        fontWeight: 'bold'
     },
     iconbell: {
         width: WIDTH(3.5),

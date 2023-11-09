@@ -22,6 +22,11 @@ const styleOther = StyleSheet.create({
         height: HEIGHT(2.5),
         tintColor: COLOR.ORANGE,
     },
+    textpromo: {
+        fontSize: FONTSIZE(2.3),
+        color: COLOR.BLACK,
+        fontWeight: '700',
+    },
     iconnotify: {
         width: WIDTH(3.9),
         height: HEIGHT(2.5),
@@ -42,6 +47,8 @@ const styleOther = StyleSheet.create({
         elevation: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'row',
+        gap: WIDTH(2),
     },
     viewnotify: {
         marginRight: WIDTH(4),

@@ -15,6 +15,9 @@ import MethodAmount from '../modal/MethodAmount';
 import { useDeleteAllCartMutation, useDeleteCartProductIdMutation } from '../../service/api/IndexCart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 
 interface PropsDetailItemProduct {
     item: GetCartOrder;
@@ -24,8 +27,10 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const route = useRoute<any>();
     const address = route.params?.item;
+    const dispatch = useDispatch<AppDispatch>();
     const id = useSelector((state: RootState) => state.user.user._id);
     const method = useSelector((state: RootState) => state.methodamount.methodamount);
+    const promo = useSelector((state: RootState) => state.ApplyPromodiscount.applyPromodiscount.promodiscount);
     const [openModal, setopenModal] = useState<boolean>(false);
     const [note, setNote] = useState<string>('');
     const [show, setshow] = useState<boolean>(false);
@@ -33,6 +38,35 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
     const shipper = 18;
     const [DeleteAllCart] = useDeleteAllCartMutation();
     const [DeleteCartProductId] = useDeleteCartProductIdMutation();
+
+    const checkPromo = () => {
+        if (promo) {
+            if (promo === 77.6) {
+                if (item?.ProductId.map((product) => product.QuantityProduct).reduce((a, b) => a + b, 0) < 4) {
+                    dispatch(setPromodiscount(0));
+                }
+            } else if (promo === 155) {
+                if (item?.ProductId.map((product) => product.QuantityProduct).reduce((a, b) => a + b, 0) < 10) {
+                    dispatch(setPromodiscount(0));
+                }
+            } else if (promo === 30) {
+                if (item?.ProductId.map((product) => product.PriceProduct).reduce((a, b) => a + b, 0) < 99) {
+                    dispatch(setPromodiscount(0));
+                }
+            } else if (promo === 20) {
+                if (item?.ProductId.map((product) => product.PriceProduct).reduce((a, b) => a + b, 0) < 50) {
+                    dispatch(setPromodiscount(0));
+                }
+            } else if (promo === 10) {
+                if (item?.ProductId.map((product) => product.PriceProduct).reduce((a, b) => a + b, 0) < 30) {
+                    dispatch(setPromodiscount(0));
+                }
+            }
+        } else {
+            dispatch(setPromodiscount(0));
+        }
+    }
+
     const renderright = (product: any) => {
         const ProductId: number = product._id
         return (
@@ -151,10 +185,17 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                     <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(shipper)}</Text>
                 </View>
                 <View style={StyleItemInformationOrder.viewlinetotalprogess} />
-                <View style={StyleItemInformationOrder.viewdiscount}>
-                    <Text style={StyleItemInformationOrder.texindex}>Mã giảm giá</Text>
-                    <Text style={StyleItemInformationOrder.texindex}>0đ</Text>
-                </View>
+                {promo ? (
+                    <TouchableOpacity style={StyleItemInformationOrder.viewtotalshipper} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DiscountUser' })}>
+                        <Text style={StyleItemInformationOrder.texindex}>Khuyến mãi</Text>
+                        <Text style={StyleItemInformationOrder.texindex}>{FormatPrice(promo)}</Text>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity style={StyleItemInformationOrder.viewdiscount} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DiscountUser' })}>
+                        <Text style={StyleItemInformationOrder.textPromo}>Bạn có mã giảm kiểm tra để sử dụng được</Text>
+                        <Image source={Icon.RIGHT} style={StyleItemInformationOrder.iconedit} />
+                    </TouchableOpacity>
+                )}
                 <View style={StyleItemInformationOrder.viewlinetotalprogess} />
                 <View style={StyleItemInformationOrder.viewamount}>
                     <Text style={StyleItemInformationOrder.texindex}>Số tiền thanh toán</Text>
@@ -187,7 +228,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
                     </TouchableOpacity>
                 </LinearGradient>
             </ScrollView>
-            <BottomUpdateOrder show={show} onDismiss={() => setshow(false)} ProductId={SelectProduct} />
+            <BottomUpdateOrder show={show} onDismiss={() => setshow(false)} ProductId={SelectProduct} checkPromo={checkPromo} />
             <MethodAmount openModal={openModal} onDismiss={() => setopenModal(false)} />
         </View >
     )

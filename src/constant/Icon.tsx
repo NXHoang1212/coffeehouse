@@ -56,6 +56,8 @@ export const Icon = {
     VNPAY: require('../assets/images/iconvnpay.png'),
     CARDBANK: require('../assets/images/iconcardbank.png'),
     CHECKED: require('../assets/images/iconfavouriteschecked.png'),
+    BACKGROUNDPROMO: require('../assets/images/backgroundPromo.png'),
+    BACKGROUNDDISCOUNT: require('../assets/images/backgrounddiscount.png'),
 }
 
 /* THÔNG TIN */

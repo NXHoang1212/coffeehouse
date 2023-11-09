@@ -15,6 +15,8 @@ import { GetProducts } from '../../service/api/IndexProducts'
 const SlashWellcome = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('transparent');
   const getProducts = async () => {
     const data = await GetProducts();
     dispatch(setProducts(data))
@@ -27,7 +29,6 @@ const SlashWellcome = () => {
   }, [])
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="transparent" />
       <Image source={Logo.SLASHLOGO} style={{ width: WIDTH(50), height: HEIGHT(25) }} />
     </View>
   )

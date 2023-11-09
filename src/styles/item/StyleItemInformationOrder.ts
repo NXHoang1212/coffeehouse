@@ -237,6 +237,11 @@ const StyleItemInformationOrder = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
+    textPromo: {
+        fontSize: FONTSIZE(1.9),
+        fontWeight: 'bold',
+        color: COLOR.RED,
+    },
     viewamount: {
         marginHorizontal: WIDTH(3),
         flexDirection: 'row',

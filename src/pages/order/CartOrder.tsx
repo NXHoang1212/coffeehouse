@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl, Animated } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableWithoutFeedback, ScrollView, RefreshControl, Animated, StatusBar } from 'react-native'
 import React, { useState, useRef, useEffect, useContext, useCallback, memo } from 'react'
 import StyleOrder from '../../styles/order/StyleOrder'
 import { Icon, category, TabCoffee } from '../../constant/Icon'
@@ -8,7 +8,6 @@ import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
 import BottomSheetMenu from '../../components/modal/BottomSheetMenu'
 import { Provider } from 'react-native-paper'
 import { useSelector } from 'react-redux'
@@ -18,8 +17,9 @@ import { DetailProduct } from '../../data/types/Product.entity'
 import { useGetFavouritesQuery } from '../../service/api/IndexFavourites'
 
 const CartOrder = () => {
-  ThemLightStatusBar('dark-content', '#fff')
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('#fff');
   const [show, setShow] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<String>('');
   let currentCategory = '';
@@ -48,6 +48,14 @@ const CartOrder = () => {
     currentCategory = product.category.name;
     return (<ItemProduct item={product} isFirstItem={isFirstItem} showCategory={isFirstItem} />)
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBackgroundColor('#fff');
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <TouchableWithoutFeedback>
