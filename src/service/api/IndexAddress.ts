@@ -1,19 +1,19 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {AddRess, CreateAddRess} from '../../data/types/AddRess.entity';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AddRess, CreateAddRess } from '../../data/types/AddRess.entity';
 import AxiosInstance from '../../utils/AxiosIntance';
-import {HOST} from '../../constant/Host';
+import { HOST } from '../../constant/Host';
 
 export const ApiAddress = createApi({
   reducerPath: 'apiAddress',
-  baseQuery: fetchBaseQuery({baseUrl: HOST.API}),
+  baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
   endpoints: build => ({
-    getAddressId: build.query<{data: AddRess[]}, number>({
+    getAddressId: build.query<{ data: AddRess[] }, number>({
       query: id => `/api/address/GetAddress/${id}`,
     }),
   }),
 });
 
-export const {useGetAddressIdQuery} = ApiAddress;
+export const { useGetAddressIdQuery } = ApiAddress;
 
 export const GetApiAddress = async (id: string) => {
   try {

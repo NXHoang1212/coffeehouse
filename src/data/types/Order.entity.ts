@@ -9,7 +9,7 @@ export interface Order {
 }
 
 export interface OrderResponse {
-  _id: number;
+  _id: string;
   cart: string;
   name: string;
   mobile: string;

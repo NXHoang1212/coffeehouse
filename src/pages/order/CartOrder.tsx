@@ -18,23 +18,23 @@ import React, {
   memo,
 } from 'react';
 import StyleOrder from '../../styles/order/StyleOrder';
-import {Icon, category, TabCoffee} from '../../constant/Icon';
+import { Icon, category, TabCoffee } from '../../constant/Icon';
 import CategoryItem from '../../components/item/CategoryItem';
 import ItemProduct from '../../components/item/ItemProduct';
-import {useScrollToTop} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useScrollToTop } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   StackHomeNavigateNameEnum,
   StackHomeNavigateTypeParam,
 } from '../../data/types/TypeStack';
 import BottomSheetMenu from '../../components/modal/BottomSheetMenu';
-import {Provider} from 'react-native-paper';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
-import {FlashList} from '@huunguyen312/flash-list';
-import {DetailProduct} from '../../data/types/Product.entity';
-import {useGetFavouritesQuery} from '../../service/api/IndexFavourites';
+import { Provider } from 'react-native-paper';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { FlashList } from '@huunguyen312/flash-list';
+import { DetailProduct } from '../../data/types/Product.entity';
+import { useGetFavouritesQuery } from '../../service/api/IndexFavourites';
 
 const CartOrder = () => {
   const navigation =
@@ -49,7 +49,7 @@ const CartOrder = () => {
     (state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn,
   );
   let id = useSelector((state: RootState) => state.user.user._id);
-  const {data, refetch} = useGetFavouritesQuery(id);
+  const { data, refetch } = useGetFavouritesQuery(id);
   const favourites: any = data?.data.length;
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
@@ -60,24 +60,20 @@ const CartOrder = () => {
   useScrollToTop(scrollViewRef);
   const itemHeight = 150;
   const scrollToCategory = (categoryName: String) => {
-    const index = showProducts.findIndex(
-      item => item.category.name === categoryName,
-    );
+    const index = showProducts.findIndex(item => item.category.name === categoryName,);
     const y = index * itemHeight;
-    scrollViewRef.current?.scrollTo({x: 0, y: y, animated: true});
+    // let y = 0; 
+    // for (let i = 0; i < index; i++) {
+    //   y += showProducts[i].products.length * 200 + 50;
+    // }
+    scrollViewRef.current?.scrollTo({ x: 0, y: y, animated: true });
   };
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = useCallback((product: DetailProduct) => {
     const isFirstItem = currentCategory !== product.category.name;
     currentCategory = product.category.name;
-    return (
-      <ItemProduct
-        item={product}
-        isFirstItem={isFirstItem}
-        showCategory={isFirstItem}
-      />
-    );
+    return (<ItemProduct item={product} isFirstItem={isFirstItem} showCategory={isFirstItem} />);
   }, []);
 
   useEffect(() => {
@@ -119,7 +115,7 @@ const CartOrder = () => {
                   isLoggedIn
                     ? StackHomeNavigateNameEnum.StackHomeUrl
                     : ('AuthStackUser' as any),
-                  {screen: 'Favourites'},
+                  { screen: 'Favourites' },
                 )
               }>
               <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
@@ -135,17 +131,17 @@ const CartOrder = () => {
         <Animated.ScrollView
           ref={scrollViewRef}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1}}
+          contentContainerStyle={{ flexGrow: 1 }}
           onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollY}}}],
-            {useNativeDriver: true},
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true },
           )}>
           <View style={StyleOrder.viewbody}>
             <CategoryItem setSelectedCategory={handleCategorySelect} />
             <View style={StyleOrder.viewbottom}>
               <FlashList
                 data={showProducts}
-                renderItem={({item}) => renderItem(item)}
+                renderItem={({ item }) => renderItem(item)}
                 keyExtractor={(item, index) => item._id + index}
                 showsVerticalScrollIndicator={false}
                 estimatedItemSize={200}
