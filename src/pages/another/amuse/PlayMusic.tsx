@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react'
-import { ThemLightStatusBar } from '../../constant/ThemLight';
-import { useGoBack } from '../../utils/GoBack';
-import StylePlayMusic from '../../styles/code/StylePlayMusic';
-import { Icon } from '../../constant/Icon';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import {ThemLightStatusBar} from '../../../constant/ThemLight';
+import {useGoBack} from '../../../utils/GoBack';
+import StylePlayMusic from '../../../styles/another/StylePlayMusic';
+import {Icon} from '../../../constant/Icon';
 
 const PlayMusic = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -17,7 +17,7 @@ const PlayMusic = () => {
         <Text style={StylePlayMusic.textHeader}>Nhạc đang nghe</Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default PlayMusic
+export default PlayMusic;

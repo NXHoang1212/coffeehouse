@@ -1,31 +1,32 @@
-import { View, Text, Image } from 'react-native';
-import React, { useEffect, useState } from 'react'
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
-import { Icon, TabCoffee } from '../../../constant/Icon'
-import { useGoBack } from '../../../utils/GoBack'
-import StyleSaveAddress from '../../../styles/code/addresses/StyleAddress'
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
-import { useNavigation } from '@react-navigation/native';
-import { useGetAddressIdQuery } from '../../../service/api/IndexAddress';
-import { useSelector } from 'react-redux';
-import { FlashList } from '@huunguyen312/flash-list';
+import {View, Text, Image} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {TouchableOpacity} from '@gorhom/bottom-sheet';
+import {Icon, TabCoffee} from '../../../constant/Icon';
+import {useGoBack} from '../../../utils/GoBack';
+import StyleSaveAddress from '../../../styles/another/StyleAddress';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackHomeNavigateTypeParam} from '../../../data/types/TypeStack';
+import {useNavigation} from '@react-navigation/native';
+import {useGetAddressIdQuery} from '../../../service/api/IndexAddress';
+import {useSelector} from 'react-redux';
+import {FlashList} from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
-import { RootState } from '../../../redux/store/Store';
+import {RootState} from '../../../redux/store/Store';
 
 const Address: React.FC = () => {
   const goback = useGoBack();
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id);
-  const { data } = useGetAddressIdQuery(id)
+  const {data} = useGetAddressIdQuery(id);
   const Addressess = data?.data;
   const isLastItem = (currentIndex: number) => {
     return Addressess && currentIndex === Addressess.length - 1;
-  }
+  };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{flex: 1}}>
       <View style={StyleSaveAddress.container}>
         <View style={StyleSaveAddress.viewheader}>
           <TouchableOpacity onPress={goback}>
@@ -34,17 +35,34 @@ const Address: React.FC = () => {
           <Text style={StyleSaveAddress.textHeader}>Địa chỉ đã lưu</Text>
         </View>
         <View style={StyleSaveAddress.viewbody}>
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: 'Nhà' })}>
-            <Image source={TabCoffee.HOME} style={StyleSaveAddress.iconAddress} />
+          <TouchableOpacity
+            style={StyleSaveAddress.viewAddress}
+            onPress={() =>
+              navigation.navigate('AddAddress' as any, {name: 'Nhà'})
+            }>
+            <Image
+              source={TabCoffee.HOME}
+              style={StyleSaveAddress.iconAddress}
+            />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ nhà</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: 'Công ty' })}>
+          <TouchableOpacity
+            style={StyleSaveAddress.viewAddress}
+            onPress={() =>
+              navigation.navigate('AddAddress' as any, {name: 'Công ty'})
+            }>
             <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
-            <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
+            <Text style={StyleSaveAddress.textAddress}>
+              Thêm địa chỉ công ty
+            </Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
-          <TouchableOpacity style={StyleSaveAddress.viewAddress} onPress={() => navigation.navigate('AddAddress' as any, { name: '' })}>
+          <TouchableOpacity
+            style={StyleSaveAddress.viewAddress}
+            onPress={() =>
+              navigation.navigate('AddAddress' as any, {name: ''})
+            }>
             <Image source={Icon.PLUS} style={StyleSaveAddress.iconplus} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>
@@ -52,7 +70,9 @@ const Address: React.FC = () => {
           <View style={StyleSaveAddress.viewitem}>
             <FlashList
               data={Addressess}
-              renderItem={({ item, index }) => <ItemAddress item={item} isLastItem={isLastItem(index)} />}
+              renderItem={({item, index}) => (
+                <ItemAddress item={item} isLastItem={isLastItem(index)} />
+              )}
               keyExtractor={(item: any) => item._id}
               estimatedItemSize={200}
             />
@@ -60,7 +80,7 @@ const Address: React.FC = () => {
         </View>
       </View>
     </GestureHandlerRootView>
-  )
-}
+  );
+};
 
-export default Address
+export default Address;

@@ -1,13 +1,12 @@
-import { StyleSheet } from "react-native";
-import { COLOR } from "../../constant/Color";
-import { WIDTH, HEIGHT, FONTSIZE } from "../../constant/Responsive";
-import { FONTSTYLE } from "../../constant/Fonts";
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
+import { FONTSTYLE } from '../../constant/Fonts';
 
-
-const StylePlayMusic = StyleSheet.create({
+const StyleStatusOrder = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.WHITE
+        backgroundColor: COLOR.WHITE,
     },
     viewheader: {
         flexDirection: 'row',
@@ -26,9 +25,8 @@ const StylePlayMusic = StyleSheet.create({
         fontSize: FONTSIZE(2.4),
         color: COLOR.BLACK,
         fontWeight: 'bold',
-        marginLeft: WIDTH(23)
+        marginLeft: WIDTH(25),
     },
 });
 
-
-export default StylePlayMusic;
+export default StyleStatusOrder;

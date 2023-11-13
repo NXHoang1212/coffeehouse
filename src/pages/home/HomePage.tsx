@@ -1,25 +1,36 @@
-import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, RefreshControl, } from 'react-native'
-import React, { useState, useRef, useEffect } from 'react'
-import StyleHomePage from '../../styles/home/StyleHomePage'
-import { Logo, category, Icon } from '../../constant/Icon'
-import FastImage from 'react-native-fast-image'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import StyleHomePage from '../../styles/home/StyleHomePage';
+import {Logo, category, Icon} from '../../constant/Icon';
+import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import BottomSheetHome from './BottomSheetHome'
-import { useGetDiscountQuery } from '../../service/api/IndexDiscount'
-import { useScrollToTop } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/store/Store'
+import BottomSheetHome from './BottomSheetHome';
+import {useGetDiscountQuery} from '../../service/api/IndexDiscount';
+import {useScrollToTop} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/Store';
 
 const HomePage = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  let isLoggedIn = useSelector(
+    (state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn,
+  );
   const scroll = useRef<ScrollView | null>(null);
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
-  const { data } = useGetDiscountQuery();
+  const {data} = useGetDiscountQuery();
   const count = data?.data.length;
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor(backgroundColor);
@@ -43,33 +54,62 @@ const HomePage = () => {
     return unsubscribe;
   }, [navigation, StatusBar]);
 
-
   return (
-    <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
+    <View style={[StyleHomePage.container, {backgroundColor: backgroundColor}]}>
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
-          {isLoggedIn ? <Text style={StyleHomePage.textheader}>Hoàng ơi, CloudTea nhé!</Text>
-            : <Text style={StyleHomePage.textheader}>CloudTea nhé!</Text>
-          }
+          {isLoggedIn ? (
+            <Text style={StyleHomePage.textheader}>
+              Hoàng ơi, CloudTea nhé!
+            </Text>
+          ) : (
+            <Text style={StyleHomePage.textheader}>CloudTea nhé!</Text>
+          )}
         </View>
         <View style={StyleHomePage.headerIcon}>
-          <TouchableOpacity style={StyleHomePage.viewpromo} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' } as any)}>
+          <TouchableOpacity
+            style={StyleHomePage.viewpromo}
+            onPress={() =>
+              navigation.navigate(
+                isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser',
+                {screen: 'DiscountUser'} as any,
+              )
+            }>
             <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
-            <Text style={StyleHomePage.textpromo}>{count}</Text>
+            {isLoggedIn ? (
+              <Text style={StyleHomePage.textpromo}>{count}</Text>
+            ) : null}
           </TouchableOpacity>
-          <TouchableOpacity style={StyleHomePage.viewbell} onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' } as any)}>
+          <TouchableOpacity
+            style={StyleHomePage.viewbell}
+            onPress={() =>
+              navigation.navigate(
+                isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser',
+                {screen: 'Notifee'} as any,
+              )
+            }>
             <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} ref={scroll} onScroll={onScroll}
-        refreshControl={<RefreshControl refreshing={false} onRefresh={() => { }} />}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        ref={scroll}
+        onScroll={onScroll}
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={() => {}} />
+        }>
         <View style={StyleHomePage.viewbody}>
-          <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
+          <LinearGradient
+            colors={['#FA8C16', '#fd7e14']}
+            style={StyleHomePage.viewbodycard}>
             <View style={StyleHomePage.viewtextcard}>
               <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
-              <Text style={StyleHomePage.textcard}>Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho thành viên bạn nhé!</Text>
+              <Text style={StyleHomePage.textcard}>
+                Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho
+                thành viên bạn nhé!
+              </Text>
               <TouchableOpacity style={StyleHomePage.viewlogincard}>
                 <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
               </TouchableOpacity>
@@ -82,8 +122,8 @@ const HomePage = () => {
         </View>
         <BottomSheetHome />
       </ScrollView>
-    </View >
-  )
-}
+    </View>
+  );
+};
 
-export default HomePage
+export default HomePage;

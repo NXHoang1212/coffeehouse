@@ -1,6 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export const useGoBack = () => {
-    const navigation = useNavigation();
-    return () => navigation.goBack();
-}
+  const navigation = useNavigation();
+  return () => navigation.goBack();
+};

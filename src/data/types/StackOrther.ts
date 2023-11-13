@@ -1,16 +1,16 @@
 export enum StackEnumOther {
-    Login = 'Login',
-    Another = 'Other',
-    History = 'HistoryOrder',
-    User = 'Information',
-    General = 'Setting',
-    Link = 'DeepLinkAccount',
+  Login = 'Login',
+  Another = 'Other',
+  History = 'HistoryOrder',
+  User = 'Information',
+  General = 'Setting',
+  Link = 'DeepLinkAccount',
 }
 
 export type StackParamsOther = {
-    Other: undefined;
-    HistoryOrder: undefined;
-    Information: undefined;
-    Setting: undefined;
-    DeepLinkAccount: undefined;
+  Other: undefined;
+  HistoryOrder: undefined;
+  Information: undefined;
+  Setting: undefined;
+  DeepLinkAccount: undefined;
 };

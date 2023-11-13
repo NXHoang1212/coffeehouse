@@ -1,12 +1,12 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import {View, Text} from 'react-native';
+import React from 'react';
 
 const BorderDesgin = () => {
-    return (
-        <View>
-            <Text>BorderDesgin</Text>
-        </View>
-    )
-}
+  return (
+    <View>
+      <Text>BorderDesgin</Text>
+    </View>
+  );
+};
 
-export default BorderDesgin
+export default BorderDesgin;

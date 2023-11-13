@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react'
-import { ThemLightStatusBar } from '../../constant/ThemLight';
-import { useGoBack } from '../../utils/GoBack';
-import StyleFeedBackOrder from '../../styles/code/StyleFeedBackOrder';
-import { Icon } from '../../constant/Icon';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import {ThemLightStatusBar} from '../../../constant/ThemLight';
+import {useGoBack} from '../../../utils/GoBack';
+import StyleFeedBackOrder from '../../../styles/another/StyleFeedBackOrder';
+import {Icon} from '../../../constant/Icon';
 
 const FeedBackOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -18,10 +18,12 @@ const FeedBackOrder: React.FC = () => {
       </View>
       <View style={StyleFeedBackOrder.viewnoorder}>
         <Image source={Icon.FEEDBACK} style={StyleFeedBackOrder.iconNoOrder} />
-        <Text style={StyleFeedBackOrder.textNoOrder}>Chưa có đơn hàng nào hoàn tất</Text>
+        <Text style={StyleFeedBackOrder.textNoOrder}>
+          Chưa có đơn hàng nào hoàn tất
+        </Text>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default FeedBackOrder
+export default FeedBackOrder;

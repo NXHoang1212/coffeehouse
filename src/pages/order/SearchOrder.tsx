@@ -1,21 +1,31 @@
-import { View, Text, TextInput, Image, TouchableOpacity, TouchableNativeFeedback, Keyboard } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import StyleSearchOrder from '../../styles/order/StyleSearchOrder'
-import { Icon } from '../../constant/Icon'
-import { useGoBack } from '../../utils/GoBack'
-import { FlashList } from '@huunguyen312/flash-list'
-import { useSelector } from 'react-redux'
-import SeacrchItem from '../../components/item/SearchItem'
-import { RootState } from '../../redux/store/Store'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Keyboard,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import StyleSearchOrder from '../../styles/order/StyleSearchOrder';
+import {Icon} from '../../constant/Icon';
+import {useGoBack} from '../../utils/GoBack';
+import {FlashList} from '@huunguyen312/flash-list';
+import {useSelector} from 'react-redux';
+import SeacrchItem from '../../components/item/SearchItem';
+import {RootState} from '../../redux/store/Store';
+import {ThemLightStatusBar} from '../../constant/ThemLight';
+import {useNavigation} from '@react-navigation/native';
 
 const SearchOrder = () => {
-  const goBack = useGoBack()
-  const navigation = useNavigation()
-  ThemLightStatusBar('dark-content', '#fff')
-  const [search, setSearch] = useState<string>('')
-  let products = useSelector((state: RootState) => state.product).filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
+  const goBack = useGoBack();
+  const navigation = useNavigation();
+  ThemLightStatusBar('dark-content', '#fff');
+  const [search, setSearch] = useState<string>('');
+  let products = useSelector((state: RootState) => state.product).filter(item =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
@@ -34,8 +44,14 @@ const SearchOrder = () => {
               onChangeText={setSearch}
             />
             {search.length > 0 && (
-              <TouchableOpacity onPress={() => { setSearch('') }}>
-                <Image source={Icon.CANCEL} style={StyleSearchOrder.iconcancel} />
+              <TouchableOpacity
+                onPress={() => {
+                  setSearch('');
+                }}>
+                <Image
+                  source={Icon.CANCEL}
+                  style={StyleSearchOrder.iconcancel}
+                />
               </TouchableOpacity>
             )}
           </View>
@@ -48,8 +64,8 @@ const SearchOrder = () => {
           {search.length > 0 ? (
             <FlashList
               data={products}
-              renderItem={({ item }) => <SeacrchItem item={item} />}
-              keyExtractor={(item) => item._id}
+              renderItem={({item}) => <SeacrchItem item={item} />}
+              keyExtractor={item => item._id}
               estimatedItemSize={200}
               showsVerticalScrollIndicator={false}
               extraData={search}
@@ -62,9 +78,9 @@ const SearchOrder = () => {
             />
           ) : null}
         </View>
-      </View >
+      </View>
     </TouchableNativeFeedback>
-  )
-}
+  );
+};
 
-export default SearchOrder
+export default SearchOrder;

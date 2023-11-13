@@ -1,5 +1,11 @@
 import React from 'react';
-import {PluginClient, usePlugin, createState, useValue, Layout} from 'flipper-plugin';
+import {
+  PluginClient,
+  usePlugin,
+  createState,
+  useValue,
+  Layout,
+} from 'flipper-plugin';
 
 type Data = {
   id: string;
@@ -15,8 +21,8 @@ type Events = {
 export function plugin(client: PluginClient<Events, {}>) {
   const data = createState<Record<string, Data>>({}, {persist: 'data'});
 
-  client.onMessage('newData', (newData) => {
-    data.update((draft) => {
+  client.onMessage('newData', newData => {
+    data.update(draft => {
       draft[newData.id] = newData;
     });
   });

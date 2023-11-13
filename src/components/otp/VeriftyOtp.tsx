@@ -1,25 +1,27 @@
 import React from 'react';
-import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputKeyPressEventData } from 'react-native';
-import { COLOR } from '../../constant/Color';
-import { HEIGHT, WIDTH } from '../../constant/Responsive';
-
-
+import {
+  NativeSyntheticEvent,
+  StyleSheet,
+  TextInput,
+  TextInputKeyPressEventData,
+} from 'react-native';
+import {COLOR} from '../../constant/Color';
+import {HEIGHT, WIDTH} from '../../constant/Responsive';
 
 type Props = {
   value: string;
   onChangeText: (text: string) => void;
   onCompleted: () => void;
   inputRef: any;
-}
-const VeriftyInput = ({ value, onChangeText, onCompleted, inputRef }: Props) => {
-
+};
+const VeriftyInput = ({value, onChangeText, onCompleted, inputRef}: Props) => {
   return (
     <TextInput
       keyboardType="number-pad"
       maxLength={1}
       style={styles.container}
       value={value}
-      onChangeText={(text) => {
+      onChangeText={text => {
         onChangeText(text);
         //nếu index === 0 thì sẽ không chuyển lui về input trước đó
         if (text.length === 1) {
@@ -28,12 +30,11 @@ const VeriftyInput = ({ value, onChangeText, onCompleted, inputRef }: Props) => 
           onCompleted();
         }
       }}
-      autoComplete='off'
+      autoComplete="off"
       autoCorrect={false}
-      autoCapitalize='none'
-      returnKeyType='next'
+      autoCapitalize="none"
+      returnKeyType="next"
       ref={inputRef}
-
     />
   );
 };

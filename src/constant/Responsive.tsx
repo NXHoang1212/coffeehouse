@@ -1,5 +1,8 @@
-import { responsiveScreenFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
-
+import {
+  responsiveScreenFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 
 export const HEIGHT = (height: number) => responsiveScreenHeight(height);
 export const WIDTH = (width: number) => responsiveScreenWidth(width);
