@@ -3,13 +3,14 @@ import { createLogger } from 'redux-logger'
 import { combineReducers } from '@reduxjs/toolkit';
 import ThemeReducer from '../slices/StatusbarSlice';
 import LoadingReducer from '../slices/IsLoadingSlice';
-import ProductReducer from '../slices/ProductSlices';
+import ProductReducer, { fetchProducts } from '../slices/ProductSlices';
 import AddressReducer from '../slices/AddressSlice';
 import CartReducer from '../slices/CartSlice';
 import IsLoggedInReducer from '../slices/IsLoggedIn';
 import MethodAmountReducer from '../slices/MethodAmountSlice';
 import DiscountReducer from '../slices/DiscountSlice';
-import ApplyPromodiscount from '../slices/ApplyPromodiscount';
+import ApplyPromodiscountReducer from '../slices/ApplyPromodiscount';
+import OrderReducer from '../slices/OrderSlice';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { ApiCart } from '../../service/api/IndexCart';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
@@ -31,7 +32,7 @@ const rootReducer = combineReducers({
   user: UserReducer,
   cart: CartReducer,
   methodamount: MethodAmountReducer,
-  applyPromodiscount: ApplyPromodiscount,
+  applyPromodiscount: ApplyPromodiscountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -48,6 +49,7 @@ const store = configureStore({
     methodamount: persistedReducer,
     discount: DiscountReducer,
     ApplyPromodiscount: persistedReducer,
+    Order: OrderReducer,
     // theme: ThemeReducer,
     [ApiAddress.reducerPath]: ApiAddress.reducer,
     [ApiCart.reducerPath]: ApiCart.reducer,
@@ -80,3 +82,4 @@ export const resetStore = async () => {
   store.dispatch({ type: 'RESET' });
   await persistor.flush();
 };
+

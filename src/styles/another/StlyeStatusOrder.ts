@@ -11,21 +11,25 @@ const StyleStatusOrder = StyleSheet.create({
     viewheader: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         width: WIDTH(100),
-        height: HEIGHT(6),
-        backgroundColor: COLOR.WHITE,
+        height: HEIGHT(6.5),
+        // backgroundColor: COLOR.WHITE,
         borderBottomWidth: 0.5,
     },
     iconBack: {
-        marginLeft: WIDTH(3),
-        width: WIDTH(5),
-        height: HEIGHT(3),
+        width: WIDTH(4),
+        height: HEIGHT(2),
+        left: WIDTH(19),
+        resizeMode: 'contain',
     },
     textHeader: {
         fontSize: FONTSIZE(2.4),
         color: COLOR.BLACK,
-        fontWeight: 'bold',
-        marginLeft: WIDTH(25),
+        fontWeight: '600',
+        left: WIDTH(3.5),
+    },
+    viewbody: {
     },
 });
 

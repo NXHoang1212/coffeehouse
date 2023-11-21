@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {WIDTH, HEIGHT, FONTSIZE} from '../../constant/Responsive';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 
 const StyleMethodAmount = StyleSheet.create({
   backdrop: {
@@ -95,4 +95,4 @@ const StyleMethodAmount = StyleSheet.create({
   },
 });
 
-export {StyleMethodAmount};
+export { StyleMethodAmount };

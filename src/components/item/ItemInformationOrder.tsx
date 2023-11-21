@@ -22,8 +22,9 @@ import ConfirmOrderPayment from '../modal/ConfirmOrderPayment';
 import { Messenger } from '../../utils/ShowMessage';
 import { useCreateOrderMutation } from '../../service/api/IndexOrdert';
 import { useUpdateStatusMutation } from '../../service/api/IndexCart';
-import { OrderStatus } from '../../data/types/Enum.entity';
+import { OrderStatus, PaymentStatus } from '../../data/types/Enum.entity';
 import { Order } from '../../data/types/Order.entity';
+import { AddOrder } from '../../redux/slices/OrderSlice';
 
 interface PropsDetailItemProduct {
   item: GetCartOrder;
@@ -32,7 +33,7 @@ interface PropsDetailItemProduct {
 const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute<any>();
-  const address = route.params?.item;
+  const address = route.params?.address;
   const dispatch = useDispatch<AppDispatch>();
   const id = useSelector((state: RootState) => state.user.user._id);
   const method = useSelector((state: RootState) => state.methodamount.methodamount,);
@@ -108,28 +109,45 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       checkPromo();
     }
   }, [quantity, deleteInProgress]);
-
   const handlePayment = async () => {
     try {
+      const orderCart = item.ProductId.map(product => {
+        return {
+          NameProduct: product.NameProduct,
+          QuantityProduct: product.QuantityProduct,
+          PriceProduct: product.PriceProduct,
+          SizeProduct: product.SizeProduct,
+          ToppingProduct: product.ToppingProduct,
+          NoteProduct: product.NoteProduct,
+        };
+      }) as any;
       const order: Order = {
-        cart: item._id,
-        name: item.UserId.name,
-        mobile: item.UserId.mobile,
+        OrderCart: orderCart,
+        user: id,
         address: address.DescribeAddRess,
+        note: note,
         promo: promo,
         payment: method.name,
         status: OrderStatus.PENDING,
+        statusPayment: PaymentStatus.PENDING,
+        reason: '',
       };
-      const res = await CreateOrder(order);
-      if (res) {
+      const response: any = await CreateOrder(order);
+      if (response) {
+        console.log("🚀 ~ file: ItemInformationOrder.tsx:138 ~ handlePayment ~ response:", response.data.data._id)
+        // await updateStatus(id);
         Messenger('Đặt hàng thành công', 'success');
-        navigation.navigate('HistoryOrder' as any);
-        await updateStatus(id);
+        dispatch(AddOrder({ _id: response.data.data._id }));
+        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' });
+      } else {
+        Messenger('Đặt hàng thất bại', 'error');
       }
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ file: ItemInformationOrder.tsx:126 ~ handlePayment ~ error:", error);
     }
+    // navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' })
   };
+
 
   return (
     <View style={StyleItemInformationOrder.container}>
@@ -144,9 +162,9 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
         </View>
         {address ? (
           <View style={StyleItemInformationOrder.viewaddress}>
-            <View style={StyleItemInformationOrder.viewtextaddress}>
+            <TouchableOpacity style={StyleItemInformationOrder.viewtextaddress} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'SelectedAddressOrder' })}>
               <Text style={StyleItemInformationOrder.textdetailaddress}>{address.DescribeAddRess}</Text>
-            </View>
+            </TouchableOpacity>
             <TouchableOpacity style={StyleItemInformationOrder.vieweditaddress} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'SelectedAddressOrder' })}>
               <Image source={Icon.RIGHT} style={StyleItemInformationOrder.iconedit} />
             </TouchableOpacity>

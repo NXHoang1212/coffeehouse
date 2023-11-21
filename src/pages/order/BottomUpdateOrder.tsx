@@ -11,21 +11,22 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {Icon} from '../../constant/Icon';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import React, { useState, useEffect, useRef } from 'react';
+import { Icon } from '../../constant/Icon';
+import { PanGestureHandler } from 'react-native-gesture-handler';
 import StyleBottomUpdateOrder from '../../styles/order/StyleBottomUpdateOrder';
-import {FormatPrice, Total} from '../../utils/FormatPrice';
-import {CheckBox} from 'react-native-elements';
-import {handleMinus, handlePlus} from '../../utils/Total';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
-import {Messenger} from '../../utils/ShowMessage';
-import {useUpdateCartMutation} from '../../service/api/IndexCart';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../redux/store/Store';
-import {AddCart} from '../../redux/slices/CartSlice';
-import {setPromodiscount} from '../../redux/slices/ApplyPromodiscount';
+import { FormatPrice, Total } from '../../utils/FormatPrice';
+import { CheckBox } from 'react-native-elements';
+import { handleMinus, handlePlus } from '../../utils/Total';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { Messenger } from '../../utils/ShowMessage';
+import { useUpdateCartMutation } from '../../service/api/IndexCart';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { AddCart } from '../../redux/slices/CartSlice';
+import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
+import { cartStatus } from '../../data/types/Enum.entity';
 
 interface Props {
   show: boolean;
@@ -110,8 +111,9 @@ const BottomUpdateOrder: React.FC<Props> = ({
         ToppingProduct: selectedTopping,
         SizeProduct: size,
         NoteProduct: note,
+        StatusProduct: cartStatus.PENDING,
       };
-      const response = await updateCart({id, ProductId: ProductId._id, data});
+      const response = await updateCart({ id, ProductId: ProductId._id, data });
       if (response) {
         setTimeout(() => {
           Messenger('Cập nhật thành công', 'success');
@@ -138,7 +140,7 @@ const BottomUpdateOrder: React.FC<Props> = ({
       />
       <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
       <Animated.View
-        style={[StyleBottomUpdateOrder.container, {bottom: bottomsheet}]}>
+        style={[StyleBottomUpdateOrder.container, { bottom: bottomsheet }]}>
         <PanGestureHandler
           onGestureEvent={onGestureEvent}
           onEnded={onGestureEnd}>
@@ -157,7 +159,7 @@ const BottomUpdateOrder: React.FC<Props> = ({
         <View style={StyleBottomUpdateOrder.line} />
         <View style={StyleBottomUpdateOrder.body}>
           <ScrollView
-            contentContainerStyle={{flexGrow: 1, paddingBottom: 150}}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 150 }}
             showsVerticalScrollIndicator={false}>
             <View style={StyleBottomUpdateOrder.body}>
               <View style={StyleBottomUpdateOrder.viewsize}>
@@ -225,7 +227,7 @@ const BottomUpdateOrder: React.FC<Props> = ({
                           </View>
                         </View>
                         {ProductId.ProductId.topping.length - 1 ===
-                        index ? null : (
+                          index ? null : (
                           <View style={StyleBottomUpdateOrder.lineitem} />
                         )}
                       </TouchableOpacity>

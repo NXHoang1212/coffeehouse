@@ -1,4 +1,4 @@
-export interface AddRess {
+export interface AddRess extends AddRessState {
   _id: string;
   name: string;
   DescribeAddRess: string;
@@ -8,6 +8,10 @@ export interface AddRess {
   userId: string;
   username: string;
   phone: string;
+}
+
+interface AddRessState {
+  done: string;
 }
 
 export interface CreateAddRess {

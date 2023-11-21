@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {HOST} from '../constant/Host';
+import { HOST } from '../constant/Host';
 
 const AxiosInstance = (contentType = 'application/json') => {
   const axiosInstance = axios.create({
-    baseURL: HOST.API,
+    baseURL: HOST.API
   });
   axiosInstance.interceptors.request.use(
     async (config: any) => {

@@ -12,13 +12,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import { OrderStatus } from '../../../data/types/Enum.entity';
 
-const HistoryOrder = () => {
+const HistoryOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const { activeTab, handleActiveTab } = ActiveTab('Tab one');
-  let id = useSelector((state: RootState) => state.user.user._id);
-  const { data } = useGetOrderQuery(id);
-  const dataOrder = data?.data;
+  // let id = useSelector((state: RootState) => state.user.user._id);
+  // const { data } = useGetOrderQuery(id);
+  // const dataOrder = data?.data;
+
   return (
     <View style={StyleHistoryOrder.container}>
       <View style={StyleHistoryOrder.viewheader}>
@@ -33,7 +34,7 @@ const HistoryOrder = () => {
             onPress={() => handleActiveTab("Tab one")}>
             <Text style={[StyleHistoryOrder.texttab, activeTab === "Tab one" ? StyleHistoryOrder.activeText : null]}>Đang thực hiện</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[StyleHistoryOrder.tabcontainer, activeTab === "Tab two" ? StyleHistoryOrder.activeTab : null,]}
+          <TouchableOpacity style={[StyleHistoryOrder.tabcontainertwo, activeTab === "Tab two" ? StyleHistoryOrder.activeTabtwo : null,]}
             onPress={() => handleActiveTab("Tab two")}>
             <Text style={[StyleHistoryOrder.texttab, activeTab === "Tab two" ? StyleHistoryOrder.activeText : null]}>Đã hoàn tất</Text>
           </TouchableOpacity>
@@ -43,7 +44,7 @@ const HistoryOrder = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {activeTab === "Tab one" ? (
+      {/* {activeTab === "Tab one" ? (
         <View style={StyleHistoryOrder.viewtabone}>
           <FlashList
             data={dataOrder?.filter((item) => item.status === OrderStatus.PENDING)}
@@ -90,7 +91,7 @@ const HistoryOrder = () => {
             }}
           />
         </View>
-      ) : null}
+      ) : null} */}
     </View>
   );
 };

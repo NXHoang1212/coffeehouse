@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CartOrder} from '../../data/types/CartOrder.entity';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartOrder } from '../../data/types/CartOrder.entity';
 
 const initialState: CartOrder = {
   _id: '',
@@ -14,6 +14,7 @@ const initialState: CartOrder = {
       ToppingProduct: [],
       SizeProduct: '',
       NoteProduct: '',
+      StatusProduct: '',
     },
   ],
 };
@@ -40,6 +41,7 @@ const CartSlice = createSlice({
           ToppingProduct: [],
           SizeProduct: '',
           NoteProduct: '',
+          StatusProduct: '',
         },
       ];
     },
@@ -47,4 +49,4 @@ const CartSlice = createSlice({
 });
 
 export default CartSlice.reducer;
-export const {AddCart, removeCart} = CartSlice.actions;
+export const { AddCart, removeCart } = CartSlice.actions;

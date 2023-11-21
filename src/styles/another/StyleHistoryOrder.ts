@@ -27,41 +27,63 @@ const StyleHistoryOrder = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: WIDTH(25),
   },
-  viewbody: {
-
-  },
+  viewbody: {},
   viewtabdiscover: {
     flexDirection: 'row',
-    marginTop: HEIGHT(1),
-    gap: WIDTH(5),
-    marginLeft: WIDTH(6.8),
-    justifyContent: 'center',
+    marginTop: HEIGHT(1.5),
     alignItems: 'center',
+    justifyContent: 'flex-start',
+    left: WIDTH(3),
   },
-  tabcontainer: {},
-  activeTab: {
-    width: WIDTH(34),
+  tabcontainer: {
+    width: WIDTH(30),
     height: HEIGHT(4),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activeTab: {
+    width: WIDTH(30),
+    height: HEIGHT(3.2),
     backgroundColor: COLOR.SKINBLAND,
     borderRadius: WIDTH(5),
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabcontainertwo: {
+    width: WIDTH(30),
+    height: HEIGHT(4),
+    alignItems: 'center',
+    justifyContent: 'center',
+    left: WIDTH(3),
+  },
+  activeTabtwo: {
+    width: WIDTH(30),
+    height: HEIGHT(3.2),
+    backgroundColor: COLOR.SKINBLAND,
+    borderRadius: WIDTH(5),
+    alignItems: 'center',
+    justifyContent: 'center',
+    left: WIDTH(3),
   },
   texttab: {
     fontSize: FONTSIZE(1.8),
     color: COLOR.BLACK,
-    fontFamily: FONTSTYLE.REGULAR,
     fontWeight: '700',
   },
   activeText: {
     fontSize: FONTSIZE(1.8),
     color: COLOR.ORANGE,
-    fontFamily: FONTSTYLE.REGULAR,
     fontWeight: '700',
   },
-  viewtabone: {},
-  viewtabtwo: {},
-  viewtabthree: {},
+  viewtabone: {
+    height: HEIGHT(100),
+  },
+  viewtabtwo: {
+    height: HEIGHT(100),
+  },
+  viewtabthree: {
+    height: HEIGHT(100),
+  },
 });
 
 export default StyleHistoryOrder;

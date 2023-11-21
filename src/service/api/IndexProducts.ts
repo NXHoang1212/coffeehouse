@@ -1,10 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HOST } from '../../constant/Host';
-import {
-  ProductGet,
-  Products,
-  DetailProduct,
-} from '../../data/types/Product.entity';
+import { Products, DetailProduct, } from '../../data/types/Product.entity';
 import AxiosInstance from '../../utils/AxiosIntance';
 
 export const ApiProducts = createApi({

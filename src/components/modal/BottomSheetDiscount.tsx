@@ -1,29 +1,18 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  ScrollView,
-  Dimensions,
-  StatusBar,
-  Modal,
-} from 'react-native';
-import React, {useState, useEffect, useRef, memo, useContext} from 'react';
-import {Icon} from '../../constant/Icon';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {Portal} from 'react-native-paper';
+import { View, Text, Modal, Animated, Dimensions, Image, ScrollView, Pressable, ImageSourcePropType, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef, memo, useContext } from 'react';
+import { Icon } from '../../constant/Icon';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { Portal } from 'react-native-paper';
 import StyleBottomSheetDiscount from '../../styles/modal/StyleBottomSheetDiscount';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 import QRCode from 'react-native-qrcode-svg';
 import Clipboard from '@react-native-clipboard/clipboard';
-import {useGetCartQuery} from '../../service/api/IndexCart';
-import {CartOrder} from '../../data/types/CartOrder.entity';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../redux/store/Store';
-import {setPromodiscount} from '../../redux/slices/ApplyPromodiscount';
+import { useGetCartQuery } from '../../service/api/IndexCart';
+import { CartOrder } from '../../data/types/CartOrder.entity';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 
 interface Props {
   show: boolean;
@@ -44,7 +33,7 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({
   const [open, setopen] = useState<boolean>(show);
   const discount = useSelector((state: RootState) => state.discount);
   const id = useSelector((state: RootState) => state.user.user._id);
-  const {data} = useGetCartQuery(id);
+  const { data } = useGetCartQuery(id);
   const ProductId = data?.data?.map((item: CartOrder) => item.ProductId);
   const Quantity = data?.data
     ?.map((item: CartOrder) =>
@@ -177,7 +166,7 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({
         style={StyleBottomSheetDiscount.backdrop}
       />
       <Animated.View
-        style={[StyleBottomSheetDiscount.container, {bottom: bottomsheet}]}>
+        style={[StyleBottomSheetDiscount.container, { bottom: bottomsheet }]}>
         <PanGestureHandler
           onGestureEvent={onGestureEvent}
           onEnded={onGestureEnd}>
@@ -192,7 +181,7 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({
         </PanGestureHandler>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={StyleBottomSheetDiscount.body}>
-            <View style={{left: 2}}>
+            <View style={{ left: 2 }}>
               <View style={StyleBottomSheetDiscount.viewtext}>
                 <Text style={StyleBottomSheetDiscount.textTitle}>
                   {discount.Tilte}

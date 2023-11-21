@@ -9,10 +9,10 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {Icon, infores} from '../../constant/Icon';
-import {StyleOptionsCamera} from '../../styles/modal/StyleOptionsCamera';
-import {OpenCamera, OpenPicker} from '../../utils/ImagePicker';
+import React, { useState, useEffect, useRef } from 'react';
+import { Icon, infores } from '../../constant/Icon';
+import { StyleOptionsCamera } from '../../styles/modal/StyleOptionsCamera';
+import { OpenCamera, OpenPicker } from '../../utils/ImagePicker';
 
 interface Props {
   show: boolean;
@@ -63,7 +63,7 @@ const OptionsCamera: React.FC<Props> = ({
         style={StyleOptionsCamera.backdrop}
       />
       <Animated.View
-        style={[StyleOptionsCamera.container, {bottom: bottomsheet}]}>
+        style={[StyleOptionsCamera.container, { bottom: bottomsheet }]}>
         <View style={StyleOptionsCamera.header}>
           <Text style={StyleOptionsCamera.texttile}>Thay đổi ảnh đại diện</Text>
           <TouchableOpacity onPress={() => onDismiss()}>

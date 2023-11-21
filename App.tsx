@@ -11,6 +11,7 @@ import {PaperProvider} from 'react-native-paper';
 import {socket} from './src/utils/Socket';
 import {ProductContextProvider} from './src/service/provider/ProductContext';
 import {ApplyPromoContextProvider} from './src/service/provider/ApplyPromoContext';
+import StatusOrder from './src/pages/another/history/StatusOrder';
 
 const App = (): JSX.Element => {
   useEffect(() => {

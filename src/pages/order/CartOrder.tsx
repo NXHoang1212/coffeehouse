@@ -1,22 +1,5 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  ScrollView,
-  RefreshControl,
-  Animated,
-  StatusBar,
-} from 'react-native';
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-  useCallback,
-  memo,
-} from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar, TouchableWithoutFeedback, Animated, ScrollView, RefreshControl } from 'react-native';
 import StyleOrder from '../../styles/order/StyleOrder';
 import { Icon, category, TabCoffee } from '../../constant/Icon';
 import CategoryItem from '../../components/item/CategoryItem';
@@ -24,12 +7,8 @@ import ItemProduct from '../../components/item/ItemProduct';
 import { useScrollToTop } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {
-  StackHomeNavigateNameEnum,
-  StackHomeNavigateTypeParam,
-} from '../../data/types/TypeStack';
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
 import BottomSheetMenu from '../../components/modal/BottomSheetMenu';
-import { Provider } from 'react-native-paper';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { FlashList } from '@huunguyen312/flash-list';
@@ -37,37 +16,36 @@ import { DetailProduct } from '../../data/types/Product.entity';
 import { useGetFavouritesQuery } from '../../service/api/IndexFavourites';
 
 const CartOrder = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
   const [show, setShow] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<String>('');
   let currentCategory = '';
   let showProducts = useSelector((state: RootState) => state.product);
-  let isLoggedIn = useSelector(
-    (state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn,
-  );
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
   let id = useSelector((state: RootState) => state.user.user._id);
-  const { data, refetch } = useGetFavouritesQuery(id);
+  const { data } = useGetFavouritesQuery(id);
   const favourites: any = data?.data.length;
+
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);
     setShow(false);
     scrollToCategory(categoryName);
   };
+
   const scrollViewRef = useRef<ScrollView | null>(null);
+
   useScrollToTop(scrollViewRef);
+
   const itemHeight = 150;
+
   const scrollToCategory = (categoryName: String) => {
-    const index = showProducts.findIndex(item => item.category.name === categoryName,);
+    const index = showProducts.data.findIndex(item => item.category.name === categoryName,);
     const y = index * itemHeight;
-    // let y = 0; 
-    // for (let i = 0; i < index; i++) {
-    //   y += showProducts[i].products.length * 200 + 50;
-    // }
     scrollViewRef.current?.scrollTo({ x: 0, y: y, animated: true });
   };
+
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const renderItem = useCallback((product: DetailProduct) => {
@@ -88,9 +66,7 @@ const CartOrder = () => {
     <TouchableWithoutFeedback>
       <View style={StyleOrder.container}>
         <View style={StyleOrder.viewheader}>
-          <TouchableOpacity
-            style={StyleOrder.viewhandlemenu}
-            onPress={() => setShow(true)}>
+          <TouchableOpacity style={StyleOrder.viewhandlemenu} onPress={() => setShow(true)}>
             <View style={StyleOrder.viewmenu}>
               <Image source={category.MENU} style={StyleOrder.iconmenu} />
             </View>
@@ -100,24 +76,10 @@ const CartOrder = () => {
             </View>
           </TouchableOpacity>
           <View style={StyleOrder.viewsearch}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(
-                  isLoggedIn ? 'SearchOrder' : ('AuthStackUser' as any),
-                )
-              }>
+            <TouchableOpacity onPress={() => navigation.navigate(isLoggedIn ? 'SearchOrder' : ('AuthStackUser' as any))}>
               <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={StyleOrder.viewfavourites}
-              onPress={() =>
-                navigation.navigate(
-                  isLoggedIn
-                    ? StackHomeNavigateNameEnum.StackHomeUrl
-                    : ('AuthStackUser' as any),
-                  { screen: 'Favourites' },
-                )
-              }>
+            <TouchableOpacity style={StyleOrder.viewfavourites} onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : ('AuthStackUser' as any), { screen: 'Favourites' })}>
               <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
               {favourites > 0 && (
                 <View style={StyleOrder.viewcount}>
@@ -128,24 +90,19 @@ const CartOrder = () => {
           </View>
         </View>
         <View style={StyleOrder.line} />
-        <Animated.ScrollView
-          ref={scrollViewRef}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1 }}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true },
+        <Animated.ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}
+          onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true },
           )}>
           <View style={StyleOrder.viewbody}>
             <CategoryItem setSelectedCategory={handleCategorySelect} />
             <View style={StyleOrder.viewbottom}>
               <FlashList
-                data={showProducts}
+                data={showProducts.data}
                 renderItem={({ item }) => renderItem(item)}
                 keyExtractor={(item, index) => item._id + index}
                 showsVerticalScrollIndicator={false}
                 estimatedItemSize={200}
-                extraData={showProducts}
+                extraData={showProducts.data}
                 removeClippedSubviews={true}
                 viewabilityConfig={{
                   waitForInteraction: true,
@@ -160,9 +117,7 @@ const CartOrder = () => {
         <BottomSheetMenu
           show={show}
           enableBackDropDismiss
-          onDismiss={() => {
-            setShow(false);
-          }}
+          onDismiss={() => { setShow(false); }}
           setSelectedCategory={handleCategorySelect}
         />
       </View>

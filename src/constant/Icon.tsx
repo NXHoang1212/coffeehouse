@@ -58,6 +58,8 @@ export const Icon = {
   CHECKED: require('../assets/images/iconfavouriteschecked.png'),
   BACKGROUNDPROMO: require('../assets/images/backgroundPromo.png'),
   BACKGROUNDDISCOUNT: require('../assets/images/backgrounddiscount.png'),
+  ORDERSTATUS: require('../assets/images/orderstatus.png'),
+  ORDERSUCCESS: require('../assets/images/ordersuccess.png'),
 };
 
 /* THÔNG TIN */

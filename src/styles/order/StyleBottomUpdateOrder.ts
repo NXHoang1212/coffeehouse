@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {WIDTH, HEIGHT, FONTSIZE} from '../../constant/Responsive';
-import {FONTSTYLE} from '../../constant/Fonts';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
+import { FONTSTYLE } from '../../constant/Fonts';
 
 const StyleBottomUpdateOrder = StyleSheet.create({
   backdrop: {

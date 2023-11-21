@@ -24,7 +24,7 @@ import Notifee from '../../pages/general/Notifee';
 import DetailOrder from '../../pages/order/DetailOrder';
 import SelectedAddressOrder from '../../pages/cart/SelectedAddressOrder';
 import UpdateOrderUser from '../../pages/cart/UpdateOrderUser';
-import StatusOrder from '../../pages/another/history/StatusOrdet';
+import StatusOrder from '../../pages/another/history/StatusOrder';
 
 const Stack = createNativeStackNavigator();
 

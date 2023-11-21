@@ -1,9 +1,9 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {WIDTH, HEIGHT, FONTSIZE} from '../../constant/Responsive';
-import {FONTSTYLE} from '../../constant/Fonts';
+import { StyleSheet, Dimensions } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
+import { FONTSTYLE } from '../../constant/Fonts';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const StyleOrder = StyleSheet.create({
   container: {

@@ -1,23 +1,13 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  Dimensions,
-  StatusBar,
-  Modal,
-} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {StyleMethodAmount} from '../../styles/modal/StyleMethodAmount';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../redux/store/Store';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
-import {AddMethodAmount} from '../../redux/slices/MethodAmountSlice';
-import {DataMethod} from '../../data/listitem/DataMethod';
-import {CheckBox} from 'react-native-elements';
+import { Modal, Pressable, Text, View, Dimensions, Animated, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleMethodAmount } from '../../styles/modal/StyleMethodAmount';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { AddMethodAmount } from '../../redux/slices/MethodAmountSlice';
+import { DataMethod } from '../../data/listitem/DataMethod';
+import { CheckBox } from 'react-native-elements';
 
 interface Props {
   openModal: boolean;
@@ -25,11 +15,7 @@ interface Props {
   enableBackDropDismiss?: boolean;
 }
 
-const MethodAmount: React.FC<Props> = ({
-  openModal,
-  onDismiss,
-  enableBackDropDismiss = true,
-}) => {
+const MethodAmount: React.FC<Props> = ({ openModal, onDismiss, enableBackDropDismiss = true, }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const [open, setopen] = useState<boolean>(openModal);
@@ -49,12 +35,7 @@ const MethodAmount: React.FC<Props> = ({
   });
   const dispatch = useDispatch<AppDispatch>();
   const handleAddMethodAmount = (item: any) => {
-    dispatch(
-      AddMethodAmount({
-        name: item.name,
-        image: item.icon,
-      }),
-    );
+    dispatch(AddMethodAmount({ name: item.name, image: item.icon, }),);
     onDismiss();
   };
 
@@ -80,26 +61,15 @@ const MethodAmount: React.FC<Props> = ({
     return null;
   }
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      onRequestClose={onDismiss}
-      hardwareAccelerated={true}
-      statusBarTranslucent={true}>
-      <Pressable
-        onPress={enableBackDropDismiss ? onDismiss : undefined}
-        style={StyleMethodAmount.backdrop}
-      />
+    <Modal animationType="fade" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
+      <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleMethodAmount.backdrop} />
       <Animated.View
-        style={[StyleMethodAmount.container, {bottom: bottomsheet}]}>
+        style={[StyleMethodAmount.container, { bottom: bottomsheet }]}>
         <View style={StyleMethodAmount.header}>
           <Text style={StyleMethodAmount.texttile}>{data[0].Title}</Text>
           <TouchableOpacity onPress={() => onDismiss()}>
             {data[0].iconTitle ? (
-              <Image
-                source={data[0].iconTitle}
-                style={StyleMethodAmount.iconcancel}
-              />
+              <Image source={data[0].iconTitle} style={StyleMethodAmount.iconcancel} />
             ) : null}
           </TouchableOpacity>
         </View>
@@ -114,8 +84,7 @@ const MethodAmount: React.FC<Props> = ({
               Cách thanh toán
             </Text>
             <View style={StyleMethodAmount.viewoptionpayment}>
-              {data
-                .filter(item => item.name && item.icon)
+              {data.filter(item => item.name && item.icon)
                 .map((item: any, index: number) => {
                   return (
                     <View key={index}>
@@ -131,13 +100,8 @@ const MethodAmount: React.FC<Props> = ({
                           onPress={() => handleAddMethodAmount(item)}
                         />
                         <View style={StyleMethodAmount.viewtextimage}>
-                          <Image
-                            source={item.icon ? item.icon : null}
-                            style={StyleMethodAmount.iconoption}
-                          />
-                          <Text style={StyleMethodAmount.textbodyoption}>
-                            {item.name}
-                          </Text>
+                          <Image source={item.icon ? item.icon : null} style={StyleMethodAmount.iconoption} />
+                          <Text style={StyleMethodAmount.textbodyoption}>{item.name}</Text>
                         </View>
                       </TouchableOpacity>
                       <View style={StyleMethodAmount.line} />

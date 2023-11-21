@@ -1,31 +1,21 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Image,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  Keyboard,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import { Image, Keyboard, Text, TextInput, TouchableOpacity, TouchableNativeFeedback, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import StyleSearchOrder from '../../styles/order/StyleSearchOrder';
-import {Icon} from '../../constant/Icon';
-import {useGoBack} from '../../utils/GoBack';
-import {FlashList} from '@huunguyen312/flash-list';
-import {useSelector} from 'react-redux';
+import { Icon } from '../../constant/Icon';
+import { useGoBack } from '../../utils/GoBack';
+import { FlashList } from '@huunguyen312/flash-list';
+import { useSelector } from 'react-redux';
 import SeacrchItem from '../../components/item/SearchItem';
-import {RootState} from '../../redux/store/Store';
-import {ThemLightStatusBar} from '../../constant/ThemLight';
-import {useNavigation} from '@react-navigation/native';
+import { RootState } from '../../redux/store/Store';
+import { ThemLightStatusBar } from '../../constant/ThemLight';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchOrder = () => {
   const goBack = useGoBack();
   const navigation = useNavigation();
   ThemLightStatusBar('dark-content', '#fff');
   const [search, setSearch] = useState<string>('');
-  let products = useSelector((state: RootState) => state.product).filter(item =>
-    item.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  let products = useSelector((state: RootState) => state.product.data).filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
@@ -64,7 +54,7 @@ const SearchOrder = () => {
           {search.length > 0 ? (
             <FlashList
               data={products}
-              renderItem={({item}) => <SeacrchItem item={item} />}
+              renderItem={({ item }) => <SeacrchItem item={item} />}
               keyExtractor={item => item._id}
               estimatedItemSize={200}
               showsVerticalScrollIndicator={false}
