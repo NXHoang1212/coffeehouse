@@ -22,15 +22,7 @@ export const ApiOrder = createApi({
     }),
     GetOrderUser: build.query<{ data: OrderResponse[] }, number>({
       query: id => `/api/users/orders/GetAllOrderUser/${id}`,
-      providesTags(result) {
-        if (result && Array.isArray(result.data)) {
-          const validData = result.data
-            .filter(item => item && item._id)
-            .map(item => ({ type: 'Order', _id: item._id } as const));
-          return [...validData, { type: 'Order', id: 'Order' }];
-        }
-        return [{ type: 'Order', id: 'Order' }];
-      },
+      providesTags: [{ type: 'Order', id: 'Order' }],
     }),
     createOrder: build.mutation<OrderResponse, Order>({
       query: data => ({
@@ -51,7 +43,7 @@ export const ApiOrder = createApi({
   }),
 });
 
-export const { useGetOrderQuery, useCreateOrderMutation, useUpdateOrderMutation } = ApiOrder;
+export const { useGetOrderQuery, useCreateOrderMutation, useUpdateOrderMutation, useGetOrderUserQuery } = ApiOrder;
 
 
 export const updateOrder = async (id: string, data: Order) => {

@@ -18,7 +18,6 @@ interface Props {
     show: boolean;
     onDismiss: () => void;
     enableBackDropDismiss?: boolean;
-    //thêm function để lấy id order
     idOrder: string;
 }
 
@@ -104,7 +103,7 @@ const RejectOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss =
         return null;
     }
     return (
-        <Portal >
+        <Modal animationType="fade" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true}>
             <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleRejectOrder.backdrop} />
             <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
             <Animated.View style={[StyleRejectOrder.container, { bottom: bottomsheet }]}>
@@ -143,7 +142,7 @@ const RejectOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss =
                     </View>
                 </View>
             </Animated.View>
-        </Portal >
+        </Modal >
     );
 };
 

@@ -8,18 +8,22 @@ import { RootState } from '../../redux/store/Store';
 import { useGetAddressIdQuery } from '../../service/api/IndexAddress';
 import { Icon } from '../../constant/Icon';
 import { useGoBack } from '../../utils/GoBack';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 
 const SelectedAddressOrder: React.FC = () => {
   const goback = useGoBack();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const id = useSelector((state: RootState) => state.user.user._id);
   const { data, refetch } = useGetAddressIdQuery(id);
   const dataAddress = data?.data.filter(item => item !== null).map(item => ({
     ...item,
-    _id: item ? item._id || '' : '',
-    done: 'Chọn địa chỉ giao hàng',
+    done: 'Xong',
   }));
+
   const showDoneButton = true;
-  
+
   useEffect(() => {
     refetch();
   }, []);
@@ -32,19 +36,19 @@ const SelectedAddressOrder: React.FC = () => {
         </TouchableOpacity>
         <Text style={StyleSelectedAddressOrder.textheader}>Chọn địa chỉ giao hàng</Text>
       </View>
-      <FlashList
-        data={dataAddress}
-        renderItem={({ item, index }) => (
-          <ItemSelectedAddressOrder
-            address={item}
-            showDoneButton={index === dataAddress?.length as any - 1 && showDoneButton}
-          />
-        )}
-        contentContainerStyle={{ paddingBottom: 50 }}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item._id}
-        estimatedItemSize={200}
-      />
+      <View style={StyleSelectedAddressOrder.body}>
+        <FlashList
+          data={dataAddress}
+          renderItem={({ item, index }) => (<ItemSelectedAddressOrder address={item} showDoneButton={index === dataAddress?.length as any - 1 && showDoneButton} />)}
+          contentContainerStyle={{ paddingBottom: 50 }}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => item._id}
+          estimatedItemSize={200}
+        />
+      </View>
+      <TouchableOpacity style={StyleSelectedAddressOrder.viewadd} onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'SaveAddress' })}>
+        <Text style={StyleSelectedAddressOrder.textadd}>Thêm địa chỉ mới</Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -6,8 +6,10 @@ import { Icon } from '../../../constant/Icon';
 import { useGoBack } from '../../../utils/GoBack';
 import { ActiveTab } from '../../../hooks/ActiveTab';
 import { FlashList } from '@huunguyen312/flash-list';
-import ItemHistoryOrder from '../../../components/item/ItemHistoryOrder';
-import { useGetOrderQuery } from '../../../service/api/IndexOrdert';
+import ItemHistoryOrderReject from '../../../components/item/ItemHistoryOrderReject';
+import ItemHistoryOrderProcessing from '../../../components/item/ItemHistoryOrderProcessing';
+import ItemHistoryOrderSuccess from '../../../components/item/ItemHistoryOrderSuccess';
+import { useGetOrderUserQuery } from '../../../service/api/IndexOrdert';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import { OrderStatus } from '../../../data/types/Enum.entity';
@@ -16,9 +18,9 @@ const HistoryOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const { activeTab, handleActiveTab } = ActiveTab('Tab one');
-  // let id = useSelector((state: RootState) => state.user.user._id);
-  // const { data } = useGetOrderQuery(id);
-  // const dataOrder = data?.data;
+  const id = useSelector((state: RootState) => state.user.user._id);
+  const { data } = useGetOrderUserQuery(id);
+  const dataOrder = data?.data;
 
   return (
     <View style={StyleHistoryOrder.container}>
@@ -44,14 +46,15 @@ const HistoryOrder: React.FC = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* {activeTab === "Tab one" ? (
+      {activeTab === "Tab one" ? (
         <View style={StyleHistoryOrder.viewtabone}>
           <FlashList
             data={dataOrder?.filter((item) => item.status === OrderStatus.PENDING)}
-            renderItem={({ item }) => <ItemHistoryOrder item={item} />}
+            renderItem={({ item }) => <ItemHistoryOrderProcessing item={item} />}
             keyExtractor={(item) => item._id}
             showsVerticalScrollIndicator={false}
             estimatedItemSize={200}
+            contentContainerStyle={{ paddingBottom: 200 }}
             removeClippedSubviews={true}
             viewabilityConfig={{
               waitForInteraction: true,
@@ -63,10 +66,11 @@ const HistoryOrder: React.FC = () => {
       ) : activeTab === "Tab two" ? (
         <View style={StyleHistoryOrder.viewtabtwo}>
           <FlashList
-            data={dataOrder?.filter((item) => item.status === OrderStatus.CANCELLED)}
-            renderItem={({ item }) => <ItemHistoryOrder item={item} />}
+            data={dataOrder?.filter((item) => item.status === OrderStatus.CONFIRMED)}
+            renderItem={({ item }) => <ItemHistoryOrderSuccess item={item} />}
             showsVerticalScrollIndicator={false}
             estimatedItemSize={200}
+            contentContainerStyle={{ paddingBottom: 200 }}
             removeClippedSubviews={true}
             viewabilityConfig={{
               waitForInteraction: true,
@@ -78,11 +82,12 @@ const HistoryOrder: React.FC = () => {
       ) : activeTab === "Tab three" ? (
         <View style={StyleHistoryOrder.viewtabthree}>
           <FlashList
-            data={dataOrder?.filter((item) => item.status === OrderStatus.CONFIRMED)}
-            renderItem={({ item }) => <ItemHistoryOrder item={item} />}
+            data={dataOrder?.filter((item) => item.status === OrderStatus.CANCELLED)}
+            renderItem={({ item }) => <ItemHistoryOrderReject item={item} />}
             keyExtractor={() => Math.random().toString()}
             showsVerticalScrollIndicator={false}
             estimatedItemSize={200}
+            contentContainerStyle={{ paddingBottom: 200 }}
             removeClippedSubviews={true}
             viewabilityConfig={{
               waitForInteraction: true,
@@ -91,7 +96,7 @@ const HistoryOrder: React.FC = () => {
             }}
           />
         </View>
-      ) : null} */}
+      ) : null}
     </View>
   );
 };

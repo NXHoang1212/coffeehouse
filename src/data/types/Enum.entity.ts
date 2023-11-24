@@ -1,5 +1,5 @@
 export enum OrderStatus {
-  PENDING = 'Đang chờ thanh toán',
+  PENDING = 'Chưa thanh toán',
   CONFIRMED = 'Đã thanh toán',
   PROCESSING = 'Đang xử lý',
   DELIVERING = 'Đang giao hàng',

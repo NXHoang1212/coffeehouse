@@ -14,7 +14,6 @@ const StatusOrder = () => {
     const id = useSelector((state: RootState) => state.Order._id);
     const data = useGetOrderQuery(id)
     const dataOrder = data?.data?.data
-    console.log("🚀 ~ file: StatusOrder.tsx:18 ~ StatusOrder ~ dataOrder:", dataOrder)
 
     return (
         <View style={StyleStatusOrder.container}>

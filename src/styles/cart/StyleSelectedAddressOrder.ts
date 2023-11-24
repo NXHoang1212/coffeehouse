@@ -23,7 +23,7 @@ const StyleSelectedAddressOrder = StyleSheet.create({
     height: HEIGHT(2),
   },
   body: {
-    height: HEIGHT(100),
+    height: HEIGHT(80),
   },
   viewdone: {
     width: WIDTH(85),
@@ -33,6 +33,20 @@ const StyleSelectedAddressOrder = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  viewadd: {
+    width: WIDTH(85),
+    height: HEIGHT(6),
+    backgroundColor: COLOR.ORANGE1,
+    borderRadius: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textadd: {
+    fontSize: FONTSIZE(1.7),
+    fontWeight: 'bold',
+    color: COLOR.BLACK,
   },
 });
 

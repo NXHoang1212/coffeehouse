@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { COLOR } from '../../constant/Color';
 import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 
-const StyleItemHistoryOrder = StyleSheet.create({
+const StyleItemHistoryOrderReject = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLOR.WHITE,
@@ -75,4 +75,4 @@ const StyleItemHistoryOrder = StyleSheet.create({
   },
 });
 
-export default StyleItemHistoryOrder;
+export default StyleItemHistoryOrderReject;

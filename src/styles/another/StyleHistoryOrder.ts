@@ -54,7 +54,7 @@ const StyleHistoryOrder = StyleSheet.create({
     height: HEIGHT(4),
     alignItems: 'center',
     justifyContent: 'center',
-    left: WIDTH(3),
+    left: WIDTH(1),
   },
   activeTabtwo: {
     width: WIDTH(30),
@@ -63,7 +63,7 @@ const StyleHistoryOrder = StyleSheet.create({
     borderRadius: WIDTH(5),
     alignItems: 'center',
     justifyContent: 'center',
-    left: WIDTH(3),
+    left: WIDTH(1),
   },
   texttab: {
     fontSize: FONTSIZE(1.8),
@@ -76,12 +76,15 @@ const StyleHistoryOrder = StyleSheet.create({
     fontWeight: '700',
   },
   viewtabone: {
-    height: HEIGHT(100),
+    width: WIDTH(100),
+    height: HEIGHT(95),
   },
   viewtabtwo: {
+    width: WIDTH(100),
     height: HEIGHT(100),
   },
   viewtabthree: {
+    width: WIDTH(100),
     height: HEIGHT(100),
   },
 });

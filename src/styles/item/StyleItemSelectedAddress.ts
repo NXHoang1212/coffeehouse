@@ -4,9 +4,7 @@ import { COLOR } from '../../constant/Color';
 
 const StyleItemSelectedAddress = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLOR.WHITE,
   },
   body: {
     flexDirection: 'row',

@@ -1,11 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import AxiosInstance from '../../utils/AxiosIntance';
 import { HOST } from '../../constant/Host';
-import {
-  CartOrder,
-  GetCartOrder,
-  UpdateCartOrder,
-} from '../../data/types/CartOrder.entity';
+import { CartOrder, GetCartOrder, UpdateCartOrder, } from '../../data/types/CartOrder.entity';
 
 export const ApiCart = createApi({
   reducerPath: 'ApiCart',
@@ -32,10 +28,7 @@ export const ApiCart = createApi({
       }),
       invalidatesTags: [{ type: 'CartOrder', id: 'CART' }],
     }),
-    UpdateCart: build.mutation<
-      { data: CartOrder },
-      { id: number; ProductId: number; data: UpdateCartOrder }
-    >({
+    UpdateCart: build.mutation<{ data: CartOrder }, { id: number; ProductId: number; data: UpdateCartOrder }>({
       query: ({ id, ProductId, data }) => ({
         url: `/api/users/cart/update/${id}/${ProductId}`,
         method: 'POST',
@@ -51,10 +44,7 @@ export const ApiCart = createApi({
       }),
       invalidatesTags: [{ type: 'CartOrder', id: 'CART' }],
     }),
-    DeleteCartProductId: build.mutation<
-      { data: CartOrder },
-      { id: number; ProductId: number }
-    >({
+    DeleteCartProductId: build.mutation<{ data: CartOrder }, { id: number; ProductId: number }>({
       query: ({ id, ProductId }) => ({
         url: `/api/users/cart/delete/${id}/${ProductId}`,
         method: 'DELETE',

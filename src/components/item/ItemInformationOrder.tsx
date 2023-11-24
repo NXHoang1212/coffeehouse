@@ -134,8 +134,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       };
       const response: any = await CreateOrder(order);
       if (response) {
-        console.log("🚀 ~ file: ItemInformationOrder.tsx:138 ~ handlePayment ~ response:", response.data.data._id)
-        // await updateStatus(id);
+        await updateStatus(id);
         Messenger('Đặt hàng thành công', 'success');
         dispatch(AddOrder({ _id: response.data.data._id }));
         navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' });
