@@ -1,12 +1,11 @@
-
-import { useState } from 'react';
+import {useState} from 'react';
 
 export function ActiveTab(initialTab: string) {
-    const [activeTab, setActiveTab] = useState<string>(initialTab);
+  const [activeTab, setActiveTab] = useState<string>(initialTab);
 
-    const handleActiveTab = (tabname: string) => {
-        setActiveTab(tabname);
-    };
+  const handleActiveTab = (tabname: string) => {
+    setActiveTab(tabname);
+  };
 
-    return { activeTab, handleActiveTab };
+  return {activeTab, handleActiveTab};
 }

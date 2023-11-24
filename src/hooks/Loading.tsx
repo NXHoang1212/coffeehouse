@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 export const LoadingScroll = () => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    return { isLoading, setIsLoading };
+  return {isLoading, setIsLoading};
 };

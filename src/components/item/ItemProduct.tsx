@@ -1,36 +1,49 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Pressable,
+  PixelRatio,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, { useState, useCallback } from 'react';
-import StyleItemProduct from '../../styles/item/StyleItemProduct'
-import { DetailProduct, ProductGet, Products } from '../../data/types/Product.entity';
-import { Icon } from '../../constant/Icon';
-import { FormatPrice } from '../../utils/FormatPrice';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
-import BottomSheetDetailOrder from '../../pages/order/BottomSheetDetailOrder';;
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useAuth } from '../../hooks/UseAuth';
-import { CreateEmptyCart } from '../../service/api/IndexCart';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store/Store';
-import { Messenger } from '../../utils/ShowMessage';
-import Animated from 'react-native-reanimated';
+import React, {useState, useCallback, useContext, memo} from 'react';
+import StyleItemProduct from '../../styles/item/StyleItemProduct';
+import {DetailProduct} from '../../data/types/Product.entity';
+import {Icon} from '../../constant/Icon';
+import {FormatPrice} from '../../utils/FormatPrice';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
+import BottomSheetDetailOrder from '../../pages/order/BottomSheetDetailOrder';
+import {useCreateEmptyCartMutation} from '../../service/api/IndexCart';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../redux/store/Store';
+import {Messenger} from '../../utils/ShowMessage';
+import {ProductContext} from '../../service/provider/ProductContext';
+
 interface PropsItemProduct {
   item: DetailProduct;
   showCategory: boolean;
   isFirstItem: boolean;
 }
 
-const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const { isLoggedIn } = useAuth();
+const ItemProduct = ({item, showCategory, isFirstItem}: PropsItemProduct) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  let isLoggedIn = useSelector(
+    (state: RootState) => state.IsLoggedIn.isLoggedIn,
+  );
+  const {setProducts} = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.user.user._id);
+  const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [show, setShow] = useState<boolean>(false);
-  const [size, setSize] = useState<{ name: string, price: number }>({
+  const [size, setSize] = useState<{name: string; price: number}>({
     name: 'Vừa',
     price: 0,
   });
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   const handleProductDetail = () => {
@@ -40,11 +53,17 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
 =======
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 
+=======
+>>>>>>> main
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
       if (item.topping.length > 0 && item.size.length > 0) {
-        const toppingValid = item.topping.every(topping => topping.name.trim() !== "" && topping.price.trim() !== "");
-        const sizeValid = item.size.every(size => size.name.trim() !== "" && size.price.trim() !== "");
+        const toppingValid = item.topping.every(
+          topping => topping.name.trim() !== '' && topping.price.trim() !== '',
+        );
+        const sizeValid = item.size.every(
+          size => size.name.trim() !== '' && size.price.trim() !== '',
+        );
         if (toppingValid && sizeValid) {
           setShow(true);
         } else {
@@ -52,6 +71,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
         }
       }
     } else {
+<<<<<<< HEAD
 <<<<<<< HEAD
       //@ts-ignore
       navigation.navigate('AuthStackUser', { screen: 'Login' });
@@ -83,9 +103,12 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
 
 =======
       navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
+=======
+      navigation.navigate('AuthStackUser' as any, {screen: 'Login'});
+>>>>>>> main
     }
-  }
-  
+  };
+
   const handleAddToCart = async (item: DetailProduct) => {
     try {
       const data: any = {
@@ -93,20 +116,25 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
         ProductId: [
           {
             NameProduct: item.name,
+            ProductId: item._id,
             PriceProduct: item.price,
             QuantityProduct: 1,
             SizeProduct: size,
-          }
-        ]
-      }
+          },
+        ],
+      };
       const response = await CreateEmptyCart(data);
       if (response) {
         Messenger('Thêm vào giỏ hàng thành công', 'success');
       }
     } catch (error: any) {
-      console.log("🚀 ~ file: ItemProduct.tsx:110 ~ error", error)
+      console.log('🚀 ~ file: ItemProduct.tsx:110 ~ error', error);
     }
-  }
+  };
+
+  const onLoad = useCallback(() => {
+    FastImage.preload([{uri: item.image as string}]);
+  }, []);
 
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
   return (
@@ -114,42 +142,60 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
       <View style={StyleItemProduct.viewbody}>
         {showCategory && isFirstItem && (
           <View style={StyleItemProduct.viewcategories}>
-            <Text style={StyleItemProduct.textnamecategories}>{item.category.name}</Text>
+            <Text style={StyleItemProduct.textnamecategories}>
+              {item.category.name}
+            </Text>
           </View>
         )}
+<<<<<<< HEAD
 <<<<<<< HEAD
         <TouchableOpacity onPress={handleProductDetail}>
 =======
         <TouchableOpacity onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'DetailOrder', params: { id: item._id } })}>
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
+=======
+        <Pressable
+          onPress={() => {
+            setProducts([item]),
+              navigation.navigate('StackHomeNavigate' as any, {
+                screen: 'DetailOrder',
+              });
+          }}>
+>>>>>>> main
           <View style={StyleItemProduct.viewProduct}>
             <View>
-              <Animated.Image
+              <FastImage
                 style={StyleItemProduct.imageproduct}
                 source={{
                   uri: item.image as string,
+                  priority: FastImage.priority.normal,
+                  cache: FastImage.cacheControl.immutable,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
-                sharedTransitionTag={item._id}
+                onLoad={onLoad}
               />
             </View>
             <View style={StyleItemProduct.viewitemtextproduct}>
               <Text style={StyleItemProduct.textname}>{item.name}</Text>
-              <Text style={StyleItemProduct.textprice}>{FormatPrice(item.price)}</Text>
+              <Text style={StyleItemProduct.textprice}>
+                {FormatPrice(item.price)}
+              </Text>
             </View>
-            <TouchableOpacity style={StyleItemProduct.viewiconplus} onPress={() => handleShowBottomSheet(item)}>
+            <TouchableOpacity
+              style={StyleItemProduct.viewiconplus}
+              onPress={() => handleShowBottomSheet(item)}>
               <Image source={Icon.PLUS} style={StyleItemProduct.iconplus} />
             </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </Pressable>
         <BottomSheetDetailOrder
           item={item}
           show={show}
-          onDismiss={() => setShow(false)} >
-        </BottomSheetDetailOrder>
+          onDismiss={() => setShow(false)}
+        />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default ItemProduct
+export default memo(ItemProduct);

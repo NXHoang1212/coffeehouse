@@ -1,20 +1,25 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React, { useState } from 'react'
-import { Icon } from '../../../constant/Icon';
-import StyleSetting from '../../../styles/code/ordinary/StyleSetting';
-import { useGoBack } from '../../../utils/GoBack';
-import ToggleSwitch from 'toggle-switch-react-native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
-import { useNavigation } from '@react-navigation/native';
-import { StackParamsOther } from '../../../data/types/StackOrther';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React, {useState} from 'react';
+import {Icon} from '../../../constant/Icon';
+import StyleSetting from '../../../styles/another/StyleSetting';
+import {useGoBack} from '../../../utils/GoBack';
+import ToggleSwitch from 'toggle-switch-react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  StackHomeNavigateNameEnum,
+  StackHomeNavigateTypeParam,
+} from '../../../data/types/TypeStack';
+import {useNavigation} from '@react-navigation/native';
+import {StackParamsOther} from '../../../data/types/StackOrther';
 
 const Setting = () => {
   const url = 'https://thecoffeehouse.com/pages/chuyen-ca-phe-va-tra';
   const goback = useGoBack();
   const [isOn, setIsOn] = useState<boolean>(false);
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
-  const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackParamsOther>>();
+  const navigationDad =
+    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   // const handeleGeneral = () => {
   //   navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl, { screen: 'AboutCoffee', params: { url: url } })
   // }
@@ -32,17 +37,32 @@ const Setting = () => {
             <Image source={Icon.NOTIFY} style={StyleSetting.iconGeneral} />
             <Text style={StyleSetting.textGeneral}>Nhận thông báo</Text>
             <View style={StyleSetting.icontoggle}>
-              <ToggleSwitch isOn={isOn} onColor="#00D1FF" offColor="#E5E5E5" size="medium" onToggle={isOn => setIsOn(isOn)} />
+              <ToggleSwitch
+                isOn={isOn}
+                onColor="#00D1FF"
+                offColor="#E5E5E5"
+                size="medium"
+                onToggle={isOn => setIsOn(isOn)}
+              />
             </View>
           </TouchableOpacity>
           <View style={StyleSetting.line} />
-          <TouchableOpacity style={StyleSetting.handlegeneral} onPress={() => navigation.navigate('DeepLinkAccount')}>
+          <TouchableOpacity
+            style={StyleSetting.handlegeneral}
+            onPress={() => navigation.navigate('DeepLinkAccount')}>
             <Image source={Icon.LINK} style={StyleSetting.iconGeneral} />
             <Text style={StyleSetting.textGeneral}>Liên kết tài khoản</Text>
             <Image source={Icon.RIGHT} style={StyleSetting.iconright} />
           </TouchableOpacity>
           <View style={StyleSetting.line} />
-          <TouchableOpacity style={StyleSetting.handlegeneral} onPress={() => navigationDad.navigate(StackHomeNavigateNameEnum.StackHomeUrl as any, { screen: 'AboutCoffee', params: { url: url } })}>
+          <TouchableOpacity
+            style={StyleSetting.handlegeneral}
+            onPress={() =>
+              navigationDad.navigate(
+                StackHomeNavigateNameEnum.StackHomeUrl as any,
+                {screen: 'AboutCoffee', params: {url: url}},
+              )
+            }>
             <Image source={Icon.ABOUT} style={StyleSetting.iconGeneral} />
             <Text style={StyleSetting.textGeneral}>Về chúng tôi</Text>
             <Image source={Icon.RIGHT} style={StyleSetting.iconright} />
@@ -50,7 +70,7 @@ const Setting = () => {
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default Setting
+export default Setting;

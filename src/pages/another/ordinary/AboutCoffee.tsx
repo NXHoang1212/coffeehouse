@@ -1,16 +1,16 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react'
-import { useRoute } from '@react-navigation/native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import {useRoute} from '@react-navigation/native';
 import WebView from 'react-native-webview';
-import { useGoBack } from '../../../utils/GoBack';
-import { Icon } from '../../../constant/Icon';
-import StyleAboutCoffee from '../../../styles/code/ordinary/StyleAboutCoffee';
+import {useGoBack} from '../../../utils/GoBack';
+import {Icon} from '../../../constant/Icon';
+import StyleAboutCoffee from '../../../styles/another/StyleAboutCoffee';
 
 interface RouteParams {
   url: string;
 }
 const AboutCoffee = () => {
-  const { url } = useRoute().params as RouteParams;
+  const {url} = useRoute().params as RouteParams;
   const goback = useGoBack();
 
   return (
@@ -21,9 +21,9 @@ const AboutCoffee = () => {
         </TouchableOpacity>
         <Text style={StyleAboutCoffee.textHeader}>Về chúng tôi</Text>
       </View>
-      <WebView source={{ uri: url }} />
+      <WebView source={{uri: url}} />
     </View>
-  )
-}
+  );
+};
 
-export default AboutCoffee
+export default AboutCoffee;

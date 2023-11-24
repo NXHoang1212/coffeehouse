@@ -9,10 +9,11 @@ export interface CartOrder {
       PriceProduct: number;
       QuantityProduct: number;
       ToppingProduct: any[];
-      SizeProduct: any,
+      SizeProduct: any;
       NoteProduct: string;
-    }
-  ]
+      StatusProduct: string;
+    },
+  ];
 }
 
 export interface GetCartOrder {
@@ -26,10 +27,11 @@ export interface GetCartOrder {
       PriceProduct: number;
       QuantityProduct: number;
       ToppingProduct: any[];
-      SizeProduct: any,
+      SizeProduct: any;
       NoteProduct: string;
-    }
-  ]
+      StatusProduct: string;
+    },
+  ];
 }
 
 export interface UpdateCartOrder {
@@ -41,10 +43,10 @@ export interface UpdateCartOrder {
       PriceProduct: number;
       QuantityProduct: number;
       ToppingProduct: any[];
-      SizeProduct: any,
+      SizeProduct: any;
       NoteProduct: string;
-    }
-  ]
+    },
+  ];
 }
 
 export interface DetailProductOrder {
@@ -57,10 +59,11 @@ export interface DetailProductOrder {
       PriceProduct: number;
       QuantityProduct: number;
       ToppingProduct: any[];
-      SizeProduct: any,
+      SizeProduct: any;
       NoteProduct: string;
-    }
-  ]
+      StatusProduct: string;
+    },
+  ];
 }
 export enum CartStackNames {
   Login = 'Login',

@@ -101,6 +101,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
     }
 
     splits {
@@ -163,7 +164,7 @@ dependencies {
 
     implementation project(':react-native-fbsdk-next')
 
-     implementation project(':react-native-geolocation-service')
+    implementation project(':react-native-geolocation-service')
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 

@@ -1,24 +1,26 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartOrder } from "../../data/types/CartOrder.entity";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartOrder } from '../../data/types/CartOrder.entity';
 
 const initialState: CartOrder = {
-    _id: '',
-    UserId: '',
-    ProductId: [
-        {
-            _id: '',
-            ProductId: '',
-            NameProduct: '',
-            PriceProduct: 0,
-            QuantityProduct: 0,
-            ToppingProduct: [],
-            SizeProduct: '',
-            NoteProduct: '',
-        }
-    ]
-}
+  _id: '',
+  UserId: '',
+  ProductId: [
+    {
+      _id: '',
+      ProductId: '',
+      NameProduct: '',
+      PriceProduct: 0,
+      QuantityProduct: 0,
+      ToppingProduct: [],
+      SizeProduct: '',
+      NoteProduct: '',
+      StatusProduct: '',
+    },
+  ],
+};
 
 const CartSlice = createSlice({
+<<<<<<< HEAD
     name: 'Cart',
     initialState,
     reducers: {
@@ -66,9 +68,35 @@ const CartSlice = createSlice({
             }
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
         },
+=======
+  name: 'Cart',
+  initialState,
+  reducers: {
+    AddCart: (state, action: PayloadAction<CartOrder>) => {
+      state._id = action.payload._id;
+      state.UserId = action.payload.UserId;
+      state.ProductId = action.payload.ProductId;
+>>>>>>> main
     },
+    removeCart: state => {
+      state._id = '';
+      state.UserId = '';
+      state.ProductId = [
+        {
+          _id: '',
+          ProductId: '',
+          NameProduct: '',
+          PriceProduct: 0,
+          QuantityProduct: 0,
+          ToppingProduct: [],
+          SizeProduct: '',
+          NoteProduct: '',
+          StatusProduct: '',
+        },
+      ];
+    },
+  },
 });
 
-
 export default CartSlice.reducer;
-export const { AddCart, removeCart, updateCartItem, removeCartItem } = CartSlice.actions;
+export const { AddCart, removeCart } = CartSlice.actions;

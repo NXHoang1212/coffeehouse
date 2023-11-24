@@ -1,31 +1,31 @@
-import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react'
-import StyleAddAddress from '../../../styles/code/addresses/StyleAddAddress'
-import { Icon } from '../../../constant/Icon';
-import { useGoBack } from '../../../utils/GoBack';
-import { useRoute, useNavigation } from '@react-navigation/native';
-import { CreateAddress } from '../../../service/api/IndexAddress';
-import { useSelector } from 'react-redux';
-import { Messenger } from '../../../utils/ShowMessage';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
-import { RootState } from '../../../redux/store/Store';
+import {View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import StyleAddAddress from '../../../styles/another/StyleAddAddress';
+import {Icon} from '../../../constant/Icon';
+import {useGoBack} from '../../../utils/GoBack';
+import {useRoute, useNavigation} from '@react-navigation/native';
+import {CreateAddress} from '../../../service/api/IndexAddress';
+import {useSelector} from 'react-redux';
+import {Messenger} from '../../../utils/ShowMessage';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackHomeNavigateTypeParam} from '../../../data/types/TypeStack';
+import {RootState} from '../../../redux/store/Store';
 
 interface RouteParams {
   name: string;
-
 }
 
 const AddAddress: React.FC = () => {
   const goback = useGoBack();
-  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute();
-  const { name } = route.params as RouteParams;
-  const InforAddress = useSelector((state: RootState) => state.address)
-  const [nameAddress, setNameAdddress] = useState<string>(name)
-  const user = useSelector((state: RootState) => state.user.user)
+  const {name} = route.params as RouteParams;
+  const InforAddress = useSelector((state: RootState) => state.address);
+  const [nameAddress, setNameAdddress] = useState<string>(name);
+  const user = useSelector((state: RootState) => state.user.user);
   const id = user._id;
-  const DescribeAddRess = InforAddress.DescribeAddRess
+  const DescribeAddRess = InforAddress.DescribeAddRess;
   const [Other, SetOther] = useState<string>('');
   const [Gate, SetGate] = useState<string>('');
   const [NoteOther, SetNoteOther] = useState<string>('');
@@ -42,16 +42,19 @@ const AddAddress: React.FC = () => {
         NoteOrther: NoteOther,
         username: userName,
         phone: Phone,
-        userId: id
-      })
+        userId: id,
+      });
       if (res) {
-        Messenger('Thêm địa chỉ thành công', 'success')
-        goback()
+        Messenger('Thêm địa chỉ thành công', 'success');
+        goback();
       }
     } catch (error: any) {
-      console.log("🚀 ~ file: AddAddress.tsx:52 ~ handeleCreateAddress ~ error:", error)
+      console.log(
+        '🚀 ~ file: AddAddress.tsx:52 ~ handeleCreateAddress ~ error:',
+        error,
+      );
     }
-  }
+  };
 
   return (
     <View style={StyleAddAddress.container}>
@@ -65,29 +68,31 @@ const AddAddress: React.FC = () => {
         <View style={StyleAddAddress.viewbody1}>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Tên địa chỉ</Text>
-            {name ?
+            {name ? (
               <View style={StyleAddAddress.viewtexthome}>
                 <Text style={StyleAddAddress.texthome}>{name}</Text>
               </View>
-              :
+            ) : (
               <View style={StyleAddAddress.viewinput}>
                 <TextInput
                   style={StyleAddAddress.textinput}
                   placeholder="Nhà / Cơ quan / Gym /..."
                   value={nameAddress}
-                  onChangeText={(text) => setNameAdddress(text)}
+                  onChangeText={text => setNameAdddress(text)}
                 />
               </View>
-            }
+            )}
           </View>
           <View style={StyleAddAddress.viewhome}>
             <Text style={StyleAddAddress.textTitle}>Địa chỉ</Text>
-            <TouchableOpacity style={StyleAddAddress.viewtextinput} onPress={() => navigation.navigate('MapsAddress' as any)}>
-              {DescribeAddRess ?
+            <TouchableOpacity
+              style={StyleAddAddress.viewtextinput}
+              onPress={() => navigation.navigate('MapsAddress' as any)}>
+              {DescribeAddRess ? (
                 <Text style={StyleAddAddress.textinput}>{DescribeAddRess}</Text>
-                :
+              ) : (
                 <Text style={StyleAddAddress.textinput}>Chọn địa chỉ</Text>
-              }
+              )}
               <Image source={Icon.RIGHT} style={StyleAddAddress.iconArrow} />
             </TouchableOpacity>
           </View>
@@ -98,7 +103,7 @@ const AddAddress: React.FC = () => {
                 style={StyleAddAddress.textinput}
                 placeholder="Tòa nhà, số tầng"
                 value={Other}
-                onChangeText={(text) => SetOther(text)}
+                onChangeText={text => SetOther(text)}
               />
             </View>
           </View>
@@ -109,7 +114,7 @@ const AddAddress: React.FC = () => {
                 style={StyleAddAddress.textinput}
                 placeholder="Cổng"
                 value={Gate}
-                onChangeText={(text) => SetGate(text)}
+                onChangeText={text => SetGate(text)}
               />
             </View>
           </View>
@@ -120,7 +125,7 @@ const AddAddress: React.FC = () => {
                 style={StyleAddAddress.textinput}
                 placeholder="Hướng dẫn giao hàng"
                 value={NoteOther}
-                onChangeText={(text) => SetNoteOther(text)}
+                onChangeText={text => SetNoteOther(text)}
               />
             </View>
           </View>
@@ -133,7 +138,7 @@ const AddAddress: React.FC = () => {
                 style={StyleAddAddress.textinput}
                 placeholder="Tên người nhận"
                 value={userName}
-                onChangeText={(text) => setuserName(text)}
+                onChangeText={text => setuserName(text)}
               />
             </View>
           </View>
@@ -144,7 +149,7 @@ const AddAddress: React.FC = () => {
                 style={StyleAddAddress.textinput}
                 placeholder="Số điện thoại"
                 value={Phone}
-                onChangeText={(text) => setPhone(text)}
+                onChangeText={text => setPhone(text)}
               />
             </View>
           </View>
@@ -156,7 +161,7 @@ const AddAddress: React.FC = () => {
         </View>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
 
-export default AddAddress
+export default AddAddress;

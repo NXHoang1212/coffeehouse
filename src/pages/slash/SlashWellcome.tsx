@@ -1,12 +1,46 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Image, StyleSheet, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import { Logo } from '../../constant/Icon';
+import { WIDTH, HEIGHT } from '../../constant/Responsive';
+import { COLOR } from '../../constant/Color';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { useGetProductsQuery } from '../../service/api/IndexProducts';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { GetProducts } from '../../service/api/IndexProducts';
+import { fetchProducts } from '../../redux/slices/ProductSlices';
 
 const SlashWellcome = () => {
-  return (
-    <View>
-      <Text>SlashWellcome</Text>
-    </View>
-  )
-}
+  const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  StatusBar.setBarStyle('dark-content');
+  StatusBar.setBackgroundColor('transparent');
+  useEffect(() => {
+    dispatch(fetchProducts());
+    setTimeout(() => {
+      navigation.navigate('TabHomeNavigate');
+    }, 1500);
+  }, []);
 
-export default SlashWellcome
+  return (
+    <View style={styles.container}>
+      <Image
+        source={Logo.SLASHLOGO}
+        style={{ width: WIDTH(50), height: HEIGHT(25) }}
+      />
+    </View>
+  );
+};
+
+export default SlashWellcome;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLOR.WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

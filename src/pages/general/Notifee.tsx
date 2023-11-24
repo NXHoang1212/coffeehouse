@@ -1,14 +1,13 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { useGoBack } from '../../utils/GoBack'
-import { Icon } from '../../constant/Icon'
-import StyleNotifee from '../../styles/general/StyleNotifee'
-import { ThemLightStatusBar } from '../../constant/ThemLight'
-
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React from 'react';
+import {useGoBack} from '../../utils/GoBack';
+import {Icon} from '../../constant/Icon';
+import StyleNotifee from '../../styles/general/StyleNotifee';
+import {ThemLightStatusBar} from '../../constant/ThemLight';
 
 const Notifee = () => {
   ThemLightStatusBar('dark-content', '#fff');
-  const goback = useGoBack()
+  const goback = useGoBack();
   return (
     <View style={StyleNotifee.container}>
       <View style={StyleNotifee.viewheader}>
@@ -21,7 +20,7 @@ const Notifee = () => {
         </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default Notifee
+export default Notifee;

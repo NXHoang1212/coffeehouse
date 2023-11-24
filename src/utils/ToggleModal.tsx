@@ -1,8 +1,6 @@
-
-
-
-export const ToggleModal = (setIsModalVisible: any, isModalVisible: boolean) => {
-    setIsModalVisible(!isModalVisible);
-}
-
-
+export const ToggleModal = (
+  setIsModalVisible: any,
+  isModalVisible: boolean,
+) => {
+  setIsModalVisible(!isModalVisible);
+};

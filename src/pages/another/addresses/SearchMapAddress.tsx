@@ -1,14 +1,21 @@
-import { Text, View, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Icon } from '../../../constant/Icon';
-import { HEIGHT, WIDTH, FONTSIZE } from '../../../constant/Responsive';
-import { useGoBack } from '../../../utils/GoBack';
-import { COLOR } from '../../../constant/Color';
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Icon} from '../../../constant/Icon';
+import {HEIGHT, WIDTH, FONTSIZE} from '../../../constant/Responsive';
+import {useGoBack} from '../../../utils/GoBack';
+import {COLOR} from '../../../constant/Color';
 
 const SearchMapAddress: React.FC = () => {
   const goback = useGoBack();
   const [search, setSearch] = useState<string>('');
-  const [data, setData] = useState<any>([]);;
+  const [data, setData] = useState<any>([]);
 
   return (
     <View style={styles.container}>
@@ -32,14 +39,14 @@ const SearchMapAddress: React.FC = () => {
             <TouchableOpacity key={index}>
               <Text style={styles.textitem}>{item.name}</Text>
             </TouchableOpacity>
-          )
+          );
         })}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default SearchMapAddress
+export default SearchMapAddress;
 
 const styles = StyleSheet.create({
   container: {
@@ -107,4 +114,4 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: COLOR.BLACK,
   },
-})
+});
