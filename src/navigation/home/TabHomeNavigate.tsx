@@ -103,17 +103,10 @@ const TabHomeNavigate = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={item.icon}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? COLOR.ORANGE : COLOR.GRAY,
-                }}
+                style={{ width: 24, height: 24, tintColor: focused ? COLOR.ORANGE : COLOR.GRAY, }}
               />
             ),
-            tabBarBadge:
-              item.name === TabHomeNavigateEnum.Cart && isLoggedIn
-                ? count
-                : undefined,
+            tabBarBadge: item.name === TabHomeNavigateEnum.Cart && isLoggedIn ? count : undefined,
           }}
         />
       ))}

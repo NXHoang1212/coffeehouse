@@ -1,37 +1,24 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  StatusBar,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from 'react-native';
-import React, {useState} from 'react';
-import {ThemLightStatusBar} from '../../constant/ThemLight';
+import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, TouchableWithoutFeedback, Keyboard, } from 'react-native';
+import React, { useState } from 'react';
+import { ThemLightStatusBar } from '../../constant/ThemLight';
 import StyleLoginUser from '../../styles/auth/StyleLoginUser';
-import {Icon, Logo} from '../../constant/Icon';
-import {useGoBack} from '../../utils/GoBack';
-import {FocusLogin} from '../../hooks/Focus';
-import {loginFacebook} from '../../service/methods/LoginFacebook';
-import {loginGoogle} from '../../service/methods/LoginGoogle';
-import {loginSendOtp} from '../../service/methods/LoginSendOtp';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {
-  StackHomeNavigateNameEnum,
-  StackHomeNavigateTypeParam,
-} from '../../data/types/TypeStack';
-import {useDispatch} from 'react-redux';
-import {setLoggedIn} from '../../redux/slices/IsLoggedIn';
-import {AppDispatch} from '../../redux/store/Store';
+import { Icon, Logo } from '../../constant/Icon';
+import { useGoBack } from '../../utils/GoBack';
+import { FocusLogin } from '../../hooks/Focus';
+import { loginFacebook } from '../../service/methods/LoginFacebook';
+import { loginGoogle } from '../../service/methods/LoginGoogle';
+import { loginSendOtp } from '../../service/methods/LoginSendOtp';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn } from '../../redux/slices/IsLoggedIn';
+import { AppDispatch } from '../../redux/store/Store';
 
 const LoginUser = () => {
   ThemLightStatusBar('dark-content', 'transparent');
   const dispatch = useDispatch<AppDispatch>();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const goBack = useGoBack();
   const focusLoginProps = FocusLogin();
   const [phone, setPhone] = useState<string>('');
@@ -89,7 +76,7 @@ const LoginUser = () => {
             <View
               style={[
                 StyleLoginUser.viewlogin,
-                {backgroundColor: isPhoneValid ? 'orange' : 'gray'},
+                { backgroundColor: isPhoneValid ? 'orange' : 'gray' },
               ]}>
               <Text style={StyleLoginUser.textlogin}>Đăng nhập</Text>
             </View>
@@ -101,12 +88,7 @@ const LoginUser = () => {
           </View>
           <View style={StyleLoginUser.viewloginOther}>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(
-                  StackHomeNavigateNameEnum.AuthStackUser as any,
-                  {screen: 'CreateInformation'},
-                )
-              }>
+              onPress={() => navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'CreateInformation' },)}>
               <View style={StyleLoginUser.viewapple}>
                 <Image source={Logo.APPLE} style={StyleLoginUser.iconfb} />
                 <Text style={StyleLoginUser.textloginfb}>

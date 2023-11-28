@@ -24,7 +24,10 @@ const BottomSheetHome = () => {
       <View style={StyleBottomSheetHome.vieworder}>
         <TouchableOpacity onPress={() => navigation.navigate('Đặt hàng' as any)}>
           <View style={StyleBottomSheetHome.viewshipper}>
-            <FastImage source={order.SHIPPER} style={StyleBottomSheetHome.imgshipper} />
+            <FastImage
+              source={order.SHIPPER}
+              style={StyleBottomSheetHome.imgshipper}
+            />
             <Text style={StyleBottomSheetHome.textshipper}>Giao Hàng</Text>
           </View>
         </TouchableOpacity>

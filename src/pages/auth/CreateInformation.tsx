@@ -1,35 +1,26 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  ScrollView,
-  Keyboard,
-} from 'react-native';
-import React, {useState} from 'react';
-import {ThemLightStatusBar} from '../../constant/ThemLight';
-import {Icon, infores} from '../../constant/Icon';
-import {useGoBack} from '../../utils/GoBack';
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Keyboard, } from 'react-native';
+import React, { useState } from 'react';
+import { ThemLightStatusBar } from '../../constant/ThemLight';
+import { Icon, infores } from '../../constant/Icon';
+import { useGoBack } from '../../utils/GoBack';
 import DatePicker from 'react-native-date-picker';
-import {FormatDate} from '../../utils/FormatDate';
-import {FocusEmail, FocusHo, FocusName} from '../../hooks/Focus';
+import { FormatDate } from '../../utils/FormatDate';
+import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
 import StyleCreateInformation from '../../styles/auth/StyleCreateInformation';
-import {Picker} from '@react-native-picker/picker';
-import {CheckBox} from 'react-native-elements';
-import {useDispatch, useSelector} from 'react-redux';
-import {ApiUpdateUser} from '../../service/api/IndexUser';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
-import {setUser} from '../../redux/slices/AuthSlice';
-import {RootState} from '../../redux/store/Store';
+import { Picker } from '@react-native-picker/picker';
+import { CheckBox } from 'react-native-elements';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApiUpdateUser } from '../../service/api/IndexUser';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { setUser } from '../../redux/slices/AuthSlice';
+import { RootState } from '../../redux/store/Store';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch();
   const [checked, setChecked] = useState<boolean>(false);
   const focusNameProps = FocusName();
@@ -57,13 +48,10 @@ const CreateInformation = () => {
       if (response) {
         const user = response.data;
         dispatch(setUser(user));
-        navigation.navigate('TabHomeNavigate' as any, {screen: 'Trang chủ'});
+        navigation.navigate('TabHomeNavigate' as any, { screen: 'Trang chủ' });
       }
     } catch (error: any) {
-      console.log(
-        '🚀 ~ file: CreateInformation.tsx:133 ~ handle ~ error',
-        error,
-      );
+      console.log("🚀 ~ file: CreateInformation.tsx:54 ~ handle ~ error:", error)
     }
   };
 

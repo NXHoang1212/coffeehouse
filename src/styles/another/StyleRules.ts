@@ -26,23 +26,11 @@ const StyleRules = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: WIDTH(30),
   },
-  progressBarContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ccc',
+  viewLoading: {
+    bottom: WIDTH(193),
   },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#00ADEF',
-  },
-  progressText: {
-    marginLeft: 5,
-    color: '#00ADEF',
+  progress: {
+    marginTop: HEIGHT(30),
   },
 });
 

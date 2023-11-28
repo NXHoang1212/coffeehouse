@@ -34,7 +34,7 @@ export const DataMethod: DataMethod[] = [
   },
   {
     id: '5',
-    name: 'Thẻ ngân hàng ',
+    name: 'Thẻ ngân hàng',
     iconName: Icon.CARDBANK,
   },
   {
