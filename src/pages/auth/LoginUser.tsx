@@ -7,18 +7,21 @@ import { useGoBack } from '../../utils/GoBack';
 import { FocusLogin } from '../../hooks/Focus';
 import { loginFacebook } from '../../service/methods/LoginFacebook';
 import { loginGoogle } from '../../service/methods/LoginGoogle';
-import { loginSendOtp } from '../../service/methods/LoginSendOtp';
+import { signInWithPhoneNumber } from '../../service/methods/LoginSendOtp';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn } from '../../redux/slices/IsLoggedIn';
 import { AppDispatch } from '../../redux/store/Store';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 
 const LoginUser = () => {
   ThemLightStatusBar('dark-content', 'transparent');
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  let mobile = useSelector((state: RootState) => state.user.user.mobile);
   const goBack = useGoBack();
   const focusLoginProps = FocusLogin();
   const [phone, setPhone] = useState<string>('');
@@ -26,6 +29,7 @@ const LoginUser = () => {
   const login = () => {
     dispatch(setLoggedIn(true));
   };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={StyleLoginUser.container}>
@@ -68,16 +72,8 @@ const LoginUser = () => {
               onBlur={focusLoginProps.onBlurLogin}
             />
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              focusLoginProps.onBlurLogin(), loginSendOtp(phone, navigation);
-            }}
-            disabled={!isPhoneValid}>
-            <View
-              style={[
-                StyleLoginUser.viewlogin,
-                { backgroundColor: isPhoneValid ? 'orange' : 'gray' },
-              ]}>
+          <TouchableOpacity onPress={() => { focusLoginProps.onBlurLogin(), signInWithPhoneNumber(phone, navigation) }} disabled={!isPhoneValid}>
+            <View style={[StyleLoginUser.viewlogin, { backgroundColor: isPhoneValid ? 'orange' : 'gray' }]}>
               <Text style={StyleLoginUser.textlogin}>Đăng nhập</Text>
             </View>
           </TouchableOpacity>
@@ -87,8 +83,7 @@ const LoginUser = () => {
             <View style={StyleLoginUser.lineor} />
           </View>
           <View style={StyleLoginUser.viewloginOther}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'CreateInformation' },)}>
+            <TouchableOpacity onPress={() => navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'CreateInformation' },)}>
               <View style={StyleLoginUser.viewapple}>
                 <Image source={Logo.APPLE} style={StyleLoginUser.iconfb} />
                 <Text style={StyleLoginUser.textloginfb}>
@@ -96,22 +91,16 @@ const LoginUser = () => {
                 </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => loginFacebook(dispatch, navigation, login)}>
+            <TouchableOpacity onPress={() => loginFacebook(dispatch, navigation, login, mobile)}>
               <View style={StyleLoginUser.viewloginfb}>
                 <Image source={Logo.FACEBOOK} style={StyleLoginUser.iconfb} />
-                <Text style={StyleLoginUser.textloginfb}>
-                  Tiếp tục bằng Facebook
-                </Text>
+                <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Facebook</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => loginGoogle(dispatch, navigation, login)}>
+            <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation, login, mobile)}>
               <View style={StyleLoginUser.viewgg}>
                 <Image source={Logo.GOOGLE} style={StyleLoginUser.iconfb} />
-                <Text style={StyleLoginUser.textgoogle}>
-                  Đăng nhập bằng Google
-                </Text>
+                <Text style={StyleLoginUser.textgoogle}>Đăng nhập bằng Google</Text>
               </View>
             </TouchableOpacity>
             <Text style={StyleLoginUser.textvn}>Tiếng Việt</Text>

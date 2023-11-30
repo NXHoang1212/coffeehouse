@@ -14,7 +14,6 @@ import Order from '../../pages/cart/Order';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { useGetCartQuery } from '../../service/api/IndexCart';
-import { useAuth } from '../../hooks/UseAuth';
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 const TabNavigate: TabHomeNavigateType[] = [

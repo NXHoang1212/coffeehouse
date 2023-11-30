@@ -8,29 +8,25 @@ type Props = {
   onChangeText: (text: string) => void;
   onSubmitEditing: () => void;
   inputRef: any;
-  phone: string;
 };
-const VeriftyInput = ({ value, onChangeText, onSubmitEditing, inputRef, phone }: Props) => {
+const VeriftyInput = ({ value, onChangeText, onSubmitEditing, inputRef }: Props) => {
   return (
     <TextInput
-      keyboardType="number-pad"
+      ref={inputRef}
+      value={value}
+      onChangeText={onChangeText}
+      onSubmitEditing={onSubmitEditing}
+      keyboardType="numeric"
       maxLength={1}
       style={styles.container}
-      value={value}
-      onChangeText={(text) => {
-        onChangeText(text);
-        if (text.length === 1) {
-          onSubmitEditing();
-        } else if (text.length === 0) {
-          onSubmitEditing();
+      onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+        if (e.nativeEvent.key === 'Back') {
+          if (value === '') {
+            const index = inputRef.current.indexOf(e.target);
+            inputRef.current[index].focus();
+          }
         }
       }}
-      onSubmitEditing={onSubmitEditing}
-      autoComplete="off"
-      autoCorrect={false}
-      autoCapitalize="none"
-      returnKeyType="done"
-      ref={inputRef}
     />
   );
 };

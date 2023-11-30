@@ -8,20 +8,20 @@ import {
   PixelRatio,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, {useState, useCallback, useContext, memo} from 'react';
+import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct';
-import {DetailProduct} from '../../data/types/Product.entity';
-import {Icon} from '../../constant/Icon';
-import {FormatPrice} from '../../utils/FormatPrice';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
+import { DetailProduct } from '../../data/types/Product.entity';
+import { Icon } from '../../constant/Icon';
+import { FormatPrice } from '../../utils/FormatPrice';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import BottomSheetDetailOrder from '../../pages/order/BottomSheetDetailOrder';
-import {useCreateEmptyCartMutation} from '../../service/api/IndexCart';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
-import {Messenger} from '../../utils/ShowMessage';
-import {ProductContext} from '../../service/provider/ProductContext';
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { Messenger } from '../../utils/ShowMessage';
+import { ProductContext } from '../../service/provider/ProductContext';
 
 interface PropsItemProduct {
   item: DetailProduct;
@@ -29,17 +29,14 @@ interface PropsItemProduct {
   isFirstItem: boolean;
 }
 
-const ItemProduct = ({item, showCategory, isFirstItem}: PropsItemProduct) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let isLoggedIn = useSelector(
-    (state: RootState) => state.IsLoggedIn.isLoggedIn,
-  );
-  const {setProducts} = useContext(ProductContext);
+const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn,);
+  const { setProducts } = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.user.user._id);
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [show, setShow] = useState<boolean>(false);
-  const [size, setSize] = useState<{name: string; price: number}>({
+  const [size, setSize] = useState<{ name: string; price: number }>({
     name: 'Vừa',
     price: 0,
   });
@@ -59,7 +56,7 @@ const ItemProduct = ({item, showCategory, isFirstItem}: PropsItemProduct) => {
         }
       }
     } else {
-      navigation.navigate('AuthStackUser' as any, {screen: 'Login'});
+      navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
     }
   };
 
@@ -87,7 +84,7 @@ const ItemProduct = ({item, showCategory, isFirstItem}: PropsItemProduct) => {
   };
 
   const onLoad = useCallback(() => {
-    FastImage.preload([{uri: item.image as string}]);
+    FastImage.preload([{ uri: item.image as string }]);
   }, []);
 
   return (

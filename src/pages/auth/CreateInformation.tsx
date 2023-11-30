@@ -46,7 +46,7 @@ const CreateInformation = () => {
       };
       const response = await ApiUpdateUser(id, data);
       if (response) {
-        const user = response.data;
+        const user = response;
         dispatch(setUser(user));
         navigation.navigate('TabHomeNavigate' as any, { screen: 'Trang chủ' });
       }

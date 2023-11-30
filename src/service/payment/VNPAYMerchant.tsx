@@ -20,7 +20,6 @@ const VNPMerchant = {
         let _params: Partial<ShowParam> = Object.assign({
             isSandbox: true, //"true": môi trường test || "false": môi trường live
             paymentUrl: 'https://sandbox.vnpayment.vn/tryitnow/Home/CreateOrder', // Đây là URL demo của VNAPAY. URL merchant thanh toán merchant tạo. Tham khảo tại "https://sandbox.vnpayment.vn/apis/docs/thanh-toan-pay/pay.html#tao-url-thanh-toan"
-			
             tmn_code: 'XXXXXXXX', // TmnCode VNPAY cung cấp
             backAlert: 'Bạn có chắc chắn trở lại ko?',
             title: 'Thanh toán',

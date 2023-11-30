@@ -1,36 +1,44 @@
-import auth from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { Messenger } from '../../utils/ShowMessage';
+import { User } from '../../data/types/User.entity';
+import { ApiLogin } from '../api/IndexUser';
+import { setUser } from '../../redux/slices/AuthSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 
+let confirmation: FirebaseAuthTypes.ConfirmationResult | null = null;
 
-export const loginSendOtp = async (phone: string, navigation: { navigate: (arg0: string) => void }) => {
+export const signInWithPhoneNumber = async (phoneNumber: string, navigation: { navigate: (arg0: string) => void }) => {
   try {
-    const phoneNumber: string = `+84${phone.substring(1)}`;
-    const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
-    console.log("🚀 ~ file: LoginSendOtp.ts:8 ~ loginSendOtp ~ confirmation:", confirmation)
-    // Tắt reCAPTCHA cho môi trường thử nghiệm
-    // auth().settings.appVerificationDisabledForTesting = true;
+    const phone: string = `+84${phoneNumber.substring(1)}`;
+    confirmation = await auth().signInWithPhoneNumber(phone);
     if (confirmation) {
-      //@ts-ignore
-      navigation.navigate('ConfirmOtpCode', { confirm: confirmation });
+      navigation.navigate('ConfirmOtpCode')
     } else {
-      throw new Error('Không thể gửi mã OTP');
+      Messenger('Số điện thoại không hợp lệ', 'danger')
     }
-  } catch (error: any) {
-    console.log("🚀 ~ file: LoginSendOtp.ts:18 ~ loginSendOtp ~ error:", error)
+  } catch (error) {
+    console.error('Error signing in with phone number:', error);
   }
 };
 
-//xác nhận mã otp khi đăng nhập
-export const loginConfirmOtp = async (confirm: any, code: string, navigation: { navigate: (arg0: string) => void }) => {
+export const confirmCode = async (code: string, dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, navigation: { navigate: (arg0: string) => void }, login: () => void, mobile: string) => {
   try {
-    const response = await confirm.confirm(code);
-    console.log("🚀 ~ file: LoginSendOtp.ts:26 ~ loginConfirmOtp ~ response:", response)
-    if (response) {
-      //@ts-ignore
-      // navigation.navigate('LoginSuccess');
+    if (confirmation) {
+      const otp = await confirmation.confirm(code);
+      if (otp) {
+        const data: any = { mobile: otp.user.phoneNumber };
+        const response = await ApiLogin(data);
+        const user = { ...response.user};
+        dispatch(setUser(user));
+        login();
+        navigation.navigate(mobile ? 'Trang chủ' : 'CreateInformation');
+      }
     } else {
-      throw new Error('Mã OTP không đúng');
+      Messenger('Mã OTP không hợp lệ', 'danger')
     }
-  } catch (error: any) {
-    console.log("🚀 ~ file: LoginSendOtp.ts:31 ~ loginConfirmOtp ~ error:", error)
+  } catch (error) {
+    console.error('Invalid code:', error);
   }
-}
+};
+

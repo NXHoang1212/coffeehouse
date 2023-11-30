@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface Props {
   visible: boolean;
@@ -17,7 +17,7 @@ const SignOut = ({
   onOKPress,
 }: Props) => {
   return (
-    <Modal visible={visible} animationType="fade" transparent>
+    <Modal visible={visible} animationType="fade" transparent={true} statusBarTranslucent={true}>
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
           <Text style={styles.title}>{title}</Text>

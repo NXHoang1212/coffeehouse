@@ -7,6 +7,8 @@ import { useGoBack } from '../../utils/GoBack';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 
 const InputPhone = () => {
   const goBack = useGoBack();
@@ -14,13 +16,7 @@ const InputPhone = () => {
   const focusLoginProps = FocusLogin();
   const [phone, setPhone] = useState<string>('');
   const isPhoneValid = phone.length === 10 || phone.length === 9;
-  // const handlePhoneChange = (text: string) => {
-  //     setPhone(text);
-  // };
-  // const handleLogin = () => {
-  //     navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'ConfirmOtpCode', })
-  //     focusLoginProps.onBlurLogin();
-  // };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={StyleInputPhone.container}>
