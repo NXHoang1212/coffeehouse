@@ -14,7 +14,6 @@ import Order from '../../pages/cart/Order';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { useGetCartQuery } from '../../service/api/IndexCart';
-import { useAuth } from '../../hooks/UseAuth';
 
 const BottomTabNavigate = createBottomTabNavigator<TabHomeParamList>();
 const TabNavigate: TabHomeNavigateType[] = [
@@ -103,17 +102,10 @@ const TabHomeNavigate = () => {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={item.icon}
-                style={{
-                  width: 24,
-                  height: 24,
-                  tintColor: focused ? COLOR.ORANGE : COLOR.GRAY,
-                }}
+                style={{ width: 24, height: 24, tintColor: focused ? COLOR.ORANGE : COLOR.GRAY, }}
               />
             ),
-            tabBarBadge:
-              item.name === TabHomeNavigateEnum.Cart && isLoggedIn
-                ? count
-                : undefined,
+            tabBarBadge: item.name === TabHomeNavigateEnum.Cart && isLoggedIn ? count : undefined,
           }}
         />
       ))}

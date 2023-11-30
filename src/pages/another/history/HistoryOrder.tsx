@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import StyleHistoryOrder from '../../../styles/another/StyleHistoryOrder';
 import { ThemLightStatusBar } from '../../../constant/ThemLight';
 import { Icon } from '../../../constant/Icon';
@@ -13,14 +13,19 @@ import { useGetOrderUserQuery } from '../../../service/api/IndexOrdert';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import { OrderStatus } from '../../../data/types/Enum.entity';
+import ActivityIndicator from '../../../components/activity/ActivityIndicator';
 
 const HistoryOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const { activeTab, handleActiveTab } = ActiveTab('Tab one');
   const id = useSelector((state: RootState) => state.user.user._id);
-  const { data } = useGetOrderUserQuery(id);
+  const { data, isLoading } = useGetOrderUserQuery(id);
   const dataOrder = data?.data;
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <View style={StyleHistoryOrder.container}>

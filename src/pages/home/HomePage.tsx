@@ -7,19 +7,19 @@ import {
   ScrollView,
   RefreshControl,
 } from 'react-native';
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import StyleHomePage from '../../styles/home/StyleHomePage';
-import {Logo, category, Icon} from '../../constant/Icon';
+import { Logo, category, Icon } from '../../constant/Icon';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import BottomSheetHome from './BottomSheetHome';
-import {useGetDiscountQuery} from '../../service/api/IndexDiscount';
-import {useScrollToTop} from '@react-navigation/native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
+import { useGetDiscountQuery } from '../../service/api/IndexDiscount';
+import { useScrollToTop } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 
 const HomePage = () => {
   const navigation =
@@ -31,6 +31,7 @@ const HomePage = () => {
   useScrollToTop(scroll);
   const [backgroundColor, setBackgroundColor] = useState<string>('#FFF7E6');
 <<<<<<< HEAD
+<<<<<<< HEAD
   ThemLightStatusBar('dark-content', backgroundColor);
 <<<<<<< HEAD
   
@@ -38,6 +39,9 @@ const HomePage = () => {
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 =======
   const {data} = useGetDiscountQuery();
+=======
+  const { data } = useGetDiscountQuery();
+>>>>>>> main
   const count = data?.data.length;
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor(backgroundColor);
@@ -63,7 +67,7 @@ const HomePage = () => {
   }, [navigation, StatusBar]);
 
   return (
-    <View style={[StyleHomePage.container, {backgroundColor: backgroundColor}]}>
+    <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
           <FastImage style={StyleHomePage.icon} source={category.CLOUDFEE} />
@@ -81,7 +85,7 @@ const HomePage = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser',
-                {screen: 'DiscountUser'} as any,
+                { screen: 'DiscountUser' } as any,
               )
             }>
             <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
@@ -94,7 +98,7 @@ const HomePage = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser',
-                {screen: 'Notifee'} as any,
+                { screen: 'Notifee' } as any,
               )
             }>
             <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
@@ -106,7 +110,7 @@ const HomePage = () => {
         ref={scroll}
         onScroll={onScroll}
         refreshControl={
-          <RefreshControl refreshing={false} onRefresh={() => {}} />
+          <RefreshControl refreshing={false} onRefresh={() => { }} />
         }>
         <View style={StyleHomePage.viewbody}>
           <LinearGradient

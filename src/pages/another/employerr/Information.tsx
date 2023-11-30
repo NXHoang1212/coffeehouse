@@ -1,39 +1,29 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
-  Keyboard,
-} from 'react-native';
-import React, {useState} from 'react';
-import {ThemLightStatusBar} from '../../../constant/ThemLight';
+import { View, Text, TouchableOpacity, Image, TextInput, KeyboardAvoidingView, ScrollView, Keyboard, } from 'react-native';
+import React, { useState } from 'react';
+import { ThemLightStatusBar } from '../../../constant/ThemLight';
 import StyleInformation from '../../../styles/another/StyleInformation';
-import {Icon, infores} from '../../../constant/Icon';
-import {useGoBack} from '../../../utils/GoBack';
+import { Icon, infores } from '../../../constant/Icon';
+import { useGoBack } from '../../../utils/GoBack';
 import DatePicker from 'react-native-date-picker';
 import ModalOptionGender from '../../../components/modal/OptionGender';
-import {FormatDate} from '../../../utils/FormatDate';
-import {FocusEmail, FocusHo, FocusName} from '../../../hooks/Focus';
-import {useSelector} from 'react-redux';
-import {MonitorChangeInput} from '../../../utils/MonitorInput';
-import {ApiUpdateUser, UploadAvatar} from '../../../service/api/IndexUser';
-import {Messenger} from '../../../utils/ShowMessage';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../../data/types/TypeStack';
-import {useDispatch} from 'react-redux';
-import {AppDispatch, RootState} from '../../../redux/store/Store';
-import {setUser} from '../../../redux/slices/AuthSlice';
+import { FormatDate } from '../../../utils/FormatDate';
+import { FocusEmail, FocusHo, FocusName } from '../../../hooks/Focus';
+import { useSelector } from 'react-redux';
+import { MonitorChangeInput } from '../../../utils/MonitorInput';
+import { ApiUpdateUser, UploadAvatar } from '../../../service/api/IndexUser';
+import { Messenger } from '../../../utils/ShowMessage';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store/Store';
+import { setUser } from '../../../redux/slices/AuthSlice';
 import OptionsCamera from '../../../components/modal/OptionsCamera';
 
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch<AppDispatch>();
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
@@ -48,16 +38,9 @@ const Information = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [genderModalVisible, setGenderModalVisible] = useState<boolean>(false);
   const [avatar, setAvatar] = useState<any>('' || user.avatar);
-  // const handleGenderSelection = (selectedGender: string) => {
-  //   monitorChangeInput('gender', selectedGender);
-  //   setGenderModalVisible(false)
-  // };
-  const [emailInputDisabled, setEmailInputDisabled] = useState<boolean>(
-    !!email,
-  );
-  const [birthdayInputDisabled, setBirthdayInputDisabled] = useState<boolean>(
-    !!birthday,
-  );
+
+  const [emailInputDisabled, setEmailInputDisabled] = useState<boolean>(!!email);
+  const [birthdayInputDisabled, setBirthdayInputDisabled] = useState<boolean>(!!birthday);
   const [isAnyFieldEmpty, setIsAnyFieldEmpty] = useState<boolean>(true);
   const [show, setshow] = useState<boolean>(false);
 
@@ -100,10 +83,20 @@ const Information = () => {
       birthday: birthday,
     };
     const res = await ApiUpdateUser(id, data);
-    const resUploadAvatar = await UploadAvatar(id, avatar);
-    if (res && resUploadAvatar) {
+    //nếu có avatar mới thì upload avatar
+    if (avatar !== user.avatar) {
+      const resUploadAvatar = await UploadAvatar(id, avatar);
+      if (resUploadAvatar) {
+        Messenger('Cập nhật avatar thành công', 'success');
+      } else {
+        Messenger('Cập nhật avatar thất bại', 'error');
+      }
+    } else {
+      Messenger('Không có avatar mới', 'error')
+    }
+    if (res) {
       Messenger('Cập nhật thành công', 'success');
-      dispatch(setUser({...res, avatar: avatar}));
+      dispatch(setUser({ ...res, avatar: avatar }));
       navigation.navigate('Other' as any);
     }
   };
@@ -121,7 +114,7 @@ const Information = () => {
           <View style={StyleInformation.viewimg}>
             {avatar ? (
               <Image
-                source={{uri: avatar}}
+                source={{ uri: avatar }}
                 style={StyleInformation.iconavatar}
               />
             ) : (
@@ -166,7 +159,7 @@ const Information = () => {
             style={[
               StyleInformation.input,
               (focusEmailProps.focusEmail && StyleInformation.focusedInput) ||
-                (emailInputDisabled && StyleInformation.disabledInput),
+              (emailInputDisabled && StyleInformation.disabledInput),
             ]}>
             <TextInput
               style={StyleInformation.textinput}

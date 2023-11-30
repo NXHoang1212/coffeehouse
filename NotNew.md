@@ -77,3 +77,4 @@ Còn providesTags trong RTK Query được dùng để callback mỗi khi một 
 sẽ trả về return  một mảng chứa các tag và phải thêm as const để báo rằng cho type này là nó sẽ readonly, không thể mutate được 
 Còn invalidateTags trong RTK Query được dùng để callback mỗi khi một query được gọi và mong muốn là chạy lại query đó sẽ dựa vào các tag được truyền vào và thực thi lại query đó
  -->
+/*"react-native-vnpay-merchant": "file:react-native-vnpay-merchant",/*

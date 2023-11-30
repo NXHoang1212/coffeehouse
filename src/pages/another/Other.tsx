@@ -20,10 +20,8 @@ const Other = () => {
   const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn,);
   const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung';
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackParamsOther>>();
-  const navigationDad =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
+  const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { data: dataDiscount } = useGetDiscountQuery();
   const count = dataDiscount?.data.length;
   StatusBar.setBarStyle('dark-content');
@@ -54,13 +52,8 @@ const Other = () => {
     <View style={styleOther.container}>
       <View style={styleOther.viewheader}>
         <Text style={styleOther.textheader}>Khác</Text>
-        <TouchableOpacity
-          style={styleOther.viewpromo}
-          onPress={() =>
-            navigationDad.navigate(
-              isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-              { screen: 'DiscountUser' },
-            )
+        <TouchableOpacity style={styleOther.viewpromo}
+          onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' },)
           }>
           <Image style={styleOther.iconpromo} source={Icon.PROMO} />
           {isLoggedIn ? (

@@ -1,21 +1,15 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, ImageSourcePropType, } from 'react-native';
 import StyleItemWebView from '../../styles/item/StyleItemWebView';
-import {Icon} from '../../constant/Icon';
-import {TrunacteString} from '../../utils/TrunacteString';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { Icon } from '../../constant/Icon';
+import { TrunacteString } from '../../utils/TrunacteString';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   EnumStackNaviagte,
   ParamsStack,
 } from '../../navigation/home/StackHomeNavigate';
-import {StackHomeNavigateNameEnum} from '../../data/types/TypeStack';
+import { StackHomeNavigateNameEnum } from '../../data/types/TypeStack';
 
 interface ItemWebViewProps {
   item: {
@@ -27,16 +21,13 @@ interface ItemWebViewProps {
   };
 }
 
-const ItemWebView = ({item}: ItemWebViewProps) => {
+const ItemWebView = ({ item }: ItemWebViewProps) => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamsStack>>();
 
   const openWebView = () => {
     navigation.navigate(StackHomeNavigateNameEnum.StackHomeUrl as any, {
       screen: EnumStackNaviagte.WebView,
-      params: {
-        name: item.name,
-        url: item.url,
-      },
+      params: { name: item.name, url: item.url, },
     });
   };
 

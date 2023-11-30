@@ -1,31 +1,39 @@
-import {View, Text, TouchableOpacity, TextInput} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
+import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
 import StyleConfirmOtp from '../../styles/auth/StyleConfirmOtp';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import VeriftyInput from '../../components/otp/VeriftyOtp';
-import {confirmOtp} from '../../service/methods/LoginSendOtp';
-
-type PropsParams = {
-  phone: string;
-};
+import { confirmCode } from '../../service/methods/LoginSendOtp';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { setLoggedIn } from '../../redux/slices/IsLoggedIn';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
 
 const ConfirmOtpCode = () => {
-  const navigation = useNavigation();
-  const {phone} = useRoute().params as PropsParams;
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const dispatch = useDispatch<AppDispatch>();
   const [time, setTime] = useState<number>(120);
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
+  const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRefs = useRef<TextInput[]>([]);
-
+  const mobile = useSelector((state: RootState) => state.user.user.mobile);
+  const login = () => {
+    dispatch(setLoggedIn(true));
+  };
   const handleInputChange = (text: string, index: number) => {
-    if (text === '') {
-      return;
-    }
-    if (index === 5) {
-      return;
-    }
-    const nextInputRef = inputRefs.current[index + 1];
-    if (nextInputRef) {
-      nextInputRef.focus();
+    const otpCode = otp.map((item, i) => {
+      if (i === index) {
+        return text;
+      } else {
+        return item;
+      }
+    });
+    setOtp(otpCode);
+    if (text !== '') {
+      if (index < otp.length - 1) {
+        inputRefs.current[index + 1].focus();
+      }
     }
   };
 
@@ -45,33 +53,28 @@ const ConfirmOtpCode = () => {
     <View style={StyleConfirmOtp.container}>
       <View style={StyleConfirmOtp.header}>
         <Text style={StyleConfirmOtp.textotp}>Xác nhận Mã OTP</Text>
-        <Text style={StyleConfirmOtp.textsend}>
-          Một mã xác thực gồm 6 số đã được gửi đến số điện thoại
-        </Text>
+        <Text style={StyleConfirmOtp.textsend}>Một mã xác thực gồm 6 số đã được gửi đến số điện thoại</Text>
       </View>
       <View style={StyleConfirmOtp.body}>
-        {otp.map((value, index) => (
+        {otp.map((item, index) => (
           <VeriftyInput
             key={index}
-            value={value}
-            onChangeText={text => {
-              const otpClone = [...otp];
-              otpClone[index] = text;
-              setOtp(otpClone);
-              handleInputChange(text, index);
-            }}
-            onCompleted={() => {
+            value={item}
+            onChangeText={(text) => handleInputChange(text, index)}
+            onSubmitEditing={() => {
               if (index === 5) {
-                confirmOtp(phone, navigation);
+                const code = otp.join('');
+                confirmCode(code, dispatch, navigation, login, mobile);
               }
             }}
-            inputRef={(ref: any) => (inputRefs.current[index] = ref)}
+            inputRef={(ref: TextInput) => {
+              inputRefs.current[index] = ref;
+            }}
           />
         ))}
       </View>
       <View style={StyleConfirmOtp.viewfail}>
         <Text style={StyleConfirmOtp.textfail}>Bạn không nhận được mã?</Text>
-        {/* @ts-ignore */}
         <TouchableOpacity onPress={() => setTime(120)}>
           <Text style={StyleConfirmOtp.textsendagain}>Gửi lại {time}s</Text>
         </TouchableOpacity>

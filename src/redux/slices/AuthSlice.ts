@@ -17,14 +17,7 @@ const initialState: User = {
 
 const UserSlice = createSlice({
   name: 'user',
-  initialState: {
-    ...initialState,
-    ignoredPath: 'users',
-    ignoredNested: {
-      one: 'one',
-      two: 'two',
-    },
-  },
+  initialState,
   reducers: {
     setUser(state, action: PayloadAction<User>) {
       state._id = action.payload._id;
