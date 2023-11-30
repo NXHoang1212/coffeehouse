@@ -6,7 +6,7 @@ import { CheckBox } from 'react-native-elements';
 import StyleRejectOrder from '../../styles/modal/StyleRejectOrder';
 import { Portal } from 'react-native-paper';
 import { DataRejectOrder } from '../../data/listitem/DataRejectOrder';
-import { useUpdateOrderMutation } from '../../service/api/IndexOrdert';
+import { useUpdateOrderMutation } from '../../service/api/IndexOrder';
 import { Messenger } from '../../utils/ShowMessage';
 import { Order, OrderResponse } from '../../data/types/Order.entity';
 import { OrderStatus, PaymentStatus } from '../../data/types/Enum.entity';

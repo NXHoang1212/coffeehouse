@@ -20,7 +20,7 @@ import { AppDispatch } from '../../redux/store/Store';
 import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 import ConfirmOrderPayment from '../modal/ConfirmOrderPayment';
 import { Messenger } from '../../utils/ShowMessage';
-import { useCreateOrderMutation } from '../../service/api/IndexOrdert';
+import { useCreateOrderMutation } from '../../service/api/IndexOrder';
 import { useUpdateStatusMutation } from '../../service/api/IndexCart';
 import { OrderStatus, PaymentStatus } from '../../data/types/Enum.entity';
 import { Order } from '../../data/types/Order.entity';

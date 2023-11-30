@@ -11,23 +11,23 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {Icon} from '../../constant/Icon';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {DetailProduct} from '../../data/types/Product.entity';
+import React, { useState, useEffect, useRef } from 'react';
+import { Icon } from '../../constant/Icon';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { DetailProduct } from '../../data/types/Product.entity';
 import StyleBottomSheetDetailOrder from '../../styles/order/StyleBottomSheetDetailOrder';
-import {FormatPrice} from '../../utils/FormatPrice';
-import {CheckBox} from 'react-native-elements';
-import {handleMinus, handlePlus} from '../../utils/Total';
-import {useSelector} from 'react-redux';
-import {useCreateEmptyCartMutation} from '../../service/api/IndexCart';
-import {Messenger} from '../../utils/ShowMessage';
+import { FormatPrice } from '../../utils/FormatPrice';
+import { CheckBox } from 'react-native-elements';
+import { handleMinus, handlePlus } from '../../utils/Total';
+import { useSelector } from 'react-redux';
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
+import { Messenger } from '../../utils/ShowMessage';
 import ActivityIndicator from '../../components/activity/ActivityIndicator';
-import {RootState} from '../../redux/store/Store';
-import {cartStatus} from '../../data/types/Enum.entity';
-import {setShowLoading} from '../../redux/slices/IsLoadingSlice';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../redux/store/Store';
+import { RootState } from '../../redux/store/Store';
+import { cartStatus } from '../../data/types/Enum.entity';
+import { setShowLoading } from '../../redux/slices/IsLoadingSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
 
 interface Props {
   show: boolean;
@@ -36,18 +36,11 @@ interface Props {
   item: DetailProduct;
 }
 
-const BottomSheetDetailOrder: React.FC<Props> = ({
-  show,
-  onDismiss,
-  enableBackDropDismiss = true,
-  item,
-}) => {
+const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item, }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const id = useSelector((state: RootState) => state.user.user._id);
-  const loading = useSelector(
-    (state: RootState) => state.isLoading.isShowLoading,
-  );
+  const loading = useSelector((state: RootState) => state.isLoading.isShowLoading);
   const dispatch: AppDispatch = useDispatch();
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [open, setopen] = useState<boolean>(show);
@@ -143,11 +136,11 @@ const BottomSheetDetailOrder: React.FC<Props> = ({
       };
       const response: any = CreateEmptyCart(data);
       if (response) {
-        dispatch(setShowLoading({isShowLoading: true}));
+        dispatch(setShowLoading({ isShowLoading: true }));
         setTimeout(() => {
           Messenger('Thêm vào giỏ hàng thành công', 'success');
           onDismiss();
-          dispatch(setShowLoading({isShowLoading: false}));
+          dispatch(setShowLoading({ isShowLoading: false }));
         }, 2000);
       }
     }
@@ -165,7 +158,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({
         style={StyleBottomSheetDetailOrder.backdrop}
       />
       <Animated.View
-        style={[StyleBottomSheetDetailOrder.container, {bottom: bottomsheet}]}>
+        style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
         <View style={StyleBottomSheetDetailOrder.viewloading}>
           {loading ? <ActivityIndicator /> : null}
         </View>
@@ -187,7 +180,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({
         <View style={StyleBottomSheetDetailOrder.line} />
         <View style={StyleBottomSheetDetailOrder.body}>
           <ScrollView
-            contentContainerStyle={{flexGrow: 1, paddingBottom: 150}}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 150 }}
             showsVerticalScrollIndicator={false}>
             <View style={StyleBottomSheetDetailOrder.body}>
               <View style={StyleBottomSheetDetailOrder.viewsize}>

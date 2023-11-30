@@ -26,7 +26,7 @@ const CartOrder = () => {
   let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
   let id = useSelector((state: RootState) => state.user.user._id);
   const { data } = useGetFavouritesQuery(id);
-  const favourites: any = data?.data.length;
+  const favourites = data?.data?.length || 0;
 
   const handleCategorySelect = (categoryName: String) => {
     setSelectedCategory(categoryName);

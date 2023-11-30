@@ -26,8 +26,7 @@ export const loginFacebook = async (dispatch: (arg0: { payload: User; type: 'use
         login();
         //@ts-ignore
         // navigation.navigate('AuthStackUser', { screen: 'InputPhone' });
-        navigation.navigate(mobile ? 'Trang chủ' : 'AuthStackUser', { screen: 'InputPhone' });
-
+        navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
       }
     }
   } catch (error: any) {

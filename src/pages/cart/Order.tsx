@@ -21,11 +21,11 @@ const Order: React.FC = () => {
   const { data: dataDiscount } = useGetDiscountQuery();
   const count = dataDiscount?.data.length;
   const { data, refetch } = useGetCartQuery(id);
-  const datacart = data?.data.filter(item => item !== null).map(item => ({
+  const datacart = data?.data ? data.data.filter(item => item !== null).map(item => ({
     ...item,
-    ProductId: item.ProductId.filter(item => item.StatusProduct === cartStatus.PENDING) || [],
+    ProductId: item.ProductId ? item.ProductId.filter(item => item.StatusProduct === cartStatus.PENDING) || [] : [],
     _id: item ? item._id || '' : '',
-  }));
+  })) : [];
 
   const onsRefresh = () => {
     setTimeout(() => {

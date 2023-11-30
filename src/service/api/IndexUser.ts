@@ -52,14 +52,8 @@ export const UploadAvatar = async (id: number, avatar: string) => {
       type: 'image/jpeg', // Loại MIME của tệp ảnh
       name: 'avatar.jpg', // Tên tệp ảnh
     });
-    const response = await AxiosInstance('multipart/form-data').post(
-      `/api/users/upload-avatar/${id}`,
-      formData,
-    );
-    console.log(
-      '🚀 ~ file: IndexUser.ts:55 ~ UploadAvatar ~ response:',
-      response.data.avatar,
-    );
+    const response = await AxiosInstance('multipart/form-data').post(`/api/users/upload-avatar/${id}`, formData);
+    console.log('🚀 ~ file: IndexUser.ts:55 ~ UploadAvatar ~ response:', response.data.avatar,);
     return response.data.avatar;
   } catch (error: any) {
     console.log('🚀 ~ file: IndexUser.ts ~ line 59 ~ ApiLogin ~ error', error);

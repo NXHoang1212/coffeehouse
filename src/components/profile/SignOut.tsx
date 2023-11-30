@@ -9,13 +9,7 @@ interface Props {
   onOKPress: () => void;
 }
 
-const SignOut = ({
-  visible,
-  title,
-  message,
-  onCancelPress,
-  onOKPress,
-}: Props) => {
+const SignOut = ({ visible, title, message, onCancelPress, onOKPress, }: Props) => {
   return (
     <Modal visible={visible} animationType="fade" transparent={true} statusBarTranslucent={true}>
       <View style={styles.modalContainer}>

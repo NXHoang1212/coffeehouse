@@ -24,7 +24,7 @@ export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/
     dispatch(setUser(user));
     login();
     //@ts-ignore
-    navigation.navigate(mobile ? 'Trang chủ' : 'AuthStackUser', { screen: 'InputPhone' });
+    navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
   } catch (error: any) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       console.log('User cancelled login flow');

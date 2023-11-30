@@ -29,8 +29,8 @@ const LoginUser = () => {
   const login = () => {
     dispatch(setLoggedIn(true));
   };
-
-  return (
+    
+  return (    
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={StyleLoginUser.container}>
         <StatusBar backgroundColor="transparent" translucent />

@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
 import { ApiFavourites } from '../../service/api/IndexFavourites';
 import { Apidiscount } from '../../service/api/IndexDiscount';
-import { ApiOrder } from '../../service/api/IndexOrdert';
+import { ApiOrder } from '../../service/api/IndexOrder';
 
 const persistConfig: any = {
   key: 'root',

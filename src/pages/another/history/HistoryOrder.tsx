@@ -9,7 +9,7 @@ import { FlashList } from '@huunguyen312/flash-list';
 import ItemHistoryOrderReject from '../../../components/item/ItemHistoryOrderReject';
 import ItemHistoryOrderProcessing from '../../../components/item/ItemHistoryOrderProcessing';
 import ItemHistoryOrderSuccess from '../../../components/item/ItemHistoryOrderSuccess';
-import { useGetOrderUserQuery } from '../../../service/api/IndexOrdert';
+import { useGetOrderUserQuery } from '../../../service/api/IndexOrder';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import { OrderStatus } from '../../../data/types/Enum.entity';

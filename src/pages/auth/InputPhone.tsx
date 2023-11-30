@@ -6,9 +6,8 @@ import { FocusLogin } from '../../hooks/Focus';
 import { useGoBack } from '../../utils/GoBack';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackHomeNavigateNameEnum, StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store/Store';
+import { StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
+import { signInWithPhoneNumber } from '../../service/methods/LoginSendOtp';
 
 const InputPhone = () => {
   const goBack = useGoBack();
@@ -56,7 +55,8 @@ const InputPhone = () => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'ConfirmOtpCode' });
+            // navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'ConfirmOtpCode' });
+            signInWithPhoneNumber(phone, navigation);
             focusLoginProps.onBlurLogin();
           }}
           disabled={!isPhoneValid}>

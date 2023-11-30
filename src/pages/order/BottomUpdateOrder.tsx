@@ -1,16 +1,4 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  ScrollView,
-  Dimensions,
-  TextInput,
-  StatusBar,
-  Modal,
-} from 'react-native';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal, } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
@@ -36,13 +24,7 @@ interface Props {
   checkPromo: () => void;
 }
 
-const BottomUpdateOrder: React.FC<Props> = ({
-  show,
-  onDismiss,
-  enableBackDropDismiss = true,
-  ProductId,
-  checkPromo,
-}) => {
+const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId, checkPromo }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const id = useSelector((state: RootState) => state.user.user._id);
@@ -122,10 +104,7 @@ const BottomUpdateOrder: React.FC<Props> = ({
         }, 1500);
       }
     } catch (error: any) {
-      console.log(
-        '🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:',
-        error,
-      );
+      console.log('🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:', error);
     }
   };
 

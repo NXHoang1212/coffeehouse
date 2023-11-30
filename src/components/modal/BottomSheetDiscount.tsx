@@ -21,12 +21,7 @@ interface Props {
   Messenger: (message: string, type: string) => void;
 }
 
-const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({
-  show,
-  onDismiss,
-  enableBackDropDismiss = true,
-  Messenger,
-}) => {
+const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismiss, enableBackDropDismiss = true, Messenger, }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const dispatch = useDispatch<AppDispatch>();
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
@@ -34,19 +29,13 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({
   const discount = useSelector((state: RootState) => state.discount);
   const id = useSelector((state: RootState) => state.user.user._id);
   const { data } = useGetCartQuery(id);
-  const ProductId = data?.data?.map((item: CartOrder) => item.ProductId);
-  const Quantity = data?.data
-    ?.map((item: CartOrder) =>
-      item.ProductId.map((item: any) => item.QuantityProduct),
-    )
-    .flat()
-    .reduce((a: any, b: any) => a + b, 0);
-  const total = data?.data
-    ?.map((item: CartOrder) =>
-      item.ProductId.map((item: any) => item.PriceProduct),
-    )
-    .flat()
-    .reduce((a: any, b: any) => a + b, 0);
+  const ProductId = data?.data ? data.data.filter(item => item !== null).map(item => ({
+    ...item,
+    ProductId: item.ProductId || [],
+    _id: item ? item._id || '' : '',
+  })) : [];
+  const Quantity = ProductId?.reduce((total: number, item: CartOrder) => total + item.ProductId.length, 0);
+  const total = ProductId?.reduce((total: number, item: CartOrder) => total + item.ProductId.reduce((total: number, item) => total + item.PriceProduct * item.QuantityProduct, 0), 0);
   let nameQR = String.fromCharCode(...discount.nameQR.data);
   const onGestureEvent = (event: any) => {
     if (event.nativeEvent.translationY > 0) {

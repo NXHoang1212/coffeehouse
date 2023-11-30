@@ -1,8 +1,8 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {User, UserData} from '../../data/types/User.entity';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { User, UserData } from '../../data/types/User.entity';
 
 const initialState: User = {
-  _id: '',
+  _id: 0,
   role: '',
   googleId: '',
   facebookId: '',
@@ -37,7 +37,7 @@ const UserSlice = createSlice({
       state.mobile = action.payload.mobile;
     },
     clearUser(state) {
-      state._id = '';
+      state._id = 0;
       state.role = '';
       state.googleId = '';
       state.facebookId = '';
@@ -50,4 +50,4 @@ const UserSlice = createSlice({
 });
 
 export default UserSlice.reducer;
-export const {setUser, clearUser, updateUserData} = UserSlice.actions;
+export const { setUser, clearUser, updateUserData } = UserSlice.actions;

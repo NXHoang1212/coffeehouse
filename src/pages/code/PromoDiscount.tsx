@@ -1,21 +1,18 @@
-import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
-import React, {useEffect} from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
 import StylePromoDiscount from '../../styles/code/StylePromoDiscount';
-import {Icon, Bean, infores} from '../../constant/Icon';
+import { Icon, Bean, infores } from '../../constant/Icon';
 import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
-import {RootState} from '../../redux/store/Store';
-import {useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { RootState } from '../../redux/store/Store';
+import { useSelector } from 'react-redux';
 
 const PromoDiscount = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const link = 'https://order.thecoffeehouse.com/user-info/accountUser';
-  let isLoggedIn = useSelector(
-    (state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn,
-  );
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fd7e14');
 
@@ -42,7 +39,7 @@ const PromoDiscount = () => {
           onPress={() =>
             navigation.navigate(
               isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-              {screen: 'DiscountUser'},
+              { screen: 'DiscountUser' },
             )
           }>
           <Image source={Icon.PROMO} style={StylePromoDiscount.iconvoucher} />
@@ -70,7 +67,7 @@ const PromoDiscount = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                {screen: 'ChangeBean'},
+                { screen: 'ChangeBean' },
               )
             }>
             <Image
@@ -86,7 +83,7 @@ const PromoDiscount = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                {screen: 'HistoryBean'},
+                { screen: 'HistoryBean' },
               )
             }>
             <Image
@@ -100,7 +97,7 @@ const PromoDiscount = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                {screen: 'Rules', params: {link}},
+                { screen: 'Rules', params: { link } },
               )
             }>
             <Image
@@ -121,7 +118,7 @@ const PromoDiscount = () => {
             onPress={() =>
               navigation.navigate(
                 isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                {screen: 'DiscountUser'},
+                { screen: 'DiscountUser' },
               )
             }>
             <Text style={StylePromoDiscount.textseeallpromocode}>

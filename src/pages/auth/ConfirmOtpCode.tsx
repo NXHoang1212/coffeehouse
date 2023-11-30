@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import StyleConfirmOtp from '../../styles/auth/StyleConfirmOtp';
 import { useNavigation } from '@react-navigation/native';
 import VeriftyInput from '../../components/otp/VeriftyOtp';
-import { confirmCode } from '../../service/methods/LoginSendOtp';
+import { confirmCode, ConfirmPhone } from '../../service/methods/LoginSendOtp';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store/Store';
@@ -17,10 +17,8 @@ const ConfirmOtpCode = () => {
   const [time, setTime] = useState<number>(120);
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRefs = useRef<TextInput[]>([]);
-  const mobile = useSelector((state: RootState) => state.user.user.mobile);
-  const login = () => {
-    dispatch(setLoggedIn(true));
-  };
+  let { mobile, _id, name } = useSelector((state: RootState) => state.user.user);
+  const login = () => { dispatch(setLoggedIn(true)) };
   const handleInputChange = (text: string, index: number) => {
     const otpCode = otp.map((item, i) => {
       if (i === index) {
@@ -64,7 +62,13 @@ const ConfirmOtpCode = () => {
             onSubmitEditing={() => {
               if (index === 5) {
                 const code = otp.join('');
-                confirmCode(code, dispatch, navigation, login, mobile);
+                if (_id) {
+                  ConfirmPhone(code, navigation, login, name, _id);
+                  console.log('đang chạy confirm phone');
+                } else {
+                  confirmCode(code, dispatch, mobile, navigation, login);
+                  console.log('đang chạy confirm code');
+                }
               }
             }}
             inputRef={(ref: TextInput) => {
