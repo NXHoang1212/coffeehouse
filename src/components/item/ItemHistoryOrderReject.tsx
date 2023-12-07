@@ -42,7 +42,7 @@ const ItemHistoryOrderReject: React.FC<PropsDetailItemProduct> = ({ item }) => {
                 <Text style={StyleItemHistoryOrderReject.textime}>Thời gian giao dự kiến</Text>
                 <Text style={StyleItemHistoryOrderReject.textstatus}>{item.status}</Text>
             </View>
-            <DetailHistoryOrderReject show={reject} onDismiss={() => setReject(false)} item={item} />
+            <DetailHistoryOrderReject show={reject} onDismiss={() => setReject(false)} item={item} enableBackDropDismiss/>
         </View>
     );
 };

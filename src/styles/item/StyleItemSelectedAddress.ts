@@ -23,7 +23,6 @@ const StyleItemSelectedAddress = StyleSheet.create({
     height: HEIGHT(6.5),
     backgroundColor: COLOR.SKINBLAND,
     borderRadius: 10,
-    marginTop: HEIGHT(2),
     flexDirection: 'row',
     alignItems: 'center',
     gap: WIDTH(5),
@@ -58,7 +57,6 @@ const StyleItemSelectedAddress = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    top: HEIGHT(5),    
   },
   viewdone: {
     width: WIDTH(85),
@@ -68,7 +66,7 @@ const StyleItemSelectedAddress = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: HEIGHT(20),
+    marginTop: HEIGHT(10),
   },
   textdone: {
     fontSize: FONTSIZE(2),

@@ -76,12 +76,7 @@ const Order: React.FC = () => {
         <Text style={styleCartOrder.textheader}>Thông tin đơn hàng</Text>
         <TouchableOpacity
           style={styleCartOrder.viewpromo}
-          onPress={() =>
-            navigation.navigate(
-              isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-              { screen: 'DiscountUser' },
-            )
-          }>
+          onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' })}>
           <Image source={Icon.PROMO} style={styleCartOrder.iconpromo} />
           <Text style={styleCartOrder.textpromo}>{count}</Text>
         </TouchableOpacity>

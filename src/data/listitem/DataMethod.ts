@@ -42,4 +42,9 @@ export const DataMethod: DataMethod[] = [
     name: 'ZaloPay',
     iconName: Icon.ZALOPAY,
   },
+  {
+    id: '8',
+    name: 'Tiền mặt',
+    iconName: Icon.CASH,
+  },
 ];

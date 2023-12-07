@@ -174,6 +174,9 @@ const DetailHistoryOrderReject = ({ show, onDismiss, enableBackDropDismiss = tru
                                      {item.payment === 'Thẻ ngân hàng' && (
                                         <Image source={Icon.CARDBANK} style={StyleDetailHistoryOrderReject.iconmethod} />
                                     )}
+                                    {item.payment === 'Tiền mặt' && (
+                                        <Image source={Icon.CASH} style={StyleDetailHistoryOrderReject.iconmethod} />
+                                    )}
                                     <Text style={StyleDetailHistoryOrderReject.textmethod}>{item.payment}</Text>
                                 </View>
 

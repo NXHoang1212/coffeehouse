@@ -15,6 +15,7 @@ export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/
     const userInfo = await GoogleSignin.signIn();
     const data: any = { googleId: userInfo.user.id };
     const response = await ApiLogin(data);
+    console.log("🚀 ~ file: LoginGoogle.ts:18 ~ response:", response)
     const user = {
       ...response.user,
       email: userInfo.user.email,

@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState, memo, useEffect } from 'react';
 import StyleHistoryOrder from '../../../styles/another/StyleHistoryOrder';
 import { ThemLightStatusBar } from '../../../constant/ThemLight';
@@ -70,11 +70,10 @@ const HistoryOrder: React.FC = () => {
         </View>
       ) : activeTab === "Tab two" ? (
         <View style={StyleHistoryOrder.viewtabtwo}>
-          <FlashList
-            data={dataOrder?.filter((item) => item.status === OrderStatus.CONFIRMED)}
+          <FlatList
+            data={dataOrder?.filter(item => item.status === OrderStatus.CONFIRMED)}
             renderItem={({ item }) => <ItemHistoryOrderSuccess item={item} />}
             showsVerticalScrollIndicator={false}
-            estimatedItemSize={200}
             contentContainerStyle={{ paddingBottom: 200 }}
             removeClippedSubviews={true}
             viewabilityConfig={{

@@ -10,7 +10,8 @@ const StyleSelectedAddressOrder = StyleSheet.create({
   viewheader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: WIDTH(5),
+    marginBottom: HEIGHT(2),
+    marginHorizontal: WIDTH(3),
   },
   textheader: {
     fontSize: FONTSIZE(2),
@@ -42,6 +43,7 @@ const StyleSelectedAddressOrder = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    bottom: HEIGHT(5),
   },
   textadd: {
     fontSize: FONTSIZE(1.7),

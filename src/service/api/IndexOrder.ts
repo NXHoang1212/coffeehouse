@@ -40,10 +40,18 @@ export const ApiOrder = createApi({
       }),
       invalidatesTags: [{ type: 'Order', id: 'Order' }],
     }),
+    confimOrder: build.mutation<{ data: OrderResponse }, { id: string, data: any }>({
+      query: ({ id, data }) => ({
+        url: `/api/users/orders/confirm/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: [{ type: 'Order', id: 'Order' }],
+    }),
   }),
 });
 
-export const { useGetOrderQuery, useCreateOrderMutation, useUpdateOrderMutation, useGetOrderUserQuery } = ApiOrder;
+export const { useGetOrderQuery, useCreateOrderMutation, useUpdateOrderMutation, useGetOrderUserQuery, useConfimOrderMutation } = ApiOrder;
 
 
 export const updateOrder = async (id: string, data: Order) => {

@@ -16,7 +16,7 @@ const StyleMethodAmount = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     borderTopLeftRadius: WIDTH(5),
     borderTopRightRadius: WIDTH(5),
-    height: HEIGHT(55),
+    height: HEIGHT(60),
     elevation: 8,
   },
   header: {

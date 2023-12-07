@@ -21,7 +21,7 @@ buildscript {
         
         maven { url "https://www.jitpack.io" }
 
-        // maven { url "$rootDir/../node_modules/react-native-vnpay-merchant/android/repo"}
+        maven { url "$rootDir/../node_modules/react-native-vnpay-merchant/android/repo"}
 
     }
     dependencies {

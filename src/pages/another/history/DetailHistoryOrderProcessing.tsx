@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import StyleDetailHistoryOrderProcessing from '../../../styles/another/StyleDetailHistoryOrderProcessing';
 import { Icon } from '../../../constant/Icon';
 import { Order, OrderResponse } from '../../../data/types/Order.entity';
+import { OrderStatus } from '../../../data/types/Enum.entity';
+import { useConfimOrderMutation } from '../../../service/api/IndexOrder';
 import { FormatPrice } from '../../../utils/FormatPrice';
 import { GetTime } from '../../../utils/Moment';
 import RejectOrder from '../../../components/modal/RejectOrder';
@@ -10,6 +12,7 @@ import ChangeMethod from '../../../components/modal/ChangeMethod';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import VnpayMerchant, { VnpayMerchantModule } from '../../../../react-native-vnpay-merchant'
+import { Messenger } from '../../../utils/ShowMessage';
 
 const eventEmitter = new NativeEventEmitter(VnpayMerchantModule);
 interface Props {
@@ -26,7 +29,7 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
     const method = useSelector((state: RootState) => state.methodamount.methodamount)
     const [showReject, setShowReject] = useState<boolean>(false);
     const [showmethod, setShowmethod] = useState<boolean>(false);
-    const [text, setText] = useState('OpenSDK')
+    const [confimOrder] = useConfimOrderMutation();
     useEffect(() => {
         if (show) {
             setopen(show);
@@ -53,18 +56,19 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
     const total = item.OrderCart.map((item) => item.PriceProduct * item.QuantityProduct).reduce((a, b) => a + b, 0);
     let TotalPrice = total + shipper - parseInt(item.promo)
 
-    const payment = () => {
-        VnpayMerchant.show({
-            "isSandbox": true,
-            "scheme": "vn.abahaglobal",
-            "title": "Thanh toán VNPAY",
-            "titleColor": "#333333",
-            "beginColor": "#ffffff",
-            "endColor": "#ffffff",
-            "iconBackName": "close",
-            "tmn_code": "GOGREEN1",
-            "paymentUrl": "http://testproduct2851.abaha.click/payment/order/916?token=eyJhcHBfa2V5IjoicGF5bWVudHNlcnZpY2VrZXkiLCJkZWxpdmVyeV91bml0Ijoidm5wYXkiLCJ0eG5faWQiOiI5MTYifQ=="
-        })
+
+    const confirmPayment = async () => {
+        try {
+            const payment = await confimOrder({ id: item._id, data: { statusPayment: OrderStatus.CONFIRMED, status: OrderStatus.CONFIRMED, } })
+            if (payment) {
+                Messenger('Thanh toán thành công', 'success')
+                onDismiss()
+            } else {
+                Messenger('Thanh toán thất bại', 'error')
+            }
+        } catch (error) {
+            console.log("🚀 ~ file: DetailHistoryOrderProcessing.tsx:63 ~ confirmPayment ~ error:", error)
+        }
     }
 
     return (
@@ -90,135 +94,15 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
                             <Text style={StyleDetailHistoryOrderProcessing.texttime}>{GetTime(item.date)}</Text>
                             <View style={StyleDetailHistoryOrderProcessing.viewtextpaymentpending}>
                                 <Text style={StyleDetailHistoryOrderProcessing.texttimepending}>Chờ thanh toán</Text>
-                                <Text style={StyleDetailHistoryOrderProcessing.texttimestatuspending}>Bạn cần thanh toán  đơn hàng này</Text>
+                                <Text style={StyleDetailHistoryOrderProcessing.texttimestatuspending}>Bạn cần thanh toán đơn hàng này</Text>
                             </View>
                         </View>
                         <View style={StyleDetailHistoryOrderProcessing.line} />
                         <View style={StyleDetailHistoryOrderProcessing.viewbutton}>
                             <View style={StyleDetailHistoryOrderProcessing.buttontwopayment}>
                                 <TouchableOpacity style={StyleDetailHistoryOrderProcessing.buttonpayment}
-                                    onPress={() => {
-                                        // mở sdk
-                                        eventEmitter.addListener('PaymentBack', (e) => {
-                                            console.log('Sdk back!')
-                                            if (e) {
-                                                console.log("e.resultCode = " + e.resultCode);
-                                                switch (e.resultCode) {
-                                                    case "00":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "01":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "02":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "03":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "04":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "05":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "06":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "07":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-                                                        break;
-                                                    case "08":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-
-                                                        break;
-                                                    case "09":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-
-                                                        break;
-                                                    case "10":
-                                                        console.log("e.resultCode = " + e.resultCode);
-                                                        console.log("e.data = " + e.data);
-                                                        console.log("e.message = " + e.message);
-
-                                                }
-                                                // khi tắt sdk
-                                                eventEmitter.removeAllListeners('PaymentBack')
-                                            }
-                                        })
-
-                                        // VnpayMerchant.show({
-                                        //   iconBackName: 'ic_back',
-                                        //   paymentUrl: 'https://sandbox.vnpayment.vn/testsdk',
-                                        //   scheme: 'sampleapp',
-                                        //   tmn_code: 'FAHASA03',
-                                        // })
-                                        // VnpayMerchant.show({
-                                        //   iconBackName: 'ic_back',
-                                        //   paymentUrl: 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=15000000&vnp_Command=pay&vnp_CreateDate=20210225130220&vnp_CurrCode=VND&vnp_Locale=vn&vnp_OrderInfo=TEST%20BAEMIN%20ORDER&vnp_TmnCode=BAEMIN01&vnp_TxnRef=130220&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=c7d9dedc25b304c961bd9a5c6ae21cb604700193ecb6b67ed871c1d084a462f4',
-                                        //   scheme: 'swing',
-                                        //   tmn_code: 'BAEMIN01',
-                                        //   title: 'payment'
-                                        // })
-                                        // VnpayMerchant.show({
-                                        //   iconBackName: 'ic_back',
-                                        //   // paymentUrl: 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=15000000&vnp_BankCode=MBAPP&vnp_Command=pay&vnp_CreateDate=20210225130220&vnp_CurrCode=VND&vnp_Locale=vn&vnp_OrderInfo=TEST%20BAEMIN%20ORDER&vnp_TmnCode=BAEMIN01&vnp_TxnRef=130220&vnp_Version=2.0.0&vnp_SecureHashType=SHA256&vnp_SecureHash=129664d02f0852765c8ade75b3fcca644bd0bfb26ceeb64b576e672c17f2cba1',
-                                        //   paymentUrl: 'https://sandbox.vnpayment.vn/testsdk/',
-                                        //   scheme: 'swing',
-                                        //   tmn_code: 'BAEMIN01',
-                                        //   title: 'tittlelelelel',
-                                        //   beginColor: '#ffffff',
-                                        //   endColor: '#ffffff', //6 ký tự.
-                                        //   titleColor: '#000000'
-                                        // })
-
-                                        // VnpayMerchant.show({
-                                        //   isSandbox: true,
-                                        //   paymentUrl: 'https://sandbox.vnpayment.vn/testsdk',
-                                        //   tmn_code: 'FAHASA03',
-                                        //   backAlert: 'Bạn có chắc chắn trở lại ko?',
-                                        //   title: 'VNPAY',
-                                        //   iconBackName: 'ic_close',
-                                        //   beginColor: 'ffffff',
-                                        //   endColor: 'ffffff',
-                                        //   titleColor: '000000',
-                                        //   scheme: 'swing'
-                                        // });
-
-                                        VnpayMerchant.show({
-                                            "isSandbox": true,
-                                            "scheme": "vn.abahaglobal",
-                                            "title": "Thanh toán VNPAY",
-                                            "titleColor": "#333333",
-                                            "beginColor": "#ffffff",
-                                            "endColor": "#ffffff",
-                                            "iconBackName": "close",
-                                            "tmn_code": "GOGREEN1",
-                                            "paymentUrl": "http://testproduct2851.abaha.click/payment/order/916?token=eyJhcHBfa2V5IjoicGF5bWVudHNlcnZpY2VrZXkiLCJkZWxpdmVyeV91bml0Ijoidm5wYXkiLCJ0eG5faWQiOiI5MTYifQ=="
-                                          })
-                                          setText('Sdk opened')
-                                    }}>
-                                    <Text style={StyleDetailHistoryOrderProcessing.textbuttonsucess}>{text}</Text>
+                                    onPress={() => confirmPayment()} >
+                                    <Text style={StyleDetailHistoryOrderProcessing.textbuttonsucess}>Thanh toán</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={StyleDetailHistoryOrderProcessing.buttoncancel} onPress={() => setShowReject(true)}>
                                     <Text style={StyleDetailHistoryOrderProcessing.textbuttoncancel}>Hủy đơn</Text>
@@ -305,8 +189,22 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
                             </View>
                             <View style={StyleDetailHistoryOrderProcessing.line} />
                             <View style={StyleDetailHistoryOrderProcessing.viewmethod}>
-                                <Image source={method.image as ImageSourcePropType} style={StyleDetailHistoryOrderProcessing.iconmethod} />
-                                <Text style={StyleDetailHistoryOrderProcessing.textmethod}>{method.name}</Text>
+                                {item.payment === 'VNPay' && (
+                                    <Image source={Icon.VNPAY} style={StyleDetailHistoryOrderProcessing.iconmethod} />
+                                )}
+                                {item.payment === 'MoMo' && (
+                                    <Image source={Icon.MOMO} style={StyleDetailHistoryOrderProcessing.iconmethod} />
+                                )}
+                                {item.payment === 'ZaloPay' && (
+                                    <Image source={Icon.ZALOPAY} style={StyleDetailHistoryOrderProcessing.iconmethod} />
+                                )}
+                                {item.payment === 'Thẻ ngân hàng' && (
+                                    <Image source={Icon.CARDBANK} style={StyleDetailHistoryOrderProcessing.iconmethod} />
+                                )}
+                                {item.payment === 'Tiền mặt' && (
+                                    <Image source={Icon.CASH} style={StyleDetailHistoryOrderProcessing.iconmethod} />
+                                )}
+                                <Text style={StyleDetailHistoryOrderProcessing.textmethod}>{item.payment}</Text>
                             </View>
                         </View>
                     </View>

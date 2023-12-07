@@ -1,29 +1,61 @@
-import {View, Text} from 'react-native';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import AppNavigate from './src/navigation/app/AppNavigate';
 import FlashMessage from 'react-native-flash-message';
-import store, {AppDispatch} from './src/redux/store/Store';
-import {Provider as StoreProvider, useDispatch} from 'react-redux';
-import {PersistGate} from 'redux-persist/integration/react';
-import {persistor} from './src/redux/store/Store';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {PaperProvider} from 'react-native-paper';
-import {socket} from './src/utils/Socket';
-import {ProductContextProvider} from './src/service/provider/ProductContext';
-import {ApplyPromoContextProvider} from './src/service/provider/ApplyPromoContext';
-import StatusOrder from './src/pages/another/history/StatusOrder';
+import store from './src/redux/store/Store';
+import { Provider as StoreProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor } from './src/redux/store/Store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { PaperProvider } from 'react-native-paper';
+import { socket } from './src/utils/Socket';
+import { ProductContextProvider } from './src/service/provider/ProductContext';
+import { ApplyPromoContextProvider } from './src/service/provider/ApplyPromoContext';
+import messaging from '@react-native-firebase/messaging';
+import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
 
 const App = (): JSX.Element => {
+
   useEffect(() => {
     socket.on('connection', data => {
       console.log('Received data from server:', data);
     });
+  }), [];
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      const channelId = await notifee.createChannel({
+        id: 'important',
+        name: 'Important Notifications',
+        sound: 'default',
+        importance: AndroidImportance.HIGH,
+        badge: false,
+        vibration: true,
+        vibrationPattern: [300, 500],
+      });
+      notifee.displayNotification({
+        title: remoteMessage.notification?.title,
+        body: remoteMessage.notification?.body,
+        android: {
+          channelId,
+          pressAction: {
+            id: 'default',
+            launchActivity: 'default',
+          },
+          sound: 'default',
+          smallIcon: 'ic_launcher_round',
+          importance: AndroidImportance.HIGH,
+          autoCancel: true,
+          vibrationPattern: [300, 500],
+        },
+      });
+    });
+    return unsubscribe;
   }, []);
   return (
     <>
       <StoreProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <GestureHandlerRootView style={{flex: 1}}>
+          <GestureHandlerRootView style={{ flex: 1 }}>
             <PaperProvider>
               <ProductContextProvider>
                 <ApplyPromoContextProvider>

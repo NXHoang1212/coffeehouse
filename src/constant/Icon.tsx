@@ -55,6 +55,7 @@ export const Icon = {
   MOMO: require('../assets/images/iconmomo.png'),
   VNPAY: require('../assets/images/iconvnpay.png'),
   CARDBANK: require('../assets/images/iconcardbank.png'),
+  CASH: require('../assets/images/iconpaymentoffline.png'),
   CHECKED: require('../assets/images/iconfavouriteschecked.png'),
   BACKGROUNDPROMO: require('../assets/images/backgroundPromo.png'),
   BACKGROUNDDISCOUNT: require('../assets/images/backgrounddiscount.png'),
