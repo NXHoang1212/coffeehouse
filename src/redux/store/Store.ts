@@ -11,6 +11,7 @@ import MethodAmountReducer from '../slices/MethodAmountSlice';
 import DiscountReducer from '../slices/DiscountSlice';
 import ApplyPromodiscountReducer from '../slices/ApplyPromodiscount';
 import OrderReducer from '../slices/OrderSlice';
+import ProductSuggest from '../slices/ProductSuggestSlice';
 import { ApiAddress } from '../../service/api/IndexAddress';
 import { ApiCart } from '../../service/api/IndexCart';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   cart: CartReducer,
   methodamount: MethodAmountReducer,
   applyPromodiscount: ApplyPromodiscountReducer,
+  recommend: ProductSuggest,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -49,8 +51,7 @@ const store = configureStore({
     methodamount: persistedReducer,
     discount: DiscountReducer,
     ApplyPromodiscount: persistedReducer,
-    Order: OrderReducer,
-    // theme: ThemeReducer,
+    recommend: persistedReducer,
     [ApiAddress.reducerPath]: ApiAddress.reducer,
     [ApiCart.reducerPath]: ApiCart.reducer,
     [ApiFavourites.reducerPath]: ApiFavourites.reducer,

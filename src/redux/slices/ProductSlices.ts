@@ -2,9 +2,7 @@
 // import { DetailProduct, Products } from '../../data/types/Product.entity';
 // import { ImageSourcePropType } from 'react-native';
 // import { useGetProductsQuery } from '../../service/api/IndexProducts';
-
 // const initialState: DetailProduct[] = [];
-
 // const productsSlice = createSlice({
 //   name: 'Products',
 //   initialState,
@@ -14,12 +12,10 @@
 //     },
 //   },
 // });
-
 // export default productsSlice.reducer;
 // export const { setProducts } = productsSlice.actions;
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ApiProducts } from '../../service/api/IndexProducts';
 import { DetailProduct } from '../../data/types/Product.entity';
 import AxiosInstance from '../../utils/AxiosIntance';
 
@@ -37,12 +33,16 @@ const initialState: ProductsState = {
   loading: false,
 };
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts',
-  async () => {
-    const response = await AxiosInstance().get('/api/users/product');
-    return response.data;
-  }
-);
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
+  const response = await AxiosInstance().get('/api/users/product');
+  return response.data;
+});
+
+export const fetchCategory = createAsyncThunk('products/fetchCategory', async () => {
+  const response = await AxiosInstance().get(`/api/users/category`);
+  return response.data;
+});
+
 const productsSlice = createSlice({
   name: 'Products',
   initialState,
@@ -60,10 +60,20 @@ const productsSlice = createSlice({
       state.status = 'failed';
       state.error = action.error.message || 'Đã xảy ra lỗi';
     });
+    builder.addCase(fetchCategory.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(fetchCategory.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      state.data = action.payload;
+      state.loading = true;
+    });
+    builder.addCase(fetchCategory.rejected, (state, action) => {
+      state.status = 'failed';
+      state.error = action.error.message || 'Đã xảy ra lỗi';
+    });
   },
 });
-
-
 
 export default productsSlice.reducer;
 

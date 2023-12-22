@@ -22,9 +22,7 @@ const Address: React.FC = () => {
   const id = useSelector((state: RootState) => state.user.user._id);
   const { data, refetch } = useGetAddressIdQuery(id);
   const Addressess = data?.data;
-  const isLastItem = (currentIndex: number) => {
-    return Addressess && currentIndex === Addressess.length - 1;
-  };
+  const isLastItem = (currentIndex: number) => { return Addressess && currentIndex === Addressess.length - 1 };
 
   useEffect(() => {
     refetch();
@@ -41,9 +39,7 @@ const Address: React.FC = () => {
         <View style={StyleSaveAddress.viewbody}>
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: 'Nhà' })
-            }>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: 'Nhà' })}>
             <Image
               source={TabCoffee.HOME}
               style={StyleSaveAddress.iconAddress}
@@ -53,20 +49,14 @@ const Address: React.FC = () => {
           <View style={StyleSaveAddress.line} />
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: 'Công ty' })
-            }>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: 'Công ty' })}>
             <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
-            <Text style={StyleSaveAddress.textAddress}>
-              Thêm địa chỉ công ty
-            </Text>
+            <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: '' })
-            }>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: '' })}>
             <Image source={Icon.PLUS} style={StyleSaveAddress.iconplus} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>
@@ -79,6 +69,13 @@ const Address: React.FC = () => {
               )}
               keyExtractor={(item: any) => item._id}
               estimatedItemSize={200}
+              showsVerticalScrollIndicator={false}
+              removeClippedSubviews={true}
+              viewabilityConfig={{
+                waitForInteraction: true,
+                itemVisiblePercentThreshold: 50,
+                minimumViewTime: 1000,
+              }}
             />
           </View>
         </View>

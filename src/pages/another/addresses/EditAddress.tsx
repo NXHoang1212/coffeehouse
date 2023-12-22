@@ -107,6 +107,7 @@ const EditAddress: React.FC = () => {
                 userId: '',
                 username: '',
                 phone: '',
+                done: '',
               }),
             );
             goback();

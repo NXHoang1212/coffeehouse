@@ -1,16 +1,4 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  ScrollView,
-  Dimensions,
-  TextInput,
-  StatusBar,
-  Modal,
-} from 'react-native';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal, } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
@@ -28,6 +16,7 @@ import { cartStatus } from '../../data/types/Enum.entity';
 import { setShowLoading } from '../../redux/slices/IsLoadingSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store/Store';
+import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
 
 interface Props {
   show: boolean;
@@ -36,7 +25,7 @@ interface Props {
   item: DetailProduct;
 }
 
-const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item, }) => {
+const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const id = useSelector((state: RootState) => state.user.user._id);
@@ -137,6 +126,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
       const response: any = CreateEmptyCart(data);
       if (response) {
         dispatch(setShowLoading({ isShowLoading: true }));
+        dispatch(setProductSuggest([item]));
         setTimeout(() => {
           Messenger('Thêm vào giỏ hàng thành công', 'success');
           onDismiss();

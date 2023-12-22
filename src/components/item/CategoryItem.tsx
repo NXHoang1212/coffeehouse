@@ -1,21 +1,14 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import React, {useState} from 'react';
+import { Image, Text, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
+import React, { useState } from 'react';
 import StyleCategoryItem from '../../styles/item/StyleCategoryItem';
-import {category} from '../../constant/Icon';
+import { category } from '../../constant/Icon';
 import BottomSheetMenu from '../modal/BottomSheetMenu';
-import {Provider} from 'react-native-paper';
 
 type Props = {
   setSelectedCategory: (categoryName: String) => void;
 };
 
-const CategoryItem = ({setSelectedCategory}: Props) => {
+const CategoryItem = ({ setSelectedCategory }: Props) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleCategorySelect = (categoryName: String) => {
@@ -25,7 +18,7 @@ const CategoryItem = ({setSelectedCategory}: Props) => {
 
   return (
     <TouchableWithoutFeedback>
-      <View style={{flexDirection: 'column', gap: 15}}>
+      <View style={{ flexDirection: 'column', gap: 15 }}>
         <View style={StyleCategoryItem.viewcategory}>
           <TouchableOpacity onPress={() => setSelectedCategory('39K FREESHIP')}>
             <View style={StyleCategoryItem.viewcategoryitem}>

@@ -11,6 +11,7 @@ import { socket } from './src/utils/Socket';
 import { ProductContextProvider } from './src/service/provider/ProductContext';
 import { ApplyPromoContextProvider } from './src/service/provider/ApplyPromoContext';
 import messaging from '@react-native-firebase/messaging';
+import firebase from '@react-native-firebase/app';
 import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
 
 const App = (): JSX.Element => {
@@ -19,7 +20,7 @@ const App = (): JSX.Element => {
     socket.on('connection', data => {
       console.log('Received data from server:', data);
     });
-  }), [];
+  }), []; 
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
@@ -51,6 +52,7 @@ const App = (): JSX.Element => {
     });
     return unsubscribe;
   }, []);
+
   return (
     <>
       <StoreProvider store={store}>

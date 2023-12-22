@@ -17,15 +17,24 @@ import { useGetFavouritesQuery } from '../../service/api/IndexFavourites';
 
 const CartOrder = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
+  
   const [show, setShow] = useState<boolean>(false);
+
   const [selectedCategory, setSelectedCategory] = useState<String>('');
+
   let currentCategory = '';
+
   let showProducts = useSelector((state: RootState) => state.product);
+
   let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+
   let id = useSelector((state: RootState) => state.user.user._id);
+
   const { data } = useGetFavouritesQuery(id);
+
   const favourites = data?.data?.length || 0;
 
   const handleCategorySelect = (categoryName: String) => {
@@ -38,9 +47,9 @@ const CartOrder = () => {
 
   useScrollToTop(scrollViewRef);
 
-  const itemHeight = 150;
 
   const scrollToCategory = (categoryName: String) => {
+    const itemHeight = 150;
     const index = showProducts.data.findIndex(item => item.category.name === categoryName,);
     const y = index * itemHeight;
     scrollViewRef.current?.scrollTo({ x: 0, y: y, animated: true });

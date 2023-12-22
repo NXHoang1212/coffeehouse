@@ -1,5 +1,5 @@
-import {ImageSourcePropType, Image} from 'react-native';
-import {Icon} from '../../constant/Icon';
+import { ImageSourcePropType, Image } from 'react-native';
+import { Icon } from '../../constant/Icon';
 
 interface DataMethod {
   id: string;

@@ -1,15 +1,15 @@
-import {View, Text, TouchableOpacity, Image, TextInput} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import StyleAddAddress from '../../../styles/another/StyleAddAddress';
-import {Icon} from '../../../constant/Icon';
-import {useGoBack} from '../../../utils/GoBack';
-import {useRoute, useNavigation} from '@react-navigation/native';
-import {CreateAddress} from '../../../service/api/IndexAddress';
-import {useSelector} from 'react-redux';
-import {Messenger} from '../../../utils/ShowMessage';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../../data/types/TypeStack';
-import {RootState} from '../../../redux/store/Store';
+import { Icon } from '../../../constant/Icon';
+import { useGoBack } from '../../../utils/GoBack';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { CreateAddress } from '../../../service/api/IndexAddress';
+import { useSelector } from 'react-redux';
+import { Messenger } from '../../../utils/ShowMessage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
+import { RootState } from '../../../redux/store/Store';
 
 interface RouteParams {
   name: string;
@@ -17,10 +17,9 @@ interface RouteParams {
 
 const AddAddress: React.FC = () => {
   const goback = useGoBack();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute();
-  const {name} = route.params as RouteParams;
+  const { name } = route.params as RouteParams;
   const InforAddress = useSelector((state: RootState) => state.address);
   const [nameAddress, setNameAdddress] = useState<string>(name);
   const user = useSelector((state: RootState) => state.user.user);

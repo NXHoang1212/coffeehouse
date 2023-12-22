@@ -12,9 +12,10 @@ const StyleSaveAddress = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: WIDTH(100),
-    height: HEIGHT(5.5),
+    height: HEIGHT(5),
     backgroundColor: COLOR.WHITE,
     borderBottomWidth: 0.5,
+    bottom: HEIGHT(1),
   },
   iconBack: {
     marginLeft: WIDTH(3),

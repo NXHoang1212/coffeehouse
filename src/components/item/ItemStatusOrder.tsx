@@ -36,7 +36,7 @@ const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
                     <Text style={StyleItemStatusOrder.texttime}>{GetTime(item.date)}</Text>
                     <View style={StyleItemStatusOrder.viewtextpaymentpending}>
                         <Text style={StyleItemStatusOrder.texttimepending}>Chờ thanh toán</Text>
-                        <Text style={StyleItemStatusOrder.texttimestatuspending}>Bạn cần thanh toán  đơn hàng này</Text>
+                        <Text style={StyleItemStatusOrder.texttimestatuspending}>Bạn cần thanh toán đơn hàng này</Text>
                     </View>
                 </View>
                 <View style={StyleItemStatusOrder.line} />

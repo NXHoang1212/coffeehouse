@@ -4,14 +4,14 @@ import StyleStatusOrder from '../../../styles/another/StlyeStatusOrder'
 import { Icon } from '../../../constant/Icon'
 import { useGoBack } from '../../../utils/GoBack'
 import { useGetOrderQuery } from '../../../service/api/IndexOrder'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/store/Store'
 import ItemStatusOrder from '../../../components/item/ItemStatusOrder'
 import { OrderResponse } from '../../../data/types/Order.entity'
+import { useRoute } from '@react-navigation/native'
 
 const StatusOrder = () => {
+    const route = useRoute() 
+    const { id } = route?.params as any
     const goback = useGoBack()
-    const id = useSelector((state: RootState) => state.Order._id);
     const data = useGetOrderQuery(id)
     const dataOrder = data?.data?.data
 

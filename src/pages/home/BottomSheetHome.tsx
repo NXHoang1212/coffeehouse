@@ -13,11 +13,16 @@ import { DataCoffeLover } from '../../data/listitem/homepage/DataCoffeeLover';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import ItemRecomend from '../../components/item/ItemRecomend';
 
 const BottomSheetHome = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
   const MemoziedItemWebView = useMemo(() => ItemWebView, []);
+  const recommend = useSelector((state: RootState) => state.recommend.recommend)
+
   return (
     <View style={StyleBottomSheetHome.container}>
       <View style={StyleBottomSheetHome.line} />
@@ -63,9 +68,26 @@ const BottomSheetHome = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={StyleBottomSheetHome.viewsuggest}>
-        <Text style={StyleBottomSheetHome.textsuggest}>Gợi ý dành riêng cho bạn</Text>
-      </View>
+      {recommend.length > 0 ? (
+        <View style={StyleBottomSheetHome.viewsuggest}>
+          <Text style={StyleBottomSheetHome.textsuggest}>Gợi ý dành riêng cho bạn</Text>
+          <FlatList
+            data={recommend}
+            renderItem={({ item }) => <ItemRecomend item={item} />}
+            keyExtractor={(item) => item._id}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      ) :
+        <View style={StyleBottomSheetHome.viewnosuggest}>
+          <Text style={StyleBottomSheetHome.textsuggest}>Không có sản phẩm gợi ý</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Đặt hàng' as any)}>
+            <Text style={StyleBottomSheetHome.textviewall}>Hãy mua sản phẩm để có những gợi ý cho bạn</Text>
+            <Text style={StyleBottomSheetHome.textviewall}>Xem tất cả</Text>
+          </TouchableOpacity>
+        </View>
+      }
       <View style={StyleBottomSheetHome.viewdiscover}>
         <View style={StyleBottomSheetHome.viewimgdiscover}>
           <Text style={StyleBottomSheetHome.textdiscover}>Khám phá thêm</Text>

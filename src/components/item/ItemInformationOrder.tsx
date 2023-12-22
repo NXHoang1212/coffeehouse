@@ -25,6 +25,7 @@ import { useUpdateStatusMutation } from '../../service/api/IndexCart';
 import { OrderStatus, PaymentStatus } from '../../data/types/Enum.entity';
 import { Order } from '../../data/types/Order.entity';
 import { AddOrder } from '../../redux/slices/OrderSlice';
+import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
 
 interface PropsDetailItemProduct {
   item: GetCartOrder;
@@ -136,15 +137,15 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       if (response) {
         await updateStatus(id);
         Messenger('Đặt hàng thành công', 'success');
-        dispatch(AddOrder({ _id: response.data.data._id }));
-        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' });
+        // dispatch(AddOrder({ _id: response.data.data._id }));
+        //truyền id vào navigation
+        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' , params: { id: response.data.data._id }});
       } else {
         Messenger('Đặt hàng thất bại', 'error');
       }
     } catch (error) {
       console.log("🚀 ~ file: ItemInformationOrder.tsx:126 ~ handlePayment ~ error:", error);
     }
-    // navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' })
   };
 
 

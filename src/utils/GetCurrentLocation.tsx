@@ -3,7 +3,7 @@ import Geolocation from 'react-native-geolocation-service';
 export const GetCurrentPosition = (setInitialRegion: any) => {
   Geolocation.getCurrentPosition(
     position => {
-      const {latitude, longitude} = position.coords;
+      const { latitude, longitude } = position.coords;
       const newRegion = {
         latitude,
         longitude,
@@ -15,6 +15,6 @@ export const GetCurrentPosition = (setInitialRegion: any) => {
     error => {
       console.log(error.code, error.message);
     },
-    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
   );
 };

@@ -24,9 +24,10 @@ const StyleHomePage = StyleSheet.create({
     height: HEIGHT(3.3),
   },
   textheader: {
-    fontSize: FONTSIZE(1.8),
+    fontSize: FONTSIZE(1.7),
     fontFamily: FONTSTYLE.MEDIUM,
     color: COLOR.BLACK,
+    width: WIDTH(62),
   },
   headerIcon: {
     flexDirection: 'row',

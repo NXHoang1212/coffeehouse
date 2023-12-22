@@ -59,7 +59,11 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
 
     const confirmPayment = async () => {
         try {
-            const payment = await confimOrder({ id: item._id, data: { statusPayment: OrderStatus.CONFIRMED, status: OrderStatus.CONFIRMED, } })
+            const payment = await
+                confimOrder({
+                    id: item._id,
+                    data: { statusPayment: OrderStatus.CONFIRMED, status: OrderStatus.CONFIRMED, date: new Date() }
+                })
             if (payment) {
                 Messenger('Thanh toán thành công', 'success')
                 onDismiss()

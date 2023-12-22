@@ -1,16 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Pressable,
-  PixelRatio,
-} from 'react-native';
+import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct';
-import { DetailProduct } from '../../data/types/Product.entity';
+import { DetailProduct, Products } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +14,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { Messenger } from '../../utils/ShowMessage';
 import { ProductContext } from '../../service/provider/ProductContext';
+import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
 
 interface PropsItemProduct {
   item: DetailProduct;
@@ -31,7 +26,8 @@ interface PropsItemProduct {
 
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn,);
+  const dispatch = useDispatch<AppDispatch>();
+  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
   const { setProducts } = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.user.user._id);
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
@@ -76,6 +72,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
       };
       const response = await CreateEmptyCart(data);
       if (response) {
+        dispatch(setProductSuggest([item]));
         Messenger('Thêm vào giỏ hàng thành công', 'success');
       }
     } catch (error: any) {
