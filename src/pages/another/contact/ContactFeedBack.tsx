@@ -1,17 +1,10 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Linking,
-  Alert,
-  Button,
-} from 'react-native';
-import React, {useCallback} from 'react';
-import {ThemLightStatusBar} from '../../../constant/ThemLight';
+import { View, Text, TouchableOpacity, Linking, Alert, Button, } from 'react-native';
+import React, { useCallback } from 'react';
+import { ThemLightStatusBar } from '../../../constant/ThemLight';
 import StyleContacFeedBack from '../../../styles/another/StyleContactFeedback';
-import {useGoBack} from '../../../utils/GoBack';
-import {Icon, contact, infores} from '../../../constant/Icon';
-import {Image} from 'react-native-animatable';
+import { useGoBack } from '../../../utils/GoBack';
+import { Icon, contact, infores } from '../../../constant/Icon';
+import { Image } from 'react-native-animatable';
 
 const ContactFeedBack = () => {
   ThemLightStatusBar('dark-content', '#fff');

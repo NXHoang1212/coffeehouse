@@ -45,25 +45,21 @@ const TabNavigate: TabHomeNavigateType[] = [
 ];
 
 const TabHomeNavigate = () => {
-  let id = useSelector((state: RootState) => state.user.user._id);
-  let isLoggedIn = useSelector(
-    (state: RootState) => state.IsLoggedIn.isLoggedIn,
-  );
+  let id = useSelector((state: RootState) => state.root.user._id);
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const { data } = useGetCartQuery(id, {
     skip: !id,
     refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
-  const datacart = data?.data
-    .filter(item => item !== null)
-    .map(item => ({
-      ...item,
-      ProductId:
-        item.ProductId.filter(
-          item => item.StatusProduct === 'Đã thêm vào giỏ hàng',
-        ) || [],
-      _id: item ? item._id || '' : '',
-    }));
+  const datacart = data?.data.filter(item => item !== null).map(item => ({
+    ...item,
+    ProductId:
+      item.ProductId.filter(
+        item => item.StatusProduct === 'Đã thêm vào giỏ hàng',
+      ) || [],
+    _id: item ? item._id || '' : '',
+  }));
   const [count, setCount] = useState<string | undefined>(undefined);
   useEffect(() => {
     if (

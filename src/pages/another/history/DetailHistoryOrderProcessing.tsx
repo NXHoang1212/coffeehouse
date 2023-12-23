@@ -26,7 +26,7 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
     const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
     const [open, setopen] = useState<boolean>(show);
-    const method = useSelector((state: RootState) => state.methodamount.methodamount)
+    const method = useSelector((state: RootState) => state.root.methodamount)
     const [showReject, setShowReject] = useState<boolean>(false);
     const [showmethod, setShowmethod] = useState<boolean>(false);
     const [confimOrder] = useConfimOrderMutation();

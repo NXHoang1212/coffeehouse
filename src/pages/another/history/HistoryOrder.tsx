@@ -19,7 +19,7 @@ const HistoryOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const { activeTab, handleActiveTab } = ActiveTab('Tab one');
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data, isLoading } = useGetOrderUserQuery(id);
   const dataOrder = data?.data;
 

@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const PromoDiscount = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const link = 'https://order.thecoffeehouse.com/user-info/accountUser';
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fd7e14');
 

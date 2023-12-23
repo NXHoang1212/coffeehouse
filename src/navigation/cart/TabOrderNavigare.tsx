@@ -1,7 +1,4 @@
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps, createNativeStackNavigator, } from '@react-navigation/native-stack';
 import CartOrder from '../../pages/order/CartOrder';
 import DetailOrder from '../../pages/order/DetailOrder';
 import { CartStackNames } from '../../data/types/CartOrder.entity';

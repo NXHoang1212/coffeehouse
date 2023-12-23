@@ -1,4 +1,4 @@
-import {PermissionsAndroid} from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 
 export const RequestLocationPermission = async () => {
   try {
@@ -14,7 +14,6 @@ export const RequestLocationPermission = async () => {
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       console.log('Quyền truy cập vị trí đã được cấp.');
-      // Gọi Geolocation.getCurrentPosition ở đây để lấy vị trí.
     } else if (granted === PermissionsAndroid.RESULTS.DENIED) {
       console.log('Quyền truy cập vị trí bị từ chối.');
     } else {

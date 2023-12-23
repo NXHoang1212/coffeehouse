@@ -18,7 +18,7 @@ const UpdateOrderUser: React.FC = () => {
   const route = useRoute<any>();
   const item = route.params?.item;
   const dispatch = useDispatch<AppDispatch>();
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const [name, setName] = useState<any>(item.UserId.name);
   const [mobile, setMobile] = useState<any>(item.UserId.mobile);
   const UpdateUser = async () => {

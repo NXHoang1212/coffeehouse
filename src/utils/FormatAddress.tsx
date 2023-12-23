@@ -26,8 +26,6 @@ const formatAddress = (addressInfo: any) => {
   if (!addressInfo) {
     return 'Đang tải địa chỉ...';
   }
-  // Trích xuất các thành phần địa chỉ bạn muốn hiển thị
   const formattedAddress = addressInfo.formatted_address;
-
   return formattedAddress;
 };

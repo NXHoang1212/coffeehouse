@@ -1,23 +1,11 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  ScrollView,
-  Dimensions,
-  Modal,
-  StatusBar,
-  FlatList,
-} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {Portal} from 'react-native-paper';
-import {Icon, category} from '../../constant/Icon';
-import {PanGestureHandler} from 'react-native-gesture-handler';
-import {StyleSelectModalDataTime} from '../../styles/modal/StyleSelectModalDataTime';
-import {DataGayteway} from '../../data/listitem/DataGayteway';
-import {TimeHoursGayteway} from '../../data/listitem/DataGayteway';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, Modal, StatusBar, FlatList, } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { Portal } from 'react-native-paper';
+import { Icon, category } from '../../constant/Icon';
+import { PanGestureHandler } from 'react-native-gesture-handler';
+import { StyleSelectModalDataTime } from '../../styles/modal/StyleSelectModalDataTime';
+import { DataGayteway } from '../../data/listitem/DataGayteway';
+import { TimeHoursGayteway } from '../../data/listitem/DataGayteway';
 
 interface Props {
   show: boolean;
@@ -101,7 +89,7 @@ const SelectModalDataTime = ({
       />
       <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
         <Animated.View
-          style={[StyleSelectModalDataTime.container, {bottom: bottomsheet}]}>
+          style={[StyleSelectModalDataTime.container, { bottom: bottomsheet }]}>
           <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
           <View style={StyleSelectModalDataTime.header}>
             <Text style={StyleSelectModalDataTime.textitle}>
@@ -122,7 +110,7 @@ const SelectModalDataTime = ({
               <FlatList
                 data={['Hôm nay', 'Ngày mai', 'Ngày kế tiếp']}
                 horizontal
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <TouchableOpacity onPress={() => handleDateSelect(item)}>
                     <Text>{item}</Text>
                   </TouchableOpacity>
@@ -132,7 +120,7 @@ const SelectModalDataTime = ({
               <FlatList
                 data={availableTimes}
                 numColumns={3}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <TouchableOpacity onPress={() => handleTimeSelect(item)}>
                     <Text>{item}</Text>
                   </TouchableOpacity>

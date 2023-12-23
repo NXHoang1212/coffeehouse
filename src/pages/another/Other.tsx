@@ -20,7 +20,7 @@ import ActivityIndicator from '../../components/activity/ActivityIndicator';
 
 const Other = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const isLoading = useSelector((state: RootState) => state.isLoading.isShowLoading);
   const [visible, setVisible] = useState<boolean>(false);
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung';

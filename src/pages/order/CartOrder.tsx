@@ -29,9 +29,9 @@ const CartOrder = () => {
 
   let showProducts = useSelector((state: RootState) => state.product);
 
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
 
-  let id = useSelector((state: RootState) => state.user.user._id);
+  let id = useSelector((state: RootState) => state.root.user._id);
 
   const { data } = useGetFavouritesQuery(id);
 

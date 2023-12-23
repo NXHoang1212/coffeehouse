@@ -15,7 +15,7 @@ interface PropsDetailItemProduct {
 }
 
 const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
-    const method = useSelector((state: RootState) => state.methodamount.methodamount)
+    const method = useSelector((state: RootState) => state.root.methodamount)
     const shipper = 18
     const total = item.OrderCart.map((item) => item.PriceProduct * item.QuantityProduct).reduce((a, b) => a + b, 0);
     let TotalPrice = total + shipper - parseInt(item.promo)

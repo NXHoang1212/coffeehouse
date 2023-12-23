@@ -27,7 +27,7 @@ const CreateInformation = () => {
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
   const [open, setOpen] = useState<boolean>(false);
-  let user = useSelector((state: RootState) => state.user.user);
+  let user = useSelector((state: RootState) => state.root.user);
   const id = user._id;
   const [name, setName] = useState<string>(user.name);
   const [holder, setHolder] = useState<string>(user.holder);

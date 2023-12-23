@@ -21,7 +21,7 @@ const LoginUser = () => {
   ThemLightStatusBar('dark-content', 'transparent');
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let mobile = useSelector((state: RootState) => state.user.user.mobile);
+  let mobile = useSelector((state: RootState) => state.root.user.mobile);
   const goBack = useGoBack();
   const focusLoginProps = FocusLogin();
   const [phone, setPhone] = useState<string>('');

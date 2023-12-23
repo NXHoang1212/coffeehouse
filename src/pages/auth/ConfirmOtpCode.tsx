@@ -17,7 +17,7 @@ const ConfirmOtpCode = () => {
   const [time, setTime] = useState<number>(120);
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRefs = useRef<TextInput[]>([]);
-  let { mobile, _id, name } = useSelector((state: RootState) => state.user.user);
+  let { mobile, _id, name } = useSelector((state: RootState) => state.root.user);
   const login = () => { dispatch(setLoggedIn(true)) };
   const handleInputChange = (text: string, index: number) => {
     const otpCode = otp.map((item, i) => {

@@ -1,7 +1,4 @@
-import {
-  createNativeStackNavigator,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackScreenProps, } from '@react-navigation/native-stack';
 import WebViewUrl from '../../components/redirectUrl/WebView';
 import AuthStackNavigate from '../auth/AuthUserNavigate';
 import PlayMusic from '../../pages/another/amuse/PlayMusic';

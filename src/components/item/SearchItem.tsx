@@ -25,7 +25,7 @@ const SeacrchItem = ({item}: PropsItemProduct) => {
     useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const {setProducts} = useContext(ProductContext);
   const [show, setShow] = useState<boolean>(false);
-  const user = useSelector((state: RootState) => state.user.user._id);
+  const user = useSelector((state: RootState) => state.root.user._id);
   const [size, setSize] = useState<{name: string; price: number}>({
     name: 'Vừa',
     price: 0,

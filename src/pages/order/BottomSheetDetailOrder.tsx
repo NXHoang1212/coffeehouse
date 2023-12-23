@@ -28,7 +28,7 @@ interface Props {
 const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, item }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const loading = useSelector((state: RootState) => state.isLoading.isShowLoading);
   const dispatch: AppDispatch = useDispatch();
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
@@ -137,33 +137,16 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
   };
 
   return (
-    <Modal
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onDismiss}
-      hardwareAccelerated={true}
-      statusBarTranslucent={true}>
-      <Pressable
-        onPress={enableBackDropDismiss ? onDismiss : undefined}
-        style={StyleBottomSheetDetailOrder.backdrop}
-      />
+    <Modal animationType="slide" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
+      <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDetailOrder.backdrop} />
       <Animated.View
         style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
-        <View style={StyleBottomSheetDetailOrder.viewloading}>
-          {loading ? <ActivityIndicator /> : null}
-        </View>
-        <PanGestureHandler
-          onGestureEvent={onGestureEvent}
-          onEnded={onGestureEnd}>
+        <View style={StyleBottomSheetDetailOrder.viewloading}>{loading ? <ActivityIndicator /> : null} </View>
+        <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
           <View style={StyleBottomSheetDetailOrder.header}>
-            <Text style={StyleBottomSheetDetailOrder.texttitle}>
-              {item.name}
-            </Text>
+            <Text style={StyleBottomSheetDetailOrder.texttitle}>{item.name}</Text>
             <TouchableOpacity onPress={onDismiss}>
-              <Image
-                source={Icon.CANCEL}
-                style={StyleBottomSheetDetailOrder.iconcancel}
-              />
+              <Image source={Icon.CANCEL} style={StyleBottomSheetDetailOrder.iconcancel} />
             </TouchableOpacity>
           </View>
         </PanGestureHandler>
@@ -176,10 +159,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
               <View style={StyleBottomSheetDetailOrder.viewsize}>
                 <Text style={StyleBottomSheetDetailOrder.textsize}>Size</Text>
                 {item.size.map((sizeItem, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={StyleBottomSheetDetailOrder.viewsizearray}
-                    onPress={() => setSelectedSize(sizeItem)}>
+                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => setSelectedSize(sizeItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                       <CheckBox
                         checkedIcon="dot-circle-o"
@@ -191,12 +171,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                         onPress={() => setSelectedSize(sizeItem)}
                       />
                       <View style={StyleBottomSheetDetailOrder.viewsizename}>
-                        <Text style={StyleBottomSheetDetailOrder.textsizename}>
-                          {sizeItem.name}
-                        </Text>
-                        <Text style={StyleBottomSheetDetailOrder.textsizeprice}>
-                          {FormatPrice(parseInt(sizeItem.price))}
-                        </Text>
+                        <Text style={StyleBottomSheetDetailOrder.textsizename}>{sizeItem.name}</Text>
+                        <Text style={StyleBottomSheetDetailOrder.textsizeprice}>{FormatPrice(parseInt(sizeItem.price))}</Text>
                       </View>
                     </View>
                     {item.size.length - 1 === index ? null : (
@@ -207,17 +183,10 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                 <View style={StyleBottomSheetDetailOrder.lineitem} />
               </View>
               <View style={StyleBottomSheetDetailOrder.viewsize}>
-                <Text style={StyleBottomSheetDetailOrder.textsize}>
-                  Topping
-                </Text>
-                <Text style={StyleBottomSheetDetailOrder.textminisize}>
-                  Chọn tối đa 2 loại
-                </Text>
+                <Text style={StyleBottomSheetDetailOrder.textsize}>Topping</Text>
+                <Text style={StyleBottomSheetDetailOrder.textminisize}>Chọn tối đa 2 loại</Text>
                 {item.topping.map((toppingItem, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={StyleBottomSheetDetailOrder.viewsizearray}
-                    onPress={() => handleSelectTopping(toppingItem)}>
+                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => handleSelectTopping(toppingItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                       <CheckBox
                         checkedIcon="check-square"
@@ -233,12 +202,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                         }
                       />
                       <View style={StyleBottomSheetDetailOrder.viewsizename}>
-                        <Text style={StyleBottomSheetDetailOrder.textsizename}>
-                          {toppingItem.name}
-                        </Text>
-                        <Text style={StyleBottomSheetDetailOrder.textsizeprice}>
-                          {FormatPrice(parseInt(toppingItem.price))}
-                        </Text>
+                        <Text style={StyleBottomSheetDetailOrder.textsizename}>{toppingItem.name}</Text>
+                        <Text style={StyleBottomSheetDetailOrder.textsizeprice}>{FormatPrice(parseInt(toppingItem.price))}</Text>
                       </View>
                     </View>
                     {item.topping.length - 1 === index ? null : (
@@ -248,12 +213,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                 ))}
               </View>
               <View style={StyleBottomSheetDetailOrder.viewnote}>
-                <Text style={StyleBottomSheetDetailOrder.textnote}>
-                  Yêu cầu khác
-                </Text>
-                <Text style={StyleBottomSheetDetailOrder.textmininote}>
-                  Những tùy chọn khác
-                </Text>
+                <Text style={StyleBottomSheetDetailOrder.textnote}>Yêu cầu khác</Text>
+                <Text style={StyleBottomSheetDetailOrder.textmininote}>Những tùy chọn khác</Text>
                 <TextInput
                   style={StyleBottomSheetDetailOrder.inputnote}
                   placeholder="Thêm ghi chú"
@@ -269,33 +230,17 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         </View>
         <View style={StyleBottomSheetDetailOrder.viewbutton}>
           <View style={StyleBottomSheetDetailOrder.viewquantity}>
-            <TouchableOpacity
-              style={StyleBottomSheetDetailOrder.viewminus}
-              onPress={handleMinus(quantity, setQuantity)}>
-              <Image
-                source={Icon.MINUS}
-                style={StyleBottomSheetDetailOrder.iconminus}
-              />
+            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewminus} onPress={handleMinus(quantity, setQuantity)}>
+              <Image source={Icon.MINUS} style={StyleBottomSheetDetailOrder.iconminus} />
             </TouchableOpacity>
-            <Text style={StyleBottomSheetDetailOrder.textnumber}>
-              {quantity}
-            </Text>
-            <TouchableOpacity
-              style={StyleBottomSheetDetailOrder.viewplus}
-              onPress={handlePlus(quantity, setQuantity)}>
-              <Image
-                source={Icon.PLUS}
-                style={StyleBottomSheetDetailOrder.iconplus}
-              />
+            <Text style={StyleBottomSheetDetailOrder.textnumber}>{quantity}</Text>
+            <TouchableOpacity style={StyleBottomSheetDetailOrder.viewplus} onPress={handlePlus(quantity, setQuantity)}>
+              <Image source={Icon.PLUS} style={StyleBottomSheetDetailOrder.iconplus} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={StyleBottomSheetDetailOrder.button}
-            onPress={AddToCart}>
+          <TouchableOpacity style={StyleBottomSheetDetailOrder.button} onPress={AddToCart}>
             <Text style={StyleBottomSheetDetailOrder.textbutton}>Chọn</Text>
-            <Text style={StyleBottomSheetDetailOrder.textbutton}>
-              {FormatPrice(total(selectedSize, selectedTopping, quantity))}
-            </Text>
+            <Text style={StyleBottomSheetDetailOrder.textbutton}>{FormatPrice(total(selectedSize, selectedTopping, quantity))}</Text>
           </TouchableOpacity>
         </View>
       </Animated.View>

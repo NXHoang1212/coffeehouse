@@ -1,7 +1,5 @@
 export const findDistrictName = (districtCode: any, Location: any) => {
-  const district = Location.District.find(
-    (item: any) => item.code === districtCode,
-  );
+  const district = Location.District.find((item: any) => item.code === districtCode,);
   return district.name_with_type;
 };
 

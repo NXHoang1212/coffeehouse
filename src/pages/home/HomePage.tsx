@@ -18,7 +18,7 @@ import { DataWellcome } from '../../data/types/Enum.entity';
 const HomePage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
 
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
 
   const scroll = useRef<ScrollView | null>(null);
 

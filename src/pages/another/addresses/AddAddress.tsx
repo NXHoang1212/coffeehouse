@@ -22,7 +22,7 @@ const AddAddress: React.FC = () => {
   const { name } = route.params as RouteParams;
   const InforAddress = useSelector((state: RootState) => state.address);
   const [nameAddress, setNameAdddress] = useState<string>(name);
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.root.user);
   const id = user._id;
   const DescribeAddRess = InforAddress.DescribeAddRess;
   const [Other, SetOther] = useState<string>('');

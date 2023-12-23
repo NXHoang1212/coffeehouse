@@ -7,7 +7,6 @@ import StylePermissionProfit from '../../styles/code/StylePermissionProfit';
 import {useRoute} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 
-//định nghĩa dữ liệu url
 interface RouteParams {
   url: string;
 }

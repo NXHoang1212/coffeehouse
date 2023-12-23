@@ -43,15 +43,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: {
     isLoading: LoadingReducer,
-    IsLoggedIn: persistedReducer,
+    root: persistedReducer,
     product: ProductReducer,
     address: AddressReducer,
-    user: persistedReducer,
-    cart: persistedReducer,
-    methodamount: persistedReducer,
     discount: DiscountReducer,
-    ApplyPromodiscount: persistedReducer,
-    recommend: persistedReducer,
     [ApiAddress.reducerPath]: ApiAddress.reducer,
     [ApiCart.reducerPath]: ApiCart.reducer,
     [ApiFavourites.reducerPath]: ApiFavourites.reducer,

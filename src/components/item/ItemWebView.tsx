@@ -5,10 +5,7 @@ import { Icon } from '../../constant/Icon';
 import { TrunacteString } from '../../utils/TrunacteString';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {
-  EnumStackNaviagte,
-  ParamsStack,
-} from '../../navigation/home/StackHomeNavigate';
+import { EnumStackNaviagte, ParamsStack, } from '../../navigation/home/StackHomeNavigate';
 import { StackHomeNavigateNameEnum } from '../../data/types/TypeStack';
 
 interface ItemWebViewProps {

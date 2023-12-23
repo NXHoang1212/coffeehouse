@@ -13,7 +13,8 @@ import {FlashList} from '@huunguyen312/flash-list';
 const Favourites = () => {
   const goBack = useGoBack();
   ThemLightStatusBar('dark-content', '#fff');
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
+  console.log("🚀 ~ file: Favourites.tsx:17 ~ Favourites ~ id:", id)
   const {data, refetch} = useGetFavouritesQuery(id);
   const favourites = data?.data.filter((item: any) => item.ProductId !== null);
 

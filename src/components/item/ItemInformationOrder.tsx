@@ -36,9 +36,9 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
   const route = useRoute<any>();
   const address = route.params?.address;
   const dispatch = useDispatch<AppDispatch>();
-  const id = useSelector((state: RootState) => state.user.user._id);
-  const method = useSelector((state: RootState) => state.methodamount.methodamount,);
-  const promo = useSelector((state: RootState) => state.ApplyPromodiscount.applyPromodiscount.promodiscount,);
+  const id = useSelector((state: RootState) => state.root.user._id);
+  const method = useSelector((state: RootState) => state.root.methodamount,);
+  const promo = useSelector((state: RootState) => state.root.applyPromodiscount.promodiscount);
   const [openModal, setopenModal] = useState<boolean>(false);
   const [note, setNote] = useState<string>('');
   const [show, setshow] = useState<boolean>(false);
@@ -137,9 +137,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       if (response) {
         await updateStatus(id);
         Messenger('Đặt hàng thành công', 'success');
-        // dispatch(AddOrder({ _id: response.data.data._id }));
-        //truyền id vào navigation
-        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' , params: { id: response.data.data._id }});
+        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder', params: { id: response.data.data._id } });
       } else {
         Messenger('Đặt hàng thất bại', 'error');
       }

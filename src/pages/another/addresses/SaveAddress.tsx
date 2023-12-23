@@ -19,7 +19,7 @@ const Address: React.FC = () => {
   let isFocused = useIsFocused();
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data, refetch } = useGetAddressIdQuery(id);
   const Addressess = data?.data;
   const isLastItem = (currentIndex: number) => { return Addressess && currentIndex === Addressess.length - 1 };

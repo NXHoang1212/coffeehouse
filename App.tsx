@@ -13,6 +13,7 @@ import { ApplyPromoContextProvider } from './src/service/provider/ApplyPromoCont
 import messaging from '@react-native-firebase/messaging';
 import firebase from '@react-native-firebase/app';
 import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
+import { PermissionNoticationAndroid, PermissionNoticationIos } from './src/utils/PermissionNotication';
 
 const App = (): JSX.Element => {
 
@@ -20,7 +21,7 @@ const App = (): JSX.Element => {
     socket.on('connection', data => {
       console.log('Received data from server:', data);
     });
-  }), []; 
+  }), [];
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {

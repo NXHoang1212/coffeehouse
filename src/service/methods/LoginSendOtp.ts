@@ -3,6 +3,7 @@ import { Messenger } from '../../utils/ShowMessage';
 import { User } from '../../data/types/User.entity';
 import { ApiLogin, ApiUpdateUser } from '../api/IndexUser';
 import { setUser } from '../../redux/slices/AuthSlice';
+import { GeneralNotification } from '../../utils/GeneralNotification';
 
 let confirmation: FirebaseAuthTypes.ConfirmationResult | null = null;
 
@@ -32,6 +33,7 @@ export const confirmCode = async (code: string, dispatch: (arg0: { payload: User
         dispatch(setUser(user));
         login();
         navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
+        GeneralNotification();
       }
     } else {
       Messenger('Mã OTP không hợp lệ', 'danger')

@@ -27,7 +27,7 @@ interface Props {
 const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId, checkPromo }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const dispatch = useDispatch<AppDispatch>();
   const [open, setopen] = useState<boolean>(show);
   const [note, setNote] = useState<string>(ProductId?.NoteProduct);

@@ -15,7 +15,7 @@ import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 const SelectedAddressOrder: React.FC = () => {
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data, refetch } = useGetAddressIdQuery(id);
   const dataAddress = data?.data.filter(item => item !== null).map(item => ({
     ...item,

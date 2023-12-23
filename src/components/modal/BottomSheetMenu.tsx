@@ -1,21 +1,9 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  StatusBar,
-  Dimensions,
-} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import {Portal} from 'react-native-paper';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, StatusBar, Dimensions, } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { Portal } from 'react-native-paper';
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu';
-import {Icon, category} from '../../constant/Icon';
-import {
-  PanGestureHandler,
-  GestureHandlerRootView,
-} from 'react-native-gesture-handler';
+import { Icon, category } from '../../constant/Icon';
+import { PanGestureHandler, GestureHandlerRootView, } from 'react-native-gesture-handler';
 
 interface Props {
   show: boolean;
@@ -76,7 +64,7 @@ const BottomSheetMenu = ({
       <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
       <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
         <Animated.View
-          style={[StyleBottomSheetMenu.container, {bottom: bottomsheet}]}>
+          style={[StyleBottomSheetMenu.container, { bottom: bottomsheet }]}>
           <View style={StyleBottomSheetMenu.header}>
             <Text style={StyleBottomSheetMenu.textitle}>Danh mục</Text>
             <TouchableOpacity onPress={onDismiss}>

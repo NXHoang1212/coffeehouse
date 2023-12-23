@@ -27,7 +27,7 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const [open, setopen] = useState<boolean>(show);
   const discount = useSelector((state: RootState) => state.discount);
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data } = useGetCartQuery(id);
   const ProductId = data?.data ? data.data.filter(item => item !== null).map(item => ({
     ...item,

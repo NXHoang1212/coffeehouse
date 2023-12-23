@@ -16,8 +16,8 @@ const Order: React.FC = () => {
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: RootState) => state.user.user._id);
-  const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  const id = useSelector((state: RootState) => state.root.user._id);
+  const isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const { data: dataDiscount } = useGetDiscountQuery();
   const count = dataDiscount?.data.length;
   const { data, refetch } = useGetCartQuery(id);

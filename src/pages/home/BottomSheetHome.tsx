@@ -21,7 +21,7 @@ const BottomSheetHome = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
   const MemoziedItemWebView = useMemo(() => ItemWebView, []);
-  const recommend = useSelector((state: RootState) => state.recommend.recommend)
+  const recommend = useSelector((state: RootState) => state.root.recommend)
 
   return (
     <View style={StyleBottomSheetHome.container}>

@@ -1,14 +1,4 @@
-import {
-  View,
-  Text,
-  Animated,
-  Image,
-  TouchableOpacity,
-  Pressable,
-  Dimensions,
-  StatusBar,
-  Modal,
-} from 'react-native';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, Dimensions, StatusBar, Modal } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon, infores } from '../../constant/Icon';
 import { StyleOptionsCamera } from '../../styles/modal/StyleOptionsCamera';

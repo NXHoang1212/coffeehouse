@@ -27,9 +27,9 @@ interface PropsItemProduct {
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch<AppDispatch>();
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const { setProducts } = useContext(ProductContext);
-  const user = useSelector((state: RootState) => state.user.user._id);
+  const user = useSelector((state: RootState) => state.root.user._id);
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [show, setShow] = useState<boolean>(false);
   const [size, setSize] = useState<{ name: string; price: number }>({

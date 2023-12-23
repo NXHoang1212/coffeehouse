@@ -1,16 +1,9 @@
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {Icon} from '../../../constant/Icon';
-import {HEIGHT, WIDTH, FONTSIZE} from '../../../constant/Responsive';
-import {useGoBack} from '../../../utils/GoBack';
-import {COLOR} from '../../../constant/Color';
+import { Text, View, Image, StyleSheet, TouchableOpacity, TextInput, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Icon } from '../../../constant/Icon';
+import { HEIGHT, WIDTH, FONTSIZE } from '../../../constant/Responsive';
+import { useGoBack } from '../../../utils/GoBack';
+import { COLOR } from '../../../constant/Color';
 
 const SearchMapAddress: React.FC = () => {
   const goback = useGoBack();

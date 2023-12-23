@@ -31,3 +31,4 @@ export const PermissionNoticationAndroid = async () => {
         console.log('Notification permission denied');
     }
 }
+

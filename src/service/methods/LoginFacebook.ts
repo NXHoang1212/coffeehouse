@@ -2,6 +2,7 @@ import { LoginManager, AccessToken, Profile } from 'react-native-fbsdk-next';
 import { ApiLogin } from '../api/IndexUser';
 import { setUser } from '../../redux/slices/AuthSlice';
 import { User } from '../../data/types/User.entity';
+import { GeneralNotification } from '../../utils/GeneralNotification';
 
 export const loginFacebook = async (dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, navigation: { navigate: (arg0: string) => void }, login: () => void, mobile: string) => {
   try {
@@ -27,6 +28,7 @@ export const loginFacebook = async (dispatch: (arg0: { payload: User; type: 'use
         //@ts-ignore
         // navigation.navigate('AuthStackUser', { screen: 'InputPhone' });
         navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
+        GeneralNotification();
       }
     }
   } catch (error: any) {

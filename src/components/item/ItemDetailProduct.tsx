@@ -1,41 +1,33 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  TextInput,
-  TouchableNativeFeedback,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, TouchableNativeFeedback, } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import React, {useState, memo} from 'react';
-import {DetailProduct} from '../../data/types/Product.entity';
-import {Icon, TabCoffee} from '../../constant/Icon';
-import {FormatPrice} from '../../utils/FormatPrice';
-import {useGoBack} from '../../utils/GoBack';
+import React, { useState, memo } from 'react';
+import { DetailProduct } from '../../data/types/Product.entity';
+import { Icon, TabCoffee } from '../../constant/Icon';
+import { FormatPrice } from '../../utils/FormatPrice';
+import { useGoBack } from '../../utils/GoBack';
 import StyleItemDetailProduct from '../../styles/item/StyleItemDetailProduct';
-import {ToggleDescription} from '../../utils/ToggleDescription';
-import {handleMinus, handlePlus} from '../../utils/Total';
-import {CheckBox} from 'react-native-elements';
-import {useCreateEmptyCartMutation} from '../../service/api/IndexCart';
-import {useCreateFavouritesMutation} from '../../service/api/IndexFavourites';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store/Store';
-import {Messenger} from '../../utils/ShowMessage';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
-import {cartStatus} from '../../data/types/Enum.entity';
+import { ToggleDescription } from '../../utils/ToggleDescription';
+import { handleMinus, handlePlus } from '../../utils/Total';
+import { CheckBox } from 'react-native-elements';
+import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
+import { useCreateFavouritesMutation } from '../../service/api/IndexFavourites';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store/Store';
+import { Messenger } from '../../utils/ShowMessage';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { cartStatus } from '../../data/types/Enum.entity';
 interface PropsDetailItemProduct {
   item: DetailProduct;
 }
 
-const ItemDetailProduct = ({item}: PropsDetailItemProduct) => {
+const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
   const goBack = useGoBack();
   const navigation =
     useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let id = useSelector((state: RootState) => state.user.user._id);
-  let isLogin = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn);
+  let id = useSelector((state: RootState) => state.root.user._id);
+  let isLogin = useSelector((state: RootState) => state.root.isLoggedIn);
   const [createFavourites] = useCreateFavouritesMutation();
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [showFullDescription, setShowFullDescription] =
@@ -76,12 +68,12 @@ const ItemDetailProduct = ({item}: PropsDetailItemProduct) => {
         Messenger('Thêm vào yêu thích thành công', 'success');
       }
     } else {
-      navigation.navigate('AuthStackUser' as any, {screen: 'Login'});
+      navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
     }
   };
 
   const onLoad = () => {
-    FastImage.preload([{uri: item.image as string}]);
+    FastImage.preload([{ uri: item.image as string }]);
   };
   const AddToCart = () => {
     if (selectedSize === null) {
@@ -114,7 +106,7 @@ const ItemDetailProduct = ({item}: PropsDetailItemProduct) => {
   return (
     <View style={StyleItemDetailProduct.container}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}>
         <View style={StyleItemDetailProduct.viewbody}>
           <View style={StyleItemDetailProduct.viewimage}>
@@ -201,8 +193,8 @@ const ItemDetailProduct = ({item}: PropsDetailItemProduct) => {
             </View>
           ) : null}
           {item.topping.length > 0 &&
-          item.topping[0].name &&
-          item.topping[0].price ? (
+            item.topping[0].name &&
+            item.topping[0].price ? (
             <View style={StyleItemDetailProduct.viewsize}>
               <Text style={StyleItemDetailProduct.textsize}>Topping</Text>
               <Text style={StyleItemDetailProduct.textminisize}>

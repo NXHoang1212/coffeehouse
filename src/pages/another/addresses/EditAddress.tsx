@@ -6,29 +6,29 @@ import {
   TextInput,
   StatusBar,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {ThemLightStatusBar} from '../../../constant/ThemLight';
-import {Icon} from '../../../constant/Icon';
-import {useGoBack} from '../../../utils/GoBack';
+import React, { useEffect, useState } from 'react';
+import { ThemLightStatusBar } from '../../../constant/ThemLight';
+import { Icon } from '../../../constant/Icon';
+import { useGoBack } from '../../../utils/GoBack';
 import StyleEditAddress from '../../../styles/another/StyleEditAddress';
-import {useNavigation} from '@react-navigation/native';
-import {MonitorAddressInput} from '../../../utils/MonitorInput';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../../data/types/TypeStack';
-import {UpdateAddress, DeleteAddress} from '../../../service/api/IndexAddress';
-import {Messenger} from '../../../utils/ShowMessage';
+import { useNavigation } from '@react-navigation/native';
+import { MonitorAddressInput } from '../../../utils/MonitorInput';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
+import { UpdateAddress, DeleteAddress } from '../../../service/api/IndexAddress';
+import { Messenger } from '../../../utils/ShowMessage';
 import Modal from 'react-native-modal';
-import {useSelector} from 'react-redux';
-import {setAddress} from '../../../redux/slices/AddressSlice';
-import {useDispatch} from 'react-redux';
+import { useSelector } from 'react-redux';
+import { setAddress } from '../../../redux/slices/AddressSlice';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../../../redux/store/Store';
 
 const EditAddress: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const dispatch = useDispatch();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const InforAddress = useSelector((state: any) => state.address);
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const InforAddress = useSelector((state: RootState) => state.address);
   const id = InforAddress._id;
   const [name, setName] = useState<string>(InforAddress.name);
   const address = InforAddress.DescribeAddRess;
