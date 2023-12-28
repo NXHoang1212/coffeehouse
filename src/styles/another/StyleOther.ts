@@ -36,7 +36,7 @@ const styleOther = StyleSheet.create({
     fontWeight: '700',
   },
   iconnotify: {
-    width: WIDTH(3.9),
+    width: WIDTH(4.7),
     height: HEIGHT(2.5),
   },
   textheader: {

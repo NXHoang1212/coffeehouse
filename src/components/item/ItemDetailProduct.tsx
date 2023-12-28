@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, TouchableNativeFeedback, } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { View, Text, TouchableOpacity, ImageStyle, ScrollView, TextInput, StyleProp, Image } from 'react-native';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
 import React, { useState, memo } from 'react';
 import { DetailProduct } from '../../data/types/Product.entity';
 import { Icon, TabCoffee } from '../../constant/Icon';
@@ -24,14 +24,12 @@ interface PropsDetailItemProduct {
 
 const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
   const goBack = useGoBack();
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   let id = useSelector((state: RootState) => state.root.user._id);
-  let isLogin = useSelector((state: RootState) => state.root.isLoggedIn);
+  let isLogin = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const [createFavourites] = useCreateFavouritesMutation();
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
-  const [showFullDescription, setShowFullDescription] =
-    useState<boolean>(false);
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const toltalPrice = quantity * item.price;
   const [selectedTopping, setSelectedTopping] = useState<any>([]);
@@ -123,7 +121,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
             <TouchableOpacity
               style={StyleItemDetailProduct.viewback}
               onPress={() => navigation.goBack()}>
-              <Image
+              <FastImage
                 source={Icon.BORDERCANCEL}
                 style={StyleItemDetailProduct.iconback}
               />
@@ -136,7 +134,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                 {FormatPrice(item.price)}
               </Text>
               <TouchableOpacity onPress={AddToFavourites}>
-                <Image
+                <FastImage
                   source={TabCoffee.HEART}
                   style={StyleItemDetailProduct.iconheart}
                 />
@@ -147,12 +145,7 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
                 ? item.description
                 : item.description.slice(0, 130)}
               ...
-              <Text
-                onPress={ToggleDescription(
-                  setShowFullDescription,
-                  showFullDescription,
-                )}
-                style={StyleItemDetailProduct.textshowmore}>
+              <Text onPress={ToggleDescription(setShowFullDescription, showFullDescription)} style={StyleItemDetailProduct.textshowmore}>
                 {showFullDescription ? 'Rút gọn' : 'Xem thêm'}
               </Text>
             </Text>

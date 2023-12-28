@@ -11,6 +11,7 @@ import { useGoBack } from '../../utils/GoBack';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import FastImage from 'react-native-fast-image';
 
 const SelectedAddressOrder: React.FC = () => {
   const goback = useGoBack();
@@ -32,7 +33,7 @@ const SelectedAddressOrder: React.FC = () => {
     <View style={StyleSelectedAddressOrder.container}>
       <View style={StyleSelectedAddressOrder.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleSelectedAddressOrder.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleSelectedAddressOrder.iconBack} />
         </TouchableOpacity>
         <Text style={StyleSelectedAddressOrder.textheader}>Chọn địa chỉ giao hàng</Text>
       </View>

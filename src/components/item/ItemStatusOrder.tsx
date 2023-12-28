@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import RejectOrder from '../modal/RejectOrder';
 import ChangeMethod from '../modal/ChangeMethod';
+import FastImage from 'react-native-fast-image';
 
 interface PropsDetailItemProduct {
     item: GetOrder
@@ -25,7 +26,7 @@ const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
     return (
         <View style={StyleItemStatusOrder.container}>
             <View style={StyleItemStatusOrder.viewimage}>
-                <Image source={Icon.ORDERSTATUS} style={StyleItemStatusOrder.image} />
+                <FastImage source={Icon.ORDERSTATUS} style={StyleItemStatusOrder.image} />
             </View>
             <View style={StyleItemStatusOrder.body}>
                 <View style={StyleItemStatusOrder.viewpending}>

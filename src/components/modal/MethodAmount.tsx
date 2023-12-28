@@ -8,6 +8,7 @@ import { RootState } from '../../redux/store/Store';
 import { AddMethodAmount } from '../../redux/slices/MethodAmountSlice';
 import { DataMethod } from '../../data/listitem/DataMethod';
 import { CheckBox } from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
 
 interface Props {
   openModal: boolean;
@@ -67,7 +68,7 @@ const MethodAmount: React.FC<Props> = ({ openModal, onDismiss, enableBackDropDis
           <Text style={StyleMethodAmount.texttile}>{data[0].Title}</Text>
           <TouchableOpacity onPress={() => onDismiss()}>
             {data[0].iconTitle ? (
-              <Image source={data[0].iconTitle} style={StyleMethodAmount.iconcancel} />
+              <FastImage source={data[0].iconTitle} style={StyleMethodAmount.iconcancel} />
             ) : null}
           </TouchableOpacity>
         </View>
@@ -82,30 +83,29 @@ const MethodAmount: React.FC<Props> = ({ openModal, onDismiss, enableBackDropDis
               Cách thanh toán
             </Text>
             <View style={StyleMethodAmount.viewoptionpayment}>
-              {data.filter(item => item.name && item.icon)
-                .map((item: any, index: number) => {
-                  return (
-                    <View key={index}>
-                      <TouchableOpacity
-                        style={StyleMethodAmount.viewoption}
-                        onPress={() => handleAddMethodAmount(item)}>
-                        <CheckBox
-                          checkedIcon="dot-circle-o"
-                          uncheckedIcon="circle-o"
-                          checkedColor="#FF5F24"
-                          uncheckedColor="#c4c4c4"
-                          checked={methodAmount.name === item.name}
-                          onPress={() => handleAddMethodAmount(item)}
-                        />
-                        <View style={StyleMethodAmount.viewtextimage}>
-                          <Image source={item.icon ? item.icon : null} style={StyleMethodAmount.iconoption} />
-                          <Text style={StyleMethodAmount.textbodyoption}>{item.name}</Text>
-                        </View>
-                      </TouchableOpacity>
-                      <View style={StyleMethodAmount.line} />
-                    </View>
-                  );
-                })}
+              {data.filter(item => item.name && item.icon).map((item: any, index: number) => {
+                return (
+                  <View key={index}>
+                    <TouchableOpacity
+                      style={StyleMethodAmount.viewoption}
+                      onPress={() => handleAddMethodAmount(item)}>
+                      <CheckBox
+                        checkedIcon="dot-circle-o"
+                        uncheckedIcon="circle-o"
+                        checkedColor="#FF5F24"
+                        uncheckedColor="#c4c4c4"
+                        checked={methodAmount.name === item.name}
+                        onPress={() => handleAddMethodAmount(item)}
+                      />
+                      <View style={StyleMethodAmount.viewtextimage}>
+                        <FastImage source={item.icon ? item.icon : null} style={StyleMethodAmount.iconoption} />
+                        <Text style={StyleMethodAmount.textbodyoption}>{item.name}</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <View style={StyleMethodAmount.line} />
+                  </View>
+                );
+              })}
             </View>
           </View>
         </View>

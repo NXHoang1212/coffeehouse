@@ -16,6 +16,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { setUser } from '../../redux/slices/AuthSlice';
 import { RootState } from '../../redux/store/Store';
+import FastImage from 'react-native-fast-image';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -59,7 +60,7 @@ const CreateInformation = () => {
     <View style={StyleCreateInformation.container}>
       <View style={StyleCreateInformation.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleCreateInformation.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleCreateInformation.iconBack} />
         </TouchableOpacity>
         <Text style={StyleCreateInformation.textHeader}>Tạo tài khoản</Text>
       </View>

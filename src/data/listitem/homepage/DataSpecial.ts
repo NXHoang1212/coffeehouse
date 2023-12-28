@@ -1,4 +1,5 @@
-import {Explore} from '../../../constant/Icon';
+import { Explore } from '../../../constant/Icon';
+import IconDiscount50 from '../../../assets/Svg/IconDownMenu';
 
 export const DataSpecial = [
   {

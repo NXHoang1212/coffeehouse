@@ -14,13 +14,15 @@ import { RootState } from '../../redux/store/Store';
 import { FlashList } from '@huunguyen312/flash-list';
 import { DetailProduct } from '../../data/types/Product.entity';
 import { useGetFavouritesQuery } from '../../service/api/IndexFavourites';
+import FastImage from 'react-native-fast-image';
+import IconDownMenu from '../../assets/Svg/IconDownMenu';
 
 const CartOrder = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
 
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
-  
+
   const [show, setShow] = useState<boolean>(false);
 
   const [selectedCategory, setSelectedCategory] = useState<String>('');
@@ -77,11 +79,11 @@ const CartOrder = () => {
         <View style={StyleOrder.viewheader}>
           <TouchableOpacity style={StyleOrder.viewhandlemenu} onPress={() => setShow(true)}>
             <View style={StyleOrder.viewmenu}>
-              <Image source={category.MENU} style={StyleOrder.iconmenu} />
+              <FastImage source={category.MENU} style={StyleOrder.iconmenu} />
             </View>
             <View style={StyleOrder.viewmenutitle}>
               <Text style={StyleOrder.texttitle}>Danh Mục</Text>
-              <Image source={Icon.DOWN} style={StyleOrder.iconwdown} />
+              <IconDownMenu style={StyleOrder.iconwdown} />
             </View>
           </TouchableOpacity>
           <View style={StyleOrder.viewsearch}>
@@ -89,7 +91,7 @@ const CartOrder = () => {
               <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
             </TouchableOpacity>
             <TouchableOpacity style={StyleOrder.viewfavourites} onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : ('AuthStackUser' as any), { screen: 'Favourites' })}>
-              <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
+              <FastImage source={TabCoffee.HEART} style={StyleOrder.iconheart} />
               {favourites > 0 && (
                 <View style={StyleOrder.viewcount}>
                   <Text style={StyleOrder.textcount}>{favourites}</Text>
@@ -118,6 +120,7 @@ const CartOrder = () => {
                   itemVisiblePercentThreshold: 50,
                   minimumViewTime: 1000,
                 }}
+                
               />
             </View>
           </View>

@@ -16,6 +16,7 @@ import { Messenger } from '../../utils/ShowMessage';
 import { ProductContext } from '../../service/provider/ProductContext';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useDeleteFavouritesMutation } from '../../service/api/IndexFavourites';
+import IconDelete from '../../assets/Svg/IconDelete';
 
 interface PropsItemProduct {
   item: DetailProduct;
@@ -91,10 +92,7 @@ const ItemFavourites = ({ item }: PropsItemProduct) => {
       <TouchableOpacity
         style={StyleItemFavourites.viewiconswipedelete}
         onPress={() => RemoveFavourites(item._id)}>
-        <Image
-          source={Icon.DELETE}
-          style={StyleItemFavourites.iconswipedelete}
-        />
+        <IconDelete style={StyleItemFavourites.iconswipedelete} />
       </TouchableOpacity>
     );
   };

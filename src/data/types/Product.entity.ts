@@ -1,5 +1,5 @@
-import {Category} from './Category.entity';
-import {ImageSourcePropType} from 'react-native';
+import { Category } from './Banner&Category.entity';
+import { ImageSourcePropType } from 'react-native';
 
 export interface Products {
   _id: string;

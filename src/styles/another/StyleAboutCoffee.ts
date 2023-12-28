@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {FONTSIZE, HEIGHT, WIDTH} from '../../constant/Responsive';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { FONTSIZE, HEIGHT, WIDTH } from '../../constant/Responsive';
 
 const StyleAboutCoffee = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ const StyleAboutCoffee = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: WIDTH(100),
-    height: HEIGHT(6),
+    height: HEIGHT(4),
     backgroundColor: COLOR.WHITE,
     borderBottomWidth: 0.5,
   },
@@ -25,6 +25,12 @@ const StyleAboutCoffee = StyleSheet.create({
     color: COLOR.BLACK,
     fontWeight: 'bold',
     marginLeft: WIDTH(28),
+  },
+  viewLoading: {
+    bottom: WIDTH(193),
+  },
+  progress: {
+    marginTop: HEIGHT(30),
   },
 });
 

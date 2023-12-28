@@ -10,6 +10,7 @@ import { COLOR } from '../../constant/Color';
 import { TrunacteString } from '../../utils/TrunacteString';
 import { useGoBack } from '../../utils/GoBack';
 import * as Progress from 'react-native-progress';
+import IconShare from '../../assets/Svg/IconShare';
 
 const WebViewUrl = () => {
   const goBack = useGoBack();
@@ -35,10 +36,11 @@ const WebViewUrl = () => {
         </TouchableOpacity>
         <Text style={styles.titlename}>{TrunacteString(params.name, 31)}</Text>
         <TouchableOpacity onPress={onShare}>
-          <Image
+          {/* <Image
             source={Icon.SHARE}
             style={{ width: WIDTH(4), height: HEIGHT(2), marginLeft: WIDTH(7) }}
-          />
+          /> */}
+          <IconShare style={{ width: WIDTH(4), height: HEIGHT(2), marginLeft: WIDTH(7) }} />
         </TouchableOpacity>
       </View>
       <WebView

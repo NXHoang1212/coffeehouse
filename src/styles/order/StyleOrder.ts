@@ -63,6 +63,7 @@ const StyleOrder = StyleSheet.create({
   iconheart: {
     width: WIDTH(4.5),
     height: WIDTH(4.5),
+    borderColor: COLOR.GRAY
   },
   line: {
     width: WIDTH(100),

@@ -11,6 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { GetProducts } from '../../service/api/IndexProducts';
 import { fetchProducts } from '../../redux/slices/ProductSlices';
+import IconSlash from '../../assets/Svg/IconSlash';
 
 const SlashWellcome = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,10 +27,7 @@ const SlashWellcome = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={Logo.SLASHLOGO}
-        style={{ width: WIDTH(50), height: HEIGHT(25) }}
-      />
+      <IconSlash style={{ width: WIDTH(50), height: HEIGHT(25) }} />
     </View>
   );
 };

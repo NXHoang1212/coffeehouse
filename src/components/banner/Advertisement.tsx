@@ -1,19 +1,11 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  FlatList,
-  Animated,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
-import {Banner} from '../../constant/Icon';
-import {WIDTH, HEIGHT} from '../../constant/Responsive';
+import React, { useState, useRef, useEffect } from 'react';
+import { StyleSheet, View, Image, FlatList, Animated, TouchableOpacity, ImageSourcePropType, } from 'react-native';
+import { Banner } from '../../constant/Icon';
+import { WIDTH, HEIGHT } from '../../constant/Responsive';
 import Paginations from './Paginations';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {TabHomeNavigateEnum, TabHomeParamList} from '../../data/types/TypesTab';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { TabHomeNavigateEnum, TabHomeParamList } from '../../data/types/TypesTab';
 
 const data = [
   {
@@ -49,28 +41,22 @@ type Destination = {
 };
 
 const BannerSlider = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<TabHomeParamList>>();
+  const navigation = useNavigation<NativeStackNavigationProp<TabHomeParamList>>();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const scrollx = useRef(new Animated.Value(0)).current;
-  const viewconfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
-  const slideRef = useRef<FlatList<{
-    destination: string;
-    id: string;
-    image: ImageSourcePropType;
-  }> | null>(null);
+  const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const slideRef = useRef<FlatList<{ destination: string; id: string; image: ImageSourcePropType; }> | null>(null);
   const [autoplay, setAutoplay] = useState<boolean>(true);
-  const viewableItemsChange = useRef(({viewableItems}: any) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
+  const viewableItemsChange = useRef(({ viewableItems }: any) => { setCurrentIndex(viewableItems[0].index) }).current;
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (autoplay && slideRef.current) {
         const nextIndex = (currentIndex + 1) % data.length;
         if (currentIndex === data.length - 1 && nextIndex === 0) {
-          slideRef.current.scrollToIndex({index: 0});
+          slideRef.current.scrollToIndex({ index: 0 });
         } else {
-          slideRef.current.scrollToIndex({index: nextIndex});
+          slideRef.current.scrollToIndex({ index: nextIndex });
         }
         setCurrentIndex(nextIndex);
       }
@@ -80,8 +66,8 @@ const BannerSlider = () => {
     };
   }, [autoplay, currentIndex]);
   const handleScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {x: scrollx}}}],
-    {useNativeDriver: false},
+    [{ nativeEvent: { contentOffset: { x: scrollx } } }],
+    { useNativeDriver: false },
   );
   const handleImagePress = (item: Destination) => {
     const destination = item.destination;
@@ -93,10 +79,8 @@ const BannerSlider = () => {
       <FlatList
         data={data}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.viewimage}
-            onPress={() => handleImagePress(item)}>
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.viewimage} onPress={() => handleImagePress(item)}>
             <Image source={item.image} style={styles.image} />
           </TouchableOpacity>
         )}

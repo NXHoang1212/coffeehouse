@@ -56,7 +56,7 @@ const StyleItemProduct = StyleSheet.create({
     right: WIDTH(1),
     top: HEIGHT(3),
   },
-  iconplus: {
+  iconplus: { 
     tintColor: COLOR.WHITE,
   },
   viewbottomsheet: {

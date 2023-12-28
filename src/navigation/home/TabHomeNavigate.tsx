@@ -54,10 +54,7 @@ const TabHomeNavigate = () => {
   });
   const datacart = data?.data.filter(item => item !== null).map(item => ({
     ...item,
-    ProductId:
-      item.ProductId.filter(
-        item => item.StatusProduct === 'Đã thêm vào giỏ hàng',
-      ) || [],
+    ProductId: item.ProductId.filter(item => item.StatusProduct === 'Đã thêm vào giỏ hàng') || [],
     _id: item ? item._id || '' : '',
   }));
   const [count, setCount] = useState<string | undefined>(undefined);

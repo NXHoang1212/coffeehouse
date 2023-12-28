@@ -16,6 +16,13 @@ import { ResetLoggedIn } from '../../redux/slices/IsLoggedIn';
 import { setShowLoading } from '../../redux/slices/IsLoadingSlice';
 import { useGetDiscountQuery } from '../../service/api/IndexDiscount';
 import ActivityIndicator from '../../components/activity/ActivityIndicator';
+import { COLOR } from '../../constant/Color';
+import IconPromo from '../../assets/Svg/IconPromo';
+import IconNotify from '../../assets/Svg/IconNotify';
+import FastImage from 'react-native-fast-image';
+import IconLogin from '../../assets/Svg/IconLogin';
+import IconStar from '../../assets/Svg/IconStar';
+import IconComments from '../../assets/Svg/IconComments';
 
 
 const Other = () => {
@@ -62,13 +69,13 @@ const Other = () => {
         <Text style={styleOther.textheader}>Khác</Text>
         <TouchableOpacity style={styleOther.viewpromo}
           onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' })}>
-          <Image style={styleOther.iconpromo} source={Icon.PROMO} />
+          <IconPromo style={styleOther.iconpromo} fill={COLOR.ORANGEBOLD} />
           {isLoggedIn ? (<Text style={styleOther.textpromo}>{count}</Text>) : null}
         </TouchableOpacity>
         <TouchableOpacity
           style={styleOther.viewnotify}
           onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'Notifee' })}>
-          <Image style={styleOther.iconnotify} source={Icon.NOTIFY} />
+          <IconNotify style={styleOther.iconnotify} />
         </TouchableOpacity>
       </View>
       <View style={styleOther.body}>
@@ -86,8 +93,7 @@ const Other = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styleOther.utilities}
-              onPress={() =>
-                navigationDad.navigate('StackHomeNavigate' as any, { screen: 'Rules', params: { link } })}>
+              onPress={() => navigationDad.navigate('StackHomeNavigate' as any, { screen: 'Rules', params: { link } })}>
               <Image style={styleOther.iconrules} source={infores.RULES} />
               <Text style={styleOther.textutilities}>Điều Khoản</Text>
             </TouchableOpacity>
@@ -101,22 +107,17 @@ const Other = () => {
         </View>
         <Text style={styleOther.textother}>Hỗ trợ</Text>
         <View style={styleOther.viewsupport}>
-          <TouchableOpacity
-            style={styleOther.support}
+          <TouchableOpacity style={styleOther.support}
             onPress={() => navigationDad.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'FeedBackOrder' })}>
-            <Image style={styleOther.iconsupport} source={infores.STAR} />
+            <IconStar style={styleOther.iconsupport} fill={COLOR.BLACK} />
             <Text style={styleOther.textsupport}>Đánh giá đơn hàng</Text>
             <Image style={styleOther.iconright} source={Icon.RIGHT} />
           </TouchableOpacity>
           <View style={styleOther.line} />
           <TouchableOpacity
             style={styleOther.support}
-            onPress={() =>
-              navigationDad.navigate('StackHomeNavigate' as any, {
-                screen: 'ContactFeedBack',
-              })
-            }>
-            <Image style={styleOther.iconsupport} source={infores.STAR} />
+            onPress={() => navigationDad.navigate('StackHomeNavigate' as any, { screen: 'ContactFeedBack' })}>
+            <IconComments style={styleOther.iconsupport} fill={COLOR.BLACK} />
             <Text style={styleOther.textsupport}>Liên hệ và góp ý</Text>
             <Image style={styleOther.iconright} source={Icon.RIGHT} />
           </TouchableOpacity>
@@ -157,7 +158,7 @@ const Other = () => {
             <TouchableOpacity
               style={styleOther.account}
               onPress={() => { navigation.navigate(StackHomeNavigateNameEnum.AuthStackUser as any, { screen: 'Login' }); }}>
-              <Image style={styleOther.iconlogout} source={infores.LOGIN} />
+              <IconLogin style={styleOther.iconlogout} />
               <Text style={styleOther.textlogout}>Đăng nhập</Text>
               <Image style={styleOther.iconright} source={Icon.RIGHT} />
             </TouchableOpacity>
@@ -171,7 +172,7 @@ const Other = () => {
           onOKPress={onOKPress}
         />
       </View>
-    </View>
+    </View >
   );
 };
 

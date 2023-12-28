@@ -11,7 +11,7 @@ const StylePermissionProfit = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: WIDTH(100),
-    height: HEIGHT(6),
+    height: HEIGHT(4),
     backgroundColor: COLOR.WHITE,
     borderBottomWidth: 0.5,
   },
@@ -25,6 +25,10 @@ const StylePermissionProfit = StyleSheet.create({
     color: COLOR.BLACK,
     fontWeight: 'bold',
     marginLeft: WIDTH(24),
+  },
+  viewLoading: {
+  },
+  progress: {
   },
 });
 

@@ -1,5 +1,5 @@
-import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image, Pressable, Text, TouchableOpacity, View, StyleProp, ImageStyle } from 'react-native';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
 import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct';
 import { DetailProduct, Products } from '../../data/types/Product.entity';
@@ -24,7 +24,7 @@ interface PropsItemProduct {
   isFirstItem: boolean;
 }
 
-const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
+const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch<AppDispatch>();
   let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
@@ -135,6 +135,6 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
       </View>
     </View>
   );
-};
+});
 
-export default memo(ItemProduct);
+export default ItemProduct;

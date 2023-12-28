@@ -14,6 +14,7 @@ import { FlashList } from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
 import { RootState } from '../../../redux/store/Store';
 import { useIsFocused } from '@react-navigation/native';
+import IconAddressHome from '../../../assets/Svg/IconAddressHome';
 
 const Address: React.FC = () => {
   let isFocused = useIsFocused();
@@ -27,6 +28,7 @@ const Address: React.FC = () => {
   useEffect(() => {
     refetch();
   }, [isFocused]);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={StyleSaveAddress.container}>
@@ -50,7 +52,7 @@ const Address: React.FC = () => {
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
             onPress={() => navigation.navigate('AddAddress' as any, { name: 'Công ty' })}>
-            <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
+            <IconAddressHome style={StyleSaveAddress.iconAddress} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />

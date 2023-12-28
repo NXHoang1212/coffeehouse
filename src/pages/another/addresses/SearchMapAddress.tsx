@@ -22,7 +22,7 @@ const SearchMapAddress: React.FC = () => {
         </View>
       </View>
       <TouchableOpacity style={styles.viewmap} onPress={goback}>
-        <Image source={Icon.MAPS} style={styles.iconmap} />
+        {/* <Image source={Icon.MAPS} style={styles.iconmap} /> */}
         <Text style={styles.textmap}>Chọn trên bản đồ</Text>
         <Image source={Icon.RIGHT} style={styles.iconright} />
       </TouchableOpacity>

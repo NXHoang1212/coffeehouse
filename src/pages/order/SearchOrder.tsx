@@ -9,6 +9,7 @@ import SeacrchItem from '../../components/item/SearchItem';
 import { RootState } from '../../redux/store/Store';
 import { ThemLightStatusBar } from '../../constant/ThemLight';
 import { useNavigation } from '@react-navigation/native';
+import FastImage from 'react-native-fast-image';
 
 const SearchOrder = () => {
   const goBack = useGoBack();

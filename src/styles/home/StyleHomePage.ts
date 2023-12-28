@@ -45,7 +45,7 @@ const StyleHomePage = StyleSheet.create({
     justifyContent: 'center',
     elevation: 5,
     flexDirection: 'row',
-    gap: WIDTH(2.2),
+    gap: WIDTH(1),
   },
   viewbell: {
     width: WIDTH(8.8),
@@ -57,9 +57,8 @@ const StyleHomePage = StyleSheet.create({
     elevation: 5,
   },
   iconpromo: {
-    width: WIDTH(5.3),
+    width: WIDTH(6),
     height: HEIGHT(2.8),
-    tintColor: COLOR.ORANGEBOLD,
   },
   textpromo: {
     fontSize: FONTSIZE(1.8),
@@ -67,7 +66,7 @@ const StyleHomePage = StyleSheet.create({
     fontWeight: 'bold',
   },
   iconbell: {
-    width: WIDTH(3.5),
+    width: WIDTH(9.8),
     height: HEIGHT(2.3),
   },
   viewbody: {
@@ -76,7 +75,6 @@ const StyleHomePage = StyleSheet.create({
   viewbodycard: {
     width: WIDTH(92),
     height: HEIGHT(22),
-    backgroundColor: COLOR.ORANGE,
     alignSelf: 'center',
     borderRadius: WIDTH(5),
     top: HEIGHT(2),

@@ -12,6 +12,7 @@
   import { Picker } from '@react-native-picker/picker';
   import Location from '../../../data/json/HCM.json';
   import { findDistrictName, findWardName } from '../../../utils/IndexAddress';
+import FastImage from 'react-native-fast-image';
 
   const MapsAddress: React.FC = () => {
     const goBack = useGoBack();
@@ -109,7 +110,7 @@
           <TouchableOpacity
             style={StyleMapAddress.viewlocation}
             onPress={handleReturnToCurrentLocation}>
-            <Image source={Icon.SEND} style={StyleMapAddress.iconmap} />
+            <FastImage source={Icon.SEND} style={StyleMapAddress.iconmap} />
           </TouchableOpacity>
           <MapView
             provider={PROVIDER_GOOGLE}
@@ -158,7 +159,7 @@
                     style={StyleMapAddress.viewmap}
                     onPress={() => handleSelectAddress(item)}>
                     <View style={StyleMapAddress.viewiconmap}>
-                      <Image
+                      <FastImage
                         source={Icon.LOCATION}
                         style={StyleMapAddress.iconmap}
                       />

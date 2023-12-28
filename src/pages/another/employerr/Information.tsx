@@ -19,6 +19,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store/Store';
 import { setUser } from '../../../redux/slices/AuthSlice';
 import OptionsCamera from '../../../components/modal/OptionsCamera';
+import IconDelete from '../../../assets/Svg/IconDelete';
+import IconDownMenu from '../../../assets/Svg/IconDownMenu';
 
 const Information = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -83,7 +85,6 @@ const Information = () => {
       birthday: birthday,
     };
     const res = await ApiUpdateUser(id, data);
-    //nếu có avatar mới thì upload avatar
     if (avatar !== user.avatar) {
       const resUploadAvatar = await UploadAvatar(id, avatar);
       if (resUploadAvatar) {
@@ -219,7 +220,7 @@ const Information = () => {
               <Text style={StyleInformation.textinput}>
                 {gender || 'Chọn giới tính'}
               </Text>
-              <Image source={Icon.DOWN} style={StyleInformation.icondown} />
+              <IconDownMenu style={StyleInformation.icondown} />
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -233,7 +234,7 @@ const Information = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={StyleInformation.viewdelete}>
-            <Image source={Icon.DELETE} style={StyleInformation.icondelete} />
+            <IconDelete style={StyleInformation.icondelete} />
             <Text style={StyleInformation.textdelete}>Xóa tài khoản</Text>
           </TouchableOpacity>
           <ModalOptionGender

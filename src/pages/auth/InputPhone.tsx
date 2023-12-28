@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam, } from '../../data/types/TypeStack';
 import { signInWithPhoneNumber } from '../../service/methods/LoginSendOtp';
+import FastImage from 'react-native-fast-image';
 
 const InputPhone = () => {
   const goBack = useGoBack();
@@ -21,7 +22,7 @@ const InputPhone = () => {
       <View style={StyleInputPhone.container}>
         <View style={StyleInputPhone.viewheader}>
           <TouchableOpacity onPress={goBack}>
-            <Image source={Icon.BACK} style={StyleInputPhone.iconback} />
+            <FastImage source={Icon.BACK} style={StyleInputPhone.iconback} />
           </TouchableOpacity>
         </View>
         <View style={StyleInputPhone.viewtext}>
@@ -49,7 +50,7 @@ const InputPhone = () => {
           />
           {phone.length > 0 && (
             <TouchableOpacity onPress={() => { setPhone(''); }}>
-              <Image source={Icon.BORDERCANCEL} style={StyleInputPhone.iconcancel} />
+              <FastImage source={Icon.BORDERCANCEL} style={StyleInputPhone.iconcancel} />
             </TouchableOpacity>
           )}
         </View>

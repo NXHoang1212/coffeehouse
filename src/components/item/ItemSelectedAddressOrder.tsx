@@ -6,6 +6,7 @@ import { StyleItemSelectedAddress } from '../../styles/item/StyleItemSelectedAdd
 import { CheckBox } from 'react-native-elements';
 import { Icon } from '../../constant/Icon';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import FastImage from 'react-native-fast-image';
 
 interface Props {
   address: any;
@@ -31,7 +32,7 @@ const ItemSelectedAddressOrder: React.FC<Props> = ({ address, showDoneButton }) 
         </View>
         <View style={StyleItemSelectedAddress.viewheader}>
           <View>
-            <Image source={Icon.DELIVERYADDRESS} style={StyleItemSelectedAddress.imageheader} />
+            <FastImage source={Icon.DELIVERYADDRESS} style={StyleItemSelectedAddress.imageheader} />
           </View>
           <View style={StyleItemSelectedAddress.viewtextheader}>
             <Text style={StyleItemSelectedAddress.textheader}>{address.name}

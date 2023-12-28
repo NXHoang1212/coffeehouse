@@ -23,6 +23,7 @@ const DetailOrder: React.FC = () => {
           itemVisiblePercentThreshold: 50,
           minimumViewTime: 1000,
         }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import ItemRecomend from '../../components/item/ItemRecomend';
 
+
 const BottomSheetHome = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { activeTab, handleActiveTab } = ActiveTab("Tab 1");

@@ -7,45 +7,30 @@ export const Banner = {
   TRADEBEAN: require('../assets/images/banner5.png'),
 };
 
-/* ĐĂNG NHẬP */
+/* ĐĂNG NHẬP */ 
 export const Logo = {
-  DATINGCOFFEE: require('../assets/images/datingcoffee.png'),
   FACEBOOK: require('../assets/images/facebook.png'),
   GOOGLE: require('../assets/images/google.png'),
   APPLE: require('../assets/images/lgoapple.jpg'),
   TEXTLOGO: require('../assets/images/Logo.png'),
-  SLASHLOGO: require('../assets/images/SlashCoffee.png'),
-  HANDSTOCK: require('../assets/images/IconHandStock.jpg'),
   LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.jpg'),
   VIETNAM: require('../assets/images/iconvietnam.png'),
 };
 
 /*DÙNG CHUNG */
 export const Icon = {
-  ADDRESS: require('../assets/images/iconaddresshome.png'),
   BACK: require('../assets/images/IconBack.png'),
-  DELETE: require('../assets/images/IconDelete.png'),
-  CHECK: require('../assets/images/Icondoublecheck.png'),
   DOWNDOUBLE: require('../assets/images/IconDown.png'),
-  DOWN: require('../assets/images/icondownmenu.png'),
   MINUS: require('../assets/images/iconminus.png'),
   PLUS: require('../assets/images/iconPlus.png'),
-  NOTIFY: require('../assets/images/IconNotify.png'),
-  PROMO: require('../assets/images/IconPromo.png'),
   RIGHT: require('../assets/images/IconRight.png'),
   SCAN: require('../assets/images/IconScan.png'),
   SEARCH: require('../assets/images/iconsearch.png'),
   POINTS: require('../assets/images/IconPoints.png'),
-  TIME: require('../assets/images/iconcalendar.png'),
-  SHARE: require('../assets/images/iconshare.png'),
   CANCEL: require('../assets/images/iconx.png'),
-  FEEDBACK: require('../assets/images/iconfeddbackorder.png'),
   AVATAR: require('../assets/images/avatar.png'),
-  ABOUT: require('../assets/images/iconabouut.png'),
-  LINK: require('../assets/images/iconlink.png'),
   HARAVAN: require('../assets/images/iconharavan.png'),
   BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
-  MAPS: require('../assets/images/Iconmap.png'),
   LOCATION: require('../assets/images/IconLocation.png'),
   SEND: require('../assets/images/iconsend.png'),
   DELIVERYADDRESS: require('../assets/images/icondeliveryaddress.png'),
@@ -68,16 +53,13 @@ export const infores = {
   HISTORY: require('../assets/images/iconhistory.png'),
   RULES: require('../assets/images/IconRules.png'),
   MUSIC: require('../assets/images/IconMusic.png'),
-  STAR: require('../assets/images/IconStar.png'),
   ACCOUNT: require('../assets/images/iconaccount.png'),
   ADDRESS: require('../assets/images/IconAddress.png'),
-  CONTACT: require('../assets/images/iconContact.png'),
   SERCURITY: require('../assets/images/IconSecurity.png'),
   SETTING: require('../assets/images/IconSetting.png'),
   DATEPICKER: require('../assets/images/iconPicker.png'),
   EDIT: require('../assets/images/IconEdit.png'),
   LOGOUT: require('../assets/images/IconLogout.png'),
-  LOGIN: require('../assets/images/iconlogin.png'),
   CAMERA: require('../assets/images/IconCamera.png'),
   GALLERY: require('../assets/images/iconGallarey.png'),
   PICTURE: require('../assets/images/iconpicturecamera.png'),
@@ -87,9 +69,7 @@ export const infores = {
 export const contact = {
   PHONE: require('../assets/images/IconPhone.png'),
   EMAIL: require('../assets/images/IconEmail.png'),
-  WEB: require('../assets/images/IconWeb.png'),
   FACEBOOK: require('../assets/images/IconFacebook.png'),
-  FEEDBACK: require('../assets/images/iconfeedback.png'),
 };
 
 export const order = {
@@ -110,9 +90,7 @@ export const TabCoffee = {
 
 /*TÍCH ĐIỂM BEAN */
 export const Bean = {
-  KING: require('../assets/images/IconKing.png'),
   BEAN: require('../assets/images/IconChangeBean.png'),
-  BEANHISTORY: require('../assets/images/IconhistoryBean.png'),
   POINTS: require('../assets/images/IconPoints.png'),
 };
 
@@ -134,11 +112,6 @@ export const category = {
   MENU: require('../assets/images/iconMenu.png'),
 };
 
-/* ĐÁNH GIÁ */
-export const Evaluate = {
-  STAR: require('../assets/images/IconStar.png'),
-  ORDERFEEDBACK: require('../assets/images/IconcupcoffeeFeedback.png'),
-};
 
 /* KHÁM PHÁ THÊM */
 export const Explore = {

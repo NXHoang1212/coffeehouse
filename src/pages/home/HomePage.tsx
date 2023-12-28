@@ -1,7 +1,7 @@
 import { Text, View, Image, TouchableOpacity, StatusBar, ScrollView, RefreshControl, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
 import StyleHomePage from '../../styles/home/StyleHomePage';
-import { Logo, category, Icon } from '../../constant/Icon';
+import { Icon } from '../../constant/Icon';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import BottomSheetHome from './BottomSheetHome';
@@ -14,6 +14,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { GetCurrentHour } from '../../utils/Moment';
 import { DataWellcome } from '../../data/types/Enum.entity';
+import IconNotify from '../../assets/Svg/IconNotify';
+import IconPromo from '../../assets/Svg/IconPromo';
+import IconDatingCoffee from '../../assets/Svg/IconDatingCoffee';
+import { COLOR } from '../../constant/Color';
 
 const HomePage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
@@ -47,7 +51,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-   const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe = navigation.addListener('focus', () => {
       StatusBar.setBarStyle('dark-content');
       StatusBar.setBackgroundColor(backgroundColor);
     });
@@ -67,10 +71,9 @@ const HomePage = () => {
           )}
         </View>
         <View style={StyleHomePage.headerIcon}>
-          <TouchableOpacity
-            style={StyleHomePage.viewpromo}
+          <TouchableOpacity style={StyleHomePage.viewpromo}
             onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'DiscountUser' } as any)}>
-            <Image style={StyleHomePage.iconpromo} source={Icon.PROMO} />
+            <IconPromo style={StyleHomePage.iconpromo} fill={COLOR.ORANGEBOLD} />
             {isLoggedIn ? (
               <Text style={StyleHomePage.textpromo}>{count}</Text>
             ) : null}
@@ -78,7 +81,7 @@ const HomePage = () => {
           <TouchableOpacity
             style={StyleHomePage.viewbell}
             onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : 'AuthStackUser', { screen: 'Notifee' } as any)}>
-            <FastImage style={StyleHomePage.iconbell} source={Icon.NOTIFY} />
+            <IconNotify style={StyleHomePage.iconbell} />
           </TouchableOpacity>
         </View>
       </View>
@@ -90,9 +93,7 @@ const HomePage = () => {
           <RefreshControl refreshing={false} onRefresh={() => { }} />
         }>
         <View style={StyleHomePage.viewbody}>
-          <LinearGradient
-            colors={['#FA8C16', '#fd7e14']}
-            style={StyleHomePage.viewbodycard}>
+          <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
             <View style={StyleHomePage.viewtextcard}>
               <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
               <Text style={StyleHomePage.textcard}>
@@ -106,7 +107,7 @@ const HomePage = () => {
             </View>
           </LinearGradient>
           <View style={StyleHomePage.viewimagecard}>
-            <Image style={StyleHomePage.imagecard} source={Logo.DATINGCOFFEE} />
+            <IconDatingCoffee style={StyleHomePage.imagecard} />
           </View>
         </View>
         <BottomSheetHome />

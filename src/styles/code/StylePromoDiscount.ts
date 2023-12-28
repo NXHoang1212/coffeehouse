@@ -65,9 +65,8 @@ const StylePromoDiscount = StyleSheet.create({
     zIndex: 1,
   },
   iconvoucher: {
-    width: WIDTH(5),
+    width: WIDTH(6),
     height: WIDTH(5),
-    tintColor: COLOR.ORANGE,
   },
   textvoucher: {
     fontSize: FONTSIZE(1.9),

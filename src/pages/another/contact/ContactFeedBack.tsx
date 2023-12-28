@@ -5,6 +5,9 @@ import StyleContacFeedBack from '../../../styles/another/StyleContactFeedback';
 import { useGoBack } from '../../../utils/GoBack';
 import { Icon, contact, infores } from '../../../constant/Icon';
 import { Image } from 'react-native-animatable';
+import FastImage from 'react-native-fast-image';
+import IconSuggest from '../../../assets/Svg/IconSuggest';
+import IconWeb from '../../../assets/Svg/IconWeb';
 
 const ContactFeedBack = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -13,7 +16,7 @@ const ContactFeedBack = () => {
     <View style={StyleContacFeedBack.container}>
       <View style={StyleContacFeedBack.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleContacFeedBack.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleContacFeedBack.iconBack} />
         </TouchableOpacity>
         <Text style={StyleContacFeedBack.textHeader}>Liên hệ và góp ý</Text>
       </View>
@@ -37,7 +40,7 @@ const ContactFeedBack = () => {
             style={StyleContacFeedBack.handlecontact}
             onPress={() => Linking.openURL('mailto:hi@thecoffeehouse.vn')}>
             <Image
-              source={contact.PHONE}
+              source={contact.EMAIL}
               style={StyleContacFeedBack.iconContact}
             />
             <View style={StyleContacFeedBack.viewtextcontact}>
@@ -52,7 +55,7 @@ const ContactFeedBack = () => {
           <TouchableOpacity
             style={StyleContacFeedBack.handlecontact}
             onPress={() => Linking.openURL('https://www.thecoffeehouse.com/')}>
-            <Image source={contact.WEB} style={StyleContacFeedBack.iconweb} />
+            <IconWeb style={StyleContacFeedBack.iconweb} />
             <View style={StyleContacFeedBack.viewtextcontact}>
               <Text style={StyleContacFeedBack.textContact}>Website</Text>
               <Text style={StyleContacFeedBack.textContact}>
@@ -83,10 +86,7 @@ const ContactFeedBack = () => {
           <TouchableOpacity
             style={StyleContacFeedBack.handlecontact}
             onPress={() => Linking.openURL('tel:18006936')}>
-            <Image
-              source={contact.FEEDBACK}
-              style={StyleContacFeedBack.iconweb}
-            />
+            <IconSuggest style={StyleContacFeedBack.iconweb} />
             <View style={StyleContacFeedBack.viewtextcontact}>
               <Text style={StyleContacFeedBack.textContact}>
                 Gửi góp ý về ứng dụng

@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { EnumStackNaviagte, ParamsStack, } from '../../navigation/home/StackHomeNavigate';
 import { StackHomeNavigateNameEnum } from '../../data/types/TypeStack';
+import IconDiscount50 from '../../assets/Svg/IconDownMenu';
+import IconCalendar from '../../assets/Svg/IconCalendar';
 
 interface ItemWebViewProps {
   item: {
@@ -39,7 +41,7 @@ const ItemWebView = ({ item }: ItemWebViewProps) => {
             {TrunacteString(item.name, 39)}
           </Text>
           <View style={StyleItemWebView.viewtime}>
-            <Image source={Icon.TIME} style={StyleItemWebView.icontime} />
+            <IconCalendar style={StyleItemWebView.icontime} />
             <Text style={StyleItemWebView.time}>{item.time}</Text>
           </View>
         </View>

@@ -60,7 +60,7 @@ export const StyleMapAddress = StyleSheet.create({
     gap: WIDTH(2),
   },
   iconmap: {
-    width: WIDTH(6),
+    width: WIDTH(5),
     height: HEIGHT(2.5),
   },
   viewtextmap: {
@@ -130,7 +130,7 @@ export const StyleMapAddress = StyleSheet.create({
   viewbutton: {
     width: WIDTH(90),
     height: HEIGHT(6),
-    backgroundColor: COLOR.GRAYLINE,
+    backgroundColor: COLOR.ORANGE,
     borderRadius: WIDTH(4),
     alignItems: 'center',
     justifyContent: 'center',

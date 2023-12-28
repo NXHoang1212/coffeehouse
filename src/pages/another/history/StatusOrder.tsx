@@ -7,6 +7,7 @@ import { useGetOrderQuery } from '../../../service/api/IndexOrder'
 import ItemStatusOrder from '../../../components/item/ItemStatusOrder'
 import { OrderResponse } from '../../../data/types/Order.entity'
 import { useRoute } from '@react-navigation/native'
+import FastImage from 'react-native-fast-image'
 
 const StatusOrder = () => {
     const route = useRoute() 
@@ -20,7 +21,7 @@ const StatusOrder = () => {
             <View style={StyleStatusOrder.viewheader}>
                 <Text style={StyleStatusOrder.textHeader}>Trạng thái đơn hàng</Text>
                 <TouchableOpacity onPress={() => goback()}>
-                    <Image source={Icon.CANCEL} style={StyleStatusOrder.iconBack} />
+                    <FastImage source={Icon.CANCEL} style={StyleStatusOrder.iconBack} />
                 </TouchableOpacity>
             </View>
             <View style={StyleStatusOrder.viewbody}>

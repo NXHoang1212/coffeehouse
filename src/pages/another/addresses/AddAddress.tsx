@@ -10,6 +10,7 @@ import { Messenger } from '../../../utils/ShowMessage';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../../data/types/TypeStack';
 import { RootState } from '../../../redux/store/Store';
+import FastImage from 'react-native-fast-image';
 
 interface RouteParams {
   name: string;
@@ -48,10 +49,7 @@ const AddAddress: React.FC = () => {
         goback();
       }
     } catch (error: any) {
-      console.log(
-        '🚀 ~ file: AddAddress.tsx:52 ~ handeleCreateAddress ~ error:',
-        error,
-      );
+      console.log('🚀 ~ file: AddAddress.tsx:52 ~ handeleCreateAddress ~ error:', error,);
     }
   };
 
@@ -59,7 +57,7 @@ const AddAddress: React.FC = () => {
     <View style={StyleAddAddress.container}>
       <View style={StyleAddAddress.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleAddAddress.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleAddAddress.iconBack} />
         </TouchableOpacity>
         <Text style={StyleAddAddress.textHeader}>Thêm địa chỉ mới</Text>
       </View>

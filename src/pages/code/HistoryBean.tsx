@@ -1,10 +1,10 @@
-
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import {useGoBack} from '../../utils/GoBack';
-import {ThemLightStatusBar} from '../../constant/ThemLight';
+import { useGoBack } from '../../utils/GoBack';
+import { ThemLightStatusBar } from '../../constant/ThemLight';
 import StyleHistoryBean from '../../styles/code/StyleHistoryBean';
-import {Icon} from '../../constant/Icon';
+import { Icon } from '../../constant/Icon';
+import FastImage from 'react-native-fast-image';
 
 const HistoryBean = () => {
   const goback = useGoBack();
@@ -13,7 +13,7 @@ const HistoryBean = () => {
     <View style={StyleHistoryBean.container}>
       <View style={StyleHistoryBean.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleHistoryBean.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleHistoryBean.iconBack} />
         </TouchableOpacity>
         <Text style={StyleHistoryBean.textHeader}>Lịch sử BEAN</Text>
       </View>

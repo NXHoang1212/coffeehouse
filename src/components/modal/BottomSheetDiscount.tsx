@@ -144,21 +144,10 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
     return null;
   }
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      onRequestClose={onDismiss}
-      hardwareAccelerated={true}
-      statusBarTranslucent={true}>
-      <Pressable
-        onPress={enableBackDropDismiss ? onDismiss : undefined}
-        style={StyleBottomSheetDiscount.backdrop}
-      />
-      <Animated.View
-        style={[StyleBottomSheetDiscount.container, { bottom: bottomsheet }]}>
-        <PanGestureHandler
-          onGestureEvent={onGestureEvent}
-          onEnded={onGestureEnd}>
+    <Modal animationType="fade" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
+      <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDiscount.backdrop} />
+      <Animated.View style={[StyleBottomSheetDiscount.container, { bottom: bottomsheet }]}>
+        <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
           <View style={StyleBottomSheetDiscount.header}>
             <TouchableOpacity onPress={onDismiss}>
               <Image

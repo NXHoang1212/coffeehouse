@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ImageSourcePropType } from 'react-native';
-import { Category } from '../../data/types/Category.entity';
+import { Category } from '../../data/types/Banner&Category.entity';
 
 export interface ProductSuggest {
   _id: string;

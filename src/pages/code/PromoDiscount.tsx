@@ -8,6 +8,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { RootState } from '../../redux/store/Store';
 import { useSelector } from 'react-redux';
+import FastImage from 'react-native-fast-image';
+import IconPromo from '../../assets/Svg/IconPromo';
+import { COLOR } from '../../constant/Color';
+import IconKing from '../../assets/Svg/IconKing';
+import IconHistoryBean from '../../assets/Svg/IconHistoryBean';
+
 
 const PromoDiscount = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
@@ -26,9 +32,7 @@ const PromoDiscount = () => {
 
   return (
     <View style={StylePromoDiscount.container}>
-      <LinearGradient
-        colors={['#fd7e14', '#ff4f0a']}
-        style={StylePromoDiscount.viewheader}>
+      <LinearGradient colors={['#fd7e14', '#ff4f0a']} style={StylePromoDiscount.viewheader}>
         <View style={StylePromoDiscount.viewtextheader}>
           <Text style={StylePromoDiscount.textheader}>Ưu đãi</Text>
           <Text style={StylePromoDiscount.textsubheader}>Mới</Text>
@@ -36,16 +40,11 @@ const PromoDiscount = () => {
         </View>
         <TouchableOpacity
           style={StylePromoDiscount.viewvoucher}
-          onPress={() =>
-            navigation.navigate(
-              isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-              { screen: 'DiscountUser' },
-            )
-          }>
-          <Image source={Icon.PROMO} style={StylePromoDiscount.iconvoucher} />
+          onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' })}>
+          <IconPromo style={StylePromoDiscount.iconvoucher} fill={COLOR.ORANGE} />
           <Text style={StylePromoDiscount.textvoucher}>Voucher Của tôi</Text>
         </TouchableOpacity>
-        <Image source={Icon.POINTS} style={StylePromoDiscount.iconpoints} />
+        <FastImage source={Icon.POINTS} style={StylePromoDiscount.iconpoints} />
         <View style={StylePromoDiscount.viewbarcode}>
           {/* api code vào dây  */}
         </View>
@@ -54,22 +53,13 @@ const PromoDiscount = () => {
         <View style={StylePromoDiscount.viewservice}>
           <TouchableOpacity
             style={StylePromoDiscount.viewmember}
-            onPress={() =>
-              navigation.navigate('StackHomeNavigate' as any, {
-                screen: 'RankMember',
-              })
-            }>
-            <Image source={Bean.KING} style={StylePromoDiscount.iconking} />
+            onPress={() => navigation.navigate('StackHomeNavigate' as any, { screen: 'RankMember' })}>
+            <IconKing style={StylePromoDiscount.iconking} fill={COLOR.ORANGE} />
             <Text style={StylePromoDiscount.textservice}>Hạng thành viên</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={StylePromoDiscount.viewmember}
-            onPress={() =>
-              navigation.navigate(
-                isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                { screen: 'ChangeBean' },
-              )
-            }>
+            onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'ChangeBean' })}>
             <Image
               source={Bean.BEAN}
               style={StylePromoDiscount.iconchangebean}
@@ -80,26 +70,13 @@ const PromoDiscount = () => {
         <View style={StylePromoDiscount.viewservice}>
           <TouchableOpacity
             style={StylePromoDiscount.viewmember}
-            onPress={() =>
-              navigation.navigate(
-                isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                { screen: 'HistoryBean' },
-              )
-            }>
-            <Image
-              source={Bean.BEANHISTORY}
-              style={StylePromoDiscount.iconbeanhistory}
-            />
+            onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'HistoryBean' })}>
+            <IconHistoryBean style={StylePromoDiscount.iconbeanhistory} fill={COLOR.ORANGE} />
             <Text style={StylePromoDiscount.textservice}>Lịch sử BEAN</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={StylePromoDiscount.viewmember}
-            onPress={() =>
-              navigation.navigate(
-                isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                { screen: 'Rules', params: { link } },
-              )
-            }>
+            onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'Rules', params: { link } })}>
             <Image
               source={infores.SERCURITY}
               style={StylePromoDiscount.iconsercurity}
@@ -115,12 +92,7 @@ const PromoDiscount = () => {
           </Text>
           <TouchableOpacity
             style={StylePromoDiscount.viewseeall}
-            onPress={() =>
-              navigation.navigate(
-                isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-                { screen: 'DiscountUser' },
-              )
-            }>
+            onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' })}>
             <Text style={StylePromoDiscount.textseeallpromocode}>
               Xem tất cả
             </Text>

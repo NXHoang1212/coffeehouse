@@ -15,6 +15,7 @@ import { AppDispatch } from '../../redux/store/Store';
 import { AddCart } from '../../redux/slices/CartSlice';
 import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 import { cartStatus } from '../../data/types/Enum.entity';
+import FastImage from 'react-native-fast-image';
 
 interface Props {
   show: boolean;
@@ -128,7 +129,7 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
               {ProductId.ProductId.name}
             </Text>
             <TouchableOpacity onPress={onDismiss}>
-              <Image
+              <FastImage
                 source={Icon.CANCEL}
                 style={StyleBottomUpdateOrder.iconcancel}
               />

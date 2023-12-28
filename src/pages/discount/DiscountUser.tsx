@@ -6,6 +6,7 @@ import { useGoBack } from '../../utils/GoBack';
 import { useGetDiscountQuery } from '../../service/api/IndexDiscount';
 import { FlashList } from '@huunguyen312/flash-list';
 import ItemDiscount from '../../components/item/ItemDiscount';
+import FastImage from 'react-native-fast-image';
 
 const DiscountUser = () => {
   const goback = useGoBack();
@@ -18,7 +19,7 @@ const DiscountUser = () => {
     <View style={StyleDiscountUser.container}>
       <View style={StyleDiscountUser.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleDiscountUser.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleDiscountUser.iconBack} />
         </TouchableOpacity>
         <Text style={StyleDiscountUser.textHeader}>Phiếu ưu đãi của bạn</Text>
       </View>

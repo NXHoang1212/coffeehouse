@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  StatusBar,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, TextInput, StatusBar, } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { ThemLightStatusBar } from '../../../constant/ThemLight';
 import { Icon } from '../../../constant/Icon';
@@ -22,6 +15,9 @@ import { useSelector } from 'react-redux';
 import { setAddress } from '../../../redux/slices/AddressSlice';
 import { useDispatch } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
+import IconDelete from '../../../assets/Svg/IconDelete';
+import FastImage from 'react-native-fast-image';
+import { COLOR } from '../../../constant/Color';
 
 const EditAddress: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -112,7 +108,7 @@ const EditAddress: React.FC = () => {
             );
             goback();
           }}>
-          <Image source={Icon.BACK} style={StyleEditAddress.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleEditAddress.iconBack} />
         </TouchableOpacity>
         <Text style={StyleEditAddress.textHeader}>Sửa địa chỉ đã lưu</Text>
       </View>
@@ -130,7 +126,7 @@ const EditAddress: React.FC = () => {
               style={StyleEditAddress.viewtextinput}
               onPress={() => navigation.navigate('MapsAddress' as any)}>
               <Text style={StyleEditAddress.textvalue}>{address}</Text>
-              <Image source={Icon.RIGHT} style={StyleEditAddress.iconArrow} />
+              <FastImage source={Icon.RIGHT} style={StyleEditAddress.iconArrow} />
             </TouchableOpacity>
           </View>
           <View style={StyleEditAddress.viewhome}>
@@ -194,7 +190,7 @@ const EditAddress: React.FC = () => {
         <TouchableOpacity onPress={toggleModal}>
           <View style={StyleEditAddress.viewbody3}>
             <View style={StyleEditAddress.viewdelete}>
-              <Image source={Icon.DELETE} style={StyleEditAddress.icondelete} />
+              <IconDelete style={StyleEditAddress.icondelete} fill={COLOR.RED} />
               <Text style={StyleEditAddress.textdelete}>Xóa địa chỉ này</Text>
             </View>
           </View>
