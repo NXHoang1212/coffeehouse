@@ -7,7 +7,7 @@ export const ApiBanner = createApi({
     reducerPath: 'apiBanner',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        getBanner: build.query<{ data: Category[] }, void>({
+        getBanner: build.query<{ data: Banner[] }, void>({
             query: () => '/api/users/GetBanner',
         }),
     }),
@@ -19,7 +19,7 @@ export const ApiCategory = createApi({
     reducerPath: 'apiCategory',
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     endpoints: build => ({
-        getCategory: build.query<{ data: Banner[] }, void>({
+        getCategory: build.query<{ data: Category[] }, void>({
             query: () => '/api/users/GetCategory',
         }),
     }),

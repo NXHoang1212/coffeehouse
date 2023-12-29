@@ -1,8 +1,10 @@
-import { Image, Text, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
+import { Image, Text, TouchableOpacity, View, TouchableWithoutFeedback, FlatList } from 'react-native';
 import React, { useState } from 'react';
 import StyleCategoryItem from '../../styles/item/StyleCategoryItem';
-import { category } from '../../constant/Icon';
 import BottomSheetMenu from '../modal/BottomSheetMenu';
+import { useGetCategoryQuery } from '../../service/api/IndexBanner&Category';
+import FastImage from 'react-native-fast-image';
+
 
 type Props = {
   setSelectedCategory: (categoryName: String) => void;
@@ -10,126 +12,49 @@ type Props = {
 
 const CategoryItem = ({ setSelectedCategory }: Props) => {
   const [show, setShow] = useState<boolean>(false);
+  const { data } = useGetCategoryQuery();
+  const categories = data?.data?.slice(0, 7).concat({ name: 'Xem thêm', image: 'https://res.cloudinary.com/dxlvdrb52/image/upload/v1703826288/category/iconanother_zuhiws.png', _id: 'all' }) || [];
 
   const handleCategorySelect = (categoryName: String) => {
-    setSelectedCategory(categoryName);
-    setShow(false);
+    if (categoryName === 'Xem thêm') {
+      setShow(true);
+    } else {
+      setSelectedCategory(categoryName);
+    }
   };
 
   return (
     <TouchableWithoutFeedback>
       <View style={{ flexDirection: 'column', gap: 15 }}>
         <View style={StyleCategoryItem.viewcategory}>
-          <TouchableOpacity onPress={() => setSelectedCategory('39K FREESHIP')}>
-            <View style={StyleCategoryItem.viewcategoryitem}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.SALE39K}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategoryfirst}>
-                Siêu Deal -{'\n'}39K FREESHIP
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setSelectedCategory('Cà phê')}>
-            <View style={StyleCategoryItem.viewcategoryitem}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.COFFEE}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategorytwo}>Cà phê</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setSelectedCategory('CloudTea')}>
-            <View style={StyleCategoryItem.viewcategoryitem}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.CLOUDTEA}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategorytwo}>CloudTea</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setSelectedCategory('Hi-Tea Healthy')}>
-            <View style={StyleCategoryItem.viewcategoryitem}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.TEAPEACH}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategorytea}>
-                Hi-Tea Healthy
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={StyleCategoryItem.viewcategory}>
-          <TouchableOpacity
-            onPress={() => setSelectedCategory('Trà Trái Cây - Trà Sữa')}>
-            <View style={StyleCategoryItem.viewcategoryitem}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.TEAMILK}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategoryfirst}>
-                Trà Trái Cây -{'\n'}Trà Sữa
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setSelectedCategory('Trà Xanh Tây Bắc')}>
-            <View style={StyleCategoryItem.viewcategorycoffee}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.TEAGREEN}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategoryfirst}>
-                Trà Xanh{'\n'} Tây Bắc
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setSelectedCategory('Đá Xay Frosty')}>
-            <View style={StyleCategoryItem.viewcategorycoffee}>
-              <View style={StyleCategoryItem.viewimgitem}>
-                <Image
-                  source={category.FORSTY}
-                  style={StyleCategoryItem.iconcategory}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategorytwo}>
-                Đá Xay Frosty
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setShow(true)}>
-            <View style={StyleCategoryItem.viewcategorycoffee}>
-              <View style={StyleCategoryItem.viewseemore}>
-                <Image
-                  source={category.SEEMORE}
-                  style={StyleCategoryItem.iconseemore}
-                />
-              </View>
-              <Text style={StyleCategoryItem.textcategorytea}>Xem Thêm</Text>
-            </View>
-          </TouchableOpacity>
+          {categories.map((item, index) => {
+            return (
+              <TouchableOpacity key={index} onPress={() => handleCategorySelect(item.name)}>
+                <View style={StyleCategoryItem.viewcategoryitem}>
+                  <View style={StyleCategoryItem.viewimgitem}>
+                    <FastImage
+                      source={{
+                        uri: item.image as string,
+                        priority: FastImage.priority.normal,
+                        cache: FastImage.cacheControl.immutable,
+                      }}
+                      resizeMode={FastImage.resizeMode.cover}
+                      style={StyleCategoryItem.iconcategory}
+                    />
+                  </View>
+                  <Text style={StyleCategoryItem.textcategoryfirst}>
+                    {item.name}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )
+          })
+          }
         </View>
         <BottomSheetMenu
           show={show}
-          onDismiss={() => {
-            setShow(false);
-          }}
+          enableBackDropDismiss
+          onDismiss={() => { setShow(false); }}
           setSelectedCategory={handleCategorySelect}
         />
       </View>

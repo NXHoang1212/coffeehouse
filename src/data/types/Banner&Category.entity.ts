@@ -1,7 +1,9 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface Category {
   _id: string;
   name: string;
-  image: string;
+  image: ImageSourcePropType | string;
 }
 
 export interface Banner {

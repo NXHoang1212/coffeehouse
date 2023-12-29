@@ -38,10 +38,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
   return response.data;
 });
 
-export const fetchCategory = createAsyncThunk('products/fetchCategory', async () => {
-  const response = await AxiosInstance().get(`/api/users/category`);
-  return response.data;
-});
+
 
 const productsSlice = createSlice({
   name: 'Products',
@@ -57,18 +54,6 @@ const productsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
-      state.status = 'failed';
-      state.error = action.error.message || 'Đã xảy ra lỗi';
-    });
-    builder.addCase(fetchCategory.pending, (state) => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchCategory.fulfilled, (state, action) => {
-      state.status = 'succeeded';
-      state.data = action.payload;
-      state.loading = true;
-    });
-    builder.addCase(fetchCategory.rejected, (state, action) => {
       state.status = 'failed';
       state.error = action.error.message || 'Đã xảy ra lỗi';
     });

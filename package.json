@@ -8,7 +8,9 @@
     "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "buildAAB": "npx react-native build-android --mode=release", 
+    "buildAPK": "npm run android -- --mode=release"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",

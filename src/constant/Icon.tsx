@@ -29,7 +29,6 @@ export const Icon = {
   POINTS: require('../assets/images/IconPoints.png'),
   CANCEL: require('../assets/images/iconx.png'),
   AVATAR: require('../assets/images/avatar.png'),
-  HARAVAN: require('../assets/images/iconharavan.png'),
   BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
   LOCATION: require('../assets/images/IconLocation.png'),
   SEND: require('../assets/images/iconsend.png'),
@@ -96,19 +95,6 @@ export const Bean = {
 
 /* DANH MỤC  */
 export const category = {
-  SALE39K: require('../assets/images/sale39k.jpg'),
-  CLOUDFEE: require('../assets/images/IconCloudFee.png'),
-  CLOUDTEA: require('../assets/images/IconCloudTea.png'),
-  TEAPEACH: require('../assets/images/IconCoffee.png'),
-  ENJOYHOME: require('../assets/images/IconEnjoyHome.png'),
-  FORSTY: require('../assets/images/IconIceFrosty.png'),
-  OTHER: require('../assets/images/IconoOherDrinks.png'),
-  SNACK: require('../assets/images/IconSnack.png'),
-  COFFEE: require('../assets/images/IconTeachCoffee.png'),
-  TEAMILK: require('../assets/images/IconTeaFruit.png'),
-  TEAGREEN: require('../assets/images/IconTeaGreen.png'),
-  TIME: require('../assets/images/Icontime.png'),
-  SEEMORE: require('../assets/images/iconanother.png'),
   MENU: require('../assets/images/iconMenu.png'),
 };
 

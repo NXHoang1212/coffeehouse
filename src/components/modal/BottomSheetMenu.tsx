@@ -1,9 +1,11 @@
-import { View, Text, Animated, Image, TouchableOpacity, Pressable, StatusBar, Dimensions, } from 'react-native';
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, StatusBar, Dimensions, FlatList } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { Portal } from 'react-native-paper';
 import StyleBottomSheetMenu from '../../styles/modal/StyleBottomSheetMenu';
-import { Icon, category } from '../../constant/Icon';
+import { Icon } from '../../constant/Icon';
 import { PanGestureHandler, GestureHandlerRootView, } from 'react-native-gesture-handler';
+import { useGetCategoryQuery } from '../../service/api/IndexBanner&Category';
+import FastImage from 'react-native-fast-image';
 
 interface Props {
   show: boolean;
@@ -12,15 +14,12 @@ interface Props {
   setSelectedCategory: (categoryName: String) => void;
 }
 
-const BottomSheetMenu = ({
-  show,
-  onDismiss,
-  enableBackDropDismiss = true,
-  setSelectedCategory,
-}: Props) => {
+const BottomSheetMenu = ({ show, onDismiss, enableBackDropDismiss = true, setSelectedCategory, }: Props) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
   const [open, setopen] = useState<boolean>(show);
+  const { data } = useGetCategoryQuery();
+  const categories = data?.data || [];
   const onGestureEvent = (event: any) => {
     if (event.nativeEvent.translationY > 0) {
       bottomsheet.setValue(-event.nativeEvent.translationY);
@@ -57,10 +56,7 @@ const BottomSheetMenu = ({
 
   return (
     <Portal>
-      <Pressable
-        onPress={enableBackDropDismiss ? onDismiss : undefined}
-        style={StyleBottomSheetMenu.backdrop}
-      />
+      <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetMenu.backdrop} />
       <StatusBar backgroundColor="rgba(0,0,0,0.5)" />
       <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
         <Animated.View
@@ -68,7 +64,7 @@ const BottomSheetMenu = ({
           <View style={StyleBottomSheetMenu.header}>
             <Text style={StyleBottomSheetMenu.textitle}>Danh mục</Text>
             <TouchableOpacity onPress={onDismiss}>
-              <Image
+              <FastImage
                 source={Icon.CANCEL}
                 style={StyleBottomSheetMenu.iconcancel}
               />
@@ -76,144 +72,40 @@ const BottomSheetMenu = ({
           </View>
           <View style={StyleBottomSheetMenu.line} />
           <View style={StyleBottomSheetMenu.viewmenu}>
-            <View style={StyleBottomSheetMenu.viewcategory}>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('39K FREESHIP')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.SALE39K}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>FREESHIP</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Trà Trái Cây - Trà Sữa')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.TEAMILK}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Trà Sữa</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('CloudFee')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.CLOUDFEE}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>CloudFee</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={StyleBottomSheetMenu.viewcategory}>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Cà phê')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.COFFEE}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Cà phê</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Trà Xanh Tây Bắc')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.TEAGREEN}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Trà Xanh</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Bánh - Snack')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.SNACK}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Bánh Snack</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={StyleBottomSheetMenu.viewcategory}>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('CloudTea')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.CLOUDTEA}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>CloudTea</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Đá Xay Frosty')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.FORSTY}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Forsty</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Thưởng thức tại nhà')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.ENJOYHOME}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Thưởng thức</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={StyleBottomSheetMenu.viewcategory}>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Hi-Tea Healthy')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.TEAPEACH}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Hi-Tea</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={StyleBottomSheetMenu.handleSale}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.TIME}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Gần đây</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={StyleBottomSheetMenu.handleSale}
-                onPress={() => setSelectedCategory('Thức uống khác')}>
-                <View style={StyleBottomSheetMenu.viewitem}>
-                  <Image
-                    source={category.OTHER}
-                    style={StyleBottomSheetMenu.iconitem}
-                  />
-                </View>
-                <Text style={StyleBottomSheetMenu.textitem}>Uống khác</Text>
-              </TouchableOpacity>
-            </View>
+            <FlatList
+              data={categories}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => setSelectedCategory(item.name)}>
+                  <View style={StyleBottomSheetMenu.viewcategory}>
+                    <View style={StyleBottomSheetMenu.viewitem}>
+                      <FastImage
+                        source={{
+                          uri: item.image as string,
+                          priority: FastImage.priority.normal,
+                          cache: FastImage.cacheControl.immutable,
+                        }}
+                        resizeMode={FastImage.resizeMode.cover}
+                        style={StyleBottomSheetMenu.iconitem}
+                      />
+                    </View>
+                    <Text style={StyleBottomSheetMenu.textitem}>
+                      {item.name}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+              contentContainerStyle={StyleBottomSheetMenu.viewcontent}
+              numColumns={4}
+              keyExtractor={(item, index) => item._id + index}
+              showsVerticalScrollIndicator={false}
+              extraData={categories}
+              removeClippedSubviews={true}
+              viewabilityConfig={{
+                waitForInteraction: true,
+                itemVisiblePercentThreshold: 50,
+                minimumViewTime: 1000,
+              }}
+            />
           </View>
         </Animated.View>
       </PanGestureHandler>

@@ -81,6 +81,7 @@ const StyleOrder = StyleSheet.create({
   viewbottom: {
     height: height * 12.65,
     marginHorizontal: WIDTH(5),
+    bottom: HEIGHT(1),
   },
   viewfavourites: {
     flexDirection: 'row',

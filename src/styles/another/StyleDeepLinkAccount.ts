@@ -41,9 +41,8 @@ const StyleDeepLinkAccount = StyleSheet.create({
     borderColor: COLOR.GRAY,
   },
   iconharavan: {
-    width: WIDTH(8),
-    height: HEIGHT(4),
-    resizeMode: 'contain',
+    width: WIDTH(10),
+    height: HEIGHT(10),
     marginLeft: WIDTH(2),
   },
   textitem: {

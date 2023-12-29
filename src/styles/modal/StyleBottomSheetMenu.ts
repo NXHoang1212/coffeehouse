@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {WIDTH, HEIGHT, FONTSIZE} from '../../constant/Responsive';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 
 const StyleBottomSheetMenu = StyleSheet.create({
   backdrop: {
@@ -16,7 +16,7 @@ const StyleBottomSheetMenu = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
     borderTopLeftRadius: WIDTH(5),
     borderTopRightRadius: WIDTH(5),
-    height: HEIGHT(45),
+    height: HEIGHT(46.8),
     elevation: 8,
   },
   header: {
@@ -45,22 +45,19 @@ const StyleBottomSheetMenu = StyleSheet.create({
     top: HEIGHT(2.3),
   },
   viewmenu: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    gap: WIDTH(2),
+    marginTop: HEIGHT(2),
   },
   viewcategory: {
-    top: HEIGHT(3.4),
+    marginTop: HEIGHT(2),
     flexDirection: 'column',
-    marginHorizontal: WIDTH(2),
-    gap: HEIGHT(1.2),
-  },
-  handleSale: {
-    flexDirection: 'column',
+    gap: HEIGHT(1),
+    height: HEIGHT(11.5),
     justifyContent: 'center',
     alignItems: 'center',
-    width: WIDTH(20),
+  },
+  viewcontent: {
+      
   },
   viewitem: {
     width: WIDTH(17.5),
@@ -80,7 +77,9 @@ const StyleBottomSheetMenu = StyleSheet.create({
     fontSize: FONTSIZE(1.5),
     fontWeight: '500',
     color: COLOR.BLACK,
-    top: HEIGHT(0.5),
+    textAlign: 'center',
+    width: WIDTH(25),
+    height: HEIGHT(5),
   },
 });
 

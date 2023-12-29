@@ -6,87 +6,60 @@ import Paginations from './Paginations';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { TabHomeNavigateEnum, TabHomeParamList } from '../../data/types/TypesTab';
+import { useGetBannerQuery } from '../../service/api/IndexBanner&Category';
+import FastImage from 'react-native-fast-image';
 
-const data = [
-  {
-    id: '1',
-    image: Banner.SALE39K,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '2',
-    image: Banner.DISCOUNT40,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '3',
-    image: Banner.DISCOUNT50,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '4',
-    image: Banner.CLICKHERE,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '5',
-    image: Banner.TRADEBEAN,
-    destination: 'Ưu đãi',
-  },
-];
-type Destination = {
-  id: string;
-  image: ImageSourcePropType;
-  destination: string;
-};
+
 
 const BannerSlider = () => {
   const navigation = useNavigation<NativeStackNavigationProp<TabHomeParamList>>();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const { data } = useGetBannerQuery();
+  const banner = data?.data.slice(0, 5) || [];
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const scrollx = useRef(new Animated.Value(0)).current;
   const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-  const slideRef = useRef<FlatList<{ destination: string; id: string; image: ImageSourcePropType; }> | null>(null);
-  const [autoplay, setAutoplay] = useState<boolean>(true);
+  const slideRef = useRef<FlatList<{ image: string; name: string; _id: string; }>>(null);
   const viewableItemsChange = useRef(({ viewableItems }: any) => { setCurrentIndex(viewableItems[0].index) }).current;
-
   useEffect(() => {
     const interval = setInterval(() => {
-      if (autoplay && slideRef.current) {
-        const nextIndex = (currentIndex + 1) % data.length;
-        if (currentIndex === data.length - 1 && nextIndex === 0) {
-          slideRef.current.scrollToIndex({ index: 0 });
-        } else {
-          slideRef.current.scrollToIndex({ index: nextIndex });
-        }
-        setCurrentIndex(nextIndex);
+      if (currentIndex < banner.length - 1) {
+        slideRef?.current?.scrollToIndex({ index: currentIndex + 1 });
+      } else {
+        slideRef?.current?.scrollToIndex({ index: 0 });
       }
-    }, 3000);
+    }, 1500);
     return () => {
       clearInterval(interval);
     };
-  }, [autoplay, currentIndex]);
+  }, [currentIndex]);
   const handleScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { x: scrollx } } }],
     { useNativeDriver: false },
   );
-  const handleImagePress = (item: Destination) => {
-    const destination = item.destination;
+  const handleImagePress = (item: any) => {
+    const destination = item.name;
     navigation.navigate(destination as TabHomeNavigateEnum);
   };
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
-        keyExtractor={item => item.id}
+        data={banner}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.viewimage} onPress={() => handleImagePress(item)}>
-            <Image source={item.image} style={styles.image} />
+            <FastImage
+              source={{
+                uri: item.image as string,
+                priority: FastImage.priority.normal,
+                cache: FastImage.cacheControl.immutable,
+              }}
+              resizeMode={FastImage.resizeMode.cover} style={styles.image} />
           </TouchableOpacity>
         )}
-        horizontal
+        keyExtractor={(item, index) => item._id + index}
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
+        horizontal={true}
         onViewableItemsChanged={viewableItemsChange}
         viewabilityConfig={viewconfig}
         ref={slideRef}
@@ -95,7 +68,7 @@ const BannerSlider = () => {
         scrollEventThrottle={32}
       />
       <View>
-        <Paginations data={data} scrollx={scrollx} />
+        <Paginations data={banner} scrollx={scrollx} />
       </View>
     </View>
   );
