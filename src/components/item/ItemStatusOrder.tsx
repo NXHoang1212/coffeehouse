@@ -9,13 +9,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import RejectOrder from '../modal/RejectOrder';
 import ChangeMethod from '../modal/ChangeMethod';
+import FastImage from 'react-native-fast-image';
 
 interface PropsDetailItemProduct {
     item: GetOrder
 }
 
 const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
-    const method = useSelector((state: RootState) => state.methodamount.methodamount)
+    const method = useSelector((state: RootState) => state.root.methodamount)
     const shipper = 18
     const total = item.OrderCart.map((item) => item.PriceProduct * item.QuantityProduct).reduce((a, b) => a + b, 0);
     let TotalPrice = total + shipper - parseInt(item.promo)
@@ -25,7 +26,7 @@ const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
     return (
         <View style={StyleItemStatusOrder.container}>
             <View style={StyleItemStatusOrder.viewimage}>
-                <Image source={Icon.ORDERSTATUS} style={StyleItemStatusOrder.image} />
+                <FastImage source={Icon.ORDERSTATUS} style={StyleItemStatusOrder.image} />
             </View>
             <View style={StyleItemStatusOrder.body}>
                 <View style={StyleItemStatusOrder.viewpending}>
@@ -36,7 +37,7 @@ const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
                     <Text style={StyleItemStatusOrder.texttime}>{GetTime(item.date)}</Text>
                     <View style={StyleItemStatusOrder.viewtextpaymentpending}>
                         <Text style={StyleItemStatusOrder.texttimepending}>Chờ thanh toán</Text>
-                        <Text style={StyleItemStatusOrder.texttimestatuspending}>Bạn cần thanh toán  đơn hàng này</Text>
+                        <Text style={StyleItemStatusOrder.texttimestatuspending}>Bạn cần thanh toán đơn hàng này</Text>
                     </View>
                 </View>
                 <View style={StyleItemStatusOrder.line} />

@@ -1,10 +1,9 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { Messenger } from '../../utils/ShowMessage';
 import { User } from '../../data/types/User.entity';
-import { ApiLogin } from '../api/IndexUser';
+import { ApiLogin, ApiUpdateUser } from '../api/IndexUser';
 import { setUser } from '../../redux/slices/AuthSlice';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store/Store';
+import { GeneralNotification } from '../../utils/GeneralNotification';
 
 let confirmation: FirebaseAuthTypes.ConfirmationResult | null = null;
 
@@ -22,17 +21,19 @@ export const signInWithPhoneNumber = async (phoneNumber: string, navigation: { n
   }
 };
 
-export const confirmCode = async (code: string, dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, navigation: { navigate: (arg0: string) => void }, login: () => void, mobile: string) => {
+export const confirmCode = async (code: string, dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, mobile: string, navigation: { navigate: (arg0: string) => void }, login: () => void) => {
   try {
     if (confirmation) {
       const otp = await confirmation.confirm(code);
+      console.log("🚀 ~ file: LoginSendOtp.ts:27 ~ confirmCode ~ otp:", otp)
       if (otp) {
         const data: any = { mobile: otp.user.phoneNumber };
         const response = await ApiLogin(data);
-        const user = { ...response.user};
+        const user = { ...response.user };
         dispatch(setUser(user));
         login();
-        navigation.navigate(mobile ? 'Trang chủ' : 'CreateInformation');
+        navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
+        GeneralNotification();
       }
     } else {
       Messenger('Mã OTP không hợp lệ', 'danger')
@@ -41,4 +42,23 @@ export const confirmCode = async (code: string, dispatch: (arg0: { payload: User
     console.error('Invalid code:', error);
   }
 };
+
+export const ConfirmPhone = async (code: string, navigation: { navigate: (arg0: string) => void }, login: () => void, name: string, id: number) => {
+  try {
+    if (confirmation) {
+      const otp = await confirmation.confirm(code);
+      if (otp) {
+        const data: any = { mobile: otp.user.phoneNumber };
+        const response = await ApiUpdateUser(id, data);
+        login();
+        navigation.navigate(name ? 'CreateInformation' : 'Trang chủ');
+      }
+    } else {
+      Messenger('Mã OTP không hợp lệ', 'danger')
+    }
+  } catch (error) {
+    console.error('Invalid code:', error);
+  }
+
+}
 

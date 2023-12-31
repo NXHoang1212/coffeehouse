@@ -14,14 +14,21 @@ import { RootState } from '../../redux/store/Store';
 import { FlashList } from '@huunguyen312/flash-list';
 import { DetailProduct } from '../../data/types/Product.entity';
 import { useGetFavouritesQuery } from '../../service/api/IndexFavourites';
+import FastImage from 'react-native-fast-image';
+import IconDownMenu from '../../assets/Svg/IconDownMenu';
 
 const CartOrder = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
+
   const [show, setShow] = useState<boolean>(false);
+
   const [selectedCategory, setSelectedCategory] = useState<String>('');
+
   let currentCategory = '';
+<<<<<<< HEAD
 <<<<<<< HEAD
   const { data, isLoading } = useGetProductsQuery();
   const showProducts = data?.data;
@@ -45,11 +52,18 @@ const CartOrder = () => {
   }, [dispatch, setProducts, showProducts, navigation, isLoggedIn]);
 >>>>>>> fcf5d62f9e6a39da18ba440b9cee6c9c56e09cc7
 =======
+=======
+
+>>>>>>> main
   let showProducts = useSelector((state: RootState) => state.product);
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
-  let id = useSelector((state: RootState) => state.user.user._id);
+
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
+
+  let id = useSelector((state: RootState) => state.root.user._id);
+
   const { data } = useGetFavouritesQuery(id);
-  const favourites: any = data?.data.length;
+
+  const favourites = data?.data?.length || 0;
 
 >>>>>>> main
   const handleCategorySelect = (categoryName: String) => {
@@ -62,9 +76,9 @@ const CartOrder = () => {
 
   useScrollToTop(scrollViewRef);
 
-  const itemHeight = 150;
 
   const scrollToCategory = (categoryName: String) => {
+    const itemHeight = 150;
     const index = showProducts.data.findIndex(item => item.category.name === categoryName,);
     const y = index * itemHeight;
     scrollViewRef.current?.scrollTo({ x: 0, y: y, animated: true });
@@ -92,11 +106,11 @@ const CartOrder = () => {
         <View style={StyleOrder.viewheader}>
           <TouchableOpacity style={StyleOrder.viewhandlemenu} onPress={() => setShow(true)}>
             <View style={StyleOrder.viewmenu}>
-              <Image source={category.MENU} style={StyleOrder.iconmenu} />
+              <FastImage source={category.MENU} style={StyleOrder.iconmenu} />
             </View>
             <View style={StyleOrder.viewmenutitle}>
               <Text style={StyleOrder.texttitle}>Danh Mục</Text>
-              <Image source={Icon.DOWN} style={StyleOrder.iconwdown} />
+              <IconDownMenu style={StyleOrder.iconwdown} />
             </View>
           </TouchableOpacity>
           <View style={StyleOrder.viewsearch}>
@@ -104,7 +118,7 @@ const CartOrder = () => {
               <Image source={Icon.SEARCH} style={StyleOrder.iconsearch} />
             </TouchableOpacity>
             <TouchableOpacity style={StyleOrder.viewfavourites} onPress={() => navigation.navigate(isLoggedIn ? StackHomeNavigateNameEnum.StackHomeUrl : ('AuthStackUser' as any), { screen: 'Favourites' })}>
-              <Image source={TabCoffee.HEART} style={StyleOrder.iconheart} />
+              <FastImage source={TabCoffee.HEART} style={StyleOrder.iconheart} />
               {favourites > 0 && (
                 <View style={StyleOrder.viewcount}>
                   <Text style={StyleOrder.textcount}>{favourites}</Text>
@@ -194,6 +208,7 @@ const CartOrder = () => {
                   itemVisiblePercentThreshold: 50,
                   minimumViewTime: 1000,
                 }}
+                
               />
             </View>
           </View>

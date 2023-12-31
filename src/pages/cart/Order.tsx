@@ -31,12 +31,20 @@ import { RootState, AppDispatch } from '../../redux/store/Store';
 import { useGetCartQuery } from '../../service/api/IndexCart';
 import { useGetDiscountQuery } from '../../service/api/IndexDiscount';
 import { cartStatus } from '../../data/types/Enum.entity';
+<<<<<<< HEAD
+>>>>>>> main
+=======
+import IconPromo from '../../assets/Svg/IconPromo';
+import { COLOR } from '../../constant/Color';
+import IconNotify from '../../assets/Svg/IconNotify';
+import IconFeedBack from '../../assets/Svg/IconFeedBack';
 >>>>>>> main
 
 const Order: React.FC = () => {
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('#fff');
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+<<<<<<< HEAD
 <<<<<<< HEAD
   const id = useSelector((state: RootState) => state.user.user._id)
 <<<<<<< HEAD
@@ -55,15 +63,19 @@ const Order: React.FC = () => {
 =======
   const id = useSelector((state: RootState) => state.user.user._id);
   const isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn.isLoggedIn);
+=======
+  const id = useSelector((state: RootState) => state.root.user._id);
+  const isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
+>>>>>>> main
   const { data: dataDiscount } = useGetDiscountQuery();
   const count = dataDiscount?.data.length;
 >>>>>>> main
   const { data, refetch } = useGetCartQuery(id);
-  const datacart = data?.data.filter(item => item !== null).map(item => ({
+  const datacart = data?.data ? data.data.filter(item => item !== null).map(item => ({
     ...item,
-    ProductId: item.ProductId.filter(item => item.StatusProduct === cartStatus.PENDING) || [],
+    ProductId: item.ProductId ? item.ProductId.filter(item => item.StatusProduct === cartStatus.PENDING) || [] : [],
     _id: item ? item._id || '' : '',
-  }));
+  })) : [];
 
   const onsRefresh = () => {
     setTimeout(() => {
@@ -81,7 +93,7 @@ const Order: React.FC = () => {
   if (!isLoggedIn) {
     return (
       <View style={styleCartOrder.containernoitem}>
-        <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
+        <IconFeedBack style={styleCartOrder.iconnoitem} />
         <Text style={styleCartOrder.textbacknoorder}>
           Bạn chưa đăng nhập vui lòng đăng nhập để xem thông tin đơn hàng
         </Text>
@@ -96,7 +108,7 @@ const Order: React.FC = () => {
   if (datacart?.length === 0 || !datacart?.some(item => item.ProductId && item.ProductId.length > 0)) {
     return (
       <View style={styleCartOrder.containernoitem}>
-        <Image source={Icon.FEEDBACK} style={styleCartOrder.iconnoitem} />
+        <IconFeedBack style={styleCartOrder.iconnoitem} />
         <Text style={styleCartOrder.textbacknoorder}>
           Bạn chưa có đơn hàng vui lòng quay lại đặt hàng
         </Text>
@@ -114,19 +126,14 @@ const Order: React.FC = () => {
         <Text style={styleCartOrder.textheader}>Thông tin đơn hàng</Text>
         <TouchableOpacity
           style={styleCartOrder.viewpromo}
-          onPress={() =>
-            navigation.navigate(
-              isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any),
-              { screen: 'DiscountUser' },
-            )
-          }>
-          <Image source={Icon.PROMO} style={styleCartOrder.iconpromo} />
+          onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'DiscountUser' })}>
+          <IconPromo style={styleCartOrder.iconpromo} fill={COLOR.ORANGEBOLD} />
           <Text style={styleCartOrder.textpromo}>{count}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styleCartOrder.viewnotify}
           onPress={() => navigation.navigate(isLoggedIn ? 'StackHomeNavigate' : ('AuthStackUser' as any), { screen: 'Notifee' })}>
-          <Image source={Icon.NOTIFY} style={styleCartOrder.iconnotify} />
+          <IconNotify style={styleCartOrder.iconnotify} />
         </TouchableOpacity>
       </View>
       <View style={styleCartOrder.viewbody}>

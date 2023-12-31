@@ -20,11 +20,13 @@ import { AppDispatch } from '../../redux/store/Store';
 import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 import ConfirmOrderPayment from '../modal/ConfirmOrderPayment';
 import { Messenger } from '../../utils/ShowMessage';
-import { useCreateOrderMutation } from '../../service/api/IndexOrdert';
+import { useCreateOrderMutation } from '../../service/api/IndexOrder';
 import { useUpdateStatusMutation } from '../../service/api/IndexCart';
 import { OrderStatus, PaymentStatus } from '../../data/types/Enum.entity';
 import { Order } from '../../data/types/Order.entity';
-import { AddOrder } from '../../redux/slices/OrderSlice';
+import FastImage from 'react-native-fast-image';
+import IconDelete from '../../assets/Svg/IconDelete';
+import { COLOR } from '../../constant/Color';
 
 interface PropsDetailItemProduct {
   item: GetCartOrder;
@@ -254,9 +256,9 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
   const route = useRoute<any>();
   const address = route.params?.address;
   const dispatch = useDispatch<AppDispatch>();
-  const id = useSelector((state: RootState) => state.user.user._id);
-  const method = useSelector((state: RootState) => state.methodamount.methodamount,);
-  const promo = useSelector((state: RootState) => state.ApplyPromodiscount.applyPromodiscount.promodiscount,);
+  const id = useSelector((state: RootState) => state.root.user._id);
+  const method = useSelector((state: RootState) => state.root.methodamount,);
+  const promo = useSelector((state: RootState) => state.root.applyPromodiscount.promodiscount);
   const [openModal, setopenModal] = useState<boolean>(false);
   const [note, setNote] = useState<string>('');
   const [show, setshow] = useState<boolean>(false);
@@ -309,7 +311,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
           <Image source={infores.EDIT} style={StyleItemInformationOrder.icondelete} />
         </TouchableOpacity>
         <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => { setDeleteInProgress(true); DeleteCartProductId({ id, ProductId }); }}>
-          <Image source={Icon.DELETE} style={StyleItemInformationOrder.icondelete} />
+          <IconDelete style={StyleItemInformationOrder.icondelete} fill={COLOR.WHITE}/>
         </TouchableOpacity>
       </View>
     );
@@ -356,15 +358,13 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       if (response) {
         await updateStatus(id);
         Messenger('Đặt hàng thành công', 'success');
-        dispatch(AddOrder({ _id: response.data.data._id }));
-        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' });
+        navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder', params: { id: response.data.data._id } });
       } else {
         Messenger('Đặt hàng thất bại', 'error');
       }
     } catch (error) {
       console.log("🚀 ~ file: ItemInformationOrder.tsx:126 ~ handlePayment ~ error:", error);
     }
-    // navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder' })
   };
 
 
@@ -486,16 +486,16 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
             style={StyleItemInformationOrder.viewmethod}
             onPress={() => setopenModal(true)}>
             {method.image ? (
-              <Image source={method.image as ImageSourcePropType} style={StyleItemInformationOrder.iconmethod} />
+              <Image source={method.image} style={StyleItemInformationOrder.iconmethod} />
             ) : (
-              <Image source={Icon.METHOD} style={StyleItemInformationOrder.iconmethod} />
+              <FastImage source={Icon.METHOD} style={StyleItemInformationOrder.iconmethod} />
             )}
             {method.name ? (
               <Text style={StyleItemInformationOrder.textmethod}>{method.name}</Text>
             ) : (
               <Text style={StyleItemInformationOrder.textmethod}>  Chọn phương thức thanh toán  </Text>
             )}
-            <Image source={Icon.RIGHT} style={StyleItemInformationOrder.iconright} />
+            <FastImage source={Icon.RIGHT} style={StyleItemInformationOrder.iconright} />
           </TouchableOpacity>
         </View>
         <LinearGradient style={StyleItemInformationOrder.viewbutton} colors={['#FA8C16', '#FA8C16']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>

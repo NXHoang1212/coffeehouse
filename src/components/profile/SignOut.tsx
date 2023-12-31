@@ -10,6 +10,7 @@ interface Props {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const SignOut = ({ visible, title, message, onCancelPress, onOKPress }: Props) => {
     return (
         <Modal visible={visible} animationType='fade' transparent>
@@ -47,6 +48,9 @@ const SignOut = ({
   onCancelPress,
   onOKPress,
 }: Props) => {
+=======
+const SignOut = ({ visible, title, message, onCancelPress, onOKPress, }: Props) => {
+>>>>>>> main
   return (
     <Modal visible={visible} animationType="fade" transparent={true} statusBarTranslucent={true}>
       <View style={styles.modalContainer}>

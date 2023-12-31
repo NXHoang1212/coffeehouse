@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack";
 import WebViewUrl from "../../components/redirectUrl/WebView";
 import AuthStackNavigate from "../auth/AuthUserNavigate";
@@ -31,6 +32,9 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+=======
+import { createNativeStackNavigator, NativeStackScreenProps, } from '@react-navigation/native-stack';
+>>>>>>> main
 import WebViewUrl from '../../components/redirectUrl/WebView';
 import AuthStackNavigate from '../auth/AuthUserNavigate';
 import PlayMusic from '../../pages/another/amuse/PlayMusic';
@@ -42,7 +46,7 @@ import EditAddress from '../../pages/another/addresses/EditAddress';
 import AboutCoffee from '../../pages/another/ordinary/AboutCoffee';
 import MapsAddress from '../../pages/another/addresses/MapsAddress';
 import SearchMapAddress from '../../pages/another/addresses/SearchMapAddress';
-import Favourites from '../../pages/order/Favourites';
+import Favourites from '../../pages/general/Favourites';
 import RankMember from '../../pages/code/RankMember';
 import HistoryBean from '../../pages/code/HistoryBean';
 import ChangeBean from '../../pages/code/ChangeBean';

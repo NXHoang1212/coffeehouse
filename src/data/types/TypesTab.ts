@@ -1,4 +1,4 @@
-import {ImageSourcePropType} from 'react-native';
+import { ImageSourcePropType } from 'react-native';
 
 //type là một từ khóa trong TypeScript dùng để khai báo kiểu dữ liệu cho biến, hàm, lớp, interface, ...
 export type TabHomeParamList = {
@@ -23,7 +23,7 @@ export enum TabHomeNavigateEnum {
 export type TabHomeNavigateType = {
   component: React.FC;
   name: keyof TabHomeParamList;
-  icon: ImageSourcePropType;
+  icon: ImageSourcePropType 
 };
 
 // HomePage: undefined;

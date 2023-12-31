@@ -63,6 +63,7 @@ const StyleOrder = StyleSheet.create({
   iconheart: {
     width: WIDTH(4.5),
     height: WIDTH(4.5),
+    borderColor: COLOR.GRAY
   },
   line: {
     width: WIDTH(100),
@@ -80,6 +81,7 @@ const StyleOrder = StyleSheet.create({
   viewbottom: {
     height: height * 12.65,
     marginHorizontal: WIDTH(5),
+    bottom: HEIGHT(1),
   },
   viewfavourites: {
     flexDirection: 'row',

@@ -8,6 +8,14 @@ const styleOther = StyleSheet.create({
     flex: 1,
     backgroundColor: COLOR.GRAYBLAND1,
   },
+  viewloading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: HEIGHT(45),
+    zIndex: 1,
+    width: WIDTH(100),
+  },
   viewheader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -28,7 +36,7 @@ const styleOther = StyleSheet.create({
     fontWeight: '700',
   },
   iconnotify: {
-    width: WIDTH(3.9),
+    width: WIDTH(4.7),
     height: HEIGHT(2.5),
   },
   textheader: {

@@ -2,6 +2,7 @@ import { GoogleSignin, statusCodes, } from '@react-native-google-signin/google-s
 import { ApiLogin } from '../api/IndexUser';
 import { setUser } from '../../redux/slices/AuthSlice';
 import { User } from '../../data/types/User.entity';
+import { GeneralNotification } from '../../utils/GeneralNotification';
 
 export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, navigation: { navigate: (arg0: string) => void },
   login: () => void, mobile: string) => {
@@ -24,7 +25,8 @@ export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/
     dispatch(setUser(user));
     login();
     //@ts-ignore
-    navigation.navigate(mobile ? 'Trang chủ' : 'AuthStackUser', { screen: 'InputPhone' });
+    navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
+    GeneralNotification();
   } catch (error: any) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       console.log('User cancelled login flow');

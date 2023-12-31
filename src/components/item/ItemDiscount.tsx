@@ -25,7 +25,7 @@ const ItemDiscount: ({item}: PropsItemDisount) => JSX.Element = ({item}) => {
         dispatch(setDiscount(item)), setshow(true);
       }}>
       <View>
-        <Image
+        <FastImage
           source={Icon.BACKGROUNDPROMO}
           style={StyleItemDiscount.imagebackground}
         />

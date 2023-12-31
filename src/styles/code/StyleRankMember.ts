@@ -17,12 +17,12 @@ const StyleRankMember = StyleSheet.create({
     borderBottomWidth: 0.5,
   },
   iconBack: {
-    marginLeft: WIDTH(3),
-    width: WIDTH(5),
-    height: HEIGHT(3),
+    marginLeft: WIDTH(5),
+    width: WIDTH(4.5),
+    height: HEIGHT(2),
   },
   textHeader: {
-    fontSize: FONTSIZE(2.4),
+    fontSize: FONTSIZE(2.1),
     color: COLOR.BLACK,
     fontWeight: 'bold',
     marginLeft: WIDTH(24),

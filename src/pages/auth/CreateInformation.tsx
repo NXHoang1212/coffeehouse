@@ -16,6 +16,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { setUser } from '../../redux/slices/AuthSlice';
 import { RootState } from '../../redux/store/Store';
+import FastImage from 'react-native-fast-image';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -27,7 +28,7 @@ const CreateInformation = () => {
   const focusHoProps = FocusHo();
   const focusEmailProps = FocusEmail();
   const [open, setOpen] = useState<boolean>(false);
-  const user = useSelector((state: RootState) => state.user.user);
+  let user = useSelector((state: RootState) => state.root.user);
   const id = user._id;
   const [name, setName] = useState<string>(user.name);
   const [holder, setHolder] = useState<string>(user.holder);
@@ -59,7 +60,7 @@ const CreateInformation = () => {
     <View style={StyleCreateInformation.container}>
       <View style={StyleCreateInformation.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleCreateInformation.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleCreateInformation.iconBack} />
         </TouchableOpacity>
         <Text style={StyleCreateInformation.textHeader}>Tạo tài khoản</Text>
       </View>

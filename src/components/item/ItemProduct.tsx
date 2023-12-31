@@ -1,16 +1,8 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Pressable,
-  PixelRatio,
-} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image, Pressable, Text, TouchableOpacity, View, StyleProp, ImageStyle } from 'react-native';
+import FastImage, { FastImageProps } from 'react-native-fast-image';
 import React, { useState, useCallback, useContext, memo } from 'react';
 import StyleItemProduct from '../../styles/item/StyleItemProduct';
-import { DetailProduct } from '../../data/types/Product.entity';
+import { DetailProduct, Products } from '../../data/types/Product.entity';
 import { Icon } from '../../constant/Icon';
 import { FormatPrice } from '../../utils/FormatPrice';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +14,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { Messenger } from '../../utils/ShowMessage';
 import { ProductContext } from '../../service/provider/ProductContext';
+import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { cartStatus } from '../../data/types/Enum.entity';
 
 interface PropsItemProduct {
   item: DetailProduct;
@@ -31,9 +27,10 @@ interface PropsItemProduct {
 
 const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let isLoggedIn = useSelector((state: RootState) => state.IsLoggedIn.isLoggedIn,);
+  const dispatch = useDispatch<AppDispatch>();
+  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const { setProducts } = useContext(ProductContext);
-  const user = useSelector((state: RootState) => state.user.user._id);
+  const user = useSelector((state: RootState) => state.root.user._id);
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [show, setShow] = useState<boolean>(false);
   const [size, setSize] = useState<{ name: string; price: number }>({
@@ -55,12 +52,8 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
       if (item.topping.length > 0 && item.size.length > 0) {
-        const toppingValid = item.topping.every(
-          topping => topping.name.trim() !== '' && topping.price.trim() !== '',
-        );
-        const sizeValid = item.size.every(
-          size => size.name.trim() !== '' && size.price.trim() !== '',
-        );
+        const toppingValid = item.topping.every(topping => topping.name.trim() !== '' && topping.price.trim() !== '')
+        const sizeValid = item.size.every(size => size.name.trim() !== '' && size.price.trim() !== '')
         if (toppingValid && sizeValid) {
           setShow(true);
         } else {
@@ -121,11 +114,13 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
             PriceProduct: item.price,
             QuantityProduct: 1,
             SizeProduct: size,
+            StatusProduct: cartStatus.PENDING,
           },
         ],
       };
       const response = await CreateEmptyCart(data);
       if (response) {
+        dispatch(setProductSuggest([item]));
         Messenger('Thêm vào giỏ hàng thành công', 'success');
       }
     } catch (error: any) {
@@ -193,10 +188,11 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
           item={item}
           show={show}
           onDismiss={() => setShow(false)}
+          enableBackDropDismiss
         />
       </View>
     </View>
   );
-};
+}
 
-export default memo(ItemProduct);
+export default ItemProduct;

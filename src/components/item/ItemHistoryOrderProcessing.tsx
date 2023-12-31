@@ -12,7 +12,6 @@ interface PropsDetailItemProduct {
 }
 
 const ItemHistoryOrderProcessing: React.FC<PropsDetailItemProduct> = ({ item }) => {
-    const goBack = useGoBack();
     const [processing, setprocessing] = useState<boolean>(false);
 
     return (

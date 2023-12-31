@@ -1,108 +1,77 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  FlatList,
-  Animated,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from 'react-native';
-import {Banner} from '../../constant/Icon';
-import {WIDTH, HEIGHT} from '../../constant/Responsive';
+import React, { useState, useRef, useEffect } from 'react';
+import { StyleSheet, View, Image, FlatList, Animated, TouchableOpacity, ImageSourcePropType, } from 'react-native';
+import { Banner } from '../../constant/Icon';
+import { WIDTH, HEIGHT } from '../../constant/Responsive';
 import Paginations from './Paginations';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {TabHomeNavigateEnum, TabHomeParamList} from '../../data/types/TypesTab';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { TabHomeNavigateEnum, TabHomeParamList } from '../../data/types/TypesTab';
+import { useGetBannerQuery } from '../../service/api/IndexBanner&Category';
+import FastImage from 'react-native-fast-image';
 
-const data = [
-  {
-    id: '1',
-    image: Banner.SALE39K,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '2',
-    image: Banner.DISCOUNT40,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '3',
-    image: Banner.DISCOUNT50,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '4',
-    image: Banner.CLICKHERE,
-    destination: 'Đặt hàng',
-  },
-  {
-    id: '5',
-    image: Banner.TRADEBEAN,
-    destination: 'Ưu đãi',
-  },
-];
-type Destination = {
-  id: string;
-  image: ImageSourcePropType;
-  destination: string;
-};
+
 
 const BannerSlider = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<TabHomeParamList>>();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const navigation = useNavigation<NativeStackNavigationProp<TabHomeParamList>>();
+  const { data } = useGetBannerQuery();
+  const banner = data?.data.slice(0, 5) || [];
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const scrollx = useRef(new Animated.Value(0)).current;
-  const viewconfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
-  const slideRef = useRef<FlatList<{
-    destination: string;
-    id: string;
-    image: ImageSourcePropType;
-  }> | null>(null);
-  const [autoplay, setAutoplay] = useState<boolean>(true);
-  const viewableItemsChange = useRef(({viewableItems}: any) => {
-    setCurrentIndex(viewableItems[0].index);
-  }).current;
+  const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+  const slideRef = useRef<FlatList<{ image: string; name: string; _id: string; }>>(null);
+  const viewableItemsChange = useRef(({ viewableItems }: any) => { setCurrentIndex(viewableItems[0].index) }).current;
   useEffect(() => {
     const interval = setInterval(() => {
-      if (autoplay && slideRef.current) {
-        const nextIndex = (currentIndex + 1) % data.length;
-        if (currentIndex === data.length - 1 && nextIndex === 0) {
-          slideRef.current.scrollToIndex({index: 0});
-        } else {
-          slideRef.current.scrollToIndex({index: nextIndex});
-        }
-        setCurrentIndex(nextIndex);
+      if (currentIndex < banner.length - 1) {
+        slideRef?.current?.scrollToIndex({ index: currentIndex + 1 });
+      } else {
+        slideRef?.current?.scrollToIndex({ index: 0 });
       }
-    }, 3000);
+    }, 1500);
     return () => {
       clearInterval(interval);
     };
-  }, [autoplay, currentIndex]);
+  }, [currentIndex]);
   const handleScroll = Animated.event(
-    [{nativeEvent: {contentOffset: {x: scrollx}}}],
-    {useNativeDriver: false},
+    [{ nativeEvent: { contentOffset: { x: scrollx } } }],
+    { useNativeDriver: false },
   );
-  const handleImagePress = (item: Destination) => {
-    const destination = item.destination;
-    navigation.navigate(destination as TabHomeNavigateEnum);
+  const screenNameMapping: Record<string, string> = {
+    "Giảm 40%": "Đặt hàng",
+    "Giảm 50%": "Đặt hàng",
+    "Thử ngay Trà Xanh Tây Bắc": "Đặt hàng",
+    "Đổi Bean": "Đặt hàng",
+    "Đồng Giá 39K": "Đặt hàng",
   };
+  const handleImagePress = (item: any) => {
+    const destination = screenNameMapping[item.name];
+    if (destination) {
+      navigation.navigate(destination as TabHomeNavigateEnum);
+    } else {
+      console.error(`No mapping found for screen name: ${item.name}`);
+    }
+  };
+
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.viewimage}
-            onPress={() => handleImagePress(item)}>
-            <Image source={item.image} style={styles.image} />
+        data={banner}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.viewimage} onPress={() => handleImagePress(item)}>
+            <FastImage
+              source={{
+                uri: item.image as string,
+                priority: FastImage.priority.normal,
+                cache: FastImage.cacheControl.immutable,
+              }}
+              resizeMode={FastImage.resizeMode.cover} style={styles.image} />
           </TouchableOpacity>
         )}
-        horizontal
+        keyExtractor={(item, index) => item._id + index}
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
+        horizontal={true}
         onViewableItemsChanged={viewableItemsChange}
         viewabilityConfig={viewconfig}
         ref={slideRef}
@@ -111,7 +80,7 @@ const BannerSlider = () => {
         scrollEventThrottle={32}
       />
       <View>
-        <Paginations data={data} scrollx={scrollx} />
+        <Paginations data={banner} scrollx={scrollx} />
       </View>
     </View>
   );

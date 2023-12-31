@@ -13,7 +13,7 @@ const StyleStatusOrder = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: WIDTH(100),
-        height: HEIGHT(6.5),
+        height: HEIGHT(4),
         // backgroundColor: COLOR.WHITE,
         borderBottomWidth: 0.5,
     },

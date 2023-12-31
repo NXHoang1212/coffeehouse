@@ -1,3 +1,12 @@
+export enum DataWellcome {
+  MORNING = 'Hãy bắt đầu ngày mới với những món ăn ngon nhất',
+  AFTERNOON = 'Buổi chiều hãy bắt đầu với những món ăn ngon nhất',
+  EVENING = 'Nếu bạn đang đói và khát hãy đến với chúng tôi',
+  WELLCOME = 'Chào mừng bạn đến với ứng dụng của chúng tôi',
+  NIGHT = 'Tối nay bạn ăn gì?',
+  NOLOGIN = 'Đăng nhập để nhận được nhiều ưu đãi hơn',
+}
+
 export enum OrderStatus {
   PENDING = 'Chưa thanh toán',
   CONFIRMED = 'Đã thanh toán',

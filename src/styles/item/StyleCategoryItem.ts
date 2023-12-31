@@ -1,14 +1,16 @@
-import {StyleSheet} from 'react-native';
-import {COLOR} from '../../constant/Color';
-import {FONTSTYLE} from '../../constant/Fonts';
-import {WIDTH, HEIGHT, FONTSIZE} from '../../constant/Responsive';
+import { StyleSheet } from 'react-native';
+import { COLOR } from '../../constant/Color';
+import { FONTSTYLE } from '../../constant/Fonts';
+import { WIDTH, HEIGHT, FONTSIZE } from '../../constant/Responsive';
 
 const StyleCategoryItem = StyleSheet.create({
   viewcategory: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    width: WIDTH(100),
+    alignSelf: 'center',
   },
-  selectedCategory: {},
   textcategorytitle: {
     fontSize: FONTSIZE(2),
     letterSpacing: WIDTH(0.4),
@@ -19,13 +21,8 @@ const StyleCategoryItem = StyleSheet.create({
   viewcategoryitem: {
     flexDirection: 'column',
     alignItems: 'center',
-    gap: HEIGHT(1),
-  },
-  viewcategorycoffee: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: HEIGHT(1),
-    right: WIDTH(2),
+    justifyContent: 'center',
+    gap: HEIGHT(1.2),
   },
   viewimgitem: {
     width: WIDTH(16),
@@ -43,20 +40,9 @@ const StyleCategoryItem = StyleSheet.create({
   textcategoryfirst: {
     fontSize: FONTSIZE(1.6),
     color: COLOR.BLACK,
+    width: WIDTH(25),
+    height: HEIGHT(5.2),
     textAlign: 'center',
-  },
-  textcategorytwo: {
-    fontSize: FONTSIZE(1.6),
-    color: COLOR.BLACK,
-    top: HEIGHT(0.5),
-    textAlign: 'center',
-  },
-  textcategorytea: {
-    fontSize: FONTSIZE(1.6),
-    color: COLOR.BLACK,
-    textAlign: 'center',
-    // left: WIDTH(1),
-    top: HEIGHT(0.5),
   },
   viewseemore: {
     width: WIDTH(14.9),

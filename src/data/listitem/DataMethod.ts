@@ -1,5 +1,5 @@
-import {ImageSourcePropType, Image} from 'react-native';
-import {Icon} from '../../constant/Icon';
+import { ImageSourcePropType, Image } from 'react-native';
+import { Icon } from '../../constant/Icon';
 
 interface DataMethod {
   id: string;
@@ -41,5 +41,10 @@ export const DataMethod: DataMethod[] = [
     id: '6',
     name: 'ZaloPay',
     iconName: Icon.ZALOPAY,
+  },
+  {
+    id: '8',
+    name: 'Tiền mặt',
+    iconName: Icon.CASH,
   },
 ];

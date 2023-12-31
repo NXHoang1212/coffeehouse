@@ -12,6 +12,7 @@ import {DataBrass} from '../../data/listitem/rankmember/DataBrass';
 import {DataSilver} from '../../data/listitem/rankmember/DataSilver';
 import {DataGold} from '../../data/listitem/rankmember/DataGold';
 import {DataDiamon} from '../../data/listitem/rankmember/DataDiamon';
+import FastImage from 'react-native-fast-image';
 
 const RankMember = () => {
   const {activeTab, handleActiveTab} = ActiveTab('Tab 1');
@@ -21,7 +22,7 @@ const RankMember = () => {
     <View style={StyleRankMember.container}>
       <View style={StyleRankMember.viewheader}>
         <TouchableOpacity onPress={goBack}>
-          <Image source={Icon.BACK} style={StyleRankMember.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleRankMember.iconBack} />
         </TouchableOpacity>
         <Text style={StyleRankMember.textHeader}>Hạng thành viên</Text>
       </View>
@@ -40,7 +41,7 @@ const RankMember = () => {
             </View>
             <View style={StyleRankMember.slider} />
           </View>
-          <Image source={Icon.POINTS} style={StyleRankMember.imgbean} />
+          <FastImage source={Icon.POINTS} style={StyleRankMember.imgbean} />
         </LinearGradient>
         <View style={StyleRankMember.viewtab}>
           <TouchableOpacity onPress={() => handleActiveTab('Tab 1')}>

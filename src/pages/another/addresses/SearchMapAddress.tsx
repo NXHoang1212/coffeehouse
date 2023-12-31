@@ -1,16 +1,9 @@
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {Icon} from '../../../constant/Icon';
-import {HEIGHT, WIDTH, FONTSIZE} from '../../../constant/Responsive';
-import {useGoBack} from '../../../utils/GoBack';
-import {COLOR} from '../../../constant/Color';
+import { Text, View, Image, StyleSheet, TouchableOpacity, TextInput, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Icon } from '../../../constant/Icon';
+import { HEIGHT, WIDTH, FONTSIZE } from '../../../constant/Responsive';
+import { useGoBack } from '../../../utils/GoBack';
+import { COLOR } from '../../../constant/Color';
 
 const SearchMapAddress: React.FC = () => {
   const goback = useGoBack();
@@ -29,7 +22,7 @@ const SearchMapAddress: React.FC = () => {
         </View>
       </View>
       <TouchableOpacity style={styles.viewmap} onPress={goback}>
-        <Image source={Icon.MAPS} style={styles.iconmap} />
+        {/* <Image source={Icon.MAPS} style={styles.iconmap} /> */}
         <Text style={styles.textmap}>Chọn trên bản đồ</Text>
         <Image source={Icon.RIGHT} style={styles.iconright} />
       </TouchableOpacity>

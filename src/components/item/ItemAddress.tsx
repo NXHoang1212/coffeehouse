@@ -1,29 +1,24 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import {Icon, infores} from '../../constant/Icon';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackHomeNavigateTypeParam} from '../../data/types/TypeStack';
-import {AddRess} from '../../data/types/AddRess.entity';
+import { Icon, infores } from '../../constant/Icon';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
+import { AddRess } from '../../data/types/AddRess.entity';
 import StyleItemGetAddress from '../../styles/item/StyleItemAddress';
-import {useDispatch} from 'react-redux';
-import {setAddress} from '../../redux/slices/AddressSlice';
+import { useDispatch } from 'react-redux';
+import { setAddress } from '../../redux/slices/AddressSlice';
+import FastImage from 'react-native-fast-image';
 
 interface PropsItemProduct {
   item: AddRess;
   isLastItem: any;
 }
 
-const ItemAddress: React.FC<PropsItemProduct> = ({item, isLastItem}) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch();
 
-  // const SelectedAddress = () => {
-  //     dispatch(setAddress(item))
-  //     //@ts-ignore
-  //     navigation.navigate('EditAddress')
-  // }
 
   return (
     <View style={StyleItemGetAddress.container}>
@@ -34,7 +29,7 @@ const ItemAddress: React.FC<PropsItemProduct> = ({item, isLastItem}) => {
         }}>
         <View style={StyleItemGetAddress.viewbody}>
           <View>
-            <Image
+            <FastImage
               source={infores.ADDRESS}
               style={StyleItemGetAddress.iconAddress}
             />

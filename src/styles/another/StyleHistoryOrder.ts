@@ -15,6 +15,7 @@ const StyleHistoryOrder = StyleSheet.create({
     height: HEIGHT(6),
     backgroundColor: COLOR.WHITE,
     borderBottomWidth: 0.5,
+    bottom: HEIGHT(1.8),
   },
   iconBack: {
     marginLeft: WIDTH(3),
@@ -30,7 +31,6 @@ const StyleHistoryOrder = StyleSheet.create({
   viewbody: {},
   viewtabdiscover: {
     flexDirection: 'row',
-    marginTop: HEIGHT(1.5),
     alignItems: 'center',
     justifyContent: 'flex-start',
     left: WIDTH(3),

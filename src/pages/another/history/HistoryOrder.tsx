@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import React, { useState, memo, useEffect } from 'react';
 import StyleHistoryOrder from '../../../styles/another/StyleHistoryOrder';
 import { ThemLightStatusBar } from '../../../constant/ThemLight';
@@ -9,7 +9,7 @@ import { FlashList } from '@huunguyen312/flash-list';
 import ItemHistoryOrderReject from '../../../components/item/ItemHistoryOrderReject';
 import ItemHistoryOrderProcessing from '../../../components/item/ItemHistoryOrderProcessing';
 import ItemHistoryOrderSuccess from '../../../components/item/ItemHistoryOrderSuccess';
-import { useGetOrderUserQuery } from '../../../service/api/IndexOrdert';
+import { useGetOrderUserQuery } from '../../../service/api/IndexOrder';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store/Store';
 import { OrderStatus } from '../../../data/types/Enum.entity';
@@ -19,7 +19,7 @@ const HistoryOrder: React.FC = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const { activeTab, handleActiveTab } = ActiveTab('Tab one');
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data, isLoading } = useGetOrderUserQuery(id);
   const dataOrder = data?.data;
 
@@ -70,11 +70,10 @@ const HistoryOrder: React.FC = () => {
         </View>
       ) : activeTab === "Tab two" ? (
         <View style={StyleHistoryOrder.viewtabtwo}>
-          <FlashList
-            data={dataOrder?.filter((item) => item.status === OrderStatus.CONFIRMED)}
+          <FlatList
+            data={dataOrder?.filter(item => item.status === OrderStatus.CONFIRMED)}
             renderItem={({ item }) => <ItemHistoryOrderSuccess item={item} />}
             showsVerticalScrollIndicator={false}
-            estimatedItemSize={200}
             contentContainerStyle={{ paddingBottom: 200 }}
             removeClippedSubviews={true}
             viewabilityConfig={{

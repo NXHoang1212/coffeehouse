@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {AddRess} from '../../data/types/AddRess.entity';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AddRess } from '../../data/types/AddRess.entity';
 
 const initialState: AddRess = {
   _id: '',
@@ -11,18 +11,12 @@ const initialState: AddRess = {
   userId: '',
   username: '',
   phone: '',
+  done: ''
 };
 
 const AddressSlice = createSlice({
   name: 'Address',
-  initialState: {
-    ...initialState,
-    ignoredPath: 'address',
-    ignoredNested: {
-      one: 'one',
-      two: 'two',
-    },
-  },
+  initialState,
   reducers: {
     setAddress(state, action: PayloadAction<AddRess>) {
       state._id = action.payload._id;
@@ -34,6 +28,7 @@ const AddressSlice = createSlice({
       state.userId = action.payload.userId;
       state.username = action.payload.username;
       state.phone = action.payload.phone;
+      state.done = action.payload.done;
     },
     setMap(state, action) {
       state.DescribeAddRess = action.payload.DescribeAddRess;
@@ -41,5 +36,5 @@ const AddressSlice = createSlice({
   },
 });
 
-export const {setAddress, setMap} = AddressSlice.actions;
+export const { setAddress, setMap } = AddressSlice.actions;
 export default AddressSlice.reducer;

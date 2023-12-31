@@ -65,13 +65,14 @@ import { RootState } from '../../redux/store/Store';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store/Store';
 import { updateUserData } from '../../redux/slices/AuthSlice';
+import FastImage from 'react-native-fast-image';
 
 const UpdateOrderUser: React.FC = () => {
   const goBack = useGoBack();
   const route = useRoute<any>();
   const item = route.params?.item;
   const dispatch = useDispatch<AppDispatch>();
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const [name, setName] = useState<any>(item.UserId.name);
   const [mobile, setMobile] = useState<any>(item.UserId.mobile);
   const UpdateUser = async () => {
@@ -95,7 +96,7 @@ const UpdateOrderUser: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.viewheader}>
         <TouchableOpacity onPress={goBack}>
-          <Image source={Icon.BACK} style={styles.iconback} />
+          <FastImage source={Icon.BACK} style={styles.iconback} />
         </TouchableOpacity>
         <Text style={styles.textheader}>Người nhận</Text>
       </View>
@@ -133,16 +134,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.WHITE,
   },
   iconback: {
-    width: WIDTH(5),
-    height: HEIGHT(5),
+    width: WIDTH(3),
+    height: HEIGHT(2.5),
     resizeMode: 'contain',
-    marginLeft: WIDTH(2),
+    marginLeft: WIDTH(3),
   },
   viewheader: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: COLOR.GRAY,
+    height: HEIGHT(4.5),
   },
   textheader: {
     fontSize: FONTSIZE(2.1),

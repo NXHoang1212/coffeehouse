@@ -85,7 +85,7 @@ const StyleBottomSheetHome = StyleSheet.create({
     alignSelf: 'center',
   },
   viewbean: {
-    bottom: HEIGHT(4),
+    bottom: HEIGHT(5.8),
     left: WIDTH(5),
   },
   viewimgbean: {
@@ -152,12 +152,26 @@ const StyleBottomSheetHome = StyleSheet.create({
   },
   viewsuggest: {
     left: WIDTH(5),
-    height: HEIGHT(25),
+    height: HEIGHT(22),
+    flexDirection: 'column',
+    gap: HEIGHT(1),
+    bottom: HEIGHT(2),
+  },
+  viewnosuggest: {
+    marginHorizontal: WIDTH(5),
+    width: WIDTH(90),
+    marginBottom: HEIGHT(2.5),
   },
   textsuggest: {
     fontSize: FONTSIZE(2.1),
     color: COLOR.BLACK,
     fontFamily: FONTSTYLE.SEMIBOLD,
+  },
+  textviewall: {
+    fontSize: FONTSIZE(1.8),
+    color: COLOR.ORANGE,
+    fontFamily: FONTSTYLE.REGULAR,
+    fontWeight: '800',
   },
   viewdiscover: {},
   viewimgdiscover: {

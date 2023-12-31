@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import { Icon } from '../../constant/Icon'
@@ -31,6 +32,9 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
+=======
+import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal, } from 'react-native';
+>>>>>>> main
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
@@ -47,6 +51,10 @@ import { AppDispatch } from '../../redux/store/Store';
 import { AddCart } from '../../redux/slices/CartSlice';
 import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
 import { cartStatus } from '../../data/types/Enum.entity';
+<<<<<<< HEAD
+>>>>>>> main
+=======
+import FastImage from 'react-native-fast-image';
 >>>>>>> main
 
 interface Props {
@@ -57,6 +65,7 @@ interface Props {
   checkPromo: () => void;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId }) => {
     const bottomsheetHeight = Dimensions.get('window').height * 0.5;
@@ -80,9 +89,12 @@ const BottomUpdateOrder: React.FC<Props> = ({
   ProductId,
   checkPromo,
 }) => {
+=======
+const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, ProductId, checkPromo }) => {
+>>>>>>> main
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const dispatch = useDispatch<AppDispatch>();
   const [open, setopen] = useState<boolean>(show);
   const [note, setNote] = useState<string>(ProductId?.NoteProduct);
@@ -231,10 +243,14 @@ const BottomUpdateOrder: React.FC<Props> = ({
         }, 1500);
       }
     } catch (error: any) {
+<<<<<<< HEAD
       console.log(
         '🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:',
         error,
       );
+>>>>>>> main
+=======
+      console.log('🚀 ~ file: BottomUpdateOrder.tsx:76 ~ handleUpdateCart ~ error:', error);
 >>>>>>> main
     }
   };
@@ -259,7 +275,7 @@ const BottomUpdateOrder: React.FC<Props> = ({
               {ProductId.ProductId.name}
             </Text>
             <TouchableOpacity onPress={onDismiss}>
-              <Image
+              <FastImage
                 source={Icon.CANCEL}
                 style={StyleBottomUpdateOrder.iconcancel}
               />

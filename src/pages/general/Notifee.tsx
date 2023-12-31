@@ -1,9 +1,11 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {useGoBack} from '../../utils/GoBack';
-import {Icon} from '../../constant/Icon';
+import { useGoBack } from '../../utils/GoBack';
+import { Icon } from '../../constant/Icon';
 import StyleNotifee from '../../styles/general/StyleNotifee';
-import {ThemLightStatusBar} from '../../constant/ThemLight';
+import { ThemLightStatusBar } from '../../constant/ThemLight';
+import IconCheck from '../../assets/Svg/IconCheck';
+import FastImage from 'react-native-fast-image';
 
 const Notifee = () => {
   ThemLightStatusBar('dark-content', '#fff');
@@ -12,11 +14,11 @@ const Notifee = () => {
     <View style={StyleNotifee.container}>
       <View style={StyleNotifee.viewheader}>
         <TouchableOpacity onPress={goback}>
-          <Image source={Icon.BACK} style={StyleNotifee.iconBack} />
+          <FastImage source={Icon.BACK} style={StyleNotifee.iconBack} />
         </TouchableOpacity>
         <Text style={StyleNotifee.textHeader}>Thông báo</Text>
         <TouchableOpacity style={StyleNotifee.handlecheck}>
-          <Image source={Icon.CHECK} style={StyleNotifee.iconBell} />
+          <IconCheck style={StyleNotifee.iconBell} />
         </TouchableOpacity>
       </View>
     </View>

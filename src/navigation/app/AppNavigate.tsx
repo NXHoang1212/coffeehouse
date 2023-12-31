@@ -1,12 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import {
-  StackHomeNavigateTypeParam,
-  StackHomeNavigateNameEnum,
-} from '../../data/types/TypeStack';
-import StackHomeNavigateComponent, {
-  EnumStackNaviagte,
-} from '../home/StackHomeNavigate';
+import { StackHomeNavigateTypeParam, StackHomeNavigateNameEnum, } from '../../data/types/TypeStack';
+import StackHomeNavigateComponent, { EnumStackNaviagte, } from '../home/StackHomeNavigate';
 import TabHomeNavigate from '../home/TabHomeNavigate';
 import AuthStackNavigate from '../auth/AuthUserNavigate';
 import SlashWellcome from '../../pages/slash/SlashWellcome';

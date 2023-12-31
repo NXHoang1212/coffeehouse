@@ -1,7 +1,4 @@
-import {
-  createNativeStackNavigator,
-  NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+import { createNativeStackNavigator, NativeStackScreenProps, } from '@react-navigation/native-stack';
 import LoginUser from '../../pages/auth/LoginUser';
 import InputPhone from '../../pages/auth/InputPhone';
 import ConfirmOtpCode from '../../pages/auth/ConfirmOtpCode';

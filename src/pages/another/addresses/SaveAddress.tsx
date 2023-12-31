@@ -14,14 +14,16 @@ import { FlashList } from '@huunguyen312/flash-list';
 import ItemAddress from '../../../components/item/ItemAddress';
 import { RootState } from '../../../redux/store/Store';
 import { useIsFocused } from '@react-navigation/native';
+import IconAddressHome from '../../../assets/Svg/IconAddressHome';
 
 const Address: React.FC = () => {
   let isFocused = useIsFocused();
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const id = useSelector((state: RootState) => state.user.user._id);
+  const id = useSelector((state: RootState) => state.root.user._id);
   const { data, refetch } = useGetAddressIdQuery(id);
   const Addressess = data?.data;
+<<<<<<< HEAD
   const isLastItem = (currentIndex: number) => {
     return Addressess && currentIndex === Addressess.length - 1;
 <<<<<<< HEAD
@@ -37,10 +39,14 @@ const Address: React.FC = () => {
 =======
   };
 >>>>>>> main
+=======
+  const isLastItem = (currentIndex: number) => { return Addressess && currentIndex === Addressess.length - 1 };
+>>>>>>> main
 
   useEffect(() => {
     refetch();
   }, [isFocused]);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View style={StyleSaveAddress.container}>
@@ -53,9 +59,7 @@ const Address: React.FC = () => {
         <View style={StyleSaveAddress.viewbody}>
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: 'Nhà' })
-            }>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: 'Nhà' })}>
             <Image
               source={TabCoffee.HOME}
               style={StyleSaveAddress.iconAddress}
@@ -65,20 +69,14 @@ const Address: React.FC = () => {
           <View style={StyleSaveAddress.line} />
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: 'Công ty' })
-            }>
-            <Image source={Icon.ADDRESS} style={StyleSaveAddress.iconAddress} />
-            <Text style={StyleSaveAddress.textAddress}>
-              Thêm địa chỉ công ty
-            </Text>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: 'Công ty' })}>
+            <IconAddressHome style={StyleSaveAddress.iconAddress} />
+            <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ công ty</Text>
           </TouchableOpacity>
           <View style={StyleSaveAddress.line} />
           <TouchableOpacity
             style={StyleSaveAddress.viewAddress}
-            onPress={() =>
-              navigation.navigate('AddAddress' as any, { name: '' })
-            }>
+            onPress={() => navigation.navigate('AddAddress' as any, { name: '' })}>
             <Image source={Icon.PLUS} style={StyleSaveAddress.iconplus} />
             <Text style={StyleSaveAddress.textAddress}>Thêm địa chỉ mới</Text>
           </TouchableOpacity>
@@ -91,6 +89,13 @@ const Address: React.FC = () => {
               )}
               keyExtractor={(item: any) => item._id}
               estimatedItemSize={200}
+              showsVerticalScrollIndicator={false}
+              removeClippedSubviews={true}
+              viewabilityConfig={{
+                waitForInteraction: true,
+                itemVisiblePercentThreshold: 50,
+                minimumViewTime: 1000,
+              }}
             />
           </View>
         </View>
