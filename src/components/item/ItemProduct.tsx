@@ -17,6 +17,7 @@ import { ProductContext } from '../../service/provider/ProductContext';
 import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store/Store';
+import { cartStatus } from '../../data/types/Enum.entity';
 
 interface PropsItemProduct {
   item: DetailProduct;
@@ -24,7 +25,7 @@ interface PropsItemProduct {
   isFirstItem: boolean;
 }
 
-const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct) => {
+const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch<AppDispatch>();
   let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
@@ -39,12 +40,8 @@ const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct)
   const handleShowBottomSheet = (item: DetailProduct) => {
     if (isLoggedIn) {
       if (item.topping.length > 0 && item.size.length > 0) {
-        const toppingValid = item.topping.every(
-          topping => topping.name.trim() !== '' && topping.price.trim() !== '',
-        );
-        const sizeValid = item.size.every(
-          size => size.name.trim() !== '' && size.price.trim() !== '',
-        );
+        const toppingValid = item.topping.every(topping => topping.name.trim() !== '' && topping.price.trim() !== '')
+        const sizeValid = item.size.every(size => size.name.trim() !== '' && size.price.trim() !== '')
         if (toppingValid && sizeValid) {
           setShow(true);
         } else {
@@ -67,6 +64,7 @@ const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct)
             PriceProduct: item.price,
             QuantityProduct: 1,
             SizeProduct: size,
+            StatusProduct: cartStatus.PENDING,
           },
         ],
       };
@@ -131,10 +129,11 @@ const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct)
           item={item}
           show={show}
           onDismiss={() => setShow(false)}
+          enableBackDropDismiss
         />
       </View>
     </View>
   );
-});
+}
 
 export default ItemProduct;

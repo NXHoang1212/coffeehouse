@@ -23,7 +23,7 @@ interface PropsItemProduct {
     item: ProductSuggest;
 }
 
-const ItemRecomend = ({ item, }: PropsItemProduct) => {
+const ItemRecomend = memo(({ item }: PropsItemProduct) => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
     const dispatch = useDispatch<AppDispatch>();
     let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
@@ -127,6 +127,6 @@ const ItemRecomend = ({ item, }: PropsItemProduct) => {
             </View>
         </View>
     );
-};
+});
 
-export default memo(ItemRecomend);
+export default ItemRecomend;

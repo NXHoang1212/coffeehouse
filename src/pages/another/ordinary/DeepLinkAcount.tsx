@@ -23,10 +23,6 @@ const DeepLinkAcount = () => {
         <TouchableOpacity
           onPress={() => Messenger('Chức năng đang phát triển', 'warning')}>
           <View style={StyleDeepLinkAccount.viewitem}>
-            {/* <FastImage
-              source={Icon.HARAVAN}
-              style={StyleDeepLinkAccount.iconharavan}
-            /> */}
             <IconHarvan style={StyleDeepLinkAccount.iconharavan} fill={COLOR.BLUE}/>
             <Text style={StyleDeepLinkAccount.textitem}>
               Liên kết với Harawoks

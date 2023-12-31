@@ -36,10 +36,22 @@ const BannerSlider = () => {
     [{ nativeEvent: { contentOffset: { x: scrollx } } }],
     { useNativeDriver: false },
   );
-  const handleImagePress = (item: any) => {
-    const destination = item.name;
-    navigation.navigate(destination as TabHomeNavigateEnum);
+  const screenNameMapping: Record<string, string> = {
+    "Giảm 40%": "Đặt hàng",
+    "Giảm 50%": "Đặt hàng",
+    "Thử ngay Trà Xanh Tây Bắc": "Đặt hàng",
+    "Đổi Bean": "Đặt hàng",
+    "Đồng Giá 39K": "Đặt hàng",
   };
+  const handleImagePress = (item: any) => {
+    const destination = screenNameMapping[item.name];
+    if (destination) {
+      navigation.navigate(destination as TabHomeNavigateEnum);
+    } else {
+      console.error(`No mapping found for screen name: ${item.name}`);
+    }
+  };
+
 
   return (
     <View style={styles.container}>

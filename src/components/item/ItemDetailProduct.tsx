@@ -22,7 +22,7 @@ interface PropsDetailItemProduct {
   item: DetailProduct;
 }
 
-const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
+const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
   const goBack = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   let id = useSelector((state: RootState) => state.root.user._id);
@@ -274,6 +274,6 @@ const ItemDetailProduct = ({ item }: PropsDetailItemProduct) => {
       </View>
     </View>
   );
-};
+});
 
 export default ItemDetailProduct;

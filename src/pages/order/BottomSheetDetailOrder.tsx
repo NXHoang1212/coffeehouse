@@ -1,5 +1,5 @@
 import { View, Text, Animated, Image, TouchableOpacity, Pressable, ScrollView, Dimensions, TextInput, StatusBar, Modal, } from 'react-native';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { DetailProduct } from '../../data/types/Product.entity';
@@ -140,7 +140,11 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
     <Modal animationType="slide" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
       <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDetailOrder.backdrop} />
       <Animated.View
-        style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}>
+        style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}
+        pointerEvents="box-none"
+        shouldRasterizeIOS={true}
+        renderToHardwareTextureAndroid={true}
+      >
         <View style={StyleBottomSheetDetailOrder.viewloading}>{loading ? <ActivityIndicator /> : null} </View>
         <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
           <View style={StyleBottomSheetDetailOrder.header}>
@@ -154,12 +158,17 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         <View style={StyleBottomSheetDetailOrder.body}>
           <ScrollView
             contentContainerStyle={{ flexGrow: 1, paddingBottom: 150 }}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: bottomsheet } } }],
+              { useNativeDriver: true },
+            )}
             showsVerticalScrollIndicator={false}>
             <View style={StyleBottomSheetDetailOrder.body}>
               <View style={StyleBottomSheetDetailOrder.viewsize}>
                 <Text style={StyleBottomSheetDetailOrder.textsize}>Size</Text>
                 {item.size.map((sizeItem, index) => (
-                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => setSelectedSize(sizeItem)}>
+                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray}
+                    onPress={() => setSelectedSize(sizeItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                       <CheckBox
                         checkedIcon="dot-circle-o"
@@ -186,7 +195,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                 <Text style={StyleBottomSheetDetailOrder.textsize}>Topping</Text>
                 <Text style={StyleBottomSheetDetailOrder.textminisize}>Chọn tối đa 2 loại</Text>
                 {item.topping.map((toppingItem, index) => (
-                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray} onPress={() => handleSelectTopping(toppingItem)}>
+                  <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray}
+                    onPress={() => handleSelectTopping(toppingItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                       <CheckBox
                         checkedIcon="check-square"
@@ -246,6 +256,6 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
       </Animated.View>
     </Modal>
   );
-};
+}
 
 export default BottomSheetDetailOrder;

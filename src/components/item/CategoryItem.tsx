@@ -5,7 +5,6 @@ import BottomSheetMenu from '../modal/BottomSheetMenu';
 import { useGetCategoryQuery } from '../../service/api/IndexBanner&Category';
 import FastImage from 'react-native-fast-image';
 
-
 type Props = {
   setSelectedCategory: (categoryName: String) => void;
 };

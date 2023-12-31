@@ -171,6 +171,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
+    implementation project(':react-native-vector-icons')
+
     implementation 'androidx.browser:browser:1.5.0'
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
@@ -188,5 +190,9 @@ dependencies {
     }
 }
 
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Specify font files
+]
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")

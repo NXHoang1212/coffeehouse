@@ -18,6 +18,7 @@ import IconNotify from '../../assets/Svg/IconNotify';
 import IconPromo from '../../assets/Svg/IconPromo';
 import IconDatingCoffee from '../../assets/Svg/IconDatingCoffee';
 import { COLOR } from '../../constant/Color';
+import { Animated } from 'react-native';
 
 const HomePage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
@@ -40,13 +41,23 @@ const HomePage = () => {
     StatusBar.setBackgroundColor(color);
     setBackgroundColor(color);
   };
-
+  const scrollY = useRef(new Animated.Value(0)).current;
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const newOffsetY = event.nativeEvent.contentOffset.y;
     if (newOffsetY > 100) {
       updateStatusBar('#fff');
+      Animated.timing(scrollY, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
     } else {
       updateStatusBar('#FFF7E6');
+      Animated.timing(scrollY, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
     }
   };
 
@@ -89,6 +100,7 @@ const HomePage = () => {
         showsVerticalScrollIndicator={false}
         ref={scroll}
         onScroll={onScroll}
+        scrollEventThrottle={16}
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={() => { }} />
         }>
@@ -112,7 +124,7 @@ const HomePage = () => {
         </View>
         <BottomSheetHome />
       </ScrollView>
-    </View>
+    </View >
   );
 };
 

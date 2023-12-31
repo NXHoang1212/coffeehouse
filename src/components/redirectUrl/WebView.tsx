@@ -36,10 +36,6 @@ const WebViewUrl = () => {
         </TouchableOpacity>
         <Text style={styles.titlename}>{TrunacteString(params.name, 31)}</Text>
         <TouchableOpacity onPress={onShare}>
-          {/* <Image
-            source={Icon.SHARE}
-            style={{ width: WIDTH(4), height: HEIGHT(2), marginLeft: WIDTH(7) }}
-          /> */}
           <IconShare style={{ width: WIDTH(4), height: HEIGHT(2), marginLeft: WIDTH(7) }} />
         </TouchableOpacity>
       </View>
