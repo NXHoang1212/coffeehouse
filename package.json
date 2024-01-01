@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "buildAAB": "npx react-native build-android --mode=release", 
+    "buildAAB": "npx react-native build-android --mode=release",
     "buildAPK": "npm run android -- --mode=release"
   },
   "dependencies": {
@@ -61,6 +61,7 @@
     "react-native-svg-transformer": "^1.2.0",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-vector-icons": "^10.0.0",
+    "react-native-webp-format": "^1.2.0",
     "react-native-webview": "^13.3.1",
     "react-redux": "^8.1.2",
     "redux-devtools-extension": "^2.13.9",

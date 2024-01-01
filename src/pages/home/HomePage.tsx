@@ -74,7 +74,7 @@ const HomePage = () => {
     <View style={[StyleHomePage.container, { backgroundColor: backgroundColor }]}>
       <View style={StyleHomePage.viewheader}>
         <View style={StyleHomePage.headerText}>
-          <FastImage style={StyleHomePage.icon} source={GetCurrentHour().imageSource as any} />
+          <FastImage style={StyleHomePage.icon} source={{ uri: GetCurrentHour().imageSource as any }} />
           {isLoggedIn ? (
             <Text style={StyleHomePage.textheader}>{GetCurrentHour().greeting}</Text>
           ) : (

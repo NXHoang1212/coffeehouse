@@ -29,7 +29,6 @@ const StyleSearchOrder = StyleSheet.create({
     marginLeft: WIDTH(6),
   },
   iconsearch: {
-    tintColor: COLOR.BLACK,
   },
   inputsearch: {
     fontSize: FONTSIZE(2),

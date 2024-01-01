@@ -1,4 +1,4 @@
-import { Modal, Pressable, Text, View, Dimensions, Animated, TouchableOpacity, Image } from 'react-native';
+import { Modal, Pressable, Text, View, Dimensions, Animated, TouchableOpacity, Image, ScrollView } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { DataMethod } from '../../data/listitem/DataMethod';
 import { CheckBox } from 'react-native-elements';

@@ -4,7 +4,7 @@ import { HOST } from '../constant/Host';
 
 const AxiosInstance = (contentType = 'application/json') => {
   const axiosInstance = axios.create({
-    baseURL: HOST.API
+    baseURL: HOST.APIRELEASE
   });
   axiosInstance.interceptors.request.use(
     async (config: any) => {

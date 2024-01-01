@@ -23,7 +23,7 @@ const BottomSheetHome = () => {
   const { activeTab, handleActiveTab } = ActiveTab("Tab 1");
   const MemoziedItemWebView = useMemo(() => ItemWebView, []);
   const recommend = useSelector((state: RootState) => state.root.recommend)
-
+  
   return (
     <View style={StyleBottomSheetHome.container}>
       <View style={StyleBottomSheetHome.line} />

@@ -75,7 +75,7 @@ const StyleMethodAmount = StyleSheet.create({
   viewoption: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: HEIGHT(1),
+    marginBottom: HEIGHT(0.3),
   },
   viewtextimage: {
     flexDirection: 'row',
@@ -85,7 +85,7 @@ const StyleMethodAmount = StyleSheet.create({
   },
   iconoption: {
     width: WIDTH(13),
-    height: HEIGHT(4),
+    height: HEIGHT(3.3),
     resizeMode: 'contain',
   },
   line: {

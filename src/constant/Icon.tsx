@@ -1,50 +1,49 @@
 /* QUẢNG CÁO */
 export const Banner = {
-  SALE39K: require('../assets/images/banner1.jpg'),
-  DISCOUNT50: require('../assets/images/banner2.jpg'),
-  DISCOUNT40: require('../assets/images/banner3.jpg'),
-  CLICKHERE: require('../assets/images/banner4.jpg'),
-  TRADEBEAN: require('../assets/images/banner5.png'),
+  SALE39K: require('../assets/images/banner1.webp'),
+  DISCOUNT50: require('../assets/images/banner2.webp'),
+  DISCOUNT40: require('../assets/images/banner3.webp'),
+  CLICKHERE: require('../assets/images/banner4.webp'),
+  TRADEBEAN: require('../assets/images/banner5.webp'),
 };
 
 /* ĐĂNG NHẬP */ 
 export const Logo = {
-  FACEBOOK: require('../assets/images/facebook.png'),
-  GOOGLE: require('../assets/images/google.png'),
-  APPLE: require('../assets/images/lgoapple.jpg'),
+  FACEBOOK: require('../assets/images/facebook.webp'),
+  GOOGLE: require('../assets/images/google.webp'),
+  APPLE: require('../assets/images/lgoapple.webp'),
   TEXTLOGO: require('../assets/images/Logo.png'),
-  LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.jpg'),
-  VIETNAM: require('../assets/images/iconvietnam.png'),
+  LOGINCOFFEE: require('../assets/images/ImageLoginCoffee.webp'),
+  VIETNAM: require('../assets/images/iconvietnam.webp'),
 };
 
 /*DÙNG CHUNG */
 export const Icon = {
-  BACK: require('../assets/images/IconBack.png'),
-  DOWNDOUBLE: require('../assets/images/IconDown.png'),
-  MINUS: require('../assets/images/iconminus.png'),
+  BACK: require('../assets/images/IconBack.webp'),
+  DOWNDOUBLE: require('../assets/images/IconDown.webp'),
+  MINUS: require('../assets/images/iconminus.webp'),
   PLUS: require('../assets/images/iconPlus.png'),
   RIGHT: require('../assets/images/IconRight.png'),
-  SCAN: require('../assets/images/IconScan.png'),
-  SEARCH: require('../assets/images/iconsearch.png'),
+  SEARCH: require('../assets/images/iconsearch.webp'),
   POINTS: require('../assets/images/IconPoints.png'),
   CANCEL: require('../assets/images/iconx.png'),
-  AVATAR: require('../assets/images/avatar.png'),
+  AVATAR: require('../assets/images/avatar.webp'),
   BORDERCANCEL: require('../assets/images/iconcancelboder.png'),
-  LOCATION: require('../assets/images/IconLocation.png'),
-  SEND: require('../assets/images/iconsend.png'),
-  DELIVERYADDRESS: require('../assets/images/icondeliveryaddress.png'),
-  METHOD: require('../assets/images/iconmethodamount.png'),
-  MONEY: require('../assets/images/iconmoney.png'),
-  ZALOPAY: require('../assets/images/iconzalopay.png'),
-  MOMO: require('../assets/images/iconmomo.png'),
-  VNPAY: require('../assets/images/iconvnpay.png'),
-  CARDBANK: require('../assets/images/iconcardbank.png'),
-  CASH: require('../assets/images/iconpaymentoffline.png'),
-  CHECKED: require('../assets/images/iconfavouriteschecked.png'),
-  BACKGROUNDPROMO: require('../assets/images/backgroundPromo.png'),
-  BACKGROUNDDISCOUNT: require('../assets/images/backgrounddiscount.png'),
+  LOCATION: require('../assets/images/IconLocation.webp'),
+  SEND: require('../assets/images/iconsend.webp'),
+  DELIVERYADDRESS: require('../assets/images/icondeliveryaddress.webp'),
+  METHOD: require('../assets/images/iconmethodamount.webp'),
+  MONEY: require('../assets/images/iconmoney.webp'),
+  ZALOPAY: require('../assets/images/iconzalopay.webp'),
+  MOMO: require('../assets/images/iconmomo.webp'),
+  VNPAY: require('../assets/images/iconvnpay.webp'),
+  CARDBANK: require('../assets/images/iconcardbank.webp'),
+  CASH: require('../assets/images/iconpaymentoffline.webp'),
+  CHECKED: require('../assets/images/iconfavouriteschecked.webp'),
+  BACKGROUNDPROMO: require('../assets/images/backgroundPromo.webp'),
+  BACKGROUNDDISCOUNT: require('../assets/images/backgrounddiscount.webp'),
   ORDERSTATUS: require('../assets/images/orderstatus.png'),
-  ORDERSUCCESS: require('../assets/images/ordersuccess.png'),
+  ORDERSUCCESS: require('../assets/images/ordersuccess.webp'),
 };
 
 /* THÔNG TIN */
@@ -52,29 +51,29 @@ export const infores = {
   HISTORY: require('../assets/images/iconhistory.png'),
   RULES: require('../assets/images/IconRules.png'),
   MUSIC: require('../assets/images/IconMusic.png'),
-  ACCOUNT: require('../assets/images/iconaccount.png'),
-  ADDRESS: require('../assets/images/IconAddress.png'),
+  ACCOUNT: require('../assets/images/iconaccount.webp'),
+  ADDRESS: require('../assets/images/IconAddress.webp'),
   SERCURITY: require('../assets/images/IconSecurity.png'),
-  SETTING: require('../assets/images/IconSetting.png'),
+  SETTING: require('../assets/images/IconSetting.webp'),
   DATEPICKER: require('../assets/images/iconPicker.png'),
   EDIT: require('../assets/images/IconEdit.png'),
   LOGOUT: require('../assets/images/IconLogout.png'),
   CAMERA: require('../assets/images/IconCamera.png'),
-  GALLERY: require('../assets/images/iconGallarey.png'),
-  PICTURE: require('../assets/images/iconpicturecamera.png'),
+  GALLERY: require('../assets/images/iconGallarey.webp'),
+  PICTURE: require('../assets/images/iconpicturecamera.webp'),
 };
 
 /* LIÊN HỆ */
 export const contact = {
-  PHONE: require('../assets/images/IconPhone.png'),
-  EMAIL: require('../assets/images/IconEmail.png'),
-  FACEBOOK: require('../assets/images/IconFacebook.png'),
+  PHONE: require('../assets/images/IconPhone.webp'),
+  EMAIL: require('../assets/images/IconEmail.webp'),
+  FACEBOOK: require('../assets/images/IconFacebook.webp'),
 };
 
 export const order = {
-  SHIPPER: require('../assets/images/IconDelivery.png'),
-  CARRIEDAWAY: require('../assets/images/IconAway.png'),
-  STAR: require('../assets/images/iconstarcustom.png'),
+  SHIPPER: require('../assets/images/IconDelivery.webp'),
+  CARRIEDAWAY: require('../assets/images/IconAway.webp'),
+  STAR: require('../assets/images/iconstarcustom.webp'),
 };
 
 /* TAB MENU CHÍNH */
@@ -95,35 +94,35 @@ export const Bean = {
 
 /* DANH MỤC  */
 export const category = {
-  MENU: require('../assets/images/iconMenu.png'),
+  MENU: require('../assets/images/iconMenu.webp'),
 };
 
 
 /* KHÁM PHÁ THÊM */
 export const Explore = {
-  DISCOUNT10: require('../assets/images/discount10.jpg'),
-  DISCOUNT40: require('../assets/images/discount40.jpg'),
-  DISCOUNT50: require('../assets/images/discount50.jpg'),
-  DISCOUNTCHILL: require('../assets/images/discountchill.jpg'),
-  FREESHIPWATER: require('../assets/images/freeshipwater.jpg'),
-  UPGRADEAPP: require('../assets/images/upgradeapp.jpg'),
-  SALE39K: require('../assets/images/banner1.jpg'),
-  MINIGAME: require('../assets/images/minigame.jpg'),
-  TRAXANH: require('../assets/images/traxanhtaybac.jpg'),
-  CHOTDONNHA: require('../assets/images/doiquachuan.jpg'),
-  FREESHIP: require('../assets/images/freeship.jpg'),
-  V60: require('../assets/images/nghethuaphache.jpg'),
-  KALITAWAVE: require('../assets/images/katlivewave.jpg'),
-  COLDBREW: require('../assets/images/coldbrew.jpg'),
-  ESPRESSO: require('../assets/images/espresso.jpg'),
+  DISCOUNT10: require('../assets/images/discount10.webp'),
+  DISCOUNT40: require('../assets/images/discount40.webp'),
+  DISCOUNT50: require('../assets/images/discount50.webp'),
+  DISCOUNTCHILL: require('../assets/images/discountchill.webp'),
+  FREESHIPWATER: require('../assets/images/freeshipwater.webp'),
+  UPGRADEAPP: require('../assets/images/upgradeapp.webp'),
+  SALE39K: require('../assets/images/banner1.webp'),
+  MINIGAME: require('../assets/images/minigame.webp'),
+  TRAXANH: require('../assets/images/traxanhtaybac.webp'),
+  CHOTDONNHA: require('../assets/images/doiquachuan.webp'),
+  FREESHIP: require('../assets/images/freeship.webp'),
+  V60: require('../assets/images/nghethuaphache.webp'),
+  KALITAWAVE: require('../assets/images/katlivewave.webp'),
+  COLDBREW: require('../assets/images/coldbrew.webp'),
+  ESPRESSO: require('../assets/images/espresso.webp'),
 };
 
 export const IconRank = {
-  BIRTHDAY: require('../assets/images/iconbrass.png'),
-  BEAN: require('../assets/images/iconbean.png'),
-  PROMO: require('../assets/images/iconcode.png'),
-  COFFEE: require('../assets/images/iconcoffeebean.png'),
-  SNACK: require('../assets/images/iconsnackbean.png'),
-  STAR: require('../assets/images/iconstarmember.png'),
-  VALI: require('../assets/images/iconvali.png'),
+  BIRTHDAY: require('../assets/images/iconbrass.webp'),
+  BEAN: require('../assets/images/iconbean.webp'),
+  PROMO: require('../assets/images/iconcode.webp'),
+  COFFEE: require('../assets/images/iconcoffeebean.webp'),
+  SNACK: require('../assets/images/iconsnackbean.webp'),
+  STAR: require('../assets/images/iconstarmember.webp'),
+  VALI: require('../assets/images/iconvali.webp'),
 };

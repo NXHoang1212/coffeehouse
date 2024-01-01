@@ -20,18 +20,22 @@ const BannerSlider = () => {
   const viewconfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
   const slideRef = useRef<FlatList<{ image: string; name: string; _id: string; }>>(null);
   const viewableItemsChange = useRef(({ viewableItems }: any) => { setCurrentIndex(viewableItems[0].index) }).current;
+
   useEffect(() => {
     const interval = setInterval(() => {
-      if (currentIndex < banner.length - 1) {
-        slideRef?.current?.scrollToIndex({ index: currentIndex + 1 });
-      } else {
-        slideRef?.current?.scrollToIndex({ index: 0 });
+      if (banner.length > 1) {
+        if (currentIndex < banner.length - 1) {
+          slideRef?.current?.scrollToIndex({ index: currentIndex + 1 });
+        } else {
+          slideRef?.current?.scrollToIndex({ index: 0 });
+        }
       }
     }, 1500);
     return () => {
       clearInterval(interval);
     };
-  }, [currentIndex]);
+  }, [currentIndex, banner]);
+
   const handleScroll = Animated.event(
     [{ nativeEvent: { contentOffset: { x: scrollx } } }],
     { useNativeDriver: false },

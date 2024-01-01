@@ -141,11 +141,10 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
       <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleBottomSheetDetailOrder.backdrop} />
       <Animated.View
         style={[StyleBottomSheetDetailOrder.container, { bottom: bottomsheet }]}
-        pointerEvents="box-none"
         shouldRasterizeIOS={true}
         renderToHardwareTextureAndroid={true}
       >
-        <View style={StyleBottomSheetDetailOrder.viewloading}>{loading ? <ActivityIndicator /> : null} </View>
+        <View style={StyleBottomSheetDetailOrder.viewloading}>{loading ? <ActivityIndicator /> : null}</View>
         <PanGestureHandler onGestureEvent={onGestureEvent} onEnded={onGestureEnd}>
           <View style={StyleBottomSheetDetailOrder.header}>
             <Text style={StyleBottomSheetDetailOrder.texttitle}>{item.name}</Text>
@@ -158,10 +157,6 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         <View style={StyleBottomSheetDetailOrder.body}>
           <ScrollView
             contentContainerStyle={{ flexGrow: 1, paddingBottom: 150 }}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: bottomsheet } } }],
-              { useNativeDriver: true },
-            )}
             showsVerticalScrollIndicator={false}>
             <View style={StyleBottomSheetDetailOrder.body}>
               <View style={StyleBottomSheetDetailOrder.viewsize}>
