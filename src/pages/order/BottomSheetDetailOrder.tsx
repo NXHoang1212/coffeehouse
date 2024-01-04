@@ -5,7 +5,7 @@ import { PanGestureHandler } from 'react-native-gesture-handler';
 import { DetailProduct } from '../../data/types/Product.entity';
 import StyleBottomSheetDetailOrder from '../../styles/order/StyleBottomSheetDetailOrder';
 import { FormatPrice } from '../../utils/FormatPrice';
-import { CheckBox } from 'react-native-elements';
+import CheckBox from '../../components/custom/CheckBox';
 import { handleMinus, handlePlus } from '../../utils/Total';
 import { useSelector } from 'react-redux';
 import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
@@ -166,11 +166,6 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                     onPress={() => setSelectedSize(sizeItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
                       <CheckBox
-                        checkedIcon="dot-circle-o"
-                        uncheckedIcon="circle-o"
-                        checkedColor="#FFC107"
-                        uncheckedColor="#000"
-                        size={20}
                         checked={selectedSize === sizeItem}
                         onPress={() => setSelectedSize(sizeItem)}
                       />
@@ -193,19 +188,10 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
                   <TouchableOpacity key={index} style={StyleBottomSheetDetailOrder.viewsizearray}
                     onPress={() => handleSelectTopping(toppingItem)}>
                     <View style={StyleBottomSheetDetailOrder.viewcheckitem}>
-                      <CheckBox
-                        checkedIcon="check-square"
-                        uncheckedIcon="square-o"
-                        checkedColor="#FFC107"
-                        uncheckedColor="#000"
-                        size={20}
-                        checked={selectedTopping.includes(toppingItem)}
-                        onPress={() => handleSelectTopping(toppingItem)}
-                        disabled={
-                          selectedTopping.length === 2 &&
-                          !selectedTopping.includes(toppingItem)
-                        }
-                      />
+                        <CheckBox
+                          checked={selectedTopping.includes(toppingItem)}
+                          onPress={() => handleSelectTopping(toppingItem)}
+                        />
                       <View style={StyleBottomSheetDetailOrder.viewsizename}>
                         <Text style={StyleBottomSheetDetailOrder.textsizename}>{toppingItem.name}</Text>
                         <Text style={StyleBottomSheetDetailOrder.textsizeprice}>{FormatPrice(parseInt(toppingItem.price))}</Text>

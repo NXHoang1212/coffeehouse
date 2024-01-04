@@ -86,6 +86,7 @@ const StyleBottomSheetDetailOrder = StyleSheet.create({
   viewsizename: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: WIDTH(10.5),
   },
   textsizename: {
     fontSize: FONTSIZE(1.9),

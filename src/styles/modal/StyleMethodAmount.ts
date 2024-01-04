@@ -75,7 +75,13 @@ const StyleMethodAmount = StyleSheet.create({
   viewoption: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: HEIGHT(0.3),
+    marginBottom: HEIGHT(0.5),
+  },
+  viewcheckbox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: WIDTH(5),
+    top: HEIGHT(0.5),
   },
   viewtextimage: {
     flexDirection: 'row',
@@ -86,7 +92,6 @@ const StyleMethodAmount = StyleSheet.create({
   iconoption: {
     width: WIDTH(13),
     height: HEIGHT(3.3),
-    resizeMode: 'contain',
   },
   line: {
     width: WIDTH(100),

@@ -78,6 +78,12 @@ const StyleChangeMethod = StyleSheet.create({
         alignItems: 'center',
         marginBottom: HEIGHT(1),
     },
+    viewcheckbox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: WIDTH(5),
+        top: HEIGHT(0.5),
+    },
     viewtextimage: {
         flexDirection: 'row',
         alignItems: 'center',

@@ -8,7 +8,7 @@ import { useGoBack } from '../../utils/GoBack';
 import StyleItemDetailProduct from '../../styles/item/StyleItemDetailProduct';
 import { ToggleDescription } from '../../utils/ToggleDescription';
 import { handleMinus, handlePlus } from '../../utils/Total';
-import { CheckBox } from 'react-native-elements';
+import CheckBox from '../custom/CheckBox';
 import { useCreateEmptyCartMutation } from '../../service/api/IndexCart';
 import { useCreateFavouritesMutation } from '../../service/api/IndexFavourites';
 import { useSelector } from 'react-redux';
@@ -160,11 +160,6 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
                     style={StyleItemDetailProduct.viewcheckitem}
                     onPress={() => setSelectedSize(sizeItem)}>
                     <CheckBox
-                      checkedIcon="dot-circle-o"
-                      uncheckedIcon="circle-o"
-                      checkedColor="#FFC107"
-                      uncheckedColor="#000"
-                      size={20}
                       checked={selectedSize === sizeItem}
                       onPress={() => setSelectedSize(sizeItem)}
                     />
@@ -199,17 +194,8 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
                   style={StyleItemDetailProduct.viewsizearray}>
                   <View style={StyleItemDetailProduct.viewcheckitem}>
                     <CheckBox
-                      checkedIcon="check-square"
-                      uncheckedIcon="square-o"
-                      checkedColor="#FFC107"
-                      uncheckedColor="#000"
-                      size={20}
                       checked={selectedTopping.includes(toppingItem)}
                       onPress={() => handleSelectTopping(toppingItem)}
-                      disabled={
-                        selectedTopping.length === 2 &&
-                        !selectedTopping.includes(toppingItem)
-                      }
                     />
                     <View style={StyleItemDetailProduct.viewsizename}>
                       <Text style={StyleItemDetailProduct.textsizename}>

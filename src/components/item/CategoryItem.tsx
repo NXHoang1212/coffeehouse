@@ -4,6 +4,7 @@ import StyleCategoryItem from '../../styles/item/StyleCategoryItem';
 import BottomSheetMenu from '../modal/BottomSheetMenu';
 import { useGetCategoryQuery } from '../../service/api/IndexBanner&Category';
 import FastImage from 'react-native-fast-image';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 type Props = {
   setSelectedCategory: (categoryName: String) => void;
@@ -12,7 +13,7 @@ type Props = {
 const CategoryItem = ({ setSelectedCategory }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const { data } = useGetCategoryQuery();
-  const categories = data?.data?.slice(0, 7).concat({ name: 'Xem thêm', image: 'https://res.cloudinary.com/dxlvdrb52/image/upload/v1703826288/category/iconanother_zuhiws.png', _id: 'all' }) || [];
+  const categories = data?.data?.slice(0, 7).concat({ name: 'Xem thêm', image: 'http://res.cloudinary.com/dxlvdrb52/image/upload/v1703826288/category/iconanother_zuhiws.png', _id: 'all' });
 
   const handleCategorySelect = (categoryName: String) => {
     if (categoryName === 'Xem thêm') {
@@ -26,7 +27,7 @@ const CategoryItem = ({ setSelectedCategory }: Props) => {
     <TouchableWithoutFeedback>
       <View style={{ flexDirection: 'column', gap: 15 }}>
         <View style={StyleCategoryItem.viewcategory}>
-          {categories.map((item, index) => {
+          {categories?.map((item, index) => {
             return (
               <TouchableOpacity key={index} onPress={() => handleCategorySelect(item.name)}>
                 <View style={StyleCategoryItem.viewcategoryitem}>

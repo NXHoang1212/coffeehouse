@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StyleItemSelectedAddress } from '../../styles/item/StyleItemSelectedAddress';
-import { CheckBox } from 'react-native-elements';
+import { CheckBoxBorder } from '../custom/CheckBox';
 import { Icon } from '../../constant/Icon';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import FastImage from 'react-native-fast-image';
+import { Messenger } from '../../utils/ShowMessage';
 
 interface Props {
   address: any;
@@ -17,15 +18,19 @@ const ItemSelectedAddressOrder: React.FC<Props> = ({ address, showDoneButton }) 
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const [reason, setReason] = useState<string>('');
 
+  const handleDone = () => {
+    if (reason === '') {
+      Messenger('Vui lòng chọn địa chỉ giao hàng', 'error');
+    } else {
+      navigation.navigate('TabHomeNavigate' as any, { screen: 'Đơn hàng', params: { address: reason } });
+    }
+  }
+
   return (
     <SafeAreaView style={StyleItemSelectedAddress.container}>
-      <TouchableOpacity style={StyleItemSelectedAddress.body} onPress={() => navigation.navigate('TabHomeNavigate' as any, { screen: 'Đơn hàng', params: { address: reason } })}>
+      <TouchableOpacity style={StyleItemSelectedAddress.body} onPress={() => handleDone()}>
         <View style={StyleItemSelectedAddress.checkbox}>
-          <CheckBox
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
-            checkedColor="#FF5F24"
-            uncheckedColor="#FF5F24"
+          <CheckBoxBorder
             checked={reason === address}
             onPress={() => setReason(address)}
           />
@@ -42,7 +47,6 @@ const ItemSelectedAddressOrder: React.FC<Props> = ({ address, showDoneButton }) 
         </View>
       </TouchableOpacity>
       <View>
-
       </View>
     </SafeAreaView>
   );

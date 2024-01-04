@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
 import { AddMethodAmount } from '../../redux/slices/MethodAmountSlice';
 import { DataMethod } from '../../data/listitem/DataMethod';
-import { CheckBox } from 'react-native-elements';
+import { CheckBoxBorder } from '../custom/CheckBox';
 import FastImage from 'react-native-fast-image';
 
 interface Props {
@@ -89,16 +89,14 @@ const MethodAmount: React.FC<Props> = ({ openModal, onDismiss, enableBackDropDis
                     <TouchableOpacity
                       style={StyleMethodAmount.viewoption}
                       onPress={() => handleAddMethodAmount(item)}>
-                      <CheckBox
-                        checkedIcon="dot-circle-o"
-                        uncheckedIcon="circle-o"
-                        checkedColor="#FF5F24"
-                        uncheckedColor="#c4c4c4"
-                        checked={methodAmount.name === item.name}
-                        onPress={() => handleAddMethodAmount(item)}
-                      />
+                      <View style={StyleMethodAmount.viewcheckbox}>
+                        <CheckBoxBorder
+                          checked={methodAmount.name === item.name}
+                          onPress={() => handleAddMethodAmount(item)}
+                        />
+                      </View>
                       <View style={StyleMethodAmount.viewtextimage}>
-                        <FastImage source={item.icon ? item.icon : null} style={StyleMethodAmount.iconoption} />
+                        <FastImage source={item.icon ? item.icon : null} style={StyleMethodAmount.iconoption} resizeMode={FastImage.resizeMode.contain} />
                         <Text style={StyleMethodAmount.textbodyoption}>{item.name}</Text>
                       </View>
                     </TouchableOpacity>

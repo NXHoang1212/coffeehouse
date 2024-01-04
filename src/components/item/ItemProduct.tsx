@@ -25,7 +25,7 @@ interface PropsItemProduct {
   isFirstItem: boolean;
 }
 
-const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
+const ItemProduct = memo(({ item, showCategory, isFirstItem }: PropsItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch<AppDispatch>();
   let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
@@ -105,8 +105,7 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
                 style={StyleItemProduct.imageproduct}
                 source={{
                   uri: item.image as string,
-                  priority: FastImage.priority.normal,
-                  cache: FastImage.cacheControl.immutable,
+                  priority: FastImage.priority.high,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
                 onLoad={onLoad}
@@ -134,6 +133,6 @@ const ItemProduct = ({ item, showCategory, isFirstItem }: PropsItemProduct) => {
       </View>
     </View>
   );
-}
+});
 
 export default ItemProduct;

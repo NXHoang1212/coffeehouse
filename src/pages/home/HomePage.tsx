@@ -104,24 +104,26 @@ const HomePage = () => {
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={() => { }} />
         }>
-        <View style={StyleHomePage.viewbody}>
-          <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
-            <View style={StyleHomePage.viewtextcard}>
-              <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
-              <Text style={StyleHomePage.textcard}>
-                Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho
-                thành viên bạn nhé!
-              </Text>
-              <TouchableOpacity style={StyleHomePage.viewlogincard}>
-                <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
-              </TouchableOpacity>
-              <Image style={StyleHomePage.iconpoints} source={Icon.POINTS} />
+        {isLoggedIn ? (
+          <View style={StyleHomePage.viewbody}>
+            <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
+              <View style={StyleHomePage.viewtextcard}>
+                <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
+                <Text style={StyleHomePage.textcard}>
+                  Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho
+                  thành viên bạn nhé!
+                </Text>
+                <TouchableOpacity style={StyleHomePage.viewlogincard} onPress={() => navigation.navigate('AuthStackUser', { screen: 'Login' } as any)}>
+                  <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
+                </TouchableOpacity>
+                <Image style={StyleHomePage.iconpoints} source={Icon.POINTS} />
+              </View>
+            </LinearGradient>
+            <View style={StyleHomePage.viewimagecard}>
+              <IconDatingCoffee style={StyleHomePage.imagecard} />
             </View>
-          </LinearGradient>
-          <View style={StyleHomePage.viewimagecard}>
-            <IconDatingCoffee style={StyleHomePage.imagecard} />
           </View>
-        </View>
+        ) : null}
         <BottomSheetHome />
       </ScrollView>
     </View >

@@ -11,6 +11,7 @@ const StyleItemSelectedAddress = StyleSheet.create({
     alignItems: 'center',
     gap: WIDTH(2),
     right: WIDTH(2),
+    marginBottom: HEIGHT(1.3),
   },
   imageheader: {
     width: WIDTH(10),

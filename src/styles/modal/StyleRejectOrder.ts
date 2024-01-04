@@ -94,6 +94,15 @@ const StyleRejectOrder = StyleSheet.create({
         fontSize: FONTSIZE(1.9),
         fontWeight: 'bold',
     },
+    viewoption: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: HEIGHT(1),
+    },
+    viewcheckbox: {
+        right: WIDTH(5),
+        top: HEIGHT(0.5),
+    },
 });
 
 

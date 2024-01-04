@@ -2,7 +2,7 @@ import { View, Text, Modal, Pressable, StatusBar, Animated, Dimensions, Image, T
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
-import { CheckBox } from 'react-native-elements';
+import { CheckBoxBorder } from '../custom/CheckBox';
 import StyleRejectOrder from '../../styles/modal/StyleRejectOrder';
 import { Portal } from 'react-native-paper';
 import { DataRejectOrder } from '../../data/listitem/DataRejectOrder';
@@ -119,17 +119,15 @@ const RejectOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss =
                     {DataRejectOrder.map((item, index) => {
                         return (
                             <View key={index}>
-                                <CheckBox
-                                    title={item.name}
-                                    checkedIcon='dot-circle-o'
-                                    uncheckedIcon='circle-o'
-                                    containerStyle={StyleRejectOrder.checkbox}
-                                    textStyle={StyleRejectOrder.textcheckbox}
-                                    checkedColor='#FF5F24'
-                                    uncheckedColor='#000'
-                                    onPress={() => setReason(item.name)}
-                                    checked={reason === item.name}
-                                />
+                                <View style={StyleRejectOrder.viewoption}>
+                                    <View style={StyleRejectOrder.viewcheckbox}>
+                                        <CheckBoxBorder
+                                            onPress={() => setReason(item.name)}
+                                            checked={reason === item.name}
+                                        />
+                                    </View>
+                                    <Text style={StyleRejectOrder.textbody}>{item.name}</Text>
+                                </View>
                                 {index === DataRejectOrder.length - 1 ? null : <View style={StyleRejectOrder.lineitem} />}
                             </View>
                         )

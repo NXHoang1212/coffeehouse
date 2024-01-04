@@ -8,7 +8,7 @@ import { FormatDate } from '../../utils/FormatDate';
 import { FocusEmail, FocusHo, FocusName } from '../../hooks/Focus';
 import StyleCreateInformation from '../../styles/auth/StyleCreateInformation';
 import { Picker } from '@react-native-picker/picker';
-import { CheckBox } from 'react-native-elements';
+import CheckBox from '../../components/custom/CheckBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApiUpdateUser } from '../../service/api/IndexUser';
 import { useNavigation } from '@react-navigation/native';
@@ -169,20 +169,18 @@ const CreateInformation = () => {
         </View>
         <View style={StyleCreateInformation.viewcheckbox}>
           <CheckBox
-            title={
-              <Text style={StyleCreateInformation.textcheckbox}>
-                Tôi đồng ý với các
-                <Text style={StyleCreateInformation.textcheckboxprotect}>
-                  {' '}
-                  Điều khoản và điều kiện của The Coffee House
-                </Text>
-              </Text>
-            }
+            // title={
+            //   <Text style={StyleCreateInformation.textcheckbox}>
+            //     Tôi đồng ý với các
+            //     <Text style={StyleCreateInformation.textcheckboxprotect}>
+            //       {' '}
+            //       Điều khoản và điều kiện của The Coffee House
+            //     </Text>
+            //   </Text>
+            // }
+            title="Tôi đồng ý với các Điều khoản và điều kiện của The Coffee House"
             checked={checked}
             onPress={() => setChecked(!checked)}
-            containerStyle={StyleCreateInformation.checkbox}
-            checkedColor="#000"
-            uncheckedColor="#000"
           />
         </View>
       </ScrollView>

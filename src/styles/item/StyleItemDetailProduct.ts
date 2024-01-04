@@ -114,6 +114,7 @@ const StyleItemDetailProduct = StyleSheet.create({
   viewsizename: {
     flexDirection: 'row',
     alignItems: 'center',
+    left: WIDTH(11),
   },
   textsizename: {
     fontSize: FONTSIZE(1.9),

@@ -107,21 +107,21 @@ const CartOrder = () => {
           <View style={StyleOrder.viewbody}>
             <CategoryItem setSelectedCategory={handleCategorySelect} />
             <View style={StyleOrder.viewbottom}>
-              <FlashList
-                data={showProducts.data}
-                renderItem={({ item }) => renderItem(item)}
-                keyExtractor={(item, index) => item._id + index}
-                showsVerticalScrollIndicator={false}
-                estimatedItemSize={200}
-                extraData={showProducts.data}
-                removeClippedSubviews={true}
-                viewabilityConfig={{
-                  waitForInteraction: true,
-                  itemVisiblePercentThreshold: 50,
-                  minimumViewTime: 1000,
-                }}
-                
-              />
+                <FlashList
+                  data={showProducts.data}
+                  renderItem={({ item }) => renderItem(item)}
+                  keyExtractor={(item, index) => item._id + index}
+                  showsVerticalScrollIndicator={false}
+                  estimatedItemSize={200}
+                  extraData={showProducts.data}
+                  removeClippedSubviews={true}
+                  viewabilityConfig={{
+                    waitForInteraction: true,
+                    itemVisiblePercentThreshold: 50,
+                    minimumViewTime: 1000,
+                  }}
+                  getItemType={(item) => item.category.name}
+                />
             </View>
           </View>
         </Animated.ScrollView>

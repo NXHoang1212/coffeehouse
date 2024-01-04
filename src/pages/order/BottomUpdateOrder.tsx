@@ -4,7 +4,7 @@ import { Icon } from '../../constant/Icon';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import StyleBottomUpdateOrder from '../../styles/order/StyleBottomUpdateOrder';
 import { FormatPrice, Total } from '../../utils/FormatPrice';
-import { CheckBox } from 'react-native-elements';
+import CheckBox from '../../components/custom/CheckBox';
 import { handleMinus, handlePlus } from '../../utils/Total';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
@@ -76,12 +76,20 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
     setNote(ProductId?.NoteProduct);
   }, [show]);
   const handleSelectTopping = (toppingItem: any) => {
-    if (selectedTopping.includes(toppingItem)) {
-      setSelectedTopping(
-        selectedTopping.filter((item: any) => item !== toppingItem),
-      );
+    if (selectedTopping.length === 2) {
+      if (selectedTopping.includes(toppingItem)) {
+        setSelectedTopping(
+          selectedTopping.filter((item: any) => item !== toppingItem),
+        );
+      }
     } else {
-      setSelectedTopping([...selectedTopping, toppingItem]);
+      if (selectedTopping.includes(toppingItem)) {
+        setSelectedTopping(
+          selectedTopping.filter((item: any) => item !== toppingItem),
+        );
+      } else {
+        setSelectedTopping([...selectedTopping, toppingItem]);
+      }
     }
   };
   const handleUpdateCart = async () => {
@@ -151,11 +159,6 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                     onPress={() => setSize(sizeItem)}>
                     <View style={StyleBottomUpdateOrder.viewcheckitem}>
                       <CheckBox
-                        checkedIcon="dot-circle-o"
-                        uncheckedIcon="circle-o"
-                        checkedColor="#FFC107"
-                        uncheckedColor="#000"
-                        size={20}
                         checked={size.name === sizeItem.name}
                         onPress={() => setSize(sizeItem)}
                       />
@@ -189,11 +192,6 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
                         onPress={() => handleSelectTopping(toppingItem)}>
                         <View style={StyleBottomUpdateOrder.viewcheckitem}>
                           <CheckBox
-                            checkedIcon="check-square"
-                            uncheckedIcon="square-o"
-                            checkedColor="#FFC107"
-                            uncheckedColor="#000"
-                            size={20}
                             checked={selectedTopping.includes(toppingItem)}
                             onPress={() => handleSelectTopping(toppingItem)}
                           />

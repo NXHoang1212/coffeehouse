@@ -1,7 +1,7 @@
 import { Modal, Pressable, Text, View, Dimensions, Animated, TouchableOpacity, Image, ScrollView } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { DataMethod } from '../../data/listitem/DataMethod';
-import { CheckBox } from 'react-native-elements';
+import { CheckBoxBorder } from '../custom/CheckBox';
 import StyleChangeMethod from '../../styles/modal/StyleChangeMethod';
 
 interface Props {
@@ -73,12 +73,12 @@ const ChangeMethod: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss 
                                     return (
                                         <View key={index}>
                                             <TouchableOpacity style={StyleChangeMethod.viewoption} >
-                                                <CheckBox
-                                                    checkedIcon="dot-circle-o"
-                                                    uncheckedIcon="circle-o"
-                                                    checkedColor="#FF5F24"
-                                                    uncheckedColor="#c4c4c4"
-                                                />
+                                                <View style={StyleChangeMethod.viewcheckbox}>
+                                                    <CheckBoxBorder
+                                                        checked={false}
+                                                        onPress={() => { }}
+                                                    />
+                                                </View>
                                                 <View style={StyleChangeMethod.viewtextimage}>
                                                     <Image source={item.icon ? item.icon : null} style={StyleChangeMethod.iconoption} />
                                                     <Text style={StyleChangeMethod.textbodyoption}>{item.name}</Text>
