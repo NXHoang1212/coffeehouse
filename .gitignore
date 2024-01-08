@@ -63,4 +63,4 @@ yarn-error.log
 .metro-health-check*
 
 #Git ignore
-.NotNew.md 
+NotNew.md 
