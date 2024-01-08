@@ -165,14 +165,15 @@ const StyleCreateInformation = StyleSheet.create({
     alignItems: 'center',
     marginTop: HEIGHT(2),
     width: WIDTH(90),
-    left: WIDTH(2),
     gap: WIDTH(2),
   },
   textcheckbox: {
     color: COLOR.BLACK,
-    fontSize: FONTSIZE(1.9),
+    fontSize: FONTSIZE(1.7),
     fontWeight: '500',
-    left: WIDTH(2),
+    left: WIDTH(5),
+    width: WIDTH(80),
+    top: HEIGHT(0.5),
   },
   textcheckboxprotect: {
     color: COLOR.BLUE,

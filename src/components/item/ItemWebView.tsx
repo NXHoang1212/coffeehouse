@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, ImageSourcePropType, } from 'react-native';
 import StyleItemWebView from '../../styles/item/StyleItemWebView';
 import { Icon } from '../../constant/Icon';
@@ -20,7 +20,7 @@ interface ItemWebViewProps {
   };
 }
 
-const ItemWebView = ({ item }: ItemWebViewProps) => {
+const ItemWebView = memo(({ item }: ItemWebViewProps) => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamsStack>>();
 
   const openWebView = () => {
@@ -48,6 +48,6 @@ const ItemWebView = ({ item }: ItemWebViewProps) => {
       </View>
     </TouchableOpacity>
   );
-};
+});
 
 export default ItemWebView;

@@ -4,18 +4,19 @@ export const enum UserRoles {
 }
 
 export interface UserMethods {
-  googleId: string;
-  facebookId: string;
+  googleId?: string;
+  facebookId?: string;
   phone: string;
+  avatar: string;
 }
 
-export interface User extends UserData {}
+export interface User extends UserData { }
 
 export interface UserData {
   _id: number;
   role: string;
-  googleId: string;
-  facebookId: string;
+  googleId?: string;
+  facebookId?: string;
   email: string;
   name: string;
   holder: string;

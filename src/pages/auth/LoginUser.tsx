@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, TextInput, StatusBar, TouchableWithoutFeedback, Keyboard, } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ThemLightStatusBar } from '../../constant/ThemLight';
 import StyleLoginUser from '../../styles/auth/StyleLoginUser';
 import { Icon, Logo } from '../../constant/Icon';
@@ -16,12 +16,12 @@ import { setLoggedIn } from '../../redux/slices/IsLoggedIn';
 import { AppDispatch } from '../../redux/store/Store';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store/Store';
+import { useGetUserByIdQuery } from '../../service/api/IndexUser';
 
 const LoginUser = () => {
   ThemLightStatusBar('dark-content', 'transparent');
   const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  let mobile = useSelector((state: RootState) => state.root.user.mobile);
   const goBack = useGoBack();
   const focusLoginProps = FocusLogin();
   const [phone, setPhone] = useState<string>('');
@@ -29,8 +29,9 @@ const LoginUser = () => {
   const login = () => {
     dispatch(setLoggedIn(true));
   };
-    
-  return (    
+
+
+  return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={StyleLoginUser.container}>
         <StatusBar backgroundColor="transparent" translucent />
@@ -91,13 +92,13 @@ const LoginUser = () => {
                 </Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => loginFacebook(dispatch, navigation, login, mobile)}>
+            <TouchableOpacity onPress={() => loginFacebook(dispatch, navigation, login)}>
               <View style={StyleLoginUser.viewloginfb}>
                 <Image source={Logo.FACEBOOK} style={StyleLoginUser.iconfb} />
                 <Text style={StyleLoginUser.textloginfb}>Tiếp tục bằng Facebook</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation, login, mobile)}>
+            <TouchableOpacity onPress={() => loginGoogle(dispatch, navigation, login)}>
               <View style={StyleLoginUser.viewgg}>
                 <Image source={Logo.GOOGLE} style={StyleLoginUser.iconfb} />
                 <Text style={StyleLoginUser.textgoogle}>Đăng nhập bằng Google</Text>

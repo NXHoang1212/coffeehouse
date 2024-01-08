@@ -22,9 +22,8 @@ interface PropsItemProduct {
   item: DetailProduct;
 }
 
-const ItemFavourites = ({ item }: PropsItemProduct) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
+const ItemFavourites = memo(({ item }: PropsItemProduct) => {
+  const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const { setProducts } = useContext(ProductContext);
   const user = useSelector((state: RootState) => state.root.user._id);
   const [deleteFavourites] = useDeleteFavouritesMutation();
@@ -146,6 +145,6 @@ const ItemFavourites = ({ item }: PropsItemProduct) => {
       />
     </View>
   );
-};
+});
 
 export default memo(ItemFavourites);

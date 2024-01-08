@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, TouchableNativeFeedback } from 'react-native';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useGoBack } from '../../utils/GoBack';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -14,8 +14,7 @@ interface PropsDetailItemProduct {
     item: OrderResponse;
 }
 
-const ItemHistoryOrderReject: React.FC<PropsDetailItemProduct> = ({ item }) => {
-    const goBack = useGoBack();
+const ItemHistoryOrderReject: React.FC<PropsDetailItemProduct> = memo(({ item }) => {
     const [reject, setReject] = useState<boolean>(false);
 
     return (
@@ -45,6 +44,6 @@ const ItemHistoryOrderReject: React.FC<PropsDetailItemProduct> = ({ item }) => {
             <DetailHistoryOrderReject show={reject} onDismiss={() => setReject(false)} item={item} enableBackDropDismiss/>
         </View>
     );
-};
+});
 
 export default ItemHistoryOrderReject;

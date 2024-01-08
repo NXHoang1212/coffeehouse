@@ -23,6 +23,7 @@ import { ApiBanner, ApiCategory } from '../../service/api/IndexBanner&Category';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RTKQueryLogger } from '../middleware/RTKQuery.logger';
+import { ApiUser } from '../../service/api/IndexUser';
 
 const persistConfig: any = {
   key: 'root',

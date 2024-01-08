@@ -39,7 +39,7 @@ const Information = () => {
   const [birthday, setBirthday] = useState<string>(user.birthday);
   const [open, setOpen] = useState<boolean>(false);
   const [genderModalVisible, setGenderModalVisible] = useState<boolean>(false);
-  const [avatar, setAvatar] = useState<any>('' || user.avatar);
+  const [avatar, setAvatar] = useState<string>('' || user.avatar);
 
   const [emailInputDisabled, setEmailInputDisabled] = useState<boolean>(!!email);
   const [birthdayInputDisabled, setBirthdayInputDisabled] = useState<boolean>(!!birthday);

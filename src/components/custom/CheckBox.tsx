@@ -9,7 +9,7 @@ interface CustomCheckboxProps {
     disabled?: boolean;
 }
 
-const CheckBox: React.FC<CustomCheckboxProps> = ({ checked, onPress }) => {
+const CheckBox: React.FC<CustomCheckboxProps> = ({ checked, onPress, title }) => {
     return (
         <TouchableOpacity onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style=

@@ -18,6 +18,9 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
 import { cartStatus } from '../../data/types/Enum.entity';
+import { setProductSuggest } from '../../redux/slices/ProductSuggestSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
 interface PropsDetailItemProduct {
   item: DetailProduct;
 }
@@ -27,6 +30,7 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   let id = useSelector((state: RootState) => state.root.user._id);
   let isLogin = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
+  const dispatch = useDispatch<AppDispatch>();
   const [createFavourites] = useCreateFavouritesMutation();
   const [CreateEmptyCart] = useCreateEmptyCartMutation();
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false);
@@ -96,6 +100,7 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
       if (response) {
         setTimeout(() => {
           Messenger('Thêm vào giỏ hàng thành công', 'success');
+          dispatch(setProductSuggest([item]));
           goBack();
         }, 1500);
       }

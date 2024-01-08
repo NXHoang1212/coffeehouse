@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 import { Icon, infores } from '../../constant/Icon';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -15,7 +15,7 @@ interface PropsItemProduct {
   isLastItem: any;
 }
 
-const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
+const ItemAddress: React.FC<PropsItemProduct> = memo(({ item, isLastItem }) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const dispatch = useDispatch();
 
@@ -54,6 +54,6 @@ const ItemAddress: React.FC<PropsItemProduct> = ({ item, isLastItem }) => {
       </TouchableOpacity>
     </View>
   );
-};
+});
 
 export default ItemAddress;

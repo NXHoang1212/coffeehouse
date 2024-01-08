@@ -1,20 +1,20 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState, useRef, useCallback, useMemo} from 'react';
-import {Discount} from '../../data/types/Discount.entity';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useRef, useCallback, useMemo, memo } from 'react';
+import { Discount } from '../../data/types/Discount.entity';
 import StyleItemDiscount from '../../styles/item/StyleItemDisocunt';
-import {Icon} from '../../constant/Icon';
+import { Icon } from '../../constant/Icon';
 import FastImage from 'react-native-fast-image';
 import BottomSheetDiscount from '../modal/BottomSheetDiscount';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../redux/store/Store';
-import {setDiscount} from '../../redux/slices/DiscountSlice';
-import {Messenger} from '../../utils/ShowMessage';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
+import { setDiscount } from '../../redux/slices/DiscountSlice';
+import { Messenger } from '../../utils/ShowMessage';
 
 interface PropsItemDisount {
   item: Discount;
 }
 
-const ItemDiscount: ({item}: PropsItemDisount) => JSX.Element = ({item}) => {
+const ItemDiscount: React.FC<PropsItemDisount> = memo(({ item }) => {
   const [show, setshow] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -54,6 +54,6 @@ const ItemDiscount: ({item}: PropsItemDisount) => JSX.Element = ({item}) => {
       />
     </TouchableOpacity>
   );
-};
+});
 
 export default ItemDiscount;

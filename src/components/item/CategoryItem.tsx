@@ -1,5 +1,5 @@
 import { Image, Text, TouchableOpacity, View, TouchableWithoutFeedback, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import StyleCategoryItem from '../../styles/item/StyleCategoryItem';
 import BottomSheetMenu from '../modal/BottomSheetMenu';
 import { useGetCategoryQuery } from '../../service/api/IndexBanner&Category';
@@ -10,7 +10,7 @@ type Props = {
   setSelectedCategory: (categoryName: String) => void;
 };
 
-const CategoryItem = ({ setSelectedCategory }: Props) => {
+const CategoryItem = memo(({ setSelectedCategory }: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const { data } = useGetCategoryQuery();
   const categories = data?.data?.slice(0, 7).concat({ name: 'Xem thêm', image: 'http://res.cloudinary.com/dxlvdrb52/image/upload/v1703826288/category/iconanother_zuhiws.png', _id: 'all' });
@@ -60,6 +60,6 @@ const CategoryItem = ({ setSelectedCategory }: Props) => {
       </View>
     </TouchableWithoutFeedback>
   );
-};
+});
 
 export default CategoryItem;

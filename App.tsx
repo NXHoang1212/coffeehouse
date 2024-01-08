@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from './src/redux/store/Store';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { PaperProvider } from 'react-native-paper';
-import { socket } from './src/utils/Socket';
+import socket from './src/utils/Socket';
 import { ProductContextProvider } from './src/service/provider/ProductContext';
 import { ApplyPromoContextProvider } from './src/service/provider/ApplyPromoContext';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -18,9 +18,6 @@ import { PermissionNoticationAndroid, PermissionNoticationIos } from './src/util
 const App = (): JSX.Element => {
 
   useEffect(() => {
-    socket.on('connection', data => {
-      console.log('Received data from server:', data);
-    });
     PermissionNoticationAndroid();
     PermissionNoticationIos();
     const unsubscribe = messaging().onMessage(async remoteMessage => {

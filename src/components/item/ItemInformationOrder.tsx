@@ -1,6 +1,6 @@
 import { Image, ImageSourcePropType, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
 import { Icon, infores } from '../../constant/Icon';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import StyleItemInformationOrder from '../../styles/item/StyleItemInformationOrder';
 import { GetCartOrder } from '../../data/types/CartOrder.entity';
 import { useNavigation } from '@react-navigation/native';
@@ -32,7 +32,7 @@ interface PropsDetailItemProduct {
   item: GetCartOrder;
 }
 
-const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
+const ItemInformationOrder: React.FC<PropsDetailItemProduct> = memo(({ item }) => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
   const route = useRoute<any>();
   const address = route.params?.address;
@@ -92,7 +92,7 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
           <Image source={infores.EDIT} style={StyleItemInformationOrder.icondelete} />
         </TouchableOpacity>
         <TouchableOpacity style={StyleItemInformationOrder.viewswipedelete} onPress={() => { setDeleteInProgress(true); DeleteCartProductId({ id, ProductId }); }}>
-          <IconDelete style={StyleItemInformationOrder.icondelete} fill={COLOR.WHITE}/>
+          <IconDelete style={StyleItemInformationOrder.icondelete} fill={COLOR.WHITE} />
         </TouchableOpacity>
       </View>
     );
@@ -316,6 +316,6 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = ({ item }) => {
       ) : null}
     </View>
   );
-};
+});
 
 export default ItemInformationOrder;

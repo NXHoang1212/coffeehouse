@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, TouchableNativeFeedback } from 'react-native';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useGoBack } from '../../utils/GoBack';
 import { OrderResponse } from '../../data/types/Order.entity';
 import StyleItemHistoryOrderSuccess from '../../styles/item/StyleItemHistoryOrderSuccess';
@@ -11,7 +11,7 @@ interface PropsDetailItemProduct {
     item: OrderResponse;
 }
 
-const ItemHistoryOrderSuccess: React.FC<PropsDetailItemProduct> = ({ item }) => {
+const ItemHistoryOrderSuccess: React.FC<PropsDetailItemProduct> = memo(({ item }) => {
     const goBack = useGoBack();
     const [suceess, setsuccess] = useState<boolean>(false);
 
@@ -42,6 +42,6 @@ const ItemHistoryOrderSuccess: React.FC<PropsDetailItemProduct> = ({ item }) => 
             <DetailHistoryOrderSuccess show={suceess} onDismiss={() => setsuccess(false)} item={item} />
         </View>
     );
-};
+});
 
 export default ItemHistoryOrderSuccess;

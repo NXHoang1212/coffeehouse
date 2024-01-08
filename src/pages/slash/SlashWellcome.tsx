@@ -19,10 +19,15 @@ const SlashWellcome = () => {
   StatusBar.setBarStyle('dark-content');
   StatusBar.setBackgroundColor('transparent');
   useEffect(() => {
-    dispatch(fetchProducts());
-    setTimeout(() => {
-      navigation.navigate('TabHomeNavigate');
-    }, 1500);
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchProducts());
+        navigation.navigate('TabHomeNavigate');
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+    fetchData();
   }, []);
 
   return (

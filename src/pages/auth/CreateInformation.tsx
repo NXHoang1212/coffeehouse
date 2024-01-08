@@ -10,19 +10,21 @@ import StyleCreateInformation from '../../styles/auth/StyleCreateInformation';
 import { Picker } from '@react-native-picker/picker';
 import CheckBox from '../../components/custom/CheckBox';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../../redux/store/Store';
 import { ApiUpdateUser } from '../../service/api/IndexUser';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';
-import { setUser } from '../../redux/slices/AuthSlice';
+import { setInfor } from '../../redux/slices/AuthSlice';
 import { RootState } from '../../redux/store/Store';
 import FastImage from 'react-native-fast-image';
+import { GeneralNotification } from '../../utils/GeneralNotification';
 
 const CreateInformation = () => {
   ThemLightStatusBar('dark-content', '#fff');
   const goback = useGoBack();
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [checked, setChecked] = useState<boolean>(false);
   const focusNameProps = FocusName();
   const focusHoProps = FocusHo();
@@ -30,25 +32,22 @@ const CreateInformation = () => {
   const [open, setOpen] = useState<boolean>(false);
   let user = useSelector((state: RootState) => state.root.user);
   const id = user._id;
-  const [name, setName] = useState<string>(user.name);
-  const [holder, setHolder] = useState<string>(user.holder);
-  const [email, setEmail] = useState<string>(user.email);
-  const [gender, setGender] = useState<string>(user.gender);
-  const [birthday, setBirthday] = useState<string>(user.birthday);
+
 
   const handle = async () => {
     try {
       const data: any = {
-        name: name,
-        email: email,
-        holder: holder,
-        gender: gender,
-        birthday: birthday,
+        name: user.name,
+        email: user.email,
+        holder: user.holder,
+        gender: user.gender,
+        birthday: user.birthday,
       };
       const response = await ApiUpdateUser(id, data);
       if (response) {
         const user = response;
-        dispatch(setUser(user));
+        dispatch(setInfor(user));
+        GeneralNotification();
         navigation.navigate('TabHomeNavigate' as any, { screen: 'Trang chủ' });
       }
     } catch (error: any) {
@@ -74,8 +73,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Nhập tên của bạn *"
-              value={name}
-              onChangeText={text => setName(text)}
+              value={user.name}
+              onChangeText={text => dispatch(setInfor({ ...user, name: text }))}
               onFocus={focusNameProps.onFocusName}
               onBlur={focusNameProps.onBlurName}
             />
@@ -88,8 +87,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Nhập họ của bạn"
-              value={holder}
-              onChangeText={text => setHolder(text)}
+              value={user.holder}
+              onChangeText={text => dispatch(setInfor({ ...user, holder: text }))}
               onFocus={focusHoProps.onFocusHo}
               onBlur={focusHoProps.onBlurHo}
             />
@@ -102,8 +101,8 @@ const CreateInformation = () => {
             <TextInput
               style={StyleCreateInformation.textinput}
               placeholder="Email của bạn"
-              value={email}
-              onChangeText={text => setEmail(text)}
+              value={user.email}
+              onChangeText={text => dispatch(setInfor({ ...user, email: text }))}
               onFocus={focusEmailProps.onFocusEmail}
               onBlur={focusEmailProps.onBlurEmail}
             />
@@ -111,7 +110,8 @@ const CreateInformation = () => {
           <View style={StyleCreateInformation.inputdate}>
             <TextInput
               style={StyleCreateInformation.textinput}
-              value={birthday ? FormatDate(new Date(birthday)) : ''}
+              // value={birthday ? FormatDate(new Date(birthday)) : ''}
+              value={user.birthday ? FormatDate(new Date(user.birthday)) : ''}
               placeholder="Chọn ngày sinh"
               onTouchStart={() => [Keyboard.dismiss(), setOpen(true)]}
             />
@@ -123,10 +123,11 @@ const CreateInformation = () => {
               modal
               mode="date"
               open={open}
-              date={birthday ? new Date(birthday) : new Date()}
+              // date={birthday ? new Date(birthday) : new Date()}
+              date={user.birthday ? new Date(user.birthday) : new Date()}
               locale="vi"
               onConfirm={date => {
-                setOpen(false), setBirthday(date.toISOString());
+                setOpen(false), dispatch(setInfor({ ...user, birthday: date.toISOString() }));
               }}
               onCancel={() => {
                 setOpen(false);
@@ -137,11 +138,14 @@ const CreateInformation = () => {
             <View style={StyleCreateInformation.dropdown}>
               <Picker
                 style={StyleCreateInformation.viewdropdown}
-                selectedValue={gender}
-                onValueChange={(itemValue, itemIndex) => setGender(itemValue)}>
+                // selectedValue={gender}
+                selectedValue={user.gender}
+                // onValueChange={(itemValue, itemIndex) => setGender(itemValue)}
+                onValueChange={(itemValue, itemIndex) => dispatch(setInfor({ ...user, gender: itemValue }))}
+              >
                 <Picker.Item
                   label="Chưa chọn giới tính"
-                  value="java"
+                  value="Chưa chọn giới tính"
                   style={StyleCreateInformation.texdropdown}
                 />
                 <Picker.Item
@@ -169,19 +173,13 @@ const CreateInformation = () => {
         </View>
         <View style={StyleCreateInformation.viewcheckbox}>
           <CheckBox
-            // title={
-            //   <Text style={StyleCreateInformation.textcheckbox}>
-            //     Tôi đồng ý với các
-            //     <Text style={StyleCreateInformation.textcheckboxprotect}>
-            //       {' '}
-            //       Điều khoản và điều kiện của The Coffee House
-            //     </Text>
-            //   </Text>
-            // }
             title="Tôi đồng ý với các Điều khoản và điều kiện của The Coffee House"
             checked={checked}
             onPress={() => setChecked(!checked)}
           />
+          <Text style={StyleCreateInformation.textcheckbox}>
+            Tôi đồng ý với các Điều khoản và điều kiện của The Coffee House
+          </Text>
         </View>
       </ScrollView>
     </View>

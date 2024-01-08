@@ -5,7 +5,7 @@ import { User } from '../../data/types/User.entity';
 import { GeneralNotification } from '../../utils/GeneralNotification';
 
 export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/setUser' }) => void, navigation: { navigate: (arg0: string) => void },
-  login: () => void, mobile: string) => {
+  login: () => void) => {
   try {
     GoogleSignin.configure({
       webClientId: '1019108648743-afg6r9l61upb85ejod4608f4jh827c0c.apps.googleusercontent.com',
@@ -14,19 +14,23 @@ export const loginGoogle = async (dispatch: (arg0: { payload: User; type: 'user/
     });
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    const data: any = { googleId: userInfo.user.id };
+    const data: any = { googleId: userInfo.user.id, avatar: userInfo.user.photo };
     const response = await ApiLogin(data);
     const user = {
       ...response.user,
       email: userInfo.user.email,
       name: userInfo.user.givenName,
       holder: userInfo.user.familyName,
+      avatar: userInfo.user.photo,
     };
     dispatch(setUser(user));
     login();
     //@ts-ignore
-    navigation.navigate(mobile ? 'Trang chủ' : 'InputPhone');
-    GeneralNotification();
+    navigation.navigate(response.user.mobile ? 'Trang chủ' : 'InputPhone');
+    ///nếu vào màn hình trang chủ thì sẽ thông báo 
+    if (response.user.mobile) {
+      GeneralNotification();
+    }
   } catch (error: any) {
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       console.log('User cancelled login flow');

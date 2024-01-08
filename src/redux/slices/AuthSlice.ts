@@ -31,10 +31,19 @@ const UserSlice = createSlice({
       state.mobile = action.payload.mobile;
       state.gender = action.payload.gender;
       state.birthday = action.payload.birthday;
+      console.log('🚀 ~ file: AuthSlice.ts ~ line 127 ~ state', state);
     },
     updateUserData(state, action: PayloadAction<UserData>) {
       state.name = action.payload.name;
       state.mobile = action.payload.mobile;
+    },
+    setInfor(state, action: PayloadAction<User>) {
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.holder = action.payload.holder;
+      state.mobile = action.payload.mobile;
+      state.gender = action.payload.gender;
+      state.birthday = action.payload.birthday;
     },
     clearUser(state) {
       state._id = 0;
@@ -50,4 +59,4 @@ const UserSlice = createSlice({
 });
 
 export default UserSlice.reducer;
-export const { setUser, clearUser, updateUserData } = UserSlice.actions;
+export const { setUser, clearUser, updateUserData, setInfor } = UserSlice.actions;

@@ -23,13 +23,14 @@ import FastImage from 'react-native-fast-image';
 import IconLogin from '../../assets/Svg/IconLogin';
 import IconStar from '../../assets/Svg/IconStar';
 import IconComments from '../../assets/Svg/IconComments';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Other = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
   const isLoading = useSelector((state: RootState) => state.isLoading.isShowLoading);
-  const [visible, setVisible] = useState<boolean>(false);
+  const id = useSelector((state: RootState) => state.root.user._id);
+  const [visible, setVisible] = useState<boolean>(false)
   const link = 'https://thecoffeehouse.com/pages/dieu-khoan-su-dung';
   const navigation = useNavigation<NativeStackNavigationProp<StackParamsOther>>();
   const navigationDad = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();

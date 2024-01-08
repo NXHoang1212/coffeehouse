@@ -17,7 +17,7 @@ const ConfirmOtpCode = () => {
   const [time, setTime] = useState<number>(120);
   const [otp, setOtp] = useState<string[]>(['', '', '', '', '', '']);
   const inputRefs = useRef<TextInput[]>([]);
-  let { mobile, _id, name } = useSelector((state: RootState) => state.root.user);
+  const _id = useSelector((state: RootState) => state.root.user._id);
   const login = () => { dispatch(setLoggedIn(true)) };
   const handleInputChange = (text: string, index: number) => {
     const otpCode = otp.map((item, i) => {
@@ -63,10 +63,12 @@ const ConfirmOtpCode = () => {
               if (index === 5) {
                 const code = otp.join('');
                 if (_id) {
-                  ConfirmPhone(code, navigation, login, name, _id);
+                  //hàm cập nhật số điện thoại
+                  ConfirmPhone(code, dispatch, navigation, login, _id);
                   console.log('đang chạy confirm phone');
                 } else {
-                  confirmCode(code, dispatch, mobile, navigation, login);
+                  //hàm xác thực otp
+                  confirmCode(code, dispatch, navigation, login);
                   console.log('đang chạy confirm code');
                 }
               }

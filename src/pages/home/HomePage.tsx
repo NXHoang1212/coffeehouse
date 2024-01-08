@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity, StatusBar, ScrollView, RefreshControl, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
+import { Text, View, Image, TouchableOpacity, StatusBar, ScrollView, RefreshControl, NativeSyntheticEvent, NativeScrollEvent, Animated } from 'react-native';
 import React, { useState, useRef, useEffect } from 'react';
 import StyleHomePage from '../../styles/home/StyleHomePage';
 import { Icon } from '../../constant/Icon';
@@ -18,12 +18,11 @@ import IconNotify from '../../assets/Svg/IconNotify';
 import IconPromo from '../../assets/Svg/IconPromo';
 import IconDatingCoffee from '../../assets/Svg/IconDatingCoffee';
 import { COLOR } from '../../constant/Color';
-import { Animated } from 'react-native';
 
 const HomePage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeNavigateTypeParam>>();
 
-  let isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
+  const isLoggedIn = useSelector((state: RootState) => state.root.isLoggedIn.isLoggedIn);
 
   const scroll = useRef<ScrollView | null>(null);
 
@@ -104,26 +103,24 @@ const HomePage = () => {
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={() => { }} />
         }>
-        {isLoggedIn ? (
-          <View style={StyleHomePage.viewbody}>
-            <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
-              <View style={StyleHomePage.viewtextcard}>
-                <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
-                <Text style={StyleHomePage.textcard}>
-                  Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho
-                  thành viên bạn nhé!
-                </Text>
-                <TouchableOpacity style={StyleHomePage.viewlogincard} onPress={() => navigation.navigate('AuthStackUser', { screen: 'Login' } as any)}>
-                  <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
-                </TouchableOpacity>
-                <Image style={StyleHomePage.iconpoints} source={Icon.POINTS} />
-              </View>
-            </LinearGradient>
-            <View style={StyleHomePage.viewimagecard}>
-              <IconDatingCoffee style={StyleHomePage.imagecard} />
+        <View style={StyleHomePage.viewbody}>
+          <LinearGradient colors={['#FA8C16', '#fd7e14']} style={StyleHomePage.viewbodycard}>
+            <View style={StyleHomePage.viewtextcard}>
+              <Text style={StyleHomePage.texttitlecard}>Đăng Nhập</Text>
+              <Text style={StyleHomePage.textcard}>
+                Sử dụng app để tích điểm và đổi những ưu đãi chỉ dành riêng cho
+                thành viên bạn nhé!
+              </Text>
+              <TouchableOpacity style={StyleHomePage.viewlogincard} onPress={() => navigation.navigate('AuthStackUser', { screen: 'Login' } as any)}>
+                <Text style={StyleHomePage.textlogincard}>Đăng nhập</Text>
+              </TouchableOpacity>
+              <Image style={StyleHomePage.iconpoints} source={Icon.POINTS} />
             </View>
+          </LinearGradient>
+          <View style={StyleHomePage.viewimagecard}>
+            <IconDatingCoffee style={StyleHomePage.imagecard} />
           </View>
-        ) : null}
+        </View>
         <BottomSheetHome />
       </ScrollView>
     </View >

@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, TextInput, TouchableNativeFeedback } from 'react-native';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useGoBack } from '../../utils/GoBack';
 import { OrderResponse } from '../../data/types/Order.entity';
 import StyleItemHistoryOrderProcessing from '../../styles/item/StyleItemHistoryOrderProcessing';
@@ -11,7 +11,7 @@ interface PropsDetailItemProduct {
     item: OrderResponse;
 }
 
-const ItemHistoryOrderProcessing: React.FC<PropsDetailItemProduct> = ({ item }) => {
+const ItemHistoryOrderProcessing: React.FC<PropsDetailItemProduct> = memo(({ item }) => {
     const [processing, setprocessing] = useState<boolean>(false);
 
     return (
@@ -41,6 +41,6 @@ const ItemHistoryOrderProcessing: React.FC<PropsDetailItemProduct> = ({ item }) 
             <DetailHistoryOrderProcessing show={processing} onDismiss={() => setprocessing(false)} item={item} enableBackDropDismiss />
         </View>
     );
-};
+});
 
 export default ItemHistoryOrderProcessing;

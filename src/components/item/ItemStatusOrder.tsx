@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, ImageSourcePropType } from 'react-native';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { GetOrder, OrderResponse } from '../../data/types/Order.entity';
 import StyleItemStatusOrder from '../../styles/item/StyleItemStatusOrder';
 import { Icon, order } from '../../constant/Icon';
@@ -15,7 +15,7 @@ interface PropsDetailItemProduct {
     item: GetOrder
 }
 
-const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
+const ItemStatusOrder = memo(({ item }: PropsDetailItemProduct) => {
     const method = useSelector((state: RootState) => state.root.methodamount)
     const shipper = 18
     const total = item.OrderCart.map((item) => item.PriceProduct * item.QuantityProduct).reduce((a, b) => a + b, 0);
@@ -140,6 +140,6 @@ const ItemStatusOrder = ({ item }: PropsDetailItemProduct) => {
             <ChangeMethod show={showmethod} onDismiss={() => setShowmethod(false)} enableBackDropDismiss />
         </View>
     );
-};
+});
 
 export default ItemStatusOrder;
