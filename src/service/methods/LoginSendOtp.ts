@@ -14,7 +14,8 @@ export const signInWithPhoneNumber = async (phoneNumber: string, navigation: { n
     if (confirmation) {
       navigation.navigate('ConfirmOtpCode')
     } else {
-      Messenger('Số điện thoại không hợp lệ', 'danger')
+      // Messenger('Số điện thoại không hợp lệ', 'danger')
+      Messenger.danger('Số điện thoại không hợp lệ');
     }
   } catch (error) {
     console.error('Error signing in with phone number:', error);
@@ -37,7 +38,8 @@ export const confirmCode = async (code: string, dispatch: (arg0: { payload: User
         }
       }
     } else {
-      Messenger('Mã OTP không hợp lệ', 'danger')
+      // Messenger('Mã OTP không hợp lệ', 'danger')
+      Messenger.danger('Mã OTP không hợp lệ');
     }
   } catch (error) {
     console.error('Invalid code:', error);
@@ -59,7 +61,8 @@ export const ConfirmPhone = async (code: string, dispatch: (arg0: { payload: Use
         }
       }
     } else {
-      Messenger('Mã OTP không hợp lệ', 'danger')
+      // Messenger('Mã OTP không hợp lệ', 'danger')
+      Messenger.error('Mã OTP không hợp lệ');
     }
   } catch (error) {
     console.error('Invalid code:', error);

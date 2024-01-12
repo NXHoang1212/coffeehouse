@@ -74,7 +74,7 @@ const DetailHistoryOrderSuccess = ({ show, onDismiss, enableBackDropDismiss = tr
                                     <Text style={StyleDetailHistoryOrderSuccess.textbuttoncancel}>Gọi hỗ trợ</Text>
                                 </TouchableOpacity>
                             </View>
-                            <TouchableOpacity style={StyleDetailHistoryOrderSuccess.viewchangepayment} onPress={() => Messenger('Có chút lỗi vui lòng thử lại sau', 'error')}>
+                            <TouchableOpacity style={StyleDetailHistoryOrderSuccess.viewchangepayment} onPress={() => Messenger.error('Có chút lỗi vui lòng thử lại sau')}>
                                 <Text style={StyleDetailHistoryOrderSuccess.textchangepayment}>Đặt lại</Text>
                             </TouchableOpacity>
                         </View>

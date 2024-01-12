@@ -62,7 +62,8 @@ const RejectOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss =
 
     const update = async () => {
         if (reason === '') {
-            Messenger('Vui lòng chọn lý do hủy đơn hàng', 'error');
+            // Messenger('Vui lòng chọn lý do hủy đơn hàng', 'error');
+            Messenger.info('Vui lòng chọn lý do hủy đơn hàng');
         } else {
             const updatedOrder: OrderResponse = {
                 _id: idOrder,
@@ -89,11 +90,13 @@ const RejectOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss =
             };
             const reponse = await UpdateOrder(updatedOrder)
             if (reponse) {
-                Messenger('Hủy đơn hàng thành công', 'success');
+                // Messenger('Hủy đơn hàng thành công', 'success');
+                Messenger.success('Hủy đơn hàng thành công');
                 navigation.navigate('TabHomeNavigate' as any, { screen: 'Other' });
             } else (error: any) => {
                 console.log(error.message);
-                Messenger('Hủy đơn hàng thất bại', 'error');
+                // Messenger('Hủy đơn hàng thất bại', 'error');
+                Messenger.error('Hủy đơn hàng thất bại');
             }
         }
     };

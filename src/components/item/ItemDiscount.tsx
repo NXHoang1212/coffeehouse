@@ -50,7 +50,6 @@ const ItemDiscount: React.FC<PropsItemDisount> = memo(({ item }) => {
       <BottomSheetDiscount
         show={show}
         onDismiss={() => setshow(false)}
-        Messenger={Messenger}
       />
     </TouchableOpacity>
   );

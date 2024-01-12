@@ -137,10 +137,12 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = memo(({ item }) =
       const response: any = await CreateOrder(order);
       if (response) {
         await updateStatus(id);
-        Messenger('Đặt hàng thành công', 'success');
+        // Messenger('Đặt hàng thành công', 'success');
+        Messenger.success('Đặt hàng thành công');
         navigation.navigate('StackHomeNavigate' as any, { screen: 'StatusOrder', params: { id: response.data.data._id } });
       } else {
-        Messenger('Đặt hàng thất bại', 'error');
+        // Messenger('Đặt hàng thất bại', 'error');
+        Messenger.error('Đặt hàng thất bại');
       }
     } catch (error) {
       console.log("🚀 ~ file: ItemInformationOrder.tsx:126 ~ handlePayment ~ error:", error);
@@ -288,7 +290,8 @@ const ItemInformationOrder: React.FC<PropsDetailItemProduct> = memo(({ item }) =
               if (address) {
                 setModal(true);
               } else {
-                Messenger('Bạn chưa chọn địa chỉ giao hàng', 'error');
+                // Messenger('Bạn chưa chọn địa chỉ giao hàng', 'error');
+                Messenger.error('Bạn chưa chọn địa chỉ giao hàng');
               }
             }}>
             <Text style={StyleItemInformationOrder.textorder}>Đặt hàng</Text>

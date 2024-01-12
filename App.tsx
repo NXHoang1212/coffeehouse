@@ -15,7 +15,7 @@ import messaging from '@react-native-firebase/messaging';
 import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native';
 import { PermissionNoticationAndroid, PermissionNoticationIos } from './src/utils/PermissionNotication';
 
-const App = (): JSX.Element => {
+function App(): JSX.Element {
 
   useEffect(() => {
     PermissionNoticationAndroid();

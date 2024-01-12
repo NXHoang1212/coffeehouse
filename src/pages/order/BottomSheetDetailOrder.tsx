@@ -106,7 +106,7 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
 
   const AddToCart = () => {
     if (selectedSize === null) {
-      Messenger('Vui lòng chọn size', 'error');
+      Messenger.error('Vui lòng chọn size');
     } else {
       const data: any = {
         UserId: id,
@@ -128,7 +128,8 @@ const BottomSheetDetailOrder: React.FC<Props> = ({ show, onDismiss, enableBackDr
         dispatch(setShowLoading({ isShowLoading: true }));
         dispatch(setProductSuggest([item]));
         setTimeout(() => {
-          Messenger('Thêm vào giỏ hàng thành công', 'success');
+          // Messenger('Thêm vào giỏ hàng thành công', 'success');
+          Messenger.success('Thêm vào giỏ hàng thành công');
           onDismiss();
           dispatch(setShowLoading({ isShowLoading: false }));
         }, 2000);

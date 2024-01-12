@@ -65,10 +65,12 @@ const DetailHistoryOrderProcessing = ({ show, onDismiss, enableBackDropDismiss =
                     data: { statusPayment: OrderStatus.CONFIRMED, status: OrderStatus.CONFIRMED, date: new Date() }
                 })
             if (payment) {
-                Messenger('Thanh toán thành công', 'success')
+                // Messenger('Thanh toán thành công', 'success')
+                Messenger.success('Thanh toán thành công')
                 onDismiss()
             } else {
-                Messenger('Thanh toán thất bại', 'error')
+                // Messenger('Thanh toán thất bại', 'error')
+                Messenger.error('Thanh toán thất bại')
             }
         } catch (error) {
             console.log("🚀 ~ file: DetailHistoryOrderProcessing.tsx:63 ~ confirmPayment ~ error:", error)

@@ -30,7 +30,8 @@ const UpdateOrderUser: React.FC = () => {
       };
       const response = await ApiUpdateUser(id, data);
       if (response) {
-        Messenger('Cập nhật thành công', 'success');
+        // Messenger('Cập nhật thành công', 'success');
+        Messenger.success('Cập nhật thành công');
         goBack();
         dispatch(updateUserData(data));
       }

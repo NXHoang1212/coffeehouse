@@ -20,7 +20,8 @@ const ItemSelectedAddressOrder: React.FC<Props> = ({ address, showDoneButton }) 
 
   const handleDone = () => {
     if (reason === '') {
-      Messenger('Vui lòng chọn địa chỉ giao hàng', 'error');
+      // Messenger('Vui lòng chọn địa chỉ giao hàng', 'error');
+      Messenger.info('Vui lòng chọn địa chỉ giao hàng');
     } else {
       navigation.navigate('TabHomeNavigate' as any, { screen: 'Đơn hàng', params: { address: reason } });
     }

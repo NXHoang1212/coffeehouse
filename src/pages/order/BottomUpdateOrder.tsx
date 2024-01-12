@@ -107,7 +107,8 @@ const BottomUpdateOrder: React.FC<Props> = ({ show, onDismiss, enableBackDropDis
       const response = await updateCart({ id, ProductId: ProductId._id, data });
       if (response) {
         setTimeout(() => {
-          Messenger('Cập nhật thành công', 'success');
+          // Messenger('Cập nhật thành công', 'success');
+          Messenger.success('Cập nhật thành công');
           onDismiss();
           dispatch(AddCart(data));
         }, 1500);

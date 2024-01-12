@@ -13,15 +13,15 @@ import { CartOrder } from '../../data/types/CartOrder.entity';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store/Store';
 import { setPromodiscount } from '../../redux/slices/ApplyPromodiscount';
+import { Messenger } from '../../utils/ShowMessage';
 
 interface Props {
   show: boolean;
   onDismiss: () => void;
   enableBackDropDismiss?: boolean;
-  Messenger: (message: string, type: string) => void;
 }
 
-const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismiss, enableBackDropDismiss = true, Messenger, }) => {
+const BottomSheetDiscount: React.JSXElementConstructor<Props> = memo(({ show, onDismiss, enableBackDropDismiss = true, }) => {
   const bottomsheetHeight = Dimensions.get('window').height * 0.5;
   const dispatch = useDispatch<AppDispatch>();
   const bottomsheet = useRef(new Animated.Value(-bottomsheetHeight)).current;
@@ -69,26 +69,30 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
   }, [show]);
   const onCoppy = () => {
     Clipboard.setString(nameQR);
-    Messenger('Đã sao chép mã giảm giá', 'success');
+    Messenger.success('Đã sao chép mã giảm giá');
   };
 
   const ApplyDiscount = () => {
     if (ProductId?.length === 0) {
-      Messenger('Bạn chưa có sản phẩm trong giỏ hàng', 'error');
+      // Messenger('Bạn chưa có sản phẩm trong giỏ hàng', 'error');
+      Messenger.error('Bạn chưa có sản phẩm trong giỏ hàng');
     } else if (discount.description) {
       if (discount.description.includes('Miễn phí vận chuyển')) {
         const discountAmount: number = 18;
         dispatch(setPromodiscount(discountAmount));
-        Messenger('Áp dụng mã giảm giá thành công', 'success');
+        // Messenger('Áp dụng mã giảm giá thành công', 'success');
+        Messenger.success('Áp dụng mã giảm giá thành công');
       } else if (
         discount.description.includes('Giảm 40% đơn từ 4 ly nước kèm FREESHIP')
       ) {
         if (Quantity >= 4) {
           const discountAmount: number = 77.6;
           dispatch(setPromodiscount(discountAmount));
-          Messenger('Áp dụng mã giảm giá thành công', 'success');
+          // Messenger('Áp dụng mã giảm giá thành công', 'success');
+          Messenger.success('Áp dụng mã giảm giá thành công');
         } else {
-          Messenger('Bạn còn thiếu số lượng vui lòng đặt thêm', 'error');
+          // Messenger('Bạn còn thiếu số lượng vui lòng đặt thêm', 'error');
+          Messenger.info('Bạn còn thiếu số lượng vui lòng đặt thêm');
         }
       } else if (
         discount.description.includes('Giảm 50% đơn từ 10 ly nước kèm FREESHIP')
@@ -96,31 +100,37 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
         if (Quantity >= 10) {
           const discountAmount: number = 155;
           dispatch(setPromodiscount(discountAmount));
-          Messenger('Áp dụng mã giảm giá thành công', 'success');
+          // Messenger('Áp dụng mã giảm giá thành công', 'success');
+          Messenger.success('Áp dụng mã giảm giá thành công');
         } else {
-          Messenger('Bạn còn thiếu số lượng vui lòng đặt thêm', 'error');
+          // Messenger('Bạn còn thiếu số lượng vui lòng đặt thêm', 'error');
+          Messenger.info('Bạn còn thiếu số lượng vui lòng đặt thêm');
         }
       } else if (discount.description.includes('Giảm 30K cho đơn từ 99K')) {
         if (total >= 99) {
           const discountAmount: number = 30;
           dispatch(setPromodiscount(discountAmount));
-          Messenger('Áp dụng mã giảm giá thành công', 'success');
+          // Messenger('Áp dụng mã giảm giá thành công', 'success');
+          Messenger.success('Áp dụng mã giảm giá thành công');
         } else {
-          Messenger(
-            'Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm',
-            'error',
-          );
+          // Messenger(
+          //   'Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm',
+          //   'error',
+          // );
+          Messenger.info('Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm');
         }
       } else if (discount.description.includes('Giảm 20K cho đơn từ 50K')) {
         if (total >= 50) {
           const discountAmount: number = 20;
           dispatch(setPromodiscount(discountAmount));
-          Messenger('Áp dụng mã giảm giá thành công', 'success');
+          // Messenger('Áp dụng mã giảm giá thành công', 'success');
+          Messenger.success('Áp dụng mã giảm giá thành công');
         } else {
-          Messenger(
-            'Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm',
-            'error',
-          );
+          // Messenger(
+          //   'Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm',
+          //   'error',
+          // );
+          Messenger.info('Đơn hàng của bạn chưa đủ giá trị vui lòng mua thêm');
         }
       } else if (
         discount.description.includes('Giảm 10% cho đơn hàng từ 2 món')
@@ -128,16 +138,19 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
         if (Quantity >= 2) {
           const discountAmount: number = 0.1;
           dispatch(setPromodiscount(discountAmount));
-          Messenger('Áp dụng mã giảm giá thành công', 'success');
+          // Messenger('Áp dụng mã giảm giá thành công', 'success');
+          Messenger.success('Áp dụng mã giảm giá thành công');
         } else {
-          Messenger(
-            'Bạn còn thiếu một món vui lòng mua thêm để được giảm',
-            'error',
-          );
+          // Messenger(
+          //   'Bạn còn thiếu một món vui lòng mua thêm để được giảm',
+          //   'error',
+          // );
+          Messenger.info('Bạn còn thiếu một món vui lòng mua thêm để được giảm');
         }
       }
     } else {
-      Messenger('Mã giảm giá không sử dụng được', 'error');
+      // Messenger('Mã giảm giá không sử dụng được', 'error');
+      Messenger.error('Mã giảm giá không sử dụng được');
     }
   };
   if (!open) {
@@ -205,6 +218,6 @@ const BottomSheetDiscount: React.JSXElementConstructor<Props> = ({ show, onDismi
       </Animated.View>
     </Modal>
   );
-};
+});
 
-export default memo(BottomSheetDiscount);
+export default BottomSheetDiscount;

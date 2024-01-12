@@ -88,15 +88,19 @@ const Information = () => {
     if (avatar !== user.avatar) {
       const resUploadAvatar = await UploadAvatar(id, avatar);
       if (resUploadAvatar) {
-        Messenger('Cập nhật avatar thành công', 'success');
+        // Messenger('Cập nhật avatar thành công', 'success');
+        Messenger.success('Cập nhật avatar thành công');
       } else {
-        Messenger('Cập nhật avatar thất bại', 'error');
+        // Messenger('Cập nhật avatar thất bại', 'error');
+        Messenger.error('Cập nhật avatar thất bại');
       }
     } else {
-      Messenger('Không có avatar mới', 'error')
+      // Messenger('Không có avatar mới', 'error')
+      Messenger.info('Không có avatar mới');
     }
     if (res) {
-      Messenger('Cập nhật thành công', 'success');
+      // Messenger('Cập nhật thành công', 'success');
+      Messenger.success('Cập nhật thành công');
       dispatch(setUser({ ...res, avatar: avatar }));
       navigation.navigate('Other' as any);
     }

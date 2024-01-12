@@ -1,0 +1,23 @@
+import { Modal, Pressable, Text, View } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import StyleChangeMethod from '../../styles/modal/StyleChangeMethod';
+import StyleCheckCOmminityNetInfor from '../../styles/modal/StyleCheckCOmminityNetInfor';
+
+interface Props {
+  show: boolean;
+  onDismiss: () => void;
+  enableBackDropDismiss?: boolean;
+}
+
+const CheckCommunityNetInfor: React.FC<Props> = ({ show, onDismiss, enableBackDropDismiss = true, }) => {
+  return (
+    <Modal animationType="fade" transparent={true} onRequestClose={onDismiss} hardwareAccelerated={true} statusBarTranslucent={true}>
+      <Pressable onPress={enableBackDropDismiss ? onDismiss : undefined} style={StyleChangeMethod.backdrop} />
+      <View>
+        <Text>CheckCommunityNetInfor</Text>
+      </View>
+    </Modal>
+  );
+};
+
+export default CheckCommunityNetInfor;

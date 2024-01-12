@@ -70,7 +70,8 @@ const EditAddress: React.FC = () => {
     };
     const res = await UpdateAddress(id, data);
     if (res) {
-      Messenger('Cập nhật địa chỉ thành công', 'success');
+      // Messenger('Cập nhật địa chỉ thành công', 'success');
+      Messenger.success('Cập nhật địa chỉ thành công');
       navigation.navigate('SaveAddress' as any);
     }
   };
@@ -82,7 +83,8 @@ const EditAddress: React.FC = () => {
   const handleDeleteAddress = async () => {
     const res = await DeleteAddress(id);
     if (res) {
-      Messenger('Xóa địa chỉ thành công', 'success');
+      // Messenger('Xóa địa chỉ thành công', 'success');
+      Messenger.success('Xóa địa chỉ thành công');
       navigation.navigate('SaveAddress' as any);
     }
   };

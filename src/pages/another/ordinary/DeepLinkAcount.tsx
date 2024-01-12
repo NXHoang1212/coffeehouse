@@ -1,9 +1,9 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import {Icon} from '../../../constant/Icon';
+import { Icon } from '../../../constant/Icon';
 import StyleDeepLinkAccount from '../../../styles/another/StyleDeepLinkAccount';
-import {useGoBack} from '../../../utils/GoBack';
-import {Messenger} from '../../../utils/ShowMessage';
+import { useGoBack } from '../../../utils/GoBack';
+import { Messenger } from '../../../utils/ShowMessage';
 import FastImage from 'react-native-fast-image';
 import IconHarvan from '../../../assets/Svg/IconHarvan';
 import { COLOR } from '../../../constant/Color';
@@ -21,9 +21,9 @@ const DeepLinkAcount = () => {
       </View>
       <View style={StyleDeepLinkAccount.body}>
         <TouchableOpacity
-          onPress={() => Messenger('Chức năng đang phát triển', 'warning')}>
+          onPress={() => Messenger.warning('Chức năng đang phát triển')}>
           <View style={StyleDeepLinkAccount.viewitem}>
-            <IconHarvan style={StyleDeepLinkAccount.iconharavan} fill={COLOR.BLUE}/>
+            <IconHarvan style={StyleDeepLinkAccount.iconharavan} fill={COLOR.BLUE} />
             <Text style={StyleDeepLinkAccount.textitem}>
               Liên kết với Harawoks
             </Text>

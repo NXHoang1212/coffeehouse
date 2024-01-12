@@ -45,7 +45,8 @@ const AddAddress: React.FC = () => {
         userId: id,
       });
       if (res) {
-        Messenger('Thêm địa chỉ thành công', 'success');
+        // Messenger('Thêm địa chỉ thành công', 'success');
+        Messenger.success('Thêm địa chỉ thành công');
         goback();
       }
     } catch (error: any) {

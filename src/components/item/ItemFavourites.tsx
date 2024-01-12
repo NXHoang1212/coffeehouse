@@ -63,7 +63,8 @@ const ItemFavourites = memo(({ item }: PropsItemProduct) => {
       };
       const response = await CreateEmptyCart(data);
       if (response) {
-        Messenger('Thêm vào giỏ hàng thành công', 'success');
+        // Messenger('Thêm vào giỏ hàng thành công', 'success');
+        Messenger.success('Thêm vào giỏ hàng thành công');
       }
     } catch (error: any) {
       console.log('🚀 ~ file: ItemProduct.tsx:110 ~ error', error);
@@ -78,7 +79,8 @@ const ItemFavourites = memo(({ item }: PropsItemProduct) => {
     try {
       const response = await deleteFavourites(id);
       if (response) {
-        Messenger('Xóa sản phẩm yêu thích thành công', 'success');
+        // Messenger('Xóa sản phẩm yêu thích thành công', 'success');
+        Messenger.success('Xóa sản phẩm yêu thích thành công');
         navigation.goBack();
       }
     } catch (error: any) {

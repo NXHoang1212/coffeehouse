@@ -72,7 +72,8 @@ const ItemRecomend = memo(({ item }: PropsItemProduct) => {
             const response = await CreateEmptyCart(data);
             if (response) {
                 dispatch(setProductSuggest([item]));
-                Messenger('Thêm vào giỏ hàng thành công', 'success');
+                // Messenger('Thêm vào giỏ hàng thành công', 'success');
+                Messenger.success('Thêm vào giỏ hàng thành công');
             }
         } catch (error: any) {
             console.log('🚀 ~ file: ItemProduct.tsx:110 ~ error', error);

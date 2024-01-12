@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ImageStyle, ScrollView, TextInput, StyleProp, Image } from 'react-native';
+import { View, Text, TouchableOpacity, ImageStyle, ScrollView, TextInput, Pressable, Image } from 'react-native';
 import FastImage, { FastImageProps } from 'react-native-fast-image';
 import React, { useState, memo } from 'react';
 import { DetailProduct } from '../../data/types/Product.entity';
@@ -67,7 +67,8 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
       };
       const response: any = await createFavourites(data);
       if (response) {
-        Messenger('Thêm vào yêu thích thành công', 'success');
+        // Messenger('Thêm vào yêu thích thành công', 'success');
+        Messenger.success('Thêm vào yêu thích thành công');
       }
     } else {
       navigation.navigate('AuthStackUser' as any, { screen: 'Login' });
@@ -79,7 +80,8 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
   };
   const AddToCart = () => {
     if (selectedSize === null) {
-      Messenger('Vui lòng chọn size', 'error');
+      // Messenger('Vui lòng chọn size', 'error');
+      Messenger.error('Vui lòng chọn size');
     } else {
       const data: any = {
         UserId: id,
@@ -99,7 +101,8 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
       const response: any = CreateEmptyCart(data);
       if (response) {
         setTimeout(() => {
-          Messenger('Thêm vào giỏ hàng thành công', 'success');
+          // Messenger('Thêm vào giỏ hàng thành công', 'success');
+          Messenger.success('Thêm vào giỏ hàng thành công');
           dispatch(setProductSuggest([item]));
           goBack();
         }, 1500);
@@ -123,14 +126,14 @@ const ItemDetailProduct = memo(({ item }: PropsDetailItemProduct) => {
               resizeMode={FastImage.resizeMode.cover}
               onLoad={onLoad}
             />
-            <TouchableOpacity
+            <Pressable
               style={StyleItemDetailProduct.viewback}
               onPress={() => navigation.goBack()}>
               <FastImage
                 source={Icon.BORDERCANCEL}
                 style={StyleItemDetailProduct.iconback}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <View style={StyleItemDetailProduct.viewtext}>
             <Text style={StyleItemDetailProduct.textname}>{item.name}</Text>
