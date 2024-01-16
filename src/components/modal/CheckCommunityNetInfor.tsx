@@ -1,6 +1,6 @@
 import { Modal, Pressable, Text, View } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
-import StyleCheckComminityNetInfor from '../../styles/modal/StyleCheckCOmminityNetInfor';
+import StyleCheckComminityNetInfor from '../../styles/modal/StyleCheckComminityNetInfor';
 
 interface Props {
   show: boolean;

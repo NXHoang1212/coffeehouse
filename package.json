@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001' ",
+    "debug": "open 'rndebugger://set-debugger-loc?host=loca lhost&port=19001' ",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
@@ -24,6 +24,7 @@
     "@react-native-community/netinfo": "^11.2.1",
     "@react-native-firebase/app": "^18.3.2",
     "@react-native-firebase/auth": "^18.3.2",
+    "@react-native-firebase/firestore": "^18.7.3",
     "@react-native-firebase/messaging": "^18.7.1",
     "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-native-picker/picker": "^2.5.0",
