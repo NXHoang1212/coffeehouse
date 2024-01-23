@@ -51,9 +51,8 @@ const CartOrder = () => {
 
 
   const scrollToCategory = (categoryName: String) => {
-    const itemHeight = 150;
     const index = showProducts.data.findIndex(item => item.category.name === categoryName,);
-    const y = index * itemHeight;
+    const y = index * 150;
     scrollViewRef.current?.scrollTo({ x: 0, y: y, animated: true });
   };
 
