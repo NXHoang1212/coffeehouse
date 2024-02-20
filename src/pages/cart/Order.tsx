@@ -1,6 +1,5 @@
 import { View, Text, Image, TouchableOpacity, StatusBar, RefreshControl, FlatList, } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { Icon } from '../../constant/Icon';
+import React, { useEffect } from 'react';
 import styleCartOrder from '../../styles/cart/StyleCartOrder';
 import { useNavigation } from '@react-navigation/native';
 import { StackHomeNavigateTypeParam } from '../../data/types/TypeStack';

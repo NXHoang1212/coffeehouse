@@ -1,5 +1,5 @@
-import {createContext, useState, useEffect} from 'react';
-import {Products} from '../../data/types/Product.entity';
+import { createContext, useState, useEffect } from 'react';
+import { Products } from '../../data/types/Product.entity';
 
 interface PropsProductContext {
   products: Products[];
@@ -8,7 +8,7 @@ interface PropsProductContext {
 
 export const ProductContext = createContext<PropsProductContext>({
   products: [],
-  setProducts: () => {},
+  setProducts: () => { },
 });
 
 type ProductContextProviderProps = {
@@ -21,7 +21,7 @@ export const ProductContextProvider = ({
   const [products, setProducts] = useState<Products[]>([]);
 
   return (
-    <ProductContext.Provider value={{products, setProducts}}>
+    <ProductContext.Provider value={{ products, setProducts }}>
       {children}
     </ProductContext.Provider>
   );

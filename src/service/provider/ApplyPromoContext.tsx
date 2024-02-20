@@ -1,5 +1,5 @@
-import {createContext, useState, useEffect} from 'react';
-import {ReactNode} from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 interface PropsApplyPromoContext {
   promo: string;
@@ -8,7 +8,7 @@ interface PropsApplyPromoContext {
 
 export const ApplyPromoContext = createContext<PropsApplyPromoContext>({
   promo: '',
-  setPromo: () => {},
+  setPromo: () => { },
 });
 
 //React.ReactNode là một kiểu dữ liệu đặc biệt trong React,
@@ -23,7 +23,7 @@ export const ApplyPromoContextProvider = ({
   const [promo, setPromo] = useState<string>('');
 
   return (
-    <ApplyPromoContext.Provider value={{promo, setPromo}}>
+    <ApplyPromoContext.Provider value={{ promo, setPromo }}>
       {children}
     </ApplyPromoContext.Provider>
   );
