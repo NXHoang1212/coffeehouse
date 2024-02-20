@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "debug": "open 'rndebugger://set-debugger-loc?host=loca lhost&port=19001' ",
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001' ",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
