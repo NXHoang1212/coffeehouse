@@ -15,7 +15,6 @@ import notifee, { AndroidImportance, AndroidStyle } from '@notifee/react-native'
 import { PermissionNoticationAndroid, PermissionNoticationIos } from './src/utils/PermissionNotication';
 
 function App(): JSX.Element {
-
   useEffect(() => {
     PermissionNoticationAndroid();
     PermissionNoticationIos();
