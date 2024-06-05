@@ -33,7 +33,6 @@ const CreateInformation = () => {
   let user = useSelector((state: RootState) => state.root.user);
   const id = user._id;
 
-
   const handle = async () => {
     try {
       const data: any = {

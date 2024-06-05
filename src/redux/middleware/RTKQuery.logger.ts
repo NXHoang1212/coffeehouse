@@ -1,4 +1,4 @@
-import {AnyAction, MiddlewareAPI, Middleware} from '@reduxjs/toolkit';
+import { AnyAction, MiddlewareAPI, Middleware } from '@reduxjs/toolkit';
 
 export const RTKQueryLogger: Middleware =
   (api: MiddlewareAPI) => next => (action: AnyAction) => {
