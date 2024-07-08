@@ -30,7 +30,7 @@ const initialState: ProductsState = {
   data: [],
   status: 'idle',
   error: '' || null,
-  loading: false,
+  loading: false, 
 };
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
